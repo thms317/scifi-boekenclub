@@ -56,11 +56,10 @@ repos:
         name: pytest-unit-tests
         entry: >
           bash -c '
-            uv tool run pytest -v tests
-            # uv tool run pytest -v tests --cov=src --junitxml=docs/tests/coverage/pytest_coverage.xml &&
-            # uv tool run coverage xml -o docs/tests/coverage/coverage.xml &&
-            # uv tool run genbadge coverage -i docs/tests/coverage/coverage.xml -o docs/assets/badge-coverage.svg &&
-            # uv tool run genbadge tests -i docs/tests/coverage/pytest_coverage.xml -o docs/assets/badge-tests.svg
+            uv run pytest -v tests --cov=src --junitxml=docs/tests/coverage/pytest_coverage.xml &&
+            uv run coverage xml -o docs/tests/coverage/coverage.xml &&
+            uv run genbadge coverage -i docs/tests/coverage/coverage.xml -o docs/assets/badge-coverage.svg &&
+            uv run genbadge tests -i docs/tests/coverage/pytest_coverage.xml -o docs/assets/badge-tests.svg
           '
         language: system
         pass_filenames: false

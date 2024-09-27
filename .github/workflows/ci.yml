@@ -32,9 +32,9 @@ jobs:
 
       - name: Run formatting checks
         run: |
-          uv tool run ruff check --output-format=github .
-          uv tool run mypy .
-          uv tool run pydoclint .
+          uv run ruff check --output-format=github .
+          uv run mypy .
+          uv run pydoclint .
 
       - name: Build and check package
         run: |
@@ -44,6 +44,6 @@ jobs:
 
       - name: Run unit tests with coverage report
         run: |
-          uv tool run pytest -v tests --cov=src tests --cov-report term
+          uv run pytest -v tests --cov=src tests --cov-report term
         env:
           PYTHONPATH: ${{ github.workspace }}/src/scifi

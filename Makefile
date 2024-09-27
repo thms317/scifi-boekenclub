@@ -42,8 +42,7 @@ test:
 	@echo "Running tests..."
 	.venv/bin/pre-commit run --all-files
 	uv sync;
-	# uv tool run pytest tests --cov=src --cov-report term;
-	uv tool run pytest tests
+	uv run pytest tests --cov=src --cov-report term;
 
 tree:
 	@echo "Generating project tree..."
@@ -51,10 +50,10 @@ tree:
 
 docs:
 	@echo "Generating HTML documentation..."
-	# @uv tool run pdoc --html src/scifi -o docs/api --force
-	# @uv tool run pdoc --html tests -o docs/api --force
+	@uv run pdoc --html src/scifi -o docs/api --force
+	@uv run pdoc --html tests -o docs/api --force
 	@echo "Generating coverage report..."
-	# @uv tool run pytest tests -v --cov=src --cov-report html:docs/tests/coverage
-	# @rm -rf docs/tests/coverage/.gitignore
-	@uv tool run mkdocs build
-	@uv tool run mkdocs serve
+	@uv run pytest tests -v --cov=src --cov-report html:docs/tests/coverage
+	@rm -rf docs/tests/coverage/.gitignore
+	@uv run mkdocs build
+	@uv run mkdocs serve
