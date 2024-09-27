@@ -1,71 +1,88 @@
 name: Semantic Release
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - main
-    paths:
-      - .github/workflows/**
-      - src/**
-      - pyproject.toml
+      - release/*
 
 jobs:
   release:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    concurrency: release
+    runs-on: ubuntu-laest
     permissions:
-      id-token: write
       contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
 
     steps:
       # Step 1: Checkout the repository and fetch all history and tags
-      - name: Checkout code
+      - name: Checkout the repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: 'main'     # Ensure you're on the main branch
+          fetch-depth: 0  # Fetch all history and tags
 
-      # Step 2: Run Semantic Release to bump version and tag
-      - name: Python Semantic Release
-        id: semantic_release
-        uses: python-semantic-release/python-semantic-release@v9.8.8
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 20
 
-      # Step 3: Fetch the latest tags after the release
+      # Step 3: Install Semantic Release
+      - name: Install Semantic Release
+        run: |
+          npm install --no-save \
+            semantic-release \
+            @semantic-release/changelog \
+            @semantic-release/exec \
+            @semantic-release/git \
+            @semantic-release/github
+
+      # Step 4: Run Semantic Release
+      - name: Run Semantic Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 5: Fetch the latest tags after the release
       - name: Fetch latest tags
         run: git fetch --tags
 
-      # Step 5: Reset file ownership after actions
-      - name: Fix .git folder permissions
-        run: sudo chown -R $USER:$USER .git
-
-      # Step 4: Generate CHANGELOG after fetching the new tags
+      # Step 6: Generate CHANGELOG
       - name: Generate CHANGELOG
-        uses: orhun/git-cliff-action@v4
+        uses: orhun/git-cliff-action@v4.2.0
+        id: git-cliff-changelog
         with:
           config: pyproject.toml
-          args: --github-repo ${{ github.repository }}
         env:
           OUTPUT: docs/CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}
 
-      # Step 6: Commit CHANGELOG
+      # Step 7: Commit the CHANGELOG after it is generated (only if there are changes)
       - name: Commit CHANGELOG
+        id: commit-changelog
         run: |
           # Set up git configuration
           git config user.name 'github-actions[bot]'
           git config user.email 'actions@github.com'
 
-          # Add generated CHANGELOG
-          git add docs/CHANGELOG.md
+          # Write the latest version to the docs
+          VERSION=$(git tag --sort=-v:refname | head -n 1 | sed 's/^v//')
+          sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
+
+          # Add generated CHANGELOG and updated pyproject.toml
+          git add docs/CHANGELOG.md pyproject.toml
 
           # Check if there are any changes to commit
           if git diff --cached --quiet; then
             echo "No changes to commit, skipping commit."
           else
-            echo "Committing CHANGELOG..."
-            git commit -m "chore(pr): update CHANGELOG for PR #${{ github.event.pull_request.number }} [automated]"
-            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git ${{ github.ref_name }}
+            # Commit the changes
+            git commit -m "chore(release): update CHANGELOG for version $VERSION [automated]"
+            # Fetching and rebasing onto the latest main branch before pushing
+            git fetch origin
+            git rebase origin/main -X ours
+            # Push changes
+            git push origin main
           fi
