@@ -29,7 +29,7 @@ jobs:
       # Step 2: Run Semantic Release to bump version and tag
       - name: Python Semantic Release
         id: semantic_release
-        uses: python-semantic-release/python-semantic-release@v9.8.8
+        uses: python-semantic-release/python-semantic-release@v9.8.9
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
