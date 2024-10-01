@@ -1,5 +1,5 @@
-Datum,Nummer,Boek,Auteur,# pagina's,Wie heeft gekozen? ,Locatie
-?,1,The Road,Cormac McCarthy,,gezamenlijk,?
+Datum,Nummer,Boek,Auteur,# pagina's,Wie heeft gekozen?,Locatie
+,1,The Road,Cormac McCarthy,,gezamenlijk,?
 11/26/2014,2,Ready Player One,Ernest Cline,,gezamenlijk,Koen - Prinsengracht 241
 1/27/2015,3,Do Androids Dream of Electric Sheep,Philip K. Dick,,gezamenlijk,Laurynas - Jan Muschstraat 54
 4/14/2015,4,Neuromancer,William Gibson,,gezamenlijk,?
@@ -45,7 +45,7 @@ Datum,Nummer,Boek,Auteur,# pagina's,Wie heeft gekozen? ,Locatie
 6/19/2020,44,Who Fears Death,Nnedi Okarafor,,Dion,Laurynas - Keizersgracht 92k
 8/4/2020,45,A Clockwork Orange,Anthony Burgess,,David,De Doelen
 9/21/2020,46,A Stranger in A Strange Land,Robert A. Heinlein,,Thirsa & Koen,Laurynas - Keizersgracht 92k
-11/18/2020,47,The Dispossessed ,Ursula K. Le Guin,,Laurynas,Laurynas - Keizersgracht 92k
+11/18/2020,47,"The Dispossessed ",Ursula K. Le Guin,,Laurynas,Laurynas - Keizersgracht 92k
 1/5/2021,48,Klont,Maxim Februari,,Robert,Skype
 2/17/2021,49,De avond is ongemak,Marieke Lucas Rijneveld,,Dion,Teams
 4/4/2021,50,Drowned World,J.G. Ballard,,David,Laurynas - Keizersgracht 92k
@@ -71,16 +71,3 @@ Datum,Nummer,Boek,Auteur,# pagina's,Wie heeft gekozen? ,Locatie
 7/20/2024,70,Concept M,Aafke Romeijn,,Thomas,Cafe Cook
 9/11/2024,71,Galapagos,Kurt Vonnegut,,Dion,De Doelen
 11/8/2024,72,The Vegetarian,Han Kang,,Koen,
-,73,,,,,
-,74,,,,,
-,75,,,,,
-,76,,,,,
-,77,,,,,
-,78,,,,,
-,79,,,,,
-,80,,,,,
-,81,,,,,
-,82,,,,,
-,83,,,,,
-,84,,,,,
-,85,,,,,
