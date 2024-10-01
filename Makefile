@@ -49,11 +49,14 @@ tree:
 	@tree -I '.venv|__pycache__|archive|scratch|.databricks|.ruff_cache|.mypy_cache|.pytest_cache|.git|htmlcov|site|dist|.DS_Store|fixtures' -a
 
 docs:
+	@echo "Running tests and generating badges..."
+	@uv run pytest -v tests --cov=src --cov-report html:docs/tests/coverage --junitxml=docs/tests/coverage/pytest_coverage.xml
+	@uv run coverage xml -o docs/tests/coverage/coverage.xml
+	@uv run genbadge coverage -i docs/tests/coverage/coverage.xml -o docs/assets/badge-coverage.svg
+	@uv run genbadge tests -i docs/tests/coverage/pytest_coverage.xml -o docs/assets/badge-tests.svg
+	@rm -rf docs/tests/coverage/.gitignore
 	@echo "Generating HTML documentation..."
 	@uv run pdoc --html src/scifi -o docs/api --force
 	@uv run pdoc --html tests -o docs/api --force
-	@echo "Generating coverage report..."
-	@uv run pytest tests -v --cov=src --cov-report html:docs/tests/coverage
-	@rm -rf docs/tests/coverage/.gitignore
 	@uv run mkdocs build
 	@uv run mkdocs serve

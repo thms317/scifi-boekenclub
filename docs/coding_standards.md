@@ -23,6 +23,4 @@ Ensure that the [`pre-commit`](https://pre-commit.com) hook defined in `.pre-com
 
 ## Data Processing
 
-- When interacting with a Delta table, use `spark.sql.DataFrame` in subsequent transformations.
-- For small datasets, use the `coalesce(1)` method to process on a single node.
-- For large datasets, use the default method to process the data (i.e. let Spark handle the partitioning).
+- When interacting with a data, leverage the lazy evaluation of `Polars`.
