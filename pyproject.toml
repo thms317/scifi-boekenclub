@@ -8,25 +8,29 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "ipykernel>=6.29.5",
+    "matplotlib>=3.9.2",
+    "nbformat>=5.10.4",
     "plotly>=5.24.1",
     "polars>=1.8.2",
+    "scipy>=1.14.1",
     "streamlit>=1.38.0",
-    "thefuzz>=0.22.1",
 ]
 
 [tool.uv]
+package = true
 dev-dependencies = [
     "coverage>=7.6.1",
     "defusedxml>=0.7.1",
     "genbadge>=1.1.1",
-    "git-cliff>=2.6.0",
+    "git-cliff>=2.6.1",
     "mkdocs>=1.6.1",
-    "mkdocs-material>=9.5.38",
+    "mkdocs-material>=9.5.39",
     "mypy>=1.11.2",
     "mypy-extensions>=1.0.0",
     "pdoc3>=0.11.1",
     "pre-commit>=3.8.0",
-    "pydoclint>=0.5.8",
+    "pydoclint>=0.5.9",
     "pytest>=8.3.3",
     "pytest-cov>=5.0.0",
     "pytest-mock>=3.14.0",
@@ -59,6 +63,7 @@ ignore = [
     "T201",     # "`print` found." I use this for debugging.
     "FBT003",   # "Boolean positional value in function call." This is fairly common in spark.
     "ANN101",   # "Missing type annotation for `self`." Deprecated.
+    "PD010",    # "`.pivot_table` is preferred to `.pivot` or `.unstack`." Polars uses `.pivot`.
 ]
 unfixable = [
     "F401",     # "Unused import." Disabled since it makes linting/formatting notebooks messy and impossible.
