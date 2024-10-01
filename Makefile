@@ -58,5 +58,5 @@ docs:
 	@echo "Generating HTML documentation..."
 	@uv run pdoc --html src/scifi -o docs/api --force
 	@uv run pdoc --html tests -o docs/api --force
-	@uv run mkdocs build
+	# @uv run mkdocs build
 	@uv run mkdocs serve
