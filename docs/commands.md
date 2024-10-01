@@ -278,112 +278,6 @@ TOTAL                      3      0   100%
 
 </details>
 
-## `deploy_%`
-
-This command deploys the bundle to a target Databricks Workspace environment. The supported environments are `dev` and `prd`.
-
-<details>
-  <summary>Usage</summary>
-
-```bash
-make deploy_dev
-make deploy_prd
-```
-
-```bash
-poetry build
-Building scifi-boekenclub (0.1.0)
-  - Building sdist
-  - Built scifi-boekenclub-0.1.0.tar.gz
-  - Building wheel
-  - Built scifi-boekenclub-0.1.0-py3-none-any.whl
-Building platform...
-Uploading scifi-boekenclub-0.1.0-py3-none-any.whl...
-Uploading bundle files to /Users/thomas.brouwer@revodata.nl/.bundle/scifi-boekenclub/dev/files...
-Deploying resources...
-Updating deployment state...
-Deployment complete!
-```
-
-</details>
-
-## `destroy_%`
-
-This command destroys the deployed bundle in a target Databricks Workspace environment. The supported environments are `dev` and `prd`.
-
-<details>
-  <summary>Usage</summary>
-
-```bash
-make destroy_dev
-make destroy_prd
-```
-
-```bash
-Building platform...
-The following resources will be deleted:
-  delete job ingest_dataset_with_dlt
-  delete job template_job
-  delete pipeline dlt_ingest_dataset
-
-All files and directories at the following location will be deleted: /Users/thomas.brouwer@revodata.nl/.bundle/scifi-boekenclub/dev
-
-Would you like to proceed? [y/n]: y
-Deleting files...
-Destroy complete!
-```
-
-</details>
-
-## `repo`
-
-This command creates a repository in RevoData's GitHub and sets it up as a remote for the local Git repository. This command requires that the GitHub CLI (`gh`) is installed and authenticated.
-
-<details>
-  <summary>Usage</summary>
-
-```bash
-make repo
-```
-
-```bash
-Creating repository in RevoData's GitHub...
-Repository created at revodatanl/scifi-boekenclub...
-Publishing project...
-Repository published.
-```
-
-</details>
-
-## `module`
-
-This command provides a selection menu to deploy various custom RevoData modules. The available modules include:
-
-- DLT
-- Azure DevOps
-- GitLab
-- VSCode settings
-
-<details>
-  <summary>Usage</summary>
-
-```bash
-make module
-```
-
-```bash
-Select the module to deploy:
-1) DLT
-2) Azure DevOps
-3) GitLab
-4) VSCode settings (update)
-Enter the number of the module you want to deploy: 1
-
-Your DLT ingestion pipeline, part of the 'ingest_dataset_using_dlt' workflow, has been added to the 'resources' directory.
-```
-
-</details>
-
 ## `tree`
 
 This command generates a tree view of the project directory, excluding certain directories and files like `.venv`, `__pycache__`, and `.git`.
@@ -403,8 +297,6 @@ make tree
 │   ├── pull_request_template.md
 │   └── workflows
 │       ├── ci.yml
-│       ├── deploy-dab.yml
-│       ├── semantic-pr.yml
 │       └── semantic-release.yml
 ├── .gitignore
 ├── .pre-commit-config.yaml
@@ -414,15 +306,19 @@ make tree
 │   └── settings.json
 ├── Makefile
 ├── README.md
-├── README_github.md
-├── databricks.yml
-├── dependabot.md
+├── data
+│   ├── boekenclub_overzicht.csv
+│   └── goodreads
+│       ├── koen_goodreads_library_export.csv
+│       ├── koen_m_goodreads_library_export.csv
+│       └── thomas_goodreads_library_export.csv
 ├── docs
 │   ├── CHANGELOG.md
 │   ├── api
 │   │   ├── scifi
 │   │   │   ├── index.html
-│   │   │   └── main.html
+│   │   │   ├── main.html
+│   │   │   └── tools.html
 │   │   └── tests
 │   │       ├── default_test.html
 │   │       └── index.html
@@ -430,64 +326,57 @@ make tree
 │   │   ├── badge-coverage.svg
 │   │   ├── badge-tests.svg
 │   │   ├── make-clean.png
-│   │   ├── make-deploy_dev.png
-│   │   ├── make-destroy_dev.png
 │   │   ├── make-install.png
-│   │   ├── make-module-azure-devops.png
-│   │   ├── make-module-dlt.png
-│   │   ├── make-module-gitlab.png
-│   │   ├── make-module-vscode.png
-│   │   ├── make-module.png
-│   │   ├── make-repo-github.png
-│   │   ├── make-repo.png
 │   │   ├── make-setup.png
 │   │   ├── make-test.png
 │   │   └── make-tree.png
-│   ├── bundle_deployment.md
 │   ├── cicd.md
 │   ├── coding_standards.md
 │   ├── commands.md
 │   ├── getting_started.md
 │   ├── index.md
-│   ├── jobs
-│   │   └── index.md
-│   ├── modules.md
-│   ├── notebooks
-│   │   └── index.md
 │   ├── release.md
+│   ├── scifi.md
 │   └── tests
 │       ├── coverage
 │       │   ├── class_index.html
+│       │   ├── coverage.xml
 │       │   ├── coverage_html_cb_6fb7b396.js
 │       │   ├── favicon_32_cb_58284776.png
 │       │   ├── function_index.html
 │       │   ├── index.html
 │       │   ├── keybd_closed_cb_ce680311.png
+│       │   ├── pytest_coverage.xml
 │       │   ├── status.json
 │       │   ├── style_cb_8e611ae1.css
-│       │   ├── z_df71c8327dd0b782___init___py.html
-│       │   └── z_df71c8327dd0b782_main_py.html
+│       │   ├── z_05c5a673803a19f1___init___py.html
+│       │   ├── z_05c5a673803a19f1_main_py.html
+│       │   ├── z_6e5cfbb1049754cf___init___py.html
+│       │   ├── z_6e5cfbb1049754cf_main_py.html
+│       │   └── z_6e5cfbb1049754cf_tools_py.html
 │       ├── coverage_report.md
 │       ├── test_configuration.md
 │       └── tests.md
 ├── mkdocs.yml
-├── poetry.lock
-├── poetry.toml
+├── notebooks
+│   └── exploration.ipynb
 ├── pyproject.toml
-├── resources
-│   ├── jobs
-│   │   ├── ingest_dataset_using_dlt.yml
-│   │   └── template_job.yml
-│   └── notebooks
-│       ├── dlt_ingest_dataset.py
-│       └── hello_revodata.py
+├── release.config.js
 ├── src
-│   └──
-│       ├── __init__.py
-│       └── main.py
-└── tests
-    ├── __init__.py
-    └── default_test.py
+│   ├── scifi
+│   │   ├── __init__.py
+│   │   ├── main.py
+│   │   └── tools.py
+│   └── scifi_boekenclub.egg-info
+│       ├── PKG-INFO
+│       ├── SOURCES.txt
+│       ├── dependency_links.txt
+│       ├── requires.txt
+│       └── top_level.txt
+├── tests
+│   ├── __init__.py
+│   └── default_test.py
+└── uv.lock
 
 19 directories, 73 files
 ```
