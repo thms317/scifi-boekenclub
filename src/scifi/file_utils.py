@@ -6,6 +6,23 @@ from typing import Literal
 import polars as pl
 
 
+def get_reviewer_mapping() -> dict[str, str]:
+    """Return the mapping from file paths to reviewer names.
+
+    Returns
+    -------
+    dict[str, str]
+        A dictionary mapping file paths to reviewer names.
+    """
+    return {
+        "data/goodreads/koen_goodreads_library_export.csv": "Koen",
+        "data/goodreads/thomas_goodreads_library_export.csv": "Thomas",
+        "data/goodreads/koen_m_goodreads_library_export.csv": "Koen_M",
+        "data/goodreads/Thomas is een worstje_clean.csv": "Robert",
+        "data/goodreads/goodreads_library_export-PHT_clean.csv": "Peter",
+    }
+
+
 def read_goodreads(path_goodreads_dir: Path) -> pl.DataFrame:
     """Read the Goodreads CSVs into a Polars DataFrame.
 
@@ -71,7 +88,7 @@ def read_bookclub(path_bookclub: Path) -> pl.DataFrame:
         .select(columns.keys())
         .rename(columns)
         .with_columns(
-            pl.col("date").str.to_date("%m/%d/%Y"),
+            pl.col("date").str.to_date("%m/%d/%Y").cast(pl.Datetime),  # redundant?
             pl.col("title").str.strip_chars(),
             pl.col("author").str.strip_chars(),
         )
@@ -79,13 +96,17 @@ def read_bookclub(path_bookclub: Path) -> pl.DataFrame:
     return q.collect()
 
 
-def pivot_goodreads_data(df_goodreads: pl.DataFrame) -> pl.DataFrame:
+def pivot_goodreads_data(
+    df_goodreads: pl.DataFrame, reviewer_mapping: dict[str, str]
+) -> pl.DataFrame:
     """Pivot the Goodreads data, grouping by book, and calculating ratings.
 
     Parameters
     ----------
     df_goodreads : pl.DataFrame
         The Goodreads data.
+    reviewer_mapping : dict[str, str]
+        Dictionary mapping file paths to reviewer names.
 
     Returns
     -------
@@ -105,15 +126,9 @@ def pivot_goodreads_data(df_goodreads: pl.DataFrame) -> pl.DataFrame:
             values="rating",
             aggregate_function="mean",
         )
-        .rename(
-            {
-                "data/goodreads/koen_goodreads_library_export.csv": "Koen",
-                "data/goodreads/thomas_goodreads_library_export.csv": "Thomas",
-                "data/goodreads/koen_m_goodreads_library_export.csv": "Koen_M",
-            }
-        )
+        .rename(reviewer_mapping)
         .with_columns(
-            pl.mean_horizontal("Koen", "Thomas", "Koen_M").alias("average_bookclub_rating")
+            pl.mean_horizontal(*reviewer_mapping.values()).alias("average_bookclub_rating")
         )
     )
 
