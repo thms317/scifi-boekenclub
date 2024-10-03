@@ -363,16 +363,10 @@ make tree
 ├── pyproject.toml
 ├── release.config.js
 ├── src
-│   ├── scifi
-│   │   ├── __init__.py
-│   │   ├── main.py
-│   │   └── tools.py
-│   └── scifi_boekenclub.egg-info
-│       ├── PKG-INFO
-│       ├── SOURCES.txt
-│       ├── dependency_links.txt
-│       ├── requires.txt
-│       └── top_level.txt
+│   └── scifi
+│       ├── __init__.py
+│       ├── main.py
+│       └── tools.py
 ├── tests
 │   ├── __init__.py
 │   └── default_test.py
