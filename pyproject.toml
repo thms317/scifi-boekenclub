@@ -1,5 +1,5 @@
 [project]
-name = "scifi-boekenclub"
+name = "scifi"
 version = "0.1.0"
 description = "Analyse van alle boeken van de enige echte Sci-Fi Boekenclub."
 authors = [
