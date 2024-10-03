@@ -1537,7 +1537,7 @@ wheels = [
 ]
 
 [[package]]
-name = "scifi-boekenclub"
+name = "scifi"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
