@@ -34,7 +34,12 @@ setup:
 clean:
 	@echo "Cleaning up..."
 	rm -rf .venv uv.lock
-	find . -type d \( -name ".pytest_cache" -o -name ".mypy_cache" -o -name ".ruff_cache" \) -exec rm -rf {} +
+	find . -type d \
+		\( -name ".pytest_cache" \
+		-o -name ".mypy_cache" \
+		-o -name ".ruff_cache" \
+		-o -name "dist" \) \
+		-exec rm -rf {} +
 	@echo "Cleanup completed. Resetting terminal..."
 	@reset
 
