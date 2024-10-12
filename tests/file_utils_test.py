@@ -176,9 +176,9 @@ class TestPivotGoodreadsData:
             {
                 "title": ["Sample Book", "Sample Book"],
                 "author": ["Sample Author", "Sample Author"],
-                "average_goodreads_rating": [4.5, 4.5],
+                "average_goodreads_rating": [4.5, 4.7],
                 "original_publication_year": [2020, 2020],
-                "number_of_pages": [300, 300],
+                "number_of_pages": [250, 300],
                 "rating": [5, 4],
                 "path": [
                     "data/goodreads/koen_goodreads_library_export.csv",
@@ -209,6 +209,10 @@ class TestPivotGoodreadsData:
         assert df_pivot.shape[0] == 1
         # Assert average_bookclub_rating calculation
         assert df_pivot["average_bookclub_rating"][0] == 4.5
+        # Assert that the averaged goodreads value is correct (in case of rating drift)
+        assert df_pivot["average_goodreads_rating"][0] == 4.6
+        # Assert that the averaged number if  is correct (in case of different editions with different page counts)
+        assert df_pivot["number_of_pages"][0] == 275
 
 
 class TestMatchDataframes:
