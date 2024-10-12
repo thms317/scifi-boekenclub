@@ -43,10 +43,10 @@ target-version = "py312"
 line-length = 100
 extend-include = ["*.ipynb"]
 exclude = ["scratch"]
-external = ["DOC"]
 
 [tool.ruff.lint]
 pydocstyle.convention = "numpy"
+external = ["DOC"]
 select = ["ALL"]
 ignore = [
     "D203",     # "One blank line required before class docstring." Should be disabled by default.
