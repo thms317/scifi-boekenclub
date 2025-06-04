@@ -1,4 +1,4 @@
-.PHONY: install setup clean test tree
+.PHONY: install setup clean test tree lint
 
 install:
 	@echo "Verifying if Homebrew is installed..."; \
@@ -71,3 +71,18 @@ test:
 tree:
 	@echo "Generating project tree..."
 	@tree -I '.venv|__pycache__|archive|scratch|.databricks|.ruff_cache|.mypy_cache|.pytest_cache|.git|htmlcov|site|dist|.DS_Store|fixtures' -a
+
+lint:
+	@echo "Linting the project..."
+	@uv sync
+	@echo "Building the project..."
+	@uv build >/dev/null 2>&1
+	@echo "Running ruff..."
+	@uv run ruff check --output-format=concise .
+	@echo "Running mypy..."
+	@uv run mypy .
+	@echo "Running pydoclint..."
+	@uv run pydoclint .
+	@echo "Running bandit..."
+	@uv run bandit --configfile=pyproject.toml --severity-level=medium -r .
+	@echo "Linting completed successfully!"
