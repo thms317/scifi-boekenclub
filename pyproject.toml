@@ -13,13 +13,14 @@ dependencies = [
     "matplotlib>=3.10.3",
     "nbformat>=5.10.4",
     "openpyxl>=3.1.5",
-    "polars>=1.30.0",
-    "streamlit>=1.45.1",
+    "pandas-stubs>=2.2.3.250527",
     "plotly>=6.1.2",
-    "seaborn>=0.13.2",
+    "polars>=1.30.0",
     "scipy>=1.15.3",
+    "seaborn>=0.13.2",
+    "streamlit>=1.45.1",
+    "watchdog>=6.0.0",
 ]
-
 
 [dependency-groups]
 dev = [
@@ -49,8 +50,11 @@ external = ["DOC"]
 select = ["ALL"]
 ignore = [
     "ANN401",   # "Dynamically typed expressions (typing.Any) are disallowed in `*args` / `**kwargs`.
+    "C901",     # Function is too complex
+    "COM812",   # "Unnecessary `self` argument in method definition."
     "D203",     # "One blank line required before class docstring." Should be disabled by default.
     "D213",     # "Multi-line docstring summary should start at the second line." Should be disabled by default.
+    "D400",     # "First line should end with a period."
     "E501",     # "Line too long." Sometimes my comments are a bit longer.
     "E731",     # "Do not assign a lambda expression, use a def." Needed for spark UDFs.
     "ERA001",   # "Found commented out code."
@@ -59,6 +63,9 @@ ignore = [
     "FBT003",   # "Boolean positional value in function call." This is common in spark.
     "ISC001",   # "Implicit string concatenation." Ignored since it conflicts with the formatter.
     "N812",     # "Lowercase `functions` imported as non-lowercase." Pretty standard for spark programming.
+    "PLR0912",  # Too many branches
+    "PLR0915",  # Too many statements
+    "PLR2004",  # Magic value used in comparison"
     "S608",     # "Possible SQL injection vector through string-based query construction."
     "T201",     # "`print` found."
 ]
