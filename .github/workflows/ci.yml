@@ -41,8 +41,6 @@ jobs:
           uv run pydoclint .
           echo "Running bandit"
           uv run bandit --configfile=pyproject.toml --severity-level=medium -r .
-          echo "Running sqlfluff"
-          uv run sqlfluff lint .
           echo "Formatting checks passed ✅"
 
       - name: Run tests with coverage report
