@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/thms317/scifi-boekenclub/compare/v1.0.1...v1.1.0) (2025-06-04)
+
+
+### Features
+
+* add streamlit dashboard ([8ddc08c](https://github.com/thms317/scifi-boekenclub/commit/8ddc08c80a2ac99f7a6633fdb977831b8f39f8b9))
+
 ## [1.0.1](https://github.com/thms317/scifi-boekenclub/compare/v1.0.0...v1.0.1) (2025-06-04)
 
 
