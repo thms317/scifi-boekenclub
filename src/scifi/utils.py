@@ -1,4 +1,4 @@
-"""File utilities for the scifi project."""
+"""Utilitiy functions for the scifi project."""
 
 from pathlib import Path
 from typing import Literal
@@ -20,6 +20,7 @@ def get_reviewer_mapping() -> dict[str, str]:
         "data/goodreads/koen_m_goodreads_library_export.csv": "Koen_M",
         "data/goodreads/Thomas is een worstje_clean.csv": "Robert",
         "data/goodreads/goodreads_library_export-PHT_clean.csv": "Peter",
+        "data/goodreads/goodreads_library_export-thirsa.csv": "Thirsa",
     }
 
 
@@ -97,7 +98,8 @@ def read_bookclub(path_bookclub: Path) -> pl.DataFrame:
 
 
 def pivot_goodreads_data(
-    df_goodreads: pl.DataFrame, reviewer_mapping: dict[str, str]
+    df_goodreads: pl.DataFrame,
+    reviewer_mapping: dict[str, str],
 ) -> pl.DataFrame:
     """Pivot the Goodreads data, grouping by book, and calculating ratings.
 
@@ -119,7 +121,7 @@ def pivot_goodreads_data(
             [
                 pl.mean("average_goodreads_rating").over(index_cols),
                 pl.mean("number_of_pages").over(index_cols),
-            ]
+            ],
         )
         .pivot(
             "path",

@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 import polars as pl
 import pytest
 
-from scifi.file_utils import match_dataframes, pivot_goodreads_data, read_bookclub, read_goodreads
+from scifi.utils import match_dataframes, pivot_goodreads_data, read_bookclub, read_goodreads
 
 
 class TestReadGoodreads:
@@ -28,7 +28,7 @@ class TestReadGoodreads:
                     "Original Publication Year": [2020],
                     "Number of Pages": [300],
                     "Exclusive Shelf": ["read"],
-                }
+                },
             )
             df2 = pl.DataFrame(
                 {
@@ -39,7 +39,7 @@ class TestReadGoodreads:
                     "Original Publication Year": [2019],
                     "Number of Pages": [250],
                     "Exclusive Shelf": ["read"],
-                }
+                },
             )
             df3 = pl.DataFrame(
                 {
@@ -50,7 +50,7 @@ class TestReadGoodreads:
                     "Original Publication Year": [2018],
                     "Number of Pages": [200],
                     "Exclusive Shelf": ["to-read"],
-                }
+                },
             )
             df1.write_csv(tmpdir_path / "koen_goodreads_library_export.csv")
             df2.write_csv(tmpdir_path / "thomas_goodreads_library_export.csv")
@@ -62,7 +62,8 @@ class TestReadGoodreads:
         df_goodreads_test = read_goodreads(test_goodreads_dir)
         # Assert that df is a Polars DataFrame
         assert isinstance(
-            df_goodreads_test, pl.DataFrame
+            df_goodreads_test,
+            pl.DataFrame,
         ), "read_goodreads did not return a Polars DataFrame"
         # Assert column names
         expected_columns = [
@@ -106,7 +107,7 @@ class TestReadBookclub:
                     "Auteur": ["Sample Author", "Another Author"],
                     "Wie heeft gekozen?": ["Member A", "Member B"],
                     "Locatie": ["Location A", "Location B"],
-                }
+                },
             )
             csv_bookclub_path = tmpdir_path / "sample_bookclub.csv"
             df_bookclub_test.write_csv(csv_bookclub_path)
@@ -117,7 +118,8 @@ class TestReadBookclub:
         df_bookclub_test = read_bookclub(test_bookclub_csv)
         # Assert that df is a Polars DataFrame
         assert isinstance(
-            df_bookclub_test, pl.DataFrame
+            df_bookclub_test,
+            pl.DataFrame,
         ), "read_bookclub did not return a Polars DataFrame"
         # Assert column names
         expected_columns = {
@@ -136,9 +138,9 @@ class TestReadBookclub:
         # Assert specific data values
         expected_titles = {"Sample Book", "Another Book"}
         actual_titles = set(df_bookclub_test["title"].to_list())
-        assert (
-            expected_titles == actual_titles
-        ), "Titles in the DataFrame do not match expected values"
+        assert expected_titles == actual_titles, (
+            "Titles in the DataFrame do not match expected values"
+        )
         # Assert that the 'date' column is of datetime type
         assert df_bookclub_test["date"].dtype == pl.Datetime, "Date column is not of datetime type"
         # Assert specific date values
@@ -184,11 +186,13 @@ class TestPivotGoodreadsData:
                     "data/goodreads/koen_goodreads_library_export.csv",
                     "data/goodreads/thomas_goodreads_library_export.csv",
                 ],
-            }
+            },
         )
 
     def test_pivot_goodreads_data(
-        self, df_goodreads: pl.DataFrame, reviewer_mapping: dict[str, str]
+        self,
+        df_goodreads: pl.DataFrame,
+        reviewer_mapping: dict[str, str],
     ) -> None:
         """Test the pivot_goodreads_data."""
         df_pivot = pivot_goodreads_data(df_goodreads, reviewer_mapping)
@@ -226,7 +230,7 @@ class TestMatchDataframes:
                 "title": ["Sample Book", "Non-Matching Book"],
                 "author": ["Sample Author", "Unknown Author"],
                 "date": [pl.datetime(2020, 1, 1), pl.datetime(2021, 1, 1)],
-            }
+            },
         )
 
     @pytest.fixture(scope="class")
@@ -237,7 +241,7 @@ class TestMatchDataframes:
                 "title": ["Sample Book", "Another Book"],
                 "author": ["Sample Author", "Another Author"],
                 "average_goodreads_rating": [4.5, 4.0],
-            }
+            },
         )
 
     @pytest.fixture(scope="class")
@@ -248,11 +252,13 @@ class TestMatchDataframes:
                 "title": ["sample Book", "another Book"],
                 "author": ["sample Author", "another Author"],
                 "average_goodreads_rating": [4.5, 4.0],
-            }
+            },
         )
 
     def test_match_dataframes_inner_join(
-        self, df_bookclub: pl.DataFrame, df_pivot: pl.DataFrame
+        self,
+        df_bookclub: pl.DataFrame,
+        df_pivot: pl.DataFrame,
     ) -> None:
         """Test that match_dataframes performs an inner join correctly."""
         matched_df = match_dataframes(df_bookclub, df_pivot, on="title", how="inner")
@@ -260,7 +266,9 @@ class TestMatchDataframes:
         assert matched_df["title"][0] == "Sample Book"
 
     def test_match_dataframes_left_join(
-        self, df_bookclub: pl.DataFrame, df_pivot: pl.DataFrame
+        self,
+        df_bookclub: pl.DataFrame,
+        df_pivot: pl.DataFrame,
     ) -> None:
         """Test that match_dataframes performs a left join correctly."""
         matched_df = match_dataframes(df_bookclub, df_pivot, on="title", how="left")
@@ -270,7 +278,9 @@ class TestMatchDataframes:
         assert matched_df["average_goodreads_rating"][1] is None
 
     def test_match_dataframes_case_insensitive(
-        self, df_bookclub: pl.DataFrame, df_pivot_lowercase: pl.DataFrame
+        self,
+        df_bookclub: pl.DataFrame,
+        df_pivot_lowercase: pl.DataFrame,
     ) -> None:
         """Test that match_dataframes matches titles case-insensitively."""
         matched_df = match_dataframes(df_bookclub, df_pivot_lowercase, on="title", how="inner")
@@ -278,7 +288,9 @@ class TestMatchDataframes:
         assert matched_df["title"][0].lower() == "sample book"
 
     def test_match_dataframes_anti_join(
-        self, df_bookclub: pl.DataFrame, df_pivot: pl.DataFrame
+        self,
+        df_bookclub: pl.DataFrame,
+        df_pivot: pl.DataFrame,
     ) -> None:
         """Test that match_dataframes performs an anti join correctly."""
         matched_df = match_dataframes(df_bookclub, df_pivot, on="title", how="anti")
