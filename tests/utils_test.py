@@ -8,7 +8,12 @@ from tempfile import TemporaryDirectory
 import polars as pl
 import pytest
 
-from scifi.utils import match_dataframes, pivot_goodreads_data, read_bookclub, read_goodreads
+from scifi.utils import (
+    match_dataframes,
+    pivot_goodreads_data,
+    read_bookclub,
+    read_combine_goodreads,
+)
 
 
 class TestReadGoodreads:
@@ -59,7 +64,7 @@ class TestReadGoodreads:
 
     def test_read_goodreads(self, test_goodreads_dir: Path) -> None:
         """Test for the read_goodreads function."""
-        df_goodreads_test = read_goodreads(test_goodreads_dir)
+        df_goodreads_test = read_combine_goodreads(test_goodreads_dir)
         # Assert that df is a Polars DataFrame
         assert isinstance(
             df_goodreads_test,
@@ -88,7 +93,7 @@ class TestReadGoodreads:
             tmpdir_path = Path(tmpdir)
             # Call the function with an empty directory
             with pytest.raises(pl.exceptions.ComputeError, match="expected at least 1 source"):
-                _ = read_goodreads(tmpdir_path)
+                _ = read_combine_goodreads(tmpdir_path)
 
 
 class TestReadBookclub:

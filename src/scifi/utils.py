@@ -3,6 +3,7 @@
 from pathlib import Path
 from typing import Literal
 
+import numpy as np
 import polars as pl
 
 
@@ -15,23 +16,23 @@ def get_reviewer_mapping() -> dict[str, str]:
         A dictionary mapping file paths to reviewer names.
     """
     return {
-        "data/goodreads/koen_goodreads_library_export.csv": "Koen",
-        "data/goodreads/thomas_goodreads_library_export.csv": "Thomas",
-        "data/goodreads/koen_m_goodreads_library_export.csv": "Koen_M",
-        "data/goodreads/Thomas is een worstje_clean.csv": "Robert",
-        "data/goodreads/goodreads_library_export-PHT_clean.csv": "Peter",
-        "data/goodreads/goodreads_library_export-thirsa.csv": "Thirsa",
+        "data/goodreads/clean/koen_goodreads_library_export.csv": "Koen_v_W",
+        "data/goodreads/clean/thomas_goodreads_library_export.csv": "Thomas",
+        "data/goodreads/clean/koen_m_goodreads_library_export.csv": "Koen_M",
+        "data/goodreads/clean/Thomas is een worstje_clean.csv": "Robert",
+        "data/goodreads/clean/goodreads_library_export-PHT_clean.csv": "Peter",
+        "data/goodreads/clean/goodreads_library_export-thirsa.csv": "Thirsa",
     }
 
 
-def read_goodreads(path_goodreads_dir: Path) -> pl.DataFrame:
-    """Read the Goodreads CSVs into a Polars DataFrame.
+def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
+    """Read and combine all Goodreads CSVs into a Polars DataFrame.
 
     The title and author columns are stripped of whitespace.
 
     Parameters
     ----------
-    path_goodreads_dir : Path
+    goodreads_dir : Path
         The directory containing the Goodreads CSVs.
 
     Returns
@@ -48,7 +49,7 @@ def read_goodreads(path_goodreads_dir: Path) -> pl.DataFrame:
         "Number of Pages": "number_of_pages",
     }
     q = (
-        pl.scan_csv(path_goodreads_dir, include_file_paths="path")
+        pl.scan_csv(goodreads_dir, include_file_paths="path")
         .filter(pl.col("Exclusive Shelf") == "read")
         .select([*columns.keys(), "path"])
         .rename(columns)
@@ -56,11 +57,12 @@ def read_goodreads(path_goodreads_dir: Path) -> pl.DataFrame:
             pl.col("title").str.strip_chars(),
             pl.col("author").str.strip_chars(),
         )
+        .filter(pl.col("rating") > 0)
     )
     return q.collect()
 
 
-def read_bookclub(path_bookclub: Path) -> pl.DataFrame:
+def read_bookclub(bookclub_path: Path) -> pl.DataFrame:
     """Read the Bookclub CSV into a Polars DataFrame.
 
     The date column is converted to a date, and the title and author columns
@@ -68,7 +70,7 @@ def read_bookclub(path_bookclub: Path) -> pl.DataFrame:
 
     Parameters
     ----------
-    path_bookclub : Path
+    bookclub_path : Path
         Path to the Bookclub CSV.
 
     Returns
@@ -85,11 +87,11 @@ def read_bookclub(path_bookclub: Path) -> pl.DataFrame:
         "Locatie": "location",
     }
     q = (
-        pl.scan_csv(path_bookclub)
+        pl.scan_csv(bookclub_path)
         .select(columns.keys())
         .rename(columns)
         .with_columns(
-            pl.col("date").str.to_date("%m/%d/%Y").cast(pl.Datetime),  # redundant?
+            pl.col("date").str.to_date("%m/%d/%Y").cast(pl.Datetime),
             pl.col("title").str.strip_chars(),
             pl.col("author").str.strip_chars(),
         )
@@ -98,14 +100,14 @@ def read_bookclub(path_bookclub: Path) -> pl.DataFrame:
 
 
 def pivot_goodreads_data(
-    df_goodreads: pl.DataFrame,
+    goodreads_df: pl.DataFrame,
     reviewer_mapping: dict[str, str],
 ) -> pl.DataFrame:
-    """Pivot the Goodreads data, grouping by book, and calculating ratings.
+    """Pivot the Goodreads data, grouping by book, and calculating average ratings.
 
     Parameters
     ----------
-    df_goodreads : pl.DataFrame
+    goodreads_df : pl.DataFrame
         The Goodreads data.
     reviewer_mapping : dict[str, str]
         Dictionary mapping file paths to reviewer names.
@@ -117,7 +119,7 @@ def pivot_goodreads_data(
     """
     index_cols = ["title", "author", "original_publication_year"]
     return (
-        df_goodreads.with_columns(
+        goodreads_df.with_columns(
             [
                 pl.mean("average_goodreads_rating").over(index_cols),
                 pl.mean("number_of_pages").over(index_cols),
@@ -139,8 +141,8 @@ def pivot_goodreads_data(
 
 
 def match_dataframes(
-    df_bookclub: pl.DataFrame,
-    df_pivot: pl.DataFrame,
+    bookclub_df: pl.DataFrame,
+    goodreads_pivot_df: pl.DataFrame,
     on: str,
     how: Literal["inner", "left", "right", "full", "semi", "anti", "cross", "outer"],
 ) -> pl.DataFrame:
@@ -151,9 +153,9 @@ def match_dataframes(
 
     Parameters
     ----------
-    df_bookclub : pl.DataFrame
+    bookclub_df : pl.DataFrame
         The Bookclub DataFrame.
-    df_pivot : pl.DataFrame
+    goodreads_pivot_df : pl.DataFrame
         The Goodreads DataFrame.
     on : str
         The column to match on.
@@ -166,9 +168,11 @@ def match_dataframes(
         The matched DataFrame.
     """
     return (
-        df_bookclub.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column"))
+        bookclub_df.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column"))
         .join(
-            df_pivot.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column")),
+            goodreads_pivot_df.with_columns(
+                pl.col(on).str.to_lowercase().alias("temp_match_column"),
+            ),
             on="temp_match_column",
             how=how,
         )
@@ -176,25 +180,51 @@ def match_dataframes(
     )
 
 
-# def select_unmatched(df_bookclub: pl.DataFrame, df_scifi: pl.DataFrame) -> pl.DataFrame:
-#     """Select the rows in the Bookclub DataFrame that do not have a match in the Goodreads DataFrame.
+def rating_to_color(rating: float, alpha: float = 0.3) -> str:
+    """Convert a rating to an RGBA color string.
 
-#     Parameters
-#     ----------
-#     df_bookclub : pl.DataFrame
-#         The Bookclub DataFrame.
-#     df_scifi : pl.DataFrame
-#         The matched DataFrame.
+    Parameters
+    ----------
+    rating : float
+        The rating to convert, expected to be in the range 1-5.
+    alpha : float, optional
+        The alpha value for the color, by default 0.3
 
-#     Returns
-#     -------
-#     pl.DataFrame
-#         The unmatched rows.
-#     """
-#     return df_bookclub.filter(
-#         pl.col("title").is_in(
-#             df_scifi.filter(pl.col("average_goodreads_rating").is_null())
-#             .select("title")
-#             .to_series()
-#         )
-#     )
+    Returns
+    -------
+    str
+        The RGBA color string.
+    """
+    # Normalize rating from 1-5 to 0-1
+    normalized = (rating - 1) / 4
+    normalized = np.clip(normalized, 0, 1)
+
+    # Interpolate between red and green
+    red = int(255 * (1 - normalized))
+    green = int(255 * normalized)
+    blue = 0
+
+    return f"rgba({red}, {green}, {blue}, {alpha})"
+
+
+def create_voting_text(bookclub_members_list: list[str], row: dict[str, float]) -> str:
+    """Create a summary of voting members and their ratings.
+
+    Parameters
+    ----------
+    bookclub_members_list : list[str]
+        List of member names who voted.
+    row : dict[str, float]
+        A dictionary containing member ratings.
+
+    Returns
+    -------
+    str
+        A formatted string listing the voting members and their ratings.
+    """
+    voters = []
+    for member in bookclub_members_list:
+        value = row.get(member)
+        if value is not None and value != 0:
+            voters.append(f"{member}: {value:.1f}")
+    return "<br>".join(voters)

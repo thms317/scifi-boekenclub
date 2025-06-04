@@ -35,6 +35,3 @@ The following additional commands are available to make development easy:
 |---------|-------------|
 | `make clean` | Removes virtual environment, lock files, and caches |
 | `make test` | Runs a full test suite including coverage reporting |
-| `make deploy` | Deploys bundle to the `dev` Databricks workspace |
-| `make destroy` | Removes bundle from `dev` Databricks workspace |
-| `make docs` | Auto-generates project documentation |
