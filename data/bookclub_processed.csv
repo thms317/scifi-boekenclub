@@ -1,0 +1,72 @@
+index,date,title,author,blame,location,title_right,author_right,original_publication_year,average_goodreads_rating,number_of_pages,Robert,Peter,Thirsa,Koen_v_W,Koen_M,Thomas,average_bookclub_rating
+70,2024-07-20T00:00:00.000000,Concept M,Aafke Romeijn,Thomas,Cafe Cook,Concept M,Aafke Romeijn,2018,3.4550000000000005,,3.0,3.0,3.0,3.0,2.0,2.0,2.6666666666666665
+13,2016-09-06T00:00:00.000000,"Blindsight (Firefall, #1)",Peter Watts,Robert,Tweede Kostverlorenkade,"Blindsight (Firefall, #1)",Peter Watts,2006,4.01,,5.0,5.0,,,,5.0,5.0
+69,2024-05-24T00:00:00.000000,His Master's Voice,Stanislaw Lem,Robert,"Knossos, Den Haag",His Master's Voice,Stanisław Lem,1968,4.09,,5.0,4.0,,3.0,3.0,5.0,4.0
+68,2024-04-07T00:00:00.000000,The City & the City,China Miéville,Laurynas,"vandeStreek, Utrecht",The City & the City,China Miéville,2009,3.9,,3.0,4.0,3.0,4.0,2.0,,3.2
+67,2024-01-26T00:00:00.000000,Kroniek van een aangekondigde dood,Gabriel Garcia Marquez,Peter,House of Watt,Kroniek van een aangekondigde dood,Gabriel García Márquez,1981,3.97,,3.0,3.0,,2.0,,,2.6666666666666665
+66,2023-12-16T00:00:00.000000,Roadside Picnic,Arkady Strugatsky,Koen,Brouwerij Troost Westergas,Roadside Picnic,Arkady Strugatsky,1972,4.14,,4.0,3.0,4.0,4.0,,5.0,4.0
+65,2023-11-05T00:00:00.000000,Oorlog met de salamanders,Karel Capek,Dion,Kaap & Tein,Oorlog met de salamanders,Karel Čapek,1936,4.17,,4.0,4.0,4.0,4.0,,3.0,3.8
+62,2023-04-22T00:00:00.000000,Tender is the Flesh,Agustina Bazterrica,Thirsa,Poolsterstraat 20,Tender Is the Flesh,Agustina Bazterrica,2017,3.783333333333333,,5.0,5.0,,5.0,,,5.0
+61,2023-03-03T00:00:00.000000,Tussentijds,Peter Zantingh,Peter,De Doelen,Tussentijds,Peter Zantingh,2022,3.8233333333333337,,3.0,,2.0,3.0,,,2.6666666666666665
+60,2023-01-06T00:00:00.000000,"Ancillary Justice (Imperial Radch, #1)",Ann Leckie,Laurynas,De Doelen,"Ancillary Justice (Imperial Radch, #1)",Ann Leckie,2013,3.99,,3.0,3.0,,2.0,,4.0,3.0
+10,2016-02-16T00:00:00.000000,Fahrenheit 451,Ray Bradbury,Bram,De Doelen,Fahrenheit 451,Ray Bradbury,1953,3.96,,3.0,4.0,3.0,3.0,,,3.25
+59,2022-11-10T00:00:00.000000,Station Eleven,Emily St. John Mandel,Koen,De Doelen,Station Eleven,Emily St. John Mandel,2014,4.07,,3.0,3.0,3.0,4.0,,,3.25
+58,2022-09-07T00:00:00.000000,De Opkomst van de Meritocratie,Michael Young,Dion,Vooges Centraal,De opkomst van de meritocratie,Michael Young,1958,3.8,,3.0,,4.0,,,,3.5
+56,2022-03-31T00:00:00.000000,Zero K,Don DeLillo,Allen (stemmen),?,Zero K,Don DeLillo,2016,3.2,,2.0,3.0,,,,,2.5
+55,2022-02-02T00:00:00.000000,House of Leaves,Mark Z. Danielewski,Allen (stemmen),De Doelen,House of Leaves,Mark Z. Danielewski,2000,4.09,,5.0,,,,,,5.0
+53,2021-10-16T00:00:00.000000,Mother Night,Kurt Vonnegut,Allen (stemmen),Robert - Atjehstraat 7,Mother Night,Kurt Vonnegut Jr.,1961,4.23,,5.0,,4.0,3.0,,,4.0
+54,2021-12-08T00:00:00.000000,The Island of Dr. Moreau,H.G. Wells,Allen (stemmen),?,The Island of Dr. Moreau,H.G. Wells,1896,3.73,,3.0,3.0,,4.0,,,3.3333333333333335
+21,2017-07-11T00:00:00.000000,Pnin,Vladimir Nabokov,Robert,Robert - Uithoornstraat 17-3,Pnin,Vladimir Nabokov,1957,3.89,,4.0,,4.0,,,,4.0
+50,2021-04-04T00:00:00.000000,The Drowned World,J.G. Ballard,David,Laurynas - Keizersgracht 92k,The Drowned World,J.G. Ballard,1962,3.48,,2.0,1.0,3.0,2.0,,,2.0
+49,2021-02-17T00:00:00.000000,De avond is ongemak,Marieke Lucas Rijneveld,Dion,Teams,De avond is ongemak,Marieke Lucas Rijneveld,2018,3.45,,3.0,4.0,4.0,3.0,,,3.5
+48,2021-01-05T00:00:00.000000,Klont,Maxim Februari,Robert,Skype,Klont,Maxim Februari,2017,3.02,,3.0,3.0,,3.0,,,3.0
+47,2020-11-18T00:00:00.000000,The Dispossessed: An Ambiguous Utopia,Ursula K. Le Guin,Laurynas,Laurynas - Keizersgracht 92k,The Dispossessed: An Ambiguous Utopia,Ursula K. Le Guin,1974,4.25,,4.0,3.0,,3.0,,,3.3333333333333335
+46,2020-09-21T00:00:00.000000,Stranger in a Strange Land,Robert A. Heinlein,Thirsa & Koen,Laurynas - Keizersgracht 92k,Stranger in a Strange Land,Robert A. Heinlein,1961,3.92,,2.0,,,,,,2.0
+45,2020-08-04T00:00:00.000000,A Clockwork Orange,Anthony Burgess,David,De Doelen,A Clockwork Orange,Anthony Burgess,1962,4.0,,3.0,,,3.0,,,3.0
+41,2020-02-03T00:00:00.000000,De Pest,Albert Camus,Thirsa & Koen,Laurynas - Keizersgracht 92k,De pest,Albert Camus,1947,4.02,,3.0,5.0,4.0,4.0,,,4.0
+44,2020-06-19T00:00:00.000000,Who Fears Death,Nnedi Okarafor,Dion,Laurynas - Keizersgracht 92k,Who Fears Death,Nnedi Okorafor,2010,3.94,,2.0,,2.0,1.0,,,1.6666666666666667
+43,2020-05-02T00:00:00.000000,Solaris,Stanislaw Lem,Robert,Skype,Solaris,Stanisław Lem,1961,3.9900000000000007,,4.0,4.0,3.0,2.0,,3.0,3.2
+42,2020-04-04T00:00:00.000000,"Oryx and Crake (MaddAddam, #1)",Margaret Atwood,Laurynas,Skype,"Oryx and Crake (MaddAddam, #1)",Margaret Atwood,2003,4.01,,3.0,4.0,,4.0,,,3.6666666666666665
+40,2019-12-20T00:00:00.000000,The Gone-Away World,Nick Harkaway,Marloes,?,The Gone-Away World,Nick Harkaway,2008,4.1,,5.0,,,,,,5.0
+39,2019-10-18T00:00:00.000000,The Algebraist,Iain M. Banks,David,?,The Algebraist,Iain M. Banks,2004,4.03,,3.0,3.0,,,,,3.0
+38,2019-09-04T00:00:00.000000,Ivanov,Hanna Bervoets,Dion,?,Ivanov,Hanna Bervoets,2016,3.62,,2.0,3.0,3.0,3.0,,,2.75
+37,2019-07-10T00:00:00.000000,Catch-22,Joseph Heller,Robert,?,Catch-22,Joseph Heller,1961,3.99,,4.0,,4.0,,,,4.0
+36,2019-05-22T00:00:00.000000,Post Office,Charles Bukowski,Laurynas,?,Post Office,Charles Bukowski,1971,3.93,,3.0,4.0,,,,,3.5
+31,2018-10-15T00:00:00.000000,The Power,Naomi Alderman,Robert,De Doelen,The Power,Naomi Alderman,2016,3.76,,5.0,,,4.0,,4.0,4.333333333333333
+17,2017-01-18T00:00:00.000000,The Windup Girl,Paolo Bacigalupi,Thirsa & Koen,De Doelen,The Windup Girl,Paolo Bacigalupi,2009,3.75,,3.0,1.0,3.0,2.0,,,2.25
+35,2019-04-17T00:00:00.000000,The Book of Illusions,Paul Auster,Thirsa & Koen,?,The Book of Illusions,Paul Auster,2002,3.9,,2.0,,,3.0,,3.0,2.6666666666666665
+33,2019-01-09T00:00:00.000000,Fight Club,Chuck Palahniuk,Marloes,?,Fight Club,Chuck Palahniuk,1996,4.18,,3.5,,4.0,4.0,,,3.8333333333333335
+32,2018-11-30T00:00:00.000000,The Gambler,Fyodor Dostoyevsky,Dion,?,The Gambler,Fyodor Dostoevsky,1866,3.91,,2.0,,,3.0,,,2.5
+30,2018-09-11T00:00:00.000000,The Left Hand of Darkness,Ursula K. Le Guin,Laurynas,?,The Left Hand of Darkness,Ursula K. Le Guin,1969,4.1,,4.0,,3.0,2.0,,,3.0
+27,2018-04-25T00:00:00.000000,Het Slot,Franz Kafka,Dion,?,Het Slot,Franz Kafka,1926,3.93,,4.0,,,2.0,,,3.0
+26,2018-02-19T00:00:00.000000,"Parable of the Sower (Earthseed, #1)",Octavia E. Butler,Robert,De Doelen,"Parable of the Sower (Earthseed, #1)",Octavia E. Butler,1993,4.21,,3.0,,4.0,4.0,,,3.6666666666666665
+25,2018-01-17T00:00:00.000000,The Unbearable Lightness of Being,Milan Kundera,Iona,De Doelen,The Unbearable Lightness of Being,Milan Kundera,1984,4.11,,2.0,,,2.0,,5.0,3.0
+24,2017-12-05T00:00:00.000000,"Things Fall Apart (The African Trilogy, #1)",Chinua Achebe,Laurynas,De Doelen,"Things Fall Apart (The African Trilogy, #1)",Chinua Achebe,1958,3.7325000000000004,,4.0,,3.0,3.0,,5.0,3.75
+23,2017-10-30T00:00:00.000000,High-Rise,J.G. Ballard,Thirsa & Koen,De Doelen,High-Rise,J.G. Ballard,1975,3.61,,3.0,,4.0,4.0,,,3.6666666666666665
+22,2017-09-08T00:00:00.000000,Fear and Loathing in Las Vegas,Hunter S. Thompson,David,?,Fear and Loathing in Las Vegas,Hunter S. Thompson,1971,4.07,,3.0,,,3.0,,,3.0
+20,2017-06-01T00:00:00.000000,"A Canticle for Leibowitz (St. Leibowitz, #1)",Walter M. Miller,Dion,De Doelen,"A Canticle for Leibowitz (St. Leibowitz, #1)",Walter M. Miller Jr.,1959,3.98,,2.0,,,,,,2.0
+19,2017-05-02T00:00:00.000000,Never Let Me Go,Kazuo Ishiguro,Iona,Thirsa - Keizersgracht 151D,Never Let Me Go,Kazuo Ishiguro,2005,3.85,,4.0,3.0,3.0,2.0,,4.0,3.2
+9,2016-01-05T00:00:00.000000,The Passion of New Eve,Angela Carter,David,De Doelen,The Passion of New Eve,Angela Carter,1977,3.6700000000000004,,4.0,3.0,4.0,1.0,,2.0,2.8
+14,2016-09-06T00:00:00.000000,Under the Skin,Michel Faber,Dion,?,Under the Skin,Michel Faber,2000,3.75,,3.0,,,2.0,,,2.5
+11,2016-03-29T00:00:00.000000,"The Three-Body Problem (Remembrance of Earth’s Past, #1)",Liu Cixin,Jelmer,De Doelen,"The Three-Body Problem (Remembrance of Earth’s Past, #1)",Liu Cixin,2006,4.08,,2.0,3.0,2.0,3.0,,,2.5
+63,2023-07-07T00:00:00.000000,Snow Crash,Neal Stephenson,Thomas,Thomas' casa?,Snow Crash,Neal Stephenson,1992,4.02,,3.0,3.0,3.0,2.0,,2.0,2.6
+18,2017-03-14T00:00:00.000000,Watchmen,Alan Moore & Dave Gibbons,Laurynas,?,Watchmen,Alan             Moore,1987,4.38,,4.0,,4.0,,,,4.0
+6,2015-07-23T00:00:00.000000,"Hyperion (Hyperion Cantos, #1)",Dan Simmons,,?,"Hyperion (Hyperion Cantos, #1)",Dan Simmons,1989,4.27,,5.0,3.0,3.0,,,4.0,3.75
+3,2015-01-27T00:00:00.000000,Do Androids Dream of Electric Sheep?,Philip K. Dick,gezamenlijk,Laurynas - Jan Muschstraat 54,Do Androids Dream of Electric Sheep?,Philip K. Dick,1968,4.09,,3.0,3.0,4.0,3.0,,4.0,3.4
+5,2015-06-08T00:00:00.000000,Starship Troopers,Robert A. Heinlein,Dion,?,Starship Troopers,Robert A. Heinlein,1959,4.01,,4.0,3.0,3.0,3.0,,3.0,3.2
+1,,The Road,Cormac McCarthy,gezamenlijk,?,The Road,Cormac McCarthy,2006,3.99,,5.0,,4.0,,,,4.5
+4,2015-04-14T00:00:00.000000,"Neuromancer (Sprawl, #1)",William Gibson,gezamenlijk,?,"Neuromancer (Sprawl, #1)",William Gibson,1984,3.89,,3.0,3.0,,,,,3.0
+15,2016-10-12T00:00:00.000000,Brave New World,Aldous Huxley,?,Van Zeggelenstraat 71,Brave New World,Aldous Huxley,1932,3.99,,5.0,4.0,,4.0,,4.0,4.25
+57,2022-06-06T00:00:00.000000,One Flew Over the Cuckoo’s Nest,Ken Kesey,David,De Doelen,One Flew Over the Cuckoo’s Nest,Ken Kesey,1962,4.2,,4.0,,4.0,4.0,,,4.0
+7,2015-09-14T00:00:00.000000,1984,George Orwell,Thirsa & Koen,?,1984,George Orwell,1949,4.19,,5.0,,4.0,5.0,,5.0,4.75
+72,2024-11-08T00:00:00.000000,The Vegetarian,Han Kang,Koen,,The Vegetarian,Han Kang,2007,3.57,,,4.0,,,,,4.0
+64,2023-09-03T00:00:00.000000,Bewilderment,Richard Powers,Robert,Café Bruxelles,Bewilderment,Richard Powers,2021,3.915,,,5.0,4.0,4.0,,3.0,4.0
+52,2021-08-13T00:00:00.000000,Het ijs,Anna Kavan,Allen (stemmen),Boekenclub Weekend,Het ijs,Anna Kavan,1967,3.665,,,4.0,,2.0,,,3.0
+12,2016-05-10T00:00:00.000000,"Lilith's Brood (Xenogenesis, #1-3)",Octavia E. Butler,Thirsa & Koen,?,"Lilith's Brood (Xenogenesis, #1-3)",Octavia E. Butler,1987,4.37,,,,4.0,,,4.0,4.0
+2,2014-11-26T00:00:00.000000,"Ready Player One (Ready Player One, #1)",Ernest Cline,gezamenlijk,Koen - Prinsengracht 241,"Ready Player One (Ready Player One, #1)",Ernest Cline,2011,4.23,,,,4.0,4.0,,,4.0
+71,2024-09-11T00:00:00.000000,Galapagos,Kurt Vonnegut,Dion,De Doelen,Galapagos,Kurt Vonnegut Jr.,1985,3.87,,,,,3.0,4.0,,3.5
+28,2018-06-06T00:00:00.000000,"1Q84 Book 1 (1Q84, #1)",Haruki Murakami,David,?,"1Q84 Book 1 (1Q84, #1)",Haruki Murakami,2009,3.96,,,,,4.0,,,4.0
+18,2017-03-14T00:00:00.000000,Watchmen,Alan Moore & Dave Gibbons,Laurynas,?,Watchmen,Alan Moore,1987,4.38,,,,,4.0,,5.0,4.5
+29,2018-07-03T00:00:00.000000,Cat's Cradle,Kurt Vonnegut,Thirsa & Koen,?,Cat's Cradle,Kurt Vonnegut Jr.,1963,4.15,,,,,4.0,,,4.0
+16,2016-11-30T00:00:00.000000,The Heart of a Dog,Mikhail Bulgakov,Bram,Cafe Kostverloren,The Heart of a Dog,bulgakov-mikhail,1925,4.1,,,,,3.0,,,3.0
+8,2015-11-16T00:00:00.000000,"The Hitchhiker’s Guide to the Galaxy (Hitchhiker's Guide to the Galaxy, #1)",Douglas Adams,Laurynas,De Doelen,"The Hitchhiker’s Guide to the Galaxy (Hitchhiker's Guide to the Galaxy, #1)",Douglas Adams,1979,4.23,,,,,3.0,,4.0,3.5
