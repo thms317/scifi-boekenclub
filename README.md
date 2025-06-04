@@ -8,10 +8,12 @@
 [![pydocstyle](https://img.shields.io/badge/pydocstyle-enabled-AD4CD3)](http://www.pydocstyle.org/en/stable/)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
-[![ci](https://github.com/revodatanl/scifi/actions/workflows/ci.yml/badge.svg)](https://github.com/revodatanl/scifi/actions/workflows/ci.yml)
-[![semantic-release](https://github.com/revodatanl/scifi/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/revodatanl/scifi/actions/workflows/semantic-release.yml)
+[![CI](https://github.com/thms317/scifi-boekenclub/actions/workflows/ci.yml/badge.svg)](https://github.com/thms317/scifi-boekenclub/actions/workflows/ci.yml)
+[![Semantic Release](https://github.com/thms317/scifi-boekenclub/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/thms317/scifi-boekenclub/actions/workflows/semantic-release.yml)
 
-The `scifi` project was generated from [RevoData Asset Bundle Templates](https://github.com/revodatanl/revo-asset-bundle-templates) version `0.15.1`.
+This is a Python data analysis project for analyzing the "Sci-Fi Boekenclub" (Sci-Fi Book Club) reading data. The project combines Goodreads export data from multiple club members with book club meeting records to analyze reading preferences and ratings over time.
+
+The project was generated from [RevoData Asset Bundle Templates](https://github.com/revodatanl/revo-asset-bundle-templates) version `0.15.1`.
 
 ## Prerequisites
 
