@@ -1,10 +1,17 @@
+# This workflow does the following things:
+# 1. Analyze commit messages and determine the next version number based on conventional commits
+# 2. Generate a CHANGELOG.md file with all changes since the last release
+# 3. Update the version in pyproject.toml
+# 4. Create a new git tag with the version
+# 5. Create a GitHub release with the changelog
+# 6. Push all changes back to the repository
+
 name: Semantic Release
 
 on:
   push:
     branches:
       - main
-      - release/*
 
 jobs:
   release:
@@ -16,20 +23,17 @@ jobs:
       id-token: write
 
     steps:
-      # Step 1: Checkout the repository and fetch all history and tags
       - name: Checkout the repository
         uses: actions/checkout@v4
         with:
-          ref: 'main'
-          fetch-depth: 0
+          ref: 'main'     # Ensure you're on the main branch
+          fetch-depth: 0  # Fetch all history and tags
 
-      # Step 2: Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # Step 3: Install Semantic Release
       - name: Install Semantic Release
         run: |
           npm install --no-save \
@@ -39,46 +43,7 @@ jobs:
             @semantic-release/git \
             @semantic-release/github
 
-      # Step 4: Run Semantic Release
       - name: Run Semantic Release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Step 5: Fetch the latest tags after the release
-      - name: Fetch latest tags
-        run: git fetch --tags
-
-      # Step 6: Generate CHANGELOG
-      - name: Generate CHANGELOG
-        uses: orhun/git-cliff-action@v4.3.1
-        id: git-cliff-changelog
-        with:
-          config: cliff.toml
-        env:
-          OUTPUT: CHANGELOG.md
-          GITHUB_REPO: ${{ github.repository }}
-
-      # Step 7: Commit the CHANGELOG after it is generated
-      - name: Commit CHANGELOG
-        id: commit-changelog
-        run: |
-          # Set up git configuration
-          git config user.name 'github-actions[bot]'
-          git config user.email 'actions@github.com'
-
-          # Add generated CHANGELOG and updated docs
-          git add docs/CHANGELOG.md
-
-          # Check if there are any changes to commit
-          if git diff --cached --quiet; then
-            echo "No changes to commit, skipping commit."
-          else
-            # Commit the generated CHANGELOG and updated README
-            git commit -m "chore(release): update CHANGELOG for version $VERSION [automated]"
-            # Fetching and rebasing onto the latest main branch before pushing
-            git fetch origin
-            git rebase origin/main -X ours
-            # Push changes
-            git push origin main
-          fi

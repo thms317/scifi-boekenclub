@@ -1,26 +1,35 @@
-.PHONY: install setup clean test tree docs
+.PHONY: install setup clean test tree
 
 install:
-	@echo "Verifying if Homebrew is installed..."
-	@which brew > /dev/null || (echo "Homebrew is not installed. Installing Homebrew..." && /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
-
-	@for tool in git uv; do \
+	@echo "Verifying if Homebrew is installed..."; \
+	which brew > /dev/null || (echo "Homebrew is not installed. Installing Homebrew..." && /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"); \
+	echo "Installing tools..."; \
+	for tool in git uv; do \
 		if ! command -v $$tool >/dev/null 2>&1; then \
 			echo "Installing $$tool..."; \
 			brew install $$tool; \
 		else \
 			echo "$$tool is already installed. Skipping."; \
 		fi; \
-	done
-
-	@echo "Setting up Python version $$PYTHON_VERSION"; \
-	uv python install;
-
-	@echo "All tools installed successfully."
+	done; \
+	echo "Setting up Python..."; \
+	uv python install || true; \
+	echo "All tools installed successfully."
 
 setup:
+	@echo "Installing tools..."
+	@{ \
+		output=$$($(MAKE) install 2>&1); \
+		exit_code=$$?; \
+		if [ $$exit_code -ne 0 ]; then \
+			echo "$$output"; \
+			exit $$exit_code; \
+		fi; \
+	}
+	@echo "All tools installed successfully."
+
 	@echo "Setting up the project..."
-	uv sync;
+	@uv sync;
 
 	@if [ ! -d ".git" ]; then \
 		echo "Setting up git..."; \
@@ -28,40 +37,37 @@ setup:
 	fi
 
 	@echo "Setting up pre-commit..."
-	. .venv/bin/activate;
-	.venv/bin/pre-commit install --hook-type pre-commit --hook-type commit-msg;
+	@. .venv/bin/activate
+	@.venv/bin/pre-commit install --hook-type pre-commit --hook-type commit-msg
+
+	@echo "Setup completed successfully!"
 
 clean:
-	@echo "Cleaning up..."
-	rm -rf .venv uv.lock
-	find . -type d \
-		\( -name ".pytest_cache" \
-		-o -name ".mypy_cache" \
-		-o -name ".ruff_cache" \
-		-o -name "dist" \) \
-		-exec rm -rf {} +
-	@echo "Cleanup completed. Resetting terminal..."
+	@echo "Uninstalling local packages..."
+	@rm -rf uv.lock
+	@uv sync
+
+	@echo -e "Cleaning up project artifacts..."
+	@find . \( \
+		-name ".pytest_cache" -o \
+		-name ".mypy_cache" -o \
+		-name ".ruff_cache" -o \
+		-name "dist" -o \
+		-name "__pycache__" -o \
+		-name ".ipynb_checkpoints" \) \
+		-type d -exec rm -rf {} + 2>/dev/null || true
+	@find . -name ".coverage" -type f -delete 2>/dev/null || true
+
+	@echo "Cleanup completed."
 	@reset
 
 test:
 	@echo "Running tests..."
-	.venv/bin/pre-commit run --all-files
-	uv sync;
-	uv run pytest tests --cov=src --cov-report term;
+	@. .venv/bin/activate
+	@uv build
+	@uv sync
+	@uv run pytest -v tests --cov=src --cov-report=term
 
 tree:
 	@echo "Generating project tree..."
 	@tree -I '.venv|__pycache__|archive|scratch|.databricks|.ruff_cache|.mypy_cache|.pytest_cache|.git|htmlcov|site|dist|.DS_Store|fixtures' -a
-
-docs:
-	@echo "Running tests and generating badges..."
-	@uv run pytest -v tests --cov=src --cov-report html:docs/tests/coverage --junitxml=docs/tests/coverage/pytest_coverage.xml
-	@uv run coverage xml -o docs/tests/coverage/coverage.xml
-	@uv run genbadge coverage -i docs/tests/coverage/coverage.xml -o docs/assets/badge-coverage.svg
-	@uv run genbadge tests -i docs/tests/coverage/pytest_coverage.xml -o docs/assets/badge-tests.svg
-	@rm -rf docs/tests/coverage/.gitignore
-	@echo "Generating HTML documentation..."
-	@uv run pdoc --html src/scifi -o docs/api --force
-	@uv run pdoc --html tests -o docs/api --force
-	# @uv run mkdocs build
-	@uv run mkdocs serve
