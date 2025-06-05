@@ -108,7 +108,7 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
         [
             # Handle date parsing more flexibly
             pl.when(pl.col("date").is_not_null())
-            .then(pl.col("date").str.strptime(pl.Date, format="%Y-%m-%dT%H:%M:%S%.f", strict=False))
+            .then(pl.col("date").str.strptime(pl.Date, format="%Y-%m-%d", strict=False))
             .otherwise(None)
             .alias("date_parsed"),
             # Ensure proper data types
@@ -131,8 +131,8 @@ def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[s
     col1, col2, col3, col4, col5 = st.columns(5)
 
     total_books = len(bookclub_processed_df)
-    avg_goodreads = bookclub_processed_df["average_goodreads_rating"].mean()
-    avg_bookclub = bookclub_processed_df["average_bookclub_rating"].mean()
+    avg_goodreads = bookclub_processed_df["average_goodreads_rating"].mean() or 0.0
+    avg_bookclub = bookclub_processed_df["average_bookclub_rating"].mean() or 0.0
     most_active = max(members, key=lambda m: bookclub_processed_df[m].count())
 
     # Calculate bookclub duration
@@ -167,17 +167,16 @@ def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[s
 
 def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str]) -> go.Figure:
     """Create fixed scatter plot with trendline for overview"""
-    st.subheader("📊 Goodreads vs Club Ratings")
-    st.write("✨ **Hover over to see detailed analysis!**")
-
     # Fixed scatter plot settings
     x_axis = "average_bookclub_rating"
     y_axis = "average_goodreads_rating"
     color_by = "original_publication_year"
     size_by = "average_goodreads_rating"
 
-    # Prepare data for plotting
-    bookclub_processed_df_pandas = bookclub_processed_df.to_pandas()
+    # Prepare data for plotting - handle null values
+    bookclub_processed_df_pandas = bookclub_processed_df.with_columns(
+        pl.col("original_publication_year").fill_null(0).alias("original_publication_year")
+    ).to_pandas()
 
     # Add perfect correlation line (x=y from 1 to 5) - FIRST so it's behind data
     fig = go.Figure()
@@ -204,6 +203,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
         title="📚 Goodreads Rating vs Club Rating",
         template="plotly_dark",
         size_max=20,
+        labels={color_by: "Publication Year", x_axis: "Club Rating", y_axis: "Goodreads Rating"},
     )
 
     # Add scatter traces to the main figure
@@ -213,6 +213,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
     # Fixed axes 1-5 for both rating axes
     fig.update_layout(
         height=700,
+        title="📚 Goodreads vs Club Ratings",
         title_font_size=24,
         font={"size": 12},
         paper_bgcolor="rgba(0,0,0,0)",
@@ -224,19 +225,20 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
             "y": 1.02,
             "xanchor": "right",
             "x": 1,
+            "title": "Publication Year",
         },
         xaxis={"range": [1, 5], "title": "Club Rating"},
         yaxis={"range": [1, 5], "title": "Goodreads Rating"},
     )
 
-    # Enhanced hover template
+    # Enhanced hover template - handle null values
     fig.update_traces(
         marker={"line": {"width": 1, "color": "white"}, "opacity": 0.8},
         hovertemplate="<b>%{customdata[0]}</b><br>"
         "Author: %{customdata[1]}<br>"
-        "Suggested by: %{customdata[2]}<br>"
-        "Club Rating: %{x}<br>"
-        "Goodreads Rating: %{y}<br>"
+        "Suggested by: %{customdata[2]|default:'Unknown'}<br>"
+        "Club Rating: %{x:.1f}<br>"
+        "Goodreads Rating: %{y:.1f}<br>"
         "<extra></extra>",
     )
 

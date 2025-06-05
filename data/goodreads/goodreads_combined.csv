@@ -1113,83 +1113,92 @@ Galapagos,Kurt Vonnegut Jr.,4,3.87,1985,302,data/goodreads/clean/koen_m_goodread
 His Master's Voice,Stanisław Lem,3,4.09,1968,199,data/goodreads/clean/koen_m_goodreads_library_export.csv
 Concept M,Aafke Romeijn,2,3.46,2018,253,data/goodreads/clean/koen_m_goodreads_library_export.csv
 The City & the City,China Miéville,2,3.9,2009,312,data/goodreads/clean/koen_m_goodreads_library_export.csv
-His Master's Voice,Stanisław Lem,5,4.09,1968,199,data/goodreads/clean/thomas_goodreads_library_export.csv
-Concept M,Aafke Romeijn,2,3.46,2018,253,data/goodreads/clean/thomas_goodreads_library_export.csv
-The Unicorn Project,Gene Kim,4,4.08,2019,352,data/goodreads/clean/thomas_goodreads_library_export.csv
+Lord of Light,Roger Zelazny,2,4.05,1967,296,data/goodreads/clean/thomas_goodreads_library_export.csv
+A Clockwork Orange,Anthony Burgess,5,4.0,1962,240,data/goodreads/clean/thomas_goodreads_library_export.csv
+Dark Matter,Blake Crouch,2,4.14,2016,342,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Beartown (Beartown, #1)",Fredrik Backman,3,4.29,2016,432,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Annihilation (Southern Reach, #1)",Jeff VanderMeer,4,3.79,2014,195,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Us Against You (Beartown, #2)",Fredrik Backman,4,4.37,2017,448,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Left Hand of Darkness,Ursula K. Le Guin,4,4.1,1969,304,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Vegetarian,Han Kang,5,3.64,2007,188,data/goodreads/clean/thomas_goodreads_library_export.csv
+Flatland: A Romance of Many Dimensions,Edwin A. Abbott,4,3.81,1884,96,data/goodreads/clean/thomas_goodreads_library_export.csv
+His Master's Voice,Stanisław Lem,5,4.07,1968,199,data/goodreads/clean/thomas_goodreads_library_export.csv
+Concept M,Aafke Romeijn,2,3.44,2018,253,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Unicorn Project (The Phoenix Project),Gene Kim,4,4.08,2019,352,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win",Gene Kim,5,4.26,2013,345,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Blindsight (Firefall, #1)",Peter Watts,5,4.01,2006,384,data/goodreads/clean/thomas_goodreads_library_export.csv
-Babel,R.F. Kuang,4,4.18,2022,544,data/goodreads/clean/thomas_goodreads_library_export.csv
-There Is No Antimemetics Division,qntm,4,4.25,2020,220,data/goodreads/clean/thomas_goodreads_library_export.csv
-Roadside Picnic,Arkady Strugatsky,5,4.14,1972,145,data/goodreads/clean/thomas_goodreads_library_export.csv
+Babel,R.F. Kuang,4,4.16,2022,544,data/goodreads/clean/thomas_goodreads_library_export.csv
+There Is No Antimemetics Division,qntm,4,4.22,2020,220,data/goodreads/clean/thomas_goodreads_library_export.csv
+Roadside Picnic,Arkady Strugatsky,5,4.13,1972,145,data/goodreads/clean/thomas_goodreads_library_export.csv
 Oorlog met de salamanders,Karel Čapek,3,4.17,1936,286,data/goodreads/clean/thomas_goodreads_library_export.csv
-Lolita,Vladimir Nabokov,5,3.88,1955,368,data/goodreads/clean/thomas_goodreads_library_export.csv
-Bewilderment,Richard Powers,3,3.92,2021,278,data/goodreads/clean/thomas_goodreads_library_export.csv
-"Summer (Seasonal Quartet, #4)",Ali Smith,5,4.05,2020,384,data/goodreads/clean/thomas_goodreads_library_export.csv
-"Spring (Seasonal Quartet, #3)",Ali Smith,4,4.08,2019,336,data/goodreads/clean/thomas_goodreads_library_export.csv
+Lolita,Vladimir Nabokov,5,3.87,1955,368,data/goodreads/clean/thomas_goodreads_library_export.csv
+Bewilderment,Richard Powers,3,3.91,2021,278,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Summer (Seasonal Quartet, #4)",Ali Smith,5,4.04,2020,384,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Spring (Seasonal Quartet, #3)",Ali Smith,4,4.06,2019,336,data/goodreads/clean/thomas_goodreads_library_export.csv
 Snow Crash,Neal Stephenson,2,4.02,1992,438,data/goodreads/clean/thomas_goodreads_library_export.csv
 De ontdekking van Urk,Matthias M.R. Declercq,4,3.93,2020,326,data/goodreads/clean/thomas_goodreads_library_export.csv
-Croc Attack!,Assaf Gavvron,3,3.75,2006,328,data/goodreads/clean/thomas_goodreads_library_export.csv
+Croc Attack!,Assaf Gavvron,3,3.76,2006,328,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Use of Weapons (Culture, #3)",Iain M. Banks,4,4.16,1990,411,data/goodreads/clean/thomas_goodreads_library_export.csv
-Survival in Auschwitz,Primo Levi,5,4.33,1947,187,data/goodreads/clean/thomas_goodreads_library_export.csv
+Survival in Auschwitz,Primo Levi,5,4.34,1947,187,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Ancillary Justice (Imperial Radch, #1)",Ann Leckie,4,3.99,2013,386,data/goodreads/clean/thomas_goodreads_library_export.csv
-"Winter (Seasonal, #2)",Ali Smith,5,3.81,2017,322,data/goodreads/clean/thomas_goodreads_library_export.csv
-"Autumn (Seasonal Quartet, #1)",Ali Smith,4,3.67,2016,264,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Winter (Seasonal, #2)",Ali Smith,5,3.79,2017,322,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Autumn (Seasonal Quartet, #1)",Ali Smith,4,3.66,2016,264,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Sense of an Ending,Julian Barnes,4,3.74,2011,150,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Every (The Circle, #2)",Dave Eggers,4,3.7,2021,580,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Every (The Circle, #2)",Dave Eggers,4,3.69,2021,580,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Circle (The Circle, #1)",Dave Eggers,5,3.43,2013,493,data/goodreads/clean/thomas_goodreads_library_export.csv
-Nachtdier,Joost van Bellen,4,3.55,,389,data/goodreads/clean/thomas_goodreads_library_export.csv
-Devil in a Coma,Mark Lanegan,2,3.92,,148,data/goodreads/clean/thomas_goodreads_library_export.csv
+Nachtdier,Joost van Bellen,4,3.57,,389,data/goodreads/clean/thomas_goodreads_library_export.csv
+Devil in a Coma,Mark Lanegan,2,3.92,2021,148,data/goodreads/clean/thomas_goodreads_library_export.csv
 Crossroads,Jonathan Franzen,4,4.06,2021,592,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Barcelona Complex: Lionel Messi and the Making--and Unmaking--of the World's Greatest Soccer Club,Simon Kuper,4,4.23,2021,416,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Great Believers,Rebecca Makkai,5,4.29,2018,421,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Visit from the Goon Squad,Jennifer Egan,5,3.7,2010,274,data/goodreads/clean/thomas_goodreads_library_export.csv
-"Things Fall Apart (The African Trilogy, #1)",Chinua Achebe,5,3.73,1958,215,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Things Fall Apart (The African Trilogy, #1)",Chinua Achebe,5,3.74,1958,215,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Hundred-Year-Old Man Who Climbed Out of the Window and Disappeared (The Hundred-Year-Old Man, #1)",Jonas Jonasson,4,3.82,2009,396,data/goodreads/clean/thomas_goodreads_library_export.csv
 Solaris,Stanisław Lem,3,3.99,1961,204,data/goodreads/clean/thomas_goodreads_library_export.csv
 Things The Grandchildren Should Know,Mark Oliver Everett,4,4.25,2007,246,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Without You, There Is No Us: My Time with the Sons of North Korea's Elite",Suki Kim,4,3.93,2014,291,data/goodreads/clean/thomas_goodreads_library_export.csv
 The End of Loneliness,Benedict Wells,3,4.38,2016,274,data/goodreads/clean/thomas_goodreads_library_export.csv
-Kafka on the Shore,Haruki Murakami,5,4.13,2002,467,data/goodreads/clean/thomas_goodreads_library_export.csv
+Kafka on the Shore,Haruki Murakami,5,4.12,2002,467,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Prayer for Owen Meany,John Irving,4,4.24,1989,637,data/goodreads/clean/thomas_goodreads_library_export.csv
 Scar Tissue,Anthony Kiedis,3,4.11,2004,465,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Captain and the Glory,Dave Eggers,3,3.42,2019,114,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Ender’s Game (Ender's Saga, #1)",Orson Scott Card,4,4.31,1985,324,data/goodreads/clean/thomas_goodreads_library_export.csv
-Schuld en Boete,Fyodor Dostoevsky,3,4.27,1866,570,data/goodreads/clean/thomas_goodreads_library_export.csv
+Schuld en Boete,Fyodor Dostoevsky,3,4.28,1866,570,data/goodreads/clean/thomas_goodreads_library_export.csv
 Between the World and Me,Ta-Nehisi Coates,5,4.4,2015,152,data/goodreads/clean/thomas_goodreads_library_export.csv
 The 7 Habits of Highly Effective People: Powerful Lessons in Personal Change,Stephen R. Covey,5,4.16,1989,372,data/goodreads/clean/thomas_goodreads_library_export.csv
-Bloodchild,Octavia E. Butler,4,4.01,1984,31,data/goodreads/clean/thomas_goodreads_library_export.csv
-The God Game,Danny Tobey,3,3.68,2020,452,data/goodreads/clean/thomas_goodreads_library_export.csv
+Bloodchild,Octavia E. Butler,4,4.0,1984,31,data/goodreads/clean/thomas_goodreads_library_export.csv
+The God Game,Danny Tobey,3,3.67,2020,452,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Lilith's Brood (Xenogenesis, #1-3)",Octavia E. Butler,4,4.37,1987,746,data/goodreads/clean/thomas_goodreads_library_export.csv
-The Motorcycle Diaries: Notes on a Latin American Journey,Ernesto Che Guevara,3,3.79,1992,175,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Motorcycle Diaries: Notes on a Latin American Journey,Ernesto Che Guevara,3,3.8,1992,175,data/goodreads/clean/thomas_goodreads_library_export.csv
 Driven to Distraction: Recognizing and Coping with Attention Deficit Disorder from Childhood Through Adulthood,Edward M. Hallowell,4,4.12,1992,319,data/goodreads/clean/thomas_goodreads_library_export.csv
 Eating Mammals: Three Novellas,John Barlow,3,3.18,2004,272,data/goodreads/clean/thomas_goodreads_library_export.csv
-21 Lessons for the 21st Century,Yuval Noah Harari,4,4.17,2018,372,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Last Wish (The Witcher, #0.5)",Andrzej Sapkowski,4,4.13,1993,400,data/goodreads/clean/thomas_goodreads_library_export.csv
-The Goldfinch,Donna Tartt,4,3.95,2013,771,data/goodreads/clean/thomas_goodreads_library_export.csv
-Eat That Frog!: 21 Great Ways to Stop Procrastinating and Get More Done in Less Time,Brian Tracy,2,3.87,2001,128,data/goodreads/clean/thomas_goodreads_library_export.csv
+21 Lessons for the 21st Century,Yuval Noah Harari,4,4.16,2018,372,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Last Wish (The Witcher, #0.5)",Andrzej Sapkowski,4,4.14,1993,400,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Goldfinch,Donna Tartt,4,3.96,2013,771,data/goodreads/clean/thomas_goodreads_library_export.csv
+Eat That Frog!: 21 Great Ways to Stop Procrastinating and Get More Done in Less Time,Brian Tracy,2,3.87,2001,144,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Man Called Ove,Fredrik Backman,5,4.38,2012,337,data/goodreads/clean/thomas_goodreads_library_export.csv
-"A Storm of Swords (A Song of Ice and Fire, #3)",George R.R. Martin,5,4.54,2000,1177,data/goodreads/clean/thomas_goodreads_library_export.csv
+"A Storm of Swords (A Song of Ice and Fire, #3)",George R.R. Martin,5,4.55,2000,1177,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Underground Railroad,Colson Whitehead,4,4.06,2016,320,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Monk of Mokha,Dave Eggers,4,4.08,2018,353,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Daring Greatly: How the Courage to Be Vulnerable Transforms the Way We Live, Love, Parent, and Lead",Brené Brown,4,4.29,2012,287,data/goodreads/clean/thomas_goodreads_library_export.csv
 "A Clash of Kings  (A Song of Ice and Fire, #2)",George R.R. Martin,4,4.42,1998,1009,data/goodreads/clean/thomas_goodreads_library_export.csv
-The Power,Naomi Alderman,4,3.76,2016,341,data/goodreads/clean/thomas_goodreads_library_export.csv
-Sapiens: A Brief History of Humankind,Yuval Noah Harari,4,4.36,2011,512,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Power,Naomi Alderman,4,3.75,2016,341,data/goodreads/clean/thomas_goodreads_library_export.csv
+Sapiens: A Brief History of Humankind,Yuval Noah Harari,4,4.34,2011,512,data/goodreads/clean/thomas_goodreads_library_export.csv
 Lord of the Flies,William Golding,4,3.7,1954,182,data/goodreads/clean/thomas_goodreads_library_export.csv
 Here I Am,Jonathan Safran Foer,4,3.64,2016,571,data/goodreads/clean/thomas_goodreads_library_export.csv
-I.M.: Ischa Meijer. In Margine. In Memoriam,Connie Palmen,4,4.0,1998,400,data/goodreads/clean/thomas_goodreads_library_export.csv
+I.M.: Ischa Meijer. In Margine. In Memoriam,Connie Palmen,4,4.01,1998,400,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Book of Illusions,Paul Auster,3,3.9,2002,288,data/goodreads/clean/thomas_goodreads_library_export.csv
-Homo Deus: A History of Tomorrow,Yuval Noah Harari,4,4.2,2015,450,data/goodreads/clean/thomas_goodreads_library_export.csv
+Homo Deus: A History of Tomorrow,Yuval Noah Harari,4,4.19,2015,450,data/goodreads/clean/thomas_goodreads_library_export.csv
 Zeitoun,Dave Eggers,3,4.05,2009,342,data/goodreads/clean/thomas_goodreads_library_export.csv
 One Hundred Years of Solitude,Gabriel García Márquez,4,4.12,1967,417,data/goodreads/clean/thomas_goodreads_library_export.csv
-Animal Farm,George Orwell,4,3.99,1945,129,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Lord of the Rings (Middle Earth, #2-4)",J.R.R. Tolkien,5,4.53,1954,1216,data/goodreads/clean/thomas_goodreads_library_export.csv
-The New York Trilogy (New York Trilogy #1-3),Paul Auster,5,3.87,1987,308,data/goodreads/clean/thomas_goodreads_library_export.csv
-"Pogingen iets van het leven te maken: Het geheime dagboek van Hendrik Groen, 83¼ jaar",Hendrik Groen,3,3.94,2014,356,data/goodreads/clean/thomas_goodreads_library_export.csv
+Animal Farm,George Orwell,4,4.0,1945,129,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Lord of the Rings,J.R.R. Tolkien,5,4.54,1954,1216,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The New York Trilogy (New York Trilogy, #1-3)",Paul Auster,5,3.86,1987,308,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Pogingen iets van het leven te maken: Het geheime dagboek van Hendrik Groen, 83¼ jaar",Hendrik Groen,3,3.93,2014,356,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Hyperion (Hyperion Cantos, #1)",Dan Simmons,4,4.27,1989,500,data/goodreads/clean/thomas_goodreads_library_export.csv
 Kaddisj voor een kut,Dimitri Verhulst,2,3.48,2014,160,data/goodreads/clean/thomas_goodreads_library_export.csv
 De laatste liefde van mijn moeder,Dimitri Verhulst,3,3.45,2010,236,data/goodreads/clean/thomas_goodreads_library_export.csv
-De helaasheid der dingen,Dimitri Verhulst,5,3.8,2006,207,data/goodreads/clean/thomas_goodreads_library_export.csv
+De helaasheid der dingen,Dimitri Verhulst,5,3.81,2006,207,data/goodreads/clean/thomas_goodreads_library_export.csv
 Never Let Me Go,Kazuo Ishiguro,4,3.85,2005,288,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Shadow of the Wind (The Cemetery of Forgotten Books, #1)",Carlos Ruiz Zafón,5,4.3,2001,487,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Passion of New Eve,Angela Carter,2,3.67,1977,187,data/goodreads/clean/thomas_goodreads_library_export.csv
@@ -1197,60 +1206,60 @@ The Passion of New Eve,Angela Carter,2,3.67,1977,187,data/goodreads/clean/thomas
 Che la festa cominci,Niccolò Ammaniti,3,3.52,2009,328,data/goodreads/clean/thomas_goodreads_library_export.csv
 Er moet iets gebeuren,Maartje Wortel,5,3.45,2015,236,data/goodreads/clean/thomas_goodreads_library_export.csv
 Pushing Ice,Alastair Reynolds,3,4.07,2005,458,data/goodreads/clean/thomas_goodreads_library_export.csv
-Troubling Love,Elena Ferrante,3,3.26,1992,139,data/goodreads/clean/thomas_goodreads_library_export.csv
-A Thousand Splendid Suns,Khaled Hosseini,4,4.44,2007,372,data/goodreads/clean/thomas_goodreads_library_export.csv
-Zendegi,Greg Egan,2,3.47,2010,278,data/goodreads/clean/thomas_goodreads_library_export.csv
-The Last Question,Isaac Asimov,5,4.54,1956,9,data/goodreads/clean/thomas_goodreads_library_export.csv
-Ons kamp,Marja Vuijsje,4,3.79,2012,335,data/goodreads/clean/thomas_goodreads_library_export.csv
+Troubling Love,Elena Ferrante,3,3.25,1992,139,data/goodreads/clean/thomas_goodreads_library_export.csv
+A Thousand Splendid Suns,Khaled Hosseini,4,4.45,2007,372,data/goodreads/clean/thomas_goodreads_library_export.csv
+Zendegi,Greg Egan,2,3.47,2010,288,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Last Question,Isaac Asimov,5,4.53,1956,9,data/goodreads/clean/thomas_goodreads_library_export.csv
+Ons kamp,Marja Vuijsje,4,3.77,2012,335,data/goodreads/clean/thomas_goodreads_library_export.csv
 Lagoon,Nnedi Okorafor,2,3.63,2014,306,data/goodreads/clean/thomas_goodreads_library_export.csv
-A Little Life,Hanya Yanagihara,4,4.32,2015,720,data/goodreads/clean/thomas_goodreads_library_export.csv
+A Little Life,Hanya Yanagihara,4,4.29,2015,720,data/goodreads/clean/thomas_goodreads_library_export.csv
 "A Fire Upon the Deep (Zones of Thought, #1)",Vernor Vinge,1,4.14,1992,613,data/goodreads/clean/thomas_goodreads_library_export.csv
 Accelerando,Charles Stross,5,3.87,2005,415,data/goodreads/clean/thomas_goodreads_library_export.csv
 Starship Troopers,Robert A. Heinlein,3,4.01,1959,264,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Age of Spiritual Machines,Ray Kurzweil,4,3.9,1998,388,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Quiet American,Graham Greene,5,3.97,1955,180,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Girl Who Saved The King Of Sweden,Jonas Jonasson,3,3.78,2013,421,data/goodreads/clean/thomas_goodreads_library_export.csv
-1984,George Orwell,5,4.19,1949,328,data/goodreads/clean/thomas_goodreads_library_export.csv
+1984,George Orwell,5,4.2,1949,328,data/goodreads/clean/thomas_goodreads_library_export.csv
 De hemel van Hollywood,Leon de Winter,3,3.21,1997,329,data/goodreads/clean/thomas_goodreads_library_export.csv
 Zionoco,Leon de Winter,3,3.24,1995,415,data/goodreads/clean/thomas_goodreads_library_export.csv
-"A Game of Thrones (A Song of Ice and Fire, #1)",George R.R. Martin,4,4.44,1996,835,data/goodreads/clean/thomas_goodreads_library_export.csv
+"A Game of Thrones (A Song of Ice and Fire, #1)",George R.R. Martin,4,4.45,1996,835,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Restaurant at the End of the Universe (The Hitchhiker's Guide to the Galaxy, #2)",Douglas Adams,4,4.2,1980,250,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Life, the Universe and Everything (The Hitchhiker's Guide to the Galaxy, #3)",Douglas Adams,3,4.17,1982,224,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Hitchhiker’s Guide to the Galaxy (Hitchhiker's Guide to the Galaxy, #1)",Douglas Adams,4,4.23,1979,216,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Hitchhiker’s Guide to the Galaxy (Hitchhiker's Guide to the Galaxy, #1)",Douglas Adams,4,4.22,1979,216,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Foundation Trilogy (Foundation, #1-3)",Isaac Asimov,4,4.42,1953,679,data/goodreads/clean/thomas_goodreads_library_export.csv
-The Spinoza Problem,Irvin D. Yalom,4,4.25,2012,321,data/goodreads/clean/thomas_goodreads_library_export.csv
-De buitenvrouw,Joost Zwagerman,1,2.95,1994,235,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Spinoza Problem,Irvin D. Yalom,4,4.26,2012,321,data/goodreads/clean/thomas_goodreads_library_export.csv
+De buitenvrouw,Joost Zwagerman,1,2.96,1994,235,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Lost Weekend,Charles Jackson,5,4.09,1944,244,data/goodreads/clean/thomas_goodreads_library_export.csv
 Brave New World,Aldous Huxley,4,3.99,1932,268,data/goodreads/clean/thomas_goodreads_library_export.csv
-Aung San Suu Kyi: A Biography,Jesper Bengtsson,3,3.49,2010,240,data/goodreads/clean/thomas_goodreads_library_export.csv
+Aung San Suu Kyi: A Biography,Jesper Bengtsson,3,3.48,2010,240,data/goodreads/clean/thomas_goodreads_library_export.csv
 Do Androids Dream of Electric Sheep?,Philip K. Dick,4,4.09,1968,244,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Fraction of the Whole,Steve Toltz,5,4.14,2008,530,data/goodreads/clean/thomas_goodreads_library_export.csv
-A Cook's Tour: Global Adventures in Extreme Cuisines,Anthony Bourdain,3,4.09,2001,277,data/goodreads/clean/thomas_goodreads_library_export.csv
+A Cook's Tour: Global Adventures in Extreme Cuisines,Anthony Bourdain,3,4.1,2001,277,data/goodreads/clean/thomas_goodreads_library_export.csv
 Taal is zeg maar echt mijn ding,Paulien Cornelisse,3,3.65,2009,212,data/goodreads/clean/thomas_goodreads_library_export.csv
-Anna Karenina,Leo Tolstoy,5,4.09,1878,964,data/goodreads/clean/thomas_goodreads_library_export.csv
-Until I Find You,John Irving,4,3.66,2005,820,data/goodreads/clean/thomas_goodreads_library_export.csv
-Bonita Avenue,Peter Buwalda,3,3.74,2010,543,data/goodreads/clean/thomas_goodreads_library_export.csv
+Anna Karenina,Leo Tolstoy,5,4.1,1878,964,data/goodreads/clean/thomas_goodreads_library_export.csv
+Until I Find You,John Irving,4,3.67,2005,820,data/goodreads/clean/thomas_goodreads_library_export.csv
+Bonita Avenue,Peter Buwalda,3,3.75,,543,data/goodreads/clean/thomas_goodreads_library_export.csv
 Born on a Blue Day,Daniel Tammet,3,3.84,2006,226,data/goodreads/clean/thomas_goodreads_library_export.csv
-Kitchen Confidential: Adventures in the Culinary Underbelly,Anthony Bourdain,5,4.17,2000,312,data/goodreads/clean/thomas_goodreads_library_export.csv
+Kitchen Confidential: Adventures in the Culinary Underbelly,Anthony Bourdain,5,4.18,2000,312,data/goodreads/clean/thomas_goodreads_library_export.csv
 God's Gym,Leon de Winter,2,3.4,2002,370,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Firm,Robin Waterfield,3,4.06,1991,76,data/goodreads/clean/thomas_goodreads_library_export.csv
-Knielen op een bed violen,Jan Siebelink,4,3.58,2005,446,data/goodreads/clean/thomas_goodreads_library_export.csv
+Knielen op een bed violen,Jan Siebelink,4,3.59,2005,446,data/goodreads/clean/thomas_goodreads_library_export.csv
 De thuiskomst,Anna Enquist,2,3.84,2005,415,data/goodreads/clean/thomas_goodreads_library_export.csv
-Een kleine geschiedenis van Amsterdam,Geert Mak,3,3.89,1994,446,data/goodreads/clean/thomas_goodreads_library_export.csv
-Shantaram,Gregory David Roberts,5,4.27,2003,936,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Shining (The Shining, #1)",Stephen         King,3,4.27,1977,497,data/goodreads/clean/thomas_goodreads_library_export.csv
-"Angels & Demons (Robert Langdon, #1)",Dan       Brown,2,3.94,2000,736,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Da Vinci Code (Robert Langdon, #2)",Dan       Brown,3,3.92,2003,489,data/goodreads/clean/thomas_goodreads_library_export.csv
-Brida,Paulo Coelho,2,3.5,1990,264,data/goodreads/clean/thomas_goodreads_library_export.csv
+Een kleine geschiedenis van Amsterdam,Geert Mak,3,3.9,1994,446,data/goodreads/clean/thomas_goodreads_library_export.csv
+Shantaram,Gregory David Roberts,5,4.28,2003,936,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Shining (The Shining, #1)",Stephen        King,3,4.28,1977,497,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Angels & Demons (Robert Langdon, #1)",Dan    Brown,2,3.95,2000,736,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The da Vinci Code (Robert Langdon, #2)",Dan    Brown,3,3.93,2003,489,data/goodreads/clean/thomas_goodreads_library_export.csv
+Brida,Paulo Coelho,2,3.51,1990,264,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Witch of Portobello,Paulo Coelho,3,3.56,2006,320,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Death of Artemio Cruz,Carlos Fuentes,4,3.86,1962,307,data/goodreads/clean/thomas_goodreads_library_export.csv
-Into the Wild,Jon Krakauer,3,4.01,1996,207,data/goodreads/clean/thomas_goodreads_library_export.csv
+Into the Wild,Jon Krakauer,3,4.02,1996,207,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Neverending Story,Michael Ende,5,4.18,1979,396,data/goodreads/clean/thomas_goodreads_library_export.csv
 De donkere kamer van Damokles,Willem Frederik Hermans,5,3.8,1958,335,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Color Purple,Alice Walker,5,4.27,1982,295,data/goodreads/clean/thomas_goodreads_library_export.csv
 De avonden,Gerard Reve,4,3.49,1947,191,data/goodreads/clean/thomas_goodreads_library_export.csv
 Nooit meer slapen,Willem Frederik Hermans,4,3.86,1966,251,data/goodreads/clean/thomas_goodreads_library_export.csv
-Hersenschimmen,J. Bernlef,5,3.89,1984,160,data/goodreads/clean/thomas_goodreads_library_export.csv
+Hersenschimmen,J. Bernlef,5,3.89,,160,data/goodreads/clean/thomas_goodreads_library_export.csv
 Veronika Decides to Die,Paulo Coelho,2,3.73,1998,285,data/goodreads/clean/thomas_goodreads_library_export.csv
 Extremely Loud & Incredibly Close,Jonathan Safran Foer,3,3.97,2005,326,data/goodreads/clean/thomas_goodreads_library_export.csv
 In One Person,John Irving,3,3.7,2012,425,data/goodreads/clean/thomas_goodreads_library_export.csv
@@ -1259,13 +1268,13 @@ Eating Animals,Jonathan Safran Foer,2,4.21,2009,341,data/goodreads/clean/thomas_
 Everything is Illuminated,Jonathan Safran Foer,5,3.89,2002,276,data/goodreads/clean/thomas_goodreads_library_export.csv
 Dit zijn de namen,Tommy Wieringa,4,3.57,2012,303,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Girl Who Kicked the Hornet’s Nest (Millennium, #3)",Stieg Larsson,4,4.24,2007,566,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Girl Who Played with Fire (Millennium, #2)",Stieg Larsson,4,4.25,2006,503,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Girl with the Dragon Tattoo (Millennium, #1)",Stieg Larsson,4,4.17,2005,480,data/goodreads/clean/thomas_goodreads_library_export.csv
-Watchmen,Alan Moore,5,4.38,1987,416,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Girl Who Played with Fire (Millennium #2),Stieg Larsson,4,4.26,2006,503,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Girl With the Dragon Tattoo (Millennium, #1)",Stieg Larsson,4,4.17,2005,480,data/goodreads/clean/thomas_goodreads_library_export.csv
+Watchmen,Alan             Moore,5,4.39,1987,416,data/goodreads/clean/thomas_goodreads_library_export.csv
 Het derde huwelijk,Tom Lanoye,2,3.39,2006,337,data/goodreads/clean/thomas_goodreads_library_export.csv
-The Alchemist,Paulo Coelho,3,3.91,1988,197,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Alchemist,Paulo Coelho,3,3.92,1988,197,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Pilgrimage,Paulo Coelho,2,3.65,1987,226,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Unbearable Lightness of Being,Milan Kundera,5,4.11,1984,314,data/goodreads/clean/thomas_goodreads_library_export.csv
-The World According to Garp,John Irving,4,4.1,1978,610,data/goodreads/clean/thomas_goodreads_library_export.csv
-The Cider House Rules,John Irving,5,4.16,1985,1064,data/goodreads/clean/thomas_goodreads_library_export.csv
-Stoner,John  Williams,5,4.34,1965,292,data/goodreads/clean/thomas_goodreads_library_export.csv
+The World According to Garp,John Irving,4,4.11,1978,610,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Cider House Rules,John Irving,5,4.17,1985,1064,data/goodreads/clean/thomas_goodreads_library_export.csv
+Stoner,John  Williams,5,4.35,1965,292,data/goodreads/clean/thomas_goodreads_library_export.csv
