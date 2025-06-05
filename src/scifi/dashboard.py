@@ -17,8 +17,8 @@ Built with ❤️ using Streamlit, Plotly, and Polars
 
 import numpy as np
 import pandas as pd
-import plotly.express as px  # type: ignore[import-untyped]
-import plotly.graph_objects as go  # type: ignore[import-untyped]
+import plotly.express as px
+import plotly.graph_objects as go
 import polars as pl
 import streamlit as st
 
@@ -146,8 +146,8 @@ def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[s
 
     metrics = [
         ("📚 Total Books", total_books, col1),
-        ("⭐ Goodreads Avg", f"{avg_goodreads:.2f}", col2),  # type: ignore[str-bytes-safe]
-        ("🎯 Club Avg", f"{avg_bookclub:.2f}", col3),  # type: ignore[str-bytes-safe]
+        ("⭐ Goodreads Avg", f"{avg_goodreads:.2f}", col2),
+        ("🎯 Club Avg", f"{avg_bookclub:.2f}", col3),
         ("👑 Most Active", str(most_active), col4),
         ("⏰ Duration", str(duration_text), col5),
     ]
@@ -319,10 +319,10 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
 
 
 def create_selected_book_analysis(
-    selected_book: pd.Series,  # type: ignore[type-arg]
+    selected_book: pd.Series,
     df: pl.DataFrame,
     members: list[str],
-) -> pd.Series:  # type: ignore[type-arg]
+) -> pd.Series:
     """Create detailed analysis for a selected book (triggered by scatter plot click)"""
     st.markdown("### 🎯 Selected Book Deep Dive")
 
@@ -524,9 +524,9 @@ def create_selected_book_analysis(
         avg_era_rating = era_books["average_bookclub_rating"].mean()
 
         if selected_book["average_bookclub_rating"] > avg_era_rating:
-            st.success(f"📈 Above average for its era! ({avg_era_rating:.2f})")  # type: ignore[str-bytes-safe]
+            st.success(f"📈 Above average for its era! ({avg_era_rating:.2f})")
         else:
-            st.info(f"📊 Era average: {avg_era_rating:.2f}")  # type: ignore[str-bytes-safe]
+            st.info(f"📊 Era average: {avg_era_rating:.2f}")
 
     with insight_col2:
         # Book statistics
@@ -641,7 +641,7 @@ def create_member_comparison(df: pl.DataFrame, members: list[str]) -> None:
                     {
                         "Member": member,
                         "Books Rated": len(ratings),
-                        "Average Rating": f"{ratings.mean():.2f}",  # type: ignore[str-bytes-safe]
+                        "Average Rating": f"{ratings.mean():.2f}",
                         "Favorite Book": str(favorite_book),
                     },
                 )

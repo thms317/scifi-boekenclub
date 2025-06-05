@@ -92,6 +92,16 @@ disallow_untyped_decorators = false
 disallow_untyped_calls = false
 exclude = "scratch"
 
+[[tool.mypy.overrides]]
+module = "plotly.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "scifi.dashboard"
+disable_error_code = [
+    "str-bytes-safe",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]

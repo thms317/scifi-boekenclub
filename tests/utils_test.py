@@ -1,7 +1,7 @@
 """Tests for the file_utils module."""
 
 from collections.abc import Generator
-from datetime import datetime
+from datetime import date
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -146,15 +146,15 @@ class TestReadBookclub:
         assert expected_titles == actual_titles, (
             "Titles in the DataFrame do not match expected values"
         )
-        # Assert that the 'date' column is of datetime type
-        assert df_bookclub_test["date"].dtype == pl.Datetime, "Date column is not of datetime type"
+        # Assert that the 'date' column is of date type
+        assert df_bookclub_test["date"].dtype == pl.Date, "Date column is not of date type"
         # Assert specific date values
         expected_dates = [
-            datetime(2020, 1, 1),  # noqa: DTZ001
-            datetime(2021, 2, 15),  # noqa: DTZ001
+            date(2020, 1, 1),
+            date(2021, 2, 15),
         ]
         actual_dates = df_bookclub_test["date"].to_list()
-        assert expected_dates == actual_dates, "Parsed dates do not match expected datetime values"
+        assert expected_dates == actual_dates, "Parsed dates do not match expected date values"
 
     def test_read_bookclub_empty_directory(self) -> None:
         """Test that read_bookclub handles an empty directory gracefully."""

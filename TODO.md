@@ -2,11 +2,15 @@
 
 ## High Priority
 
-- [ ] Fix the JOIN - it creates duplicate columns
+- [ ] Add `index` column to dashboard
+- [ ] Depict latest book in overview
+- [ ] Labels are falling off the spider chart
 
 ## Nice to Have
 
-- [ ] Design some tests
+- [ ] Integrate `ty`
+- [ ] Create more tests
+- [ ] Fix the JOIN - it creates duplicate columns
 
 ## Done
 
