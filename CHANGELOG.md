@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/thms317/scifi-boekenclub/compare/v1.1.0...v1.1.1) (2025-06-05)
+
+
+### Bug Fixes
+
+* add merge function for manual reviews ([226cda7](https://github.com/thms317/scifi-boekenclub/commit/226cda7a70db54a4fb74360b3f3801bff575ebff))
+* enable mypy in pre-commit ([5e5eb27](https://github.com/thms317/scifi-boekenclub/commit/5e5eb27088ea7d20866557fa47fe981cecd95a4e))
+
 # [1.1.0](https://github.com/thms317/scifi-boekenclub/compare/v1.0.1...v1.1.0) (2025-06-04)
 
 
