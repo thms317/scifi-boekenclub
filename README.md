@@ -11,13 +11,11 @@
 [![CI](https://github.com/thms317/scifi-boekenclub/actions/workflows/ci.yml/badge.svg)](https://github.com/thms317/scifi-boekenclub/actions/workflows/ci.yml)
 [![Semantic Release](https://github.com/thms317/scifi-boekenclub/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/thms317/scifi-boekenclub/actions/workflows/semantic-release.yml)
 
-This is a Python data analysis project for analyzing the "Sci-Fi Boekenclub" (Sci-Fi Book Club) reading data. The project combines Goodreads export data from multiple club members with book club meeting records to analyze reading preferences and ratings over time.
+This is a Python data analysis project for analyzing the `Sci-Fi Boekenclub` reading data. The project combines Goodreads export data from multiple club members with book club meeting records to analyze reading preferences and ratings over time.
+
+The ratings and trends are visualized in a nice [Streamlit dashboard](https://thms317-scifi-boekenclub-srcscifidashboard-erirdk.streamlit.app/).
 
 The project was generated from [RevoData Asset Bundle Templates](https://github.com/revodatanl/revo-asset-bundle-templates) version `0.15.1`.
-
-## Prerequisites
-
-This project heavily depends on the provided `Makefile` for various tasks. Without [`make`](https://www.gnu.org/software/make) installed, you will need to run the commands described in the `Makefile` manually.
 
 ## Getting Started
 
@@ -29,11 +27,14 @@ make setup
 
 This installs [`Homebrew`](https://brew.sh), [`Git`](https://git-scm.com), [`uv`](https://github.com/astral-sh/uv), configures Python, sets up a virtual environment, and installs pre-commit hooks.
 
-## Command Reference
+## Build the Dashboard
 
-The following additional commands are available to make development easy:
+Instructions on how to update the source data can be found [here](data/README.md).
 
-| Command | Description |
-|---------|-------------|
-| `make clean` | Removes virtual environment, lock files, and caches |
-| `make test` | Runs a full test suite including coverage reporting |
+To build and test the Streamlit dashboard locally, run:
+
+```bash
+make dashboard
+```
+
+The hosted dashboard is automatically built and updated on every merge to `main`.

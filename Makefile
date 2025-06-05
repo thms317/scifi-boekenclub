@@ -86,3 +86,7 @@ lint:
 	@echo "Running bandit..."
 	@uv run bandit --configfile=pyproject.toml --severity-level=medium -r .
 	@echo "Linting completed successfully!"
+
+dashboard:
+	@echo "Building dashboard locally..."
+	@uv run streamlit run src/scifi/dashboard.py

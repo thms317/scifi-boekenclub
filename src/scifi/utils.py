@@ -1,9 +1,8 @@
-"""Utilitiy functions for the scifi project."""
+"""Utility functions for the scifi project."""
 
 from pathlib import Path
 from typing import Literal
 
-import numpy as np
 import polars as pl
 
 
@@ -91,7 +90,7 @@ def read_bookclub(bookclub_path: Path) -> pl.DataFrame:
         .select(columns.keys())
         .rename(columns)
         .with_columns(
-            pl.col("date").str.to_date("%m/%d/%Y").cast(pl.Datetime),
+            pl.col("date").str.to_date("%m/%d/%Y"),
             pl.col("title").str.strip_chars(),
             pl.col("author").str.strip_chars(),
         )
@@ -180,51 +179,85 @@ def match_dataframes(
     )
 
 
-def rating_to_color(rating: float, alpha: float = 0.3) -> str:
-    """Convert a rating to an RGBA color string.
+def read_manual_ratings(manual_ratings_path: Path) -> pl.DataFrame:
+    """Read the manual ratings CSV into a Polars DataFrame.
+
+    The title and author columns are stripped of whitespace.
+    Rating columns are cast to float to preserve numeric types.
 
     Parameters
     ----------
-    rating : float
-        The rating to convert, expected to be in the range 1-5.
-    alpha : float, optional
-        The alpha value for the color, by default 0.3
+    manual_ratings_path : Path
+        Path to the manual ratings CSV.
 
     Returns
     -------
-    str
-        The RGBA color string.
+    pl.DataFrame
+        The manual ratings data.
     """
-    # Normalize rating from 1-5 to 0-1
-    normalized = (rating - 1) / 4
-    normalized = np.clip(normalized, 0, 1)
-
-    # Interpolate between red and green
-    red = int(255 * (1 - normalized))
-    green = int(255 * normalized)
-    blue = 0
-
-    return f"rgba({red}, {green}, {blue}, {alpha})"
+    return pl.read_csv(manual_ratings_path).with_columns(
+        pl.col("title").str.strip_chars(),
+        pl.col("author").str.strip_chars(),
+        pl.exclude(["title", "author"]).cast(pl.Float64, strict=False),
+    )
 
 
-def create_voting_text(bookclub_members_list: list[str], row: dict[str, float]) -> str:
-    """Create a summary of voting members and their ratings.
+def merge_manual_ratings(
+    bookclub_processed_df: pl.DataFrame,
+    manual_ratings_df: pl.DataFrame,
+    on: str = "title",
+) -> pl.DataFrame:
+    """Merge manual ratings into the processed bookclub data.
+
+    Empty/null values in manual ratings will not overwrite existing ratings
+    in the bookclub processed data. Only non-null manual ratings will be used.
 
     Parameters
     ----------
-    bookclub_members_list : list[str]
-        List of member names who voted.
-    row : dict[str, float]
-        A dictionary containing member ratings.
+    bookclub_processed_df : pl.DataFrame
+        The processed bookclub DataFrame.
+    manual_ratings_df : pl.DataFrame
+        The manual ratings DataFrame.
+    on : str, optional
+        The column to join on, by default "title"
 
     Returns
     -------
-    str
-        A formatted string listing the voting members and their ratings.
+    pl.DataFrame
+        The joined DataFrame where manual ratings supplement existing ratings
+        without overwriting them when manual ratings are empty/null.
     """
-    voters = []
-    for member in bookclub_members_list:
-        value = row.get(member)
-        if value is not None and value != 0:
-            voters.append(f"{member}: {value:.1f}")
-    return "<br>".join(voters)
+    # Get the member columns
+    bookclub_members_list = [
+        col for col in manual_ratings_df.columns if col not in ["title", "author"]
+    ]
+    # Join the DataFrames on the match column (use a temporary column to prevent column duplication)
+    joined_df = (
+        bookclub_processed_df.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column"))
+        .join(
+            manual_ratings_df.with_columns(
+                pl.col(on).str.to_lowercase().alias("temp_match_column")
+            ).select(["temp_match_column", *bookclub_members_list]),
+            on="temp_match_column",
+            how="left",
+            suffix="_manual",
+        )
+        .drop("temp_match_column")
+    )
+    # Use manual rating only if there is no existing rating
+    coalesce_exprs = []
+    for col in bookclub_members_list:
+        manual_col = f"{col}_manual"
+        if col in bookclub_processed_df.columns and manual_col in joined_df.columns:
+            # Use coalesce to prefer existing ratings over manual ratings when both exist
+            coalesce_exprs.append(pl.coalesce([pl.col(col), pl.col(manual_col)]).alias(col))
+        elif manual_col in joined_df.columns:
+            # If original column doesn't exist, just rename the manual column
+            coalesce_exprs.append(pl.col(manual_col).alias(col))
+    # Apply the coalescing and drop the manual columns
+    if coalesce_exprs:
+        manual_cols_to_drop = [
+            f"{col}_manual" for col in bookclub_members_list if f"{col}_manual" in joined_df.columns
+        ]
+        return joined_df.with_columns(coalesce_exprs).drop(manual_cols_to_drop)
+    return joined_df
