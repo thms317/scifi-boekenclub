@@ -25,18 +25,21 @@ dependencies = [
 [dependency-groups]
 dev = [
     "bandit>=1.8.3",
-    "mypy>=1.16.0",
     "pdoc3>=0.11.6",
     "pre-commit>=4.2.0",
     "pydoclint>=0.6.6",
     "pytest-cov>=6.1.1",
     "pytest-mock>=3.14.1",
     "pytest>=8.4.0",
-    "ruff>=0.11.12",
+    "ruff>=0.11.13",
+    "ty>=0.0.1a8",
 ]
 
 [tool.uv]
 package = true
+
+[tool.ty.environment]
+python-version = "3.12"
 
 [tool.ruff]
 target-version = "py312"
@@ -83,24 +86,6 @@ unfixable = [
     "S101",     # "Use of `assert` detected."
 ]
 
-[tool.mypy]
-packages = ["src"]
-python_version = "3.12"
-mypy_path = ["src"]
-strict = true
-disallow_untyped_decorators = false
-disallow_untyped_calls = false
-exclude = "scratch"
-
-[[tool.mypy.overrides]]
-module = "plotly.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "scifi.dashboard"
-disable_error_code = [
-    "str-bytes-safe",
-]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
