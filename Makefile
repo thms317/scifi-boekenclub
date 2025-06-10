@@ -1,5 +1,7 @@
 .PHONY: install setup clean test tree lint
 
+.DEFAULT_GOAL := setup
+
 install:
 	@echo "Verifying if Homebrew is installed..."; \
 	which brew > /dev/null || (echo "Homebrew is not installed. Installing Homebrew..." && /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"); \
@@ -50,7 +52,6 @@ clean:
 	@echo -e "Cleaning up project artifacts..."
 	@find . \( \
 		-name ".pytest_cache" -o \
-		-name ".mypy_cache" -o \
 		-name ".ruff_cache" -o \
 		-name "dist" -o \
 		-name "__pycache__" -o \
@@ -66,7 +67,7 @@ test:
 	@. .venv/bin/activate
 	@uv build
 	@uv sync
-	@uv run pytest -v tests --cov=src --cov-report=term
+	@uvx pytest -v tests --cov=src --cov-report=term
 
 tree:
 	@echo "Generating project tree..."
@@ -78,15 +79,15 @@ lint:
 	@echo "Building the project..."
 	@uv build >/dev/null 2>&1
 	@echo "Running ruff..."
-	@uv run ruff check --output-format=concise .
-	@echo "Running mypy..."
-	@uv run mypy .
+	@uvx ruff check --output-format=concise .
+	@echo "Running ty..."
+	@uvx ty check .
 	@echo "Running pydoclint..."
-	@uv run pydoclint .
+	@uvx pydoclint .
 	@echo "Running bandit..."
-	@uv run bandit --configfile=pyproject.toml --severity-level=medium -r .
+	@uvx bandit --configfile=pyproject.toml --severity-level=medium -r .
 	@echo "Linting completed successfully!"
 
 dashboard:
 	@echo "Building dashboard locally..."
-	@uv run streamlit run src/scifi/dashboard.py
+	@uvx streamlit run src/scifi/dashboard.py
