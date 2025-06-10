@@ -42,7 +42,7 @@ Python package management uses `uv`:
 - Tests are in `tests/` directory using pytest
 - Code quality enforced by:
   - Ruff (linting and formatting)
-  - mypy (type checking)
+  - ty (type checking)
   - pre-commit hooks
 - Run `make test` to execute full test suite with coverage
 
