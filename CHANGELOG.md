@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/thms317/scifi-boekenclub/compare/v1.1.1...v1.2.0) (2025-06-10)
+
+
+### Features
+
+* migrate from mypy to ty ([5aec0e4](https://github.com/thms317/scifi-boekenclub/commit/5aec0e41415c14c91bc83951ae6bd86593f88648))
+
 ## [1.1.1](https://github.com/thms317/scifi-boekenclub/compare/v1.1.0...v1.1.1) (2025-06-05)
 
 
