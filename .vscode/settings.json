@@ -39,10 +39,5 @@
   },
   "[markdown]": {
     "editor.formatOnSave": true
-  },
-  "[xml]": {
-  "editor.defaultFormatter": "redhat.vscode-xml",
-  "editor.formatOnSave": true,
-  "editor.tabSize": 2
   }
 }
