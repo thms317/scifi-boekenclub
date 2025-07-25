@@ -21,6 +21,7 @@ def get_reviewer_mapping() -> dict[str, str]:
         "data/goodreads/clean/Thomas is een worstje_clean.csv": "Robert",
         "data/goodreads/clean/goodreads_library_export-PHT_clean.csv": "Peter",
         "data/goodreads/clean/goodreads_library_export-thirsa.csv": "Thirsa",
+        "data/goodreads/clean/dion_goodreads_library_export.csv": "Dion",
     }
 
 
