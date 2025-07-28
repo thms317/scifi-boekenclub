@@ -199,7 +199,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
         y=y_axis,
         color=color_by,
         size=size_by,
-        hover_data=["title", "author", "blame", "date"],
+        hover_data=["title", "author", "suggested_by", "date"],
         title="📚 Goodreads Rating vs Club Rating",
         template="plotly_dark",
         size_max=20,
@@ -267,7 +267,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
         [
             "title",
             "author",
-            "blame",
+            "suggested_by",
             "original_publication_year",
             "average_goodreads_rating",
             "average_bookclub_rating",
@@ -940,7 +940,7 @@ def create_book_selector(df: pl.DataFrame, members: list[str]) -> None:
         <h3>✍️ by {selected_book["author"]}</h3>
         <div style="display: flex; justify-content: space-between; margin: 1rem 0;">
             <div><strong>Published:</strong> {selected_book["original_publication_year"]}</div>
-            <div><strong>Suggested by:</strong> {selected_book["blame"]}</div>
+            <div><strong>Suggested by:</strong> {selected_book["suggested_by"]}</div>
             <div><strong>Goodreads:</strong> ⭐ {selected_book["average_goodreads_rating"]:.2f}</div>
             <div><strong>Club Average:</strong> 🎯 {selected_book["average_bookclub_rating"]:.2f}</div>
         </div>
@@ -1063,6 +1063,95 @@ def create_book_selector(df: pl.DataFrame, members: list[str]) -> None:
 
             else:
                 st.warning("Could not determine ranking for this book.")
+
+
+def create_suggester_analysis(df: pl.DataFrame) -> None:
+    """Create violin plot showing ratings by book suggester"""
+    st.subheader("🎯 Ratings by Book Suggester")
+    st.write("Distribution of average club ratings for books suggested by each member")
+
+    # Calculate average ratings per suggester for ordering
+    suggester_stats = (
+        df.group_by("suggested_by")
+        .agg(
+            [
+                pl.col("average_bookclub_rating").mean().alias("avg_rating"),
+                pl.col("average_bookclub_rating").count().alias("book_count"),
+            ]
+        )
+        .sort("avg_rating", descending=True)
+        .to_pandas()
+    )
+
+    # Create ordered list of suggesters
+    ordered_suggesters = suggester_stats["suggested_by"].tolist()
+
+    # Convert main dataframe to pandas for violin plot
+    df_pandas = df.to_pandas()
+
+    # Create the violin plot
+    fig = go.Figure()
+    colors = px.colors.qualitative.Set3
+
+    for i, suggester in enumerate(ordered_suggesters):
+        suggester_books = df_pandas[df_pandas["suggested_by"] == suggester]
+        ratings = suggester_books["average_bookclub_rating"].tolist()
+
+        if len(ratings) >= 1:  # Need at least 1 book for visualization
+            # Add violin plot
+            fig.add_trace(
+                go.Violin(
+                    x=[suggester] * len(ratings),
+                    y=ratings,
+                    name=suggester,
+                    box_visible=True,
+                    meanline_visible=True,
+                    fillcolor=colors[i % len(colors)],
+                    opacity=0.6,
+                    points="all",
+                    pointpos=0,
+                    marker={"size": 6, "opacity": 0.8},
+                    customdata=suggester_books[["title", "author"]].values,
+                    hovertemplate=(
+                        "<b>%{customdata[0]}</b><br>"
+                        "Author: %{customdata[1]}<br>"
+                        "Rating: %{y:.2f}<br>"
+                        f"Suggested by: {suggester}<br>"
+                        "<extra></extra>"
+                    ),
+                    showlegend=False,
+                )
+            )
+
+    fig.update_layout(
+        title="📊 Book Rating Distribution by Suggester",
+        xaxis_title="Book Suggester",
+        yaxis_title="Average Club Rating",
+        yaxis={"range": [1, 5]},
+        template="plotly_dark",
+        height=600,
+        xaxis_tickangle=-45,
+    )
+
+    # Create layout with violin plot and stats side by side
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        st.plotly_chart(fig, use_container_width=True)
+
+    with col2:
+        # Simple stats display
+        st.subheader("📈 Suggester Statistics")
+        st.dataframe(
+            suggester_stats[["suggested_by", "book_count", "avg_rating"]].round(2),
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "suggested_by": "Suggester",
+                "book_count": "Books",
+                "avg_rating": "Avg Rating",
+            },
+        )
 
 
 def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
@@ -1227,6 +1316,7 @@ def main() -> None:
         [
             "📊 Overview",
             "👥 Member Insights",
+            "🎯 Book Suggesters",
             "📅 Time Analysis",
             "🔍 Book Explorer",
             "🔬 Advanced Analytics",
@@ -1241,6 +1331,9 @@ def main() -> None:
 
     elif page == "👥 Member Insights":
         create_member_comparison(bookclub_processed_df, members)
+
+    elif page == "🎯 Book Suggesters":
+        create_suggester_analysis(bookclub_processed_df)
 
     elif page == "📅 Time Analysis":
         create_time_analysis(bookclub_processed_df)
