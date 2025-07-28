@@ -51,8 +51,8 @@ lint:
 	@uv build >/dev/null 2>&1
 	@echo "Running ruff..."
 	-@uv run ruff check --output-format=concise .
-	@echo "Running mypy..."
-	-@uv run mypy .
+	@echo "Running ty..."
+	-@uv run ty check .
 	@echo "Running pydoclint..."
 	-@uv run pydoclint .
 	@echo "Linting completed!"
