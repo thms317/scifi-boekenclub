@@ -22,6 +22,7 @@ import plotly.graph_objects as go
 import polars as pl
 import streamlit as st
 
+from scifi.data_processor import process_bookclub_data
 from scifi.utils import get_reviewer_mapping
 
 # Page configuration
@@ -91,32 +92,44 @@ st.markdown(
 
 @st.cache_data
 def load_data() -> tuple[pl.DataFrame, list[str]]:
-    """Load and preprocess the bookclub data"""
+    """Load and preprocess the bookclub data using live data processing."""
     try:
-        # Read from the specified data directory
-        bookclub_processed_df = pl.read_csv("data/bookclub_processed.csv")
-    except:  # noqa: E722
-        # If file not found, show instructions
-        st.error("📁 Please upload your 'bookclub_processed.csv' file to the data/ directory.")
-        st.info("💡 Place the CSV file in the data/ folder and refresh the page.")
+        with st.spinner("🔄 Processing book club data from sources..."):
+            # Run the data processing pipeline
+            bookclub_processed_df, unmatched_df, goodreads_df = process_bookclub_data()
+
+    except FileNotFoundError as e:
+        st.error(f"📁 Data files not found: {e}")
+        st.info("💡 Make sure your data files are in the correct directories:")
+        st.code("""
+        data/
+        ├── goodreads/
+        │   └── clean/
+        │       └── [member CSV files]
+        ├── bookclub_source.csv
+        └── goodreads/
+            └── manual_ratings.csv (optional)
+        """)
+        st.stop()
+
+    except (RuntimeError, ValueError, OSError) as e:
+        st.error(f"❌ Error processing data: {e}")
+        st.info("💡 Check the data file formats and try again.")
         st.stop()
 
     bookclub_members_list = list(get_reviewer_mapping().values())
 
-    # Data preprocessing
+    # Data preprocessing for dashboard display
     bookclub_processed_df = bookclub_processed_df.with_columns(
         [
-            # Handle date parsing more flexibly
-            pl.when(pl.col("date").is_not_null())
-            .then(pl.col("date").str.strptime(pl.Date, format="%Y-%m-%d", strict=False))
-            .otherwise(None)
-            .alias("date_parsed"),
-            # Ensure proper data types
-            pl.col("original_publication_year").cast(pl.Int64, strict=False),
-            pl.col("average_goodreads_rating").cast(pl.Float64, strict=False),
-            pl.col("average_bookclub_rating").cast(pl.Float64, strict=False),
-            # Handle member ratings
-            *[pl.col(member).cast(pl.Float64, strict=False) for member in bookclub_members_list],
+            # Date is already parsed by data processor, just create alias for compatibility
+            pl.col("date").alias("date_parsed"),
+            # Data types are already handled by data processor, but ensure float types for calculations
+            *[
+                pl.col(member).cast(pl.Float64, strict=False)
+                for member in bookclub_members_list
+                if member in bookclub_processed_df.columns
+            ],
         ],
     )
 
@@ -1065,95 +1078,6 @@ def create_book_selector(df: pl.DataFrame, members: list[str]) -> None:
                 st.warning("Could not determine ranking for this book.")
 
 
-def create_suggester_analysis(df: pl.DataFrame) -> None:
-    """Create violin plot showing ratings by book suggester"""
-    st.subheader("🎯 Ratings by Book Suggester")
-    st.write("Distribution of average club ratings for books suggested by each member")
-
-    # Calculate average ratings per suggester for ordering
-    suggester_stats = (
-        df.group_by("suggested_by")
-        .agg(
-            [
-                pl.col("average_bookclub_rating").mean().alias("avg_rating"),
-                pl.col("average_bookclub_rating").count().alias("book_count"),
-            ]
-        )
-        .sort("avg_rating", descending=True)
-        .to_pandas()
-    )
-
-    # Create ordered list of suggesters
-    ordered_suggesters = suggester_stats["suggested_by"].tolist()
-
-    # Convert main dataframe to pandas for violin plot
-    df_pandas = df.to_pandas()
-
-    # Create the violin plot
-    fig = go.Figure()
-    colors = px.colors.qualitative.Set3
-
-    for i, suggester in enumerate(ordered_suggesters):
-        suggester_books = df_pandas[df_pandas["suggested_by"] == suggester]
-        ratings = suggester_books["average_bookclub_rating"].tolist()
-
-        if len(ratings) >= 1:  # Need at least 1 book for visualization
-            # Add violin plot
-            fig.add_trace(
-                go.Violin(
-                    x=[suggester] * len(ratings),
-                    y=ratings,
-                    name=suggester,
-                    box_visible=True,
-                    meanline_visible=True,
-                    fillcolor=colors[i % len(colors)],
-                    opacity=0.6,
-                    points="all",
-                    pointpos=0,
-                    marker={"size": 6, "opacity": 0.8},
-                    customdata=suggester_books[["title", "author"]].values,
-                    hovertemplate=(
-                        "<b>%{customdata[0]}</b><br>"
-                        "Author: %{customdata[1]}<br>"
-                        "Rating: %{y:.2f}<br>"
-                        f"Suggested by: {suggester}<br>"
-                        "<extra></extra>"
-                    ),
-                    showlegend=False,
-                )
-            )
-
-    fig.update_layout(
-        title="📊 Book Rating Distribution by Suggester",
-        xaxis_title="Book Suggester",
-        yaxis_title="Average Club Rating",
-        yaxis={"range": [1, 5]},
-        template="plotly_dark",
-        height=600,
-        xaxis_tickangle=-45,
-    )
-
-    # Create layout with violin plot and stats side by side
-    col1, col2 = st.columns([2, 1])
-
-    with col1:
-        st.plotly_chart(fig, use_container_width=True)
-
-    with col2:
-        # Simple stats display
-        st.subheader("📈 Suggester Statistics")
-        st.dataframe(
-            suggester_stats[["suggested_by", "book_count", "avg_rating"]].round(2),
-            use_container_width=True,
-            hide_index=True,
-            column_config={
-                "suggested_by": "Suggester",
-                "book_count": "Books",
-                "avg_rating": "Avg Rating",
-            },
-        )
-
-
 def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
     """Create advanced analytics section"""
     # CORRELATION ANALYSIS SECTION
@@ -1264,8 +1188,8 @@ def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
             shared_books_df = correlation_books[pair_key]
 
             # Display the shared books nicely
+            col1, col2, col3, col4 = st.columns(4)
             for _, book in shared_books_df.iterrows():
-                col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
                 with col1:
                     st.write(f"**{book['title']}** by {book['author']}")
                 with col2:
@@ -1316,7 +1240,6 @@ def main() -> None:
         [
             "📊 Overview",
             "👥 Member Insights",
-            "🎯 Book Suggesters",
             "📅 Time Analysis",
             "🔍 Book Explorer",
             "🔬 Advanced Analytics",
@@ -1331,9 +1254,6 @@ def main() -> None:
 
     elif page == "👥 Member Insights":
         create_member_comparison(bookclub_processed_df, members)
-
-    elif page == "🎯 Book Suggesters":
-        create_suggester_analysis(bookclub_processed_df)
 
     elif page == "📅 Time Analysis":
         create_time_analysis(bookclub_processed_df)
