@@ -132,7 +132,7 @@ class TestReadBookclub:
             "date",
             "title",
             "author",
-            "blame",
+            "suggested_by",
             "location",
         }
         actual_columns = set(df_bookclub_test.columns)
