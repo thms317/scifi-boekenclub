@@ -83,7 +83,7 @@ def read_bookclub(bookclub_path: Path) -> pl.DataFrame:
         "Datum": "date",
         "Boek": "title",
         "Auteur": "author",
-        "Wie heeft gekozen?": "blame",
+        "Wie heeft gekozen?": "suggested_by",
         "Locatie": "location",
     }
     q = (

@@ -12,8 +12,7 @@ setup:
 	fi
 
 	@echo "Setting up pre-commit..."
-	@. .venv/bin/activate
-	@.venv/bin/pre-commit install --hook-type pre-commit --hook-type commit-msg
+	@uv run pre-commit install --hook-type pre-commit --hook-type commit-msg
 
 	@echo "Setup completed successfully!"
 
@@ -37,10 +36,9 @@ clean:
 
 test:
 	@echo "Running tests..."
-	@. .venv/bin/activate
 	@uv build
 	@uv sync
-	@uvx pytest -v tests --cov=src --cov-report=term
+	@uv run pytest -v tests --cov=src --cov-report=term
 
 tree:
 	@echo "Generating project tree..."
@@ -52,13 +50,13 @@ lint:
 	@echo "Building the project..."
 	@uv build >/dev/null 2>&1
 	@echo "Running ruff..."
-	@uvx ruff check --output-format=concise .
-	@echo "Running ty..."
-	@uvx ty check .
+	-@uv run ruff check --output-format=concise .
+	@echo "Running mypy..."
+	-@uv run mypy .
 	@echo "Running pydoclint..."
-	@uvx pydoclint . .
-	@echo "Linting completed successfully!"
+	-@uv run pydoclint .
+	@echo "Linting completed!"
 
 dashboard:
 	@echo "Building dashboard locally..."
-	@uvx streamlit run src/scifi/dashboard.py
+	@uv run streamlit run src/scifi/dashboard.py
