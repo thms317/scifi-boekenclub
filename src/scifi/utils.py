@@ -5,25 +5,7 @@ from typing import Literal
 
 import polars as pl
 
-
-def get_reviewer_mapping() -> dict[str, str]:
-    """Return the mapping from file paths to reviewer names.
-
-    Returns
-    -------
-    dict[str, str]
-        A dictionary mapping file paths to reviewer names.
-    """
-    return {
-        "data/goodreads/clean/dion_goodreads_library_export.csv": "Dion",
-        "data/goodreads/clean/goodreads_library_export-PHT_clean.csv": "Peter",
-        "data/goodreads/clean/goodreads_library_export-thirsa.csv": "Thirsa",
-        "data/goodreads/clean/koen_goodreads_library_export.csv": "Koen_v_W",
-        "data/goodreads/clean/koen_m_goodreads_library_export.csv": "Koen_M",
-        # "data/goodreads/clean/laurynas_goodreads_library_export.csv": "Laurynas",
-        "data/goodreads/clean/Thomas is een worstje_clean.csv": "Robert",
-        "data/goodreads/clean/thomas_goodreads_library_export.csv": "Thomas",
-    }
+from scifi.members import BookClubMembers
 
 
 def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
@@ -288,7 +270,7 @@ def get_active_book_suggesters(
         DataFrame with suggester names and their suggestion counts,
         sorted by count in descending order.
     """
-    reviewer_mapping = get_reviewer_mapping()
+    reviewer_mapping = BookClubMembers.get_reviewer_mapping()
     mapped_reviewer_names = list(reviewer_mapping.values())
     return (
         bookclub_df.group_by("suggested_by")

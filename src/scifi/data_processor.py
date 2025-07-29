@@ -9,8 +9,8 @@ from pathlib import Path
 
 import polars as pl
 
+from scifi.members import BookClubMembers
 from scifi.utils import (
-    get_reviewer_mapping,
     match_dataframes,
     merge_manual_ratings,
     pivot_goodreads_data,
@@ -218,7 +218,7 @@ def process_bookclub_data(
         # Step 2: Pivot Goodreads data by reviewer
         goodreads_pivot_df = pivot_goodreads_data(
             goodreads_df=goodreads_df,
-            reviewer_mapping=get_reviewer_mapping(),
+            reviewer_mapping=BookClubMembers.get_reviewer_mapping(),
         )
 
         # Step 3: Load bookclub data
