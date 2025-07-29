@@ -12,7 +12,8 @@ The project follows a data pipeline structure:
 
 1. **Data Sources**:
    - Goodreads CSV exports from individual members (in `data/goodreads/`)
-   - Book club meeting records (`data/bookclub_source.csv`)
+   - Book club meeting records (`data/bookclub/bookclub.csv`)
+   - Manual ratings (`data/bookclub/manual_ratings.csv`)
 
 2. **Core Processing**:
    - Data cleaning and combination utilities in `src/scifi/utils.py`
@@ -55,4 +56,4 @@ The core data processing uses Polars for performance. Key functions in `src/scif
 - `pivot_goodreads_data()`: Transforms individual ratings into club member columns
 - `match_dataframes()`: Joins book club and Goodreads data on title/author
 
-The project handles multiple reviewer mappings and calculates both individual and average ratings across club members.
+The processed data is saved as `data/processed_data.csv`. The project handles multiple reviewer mappings and calculates both individual and average ratings across club members.
