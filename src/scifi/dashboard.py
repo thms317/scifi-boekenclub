@@ -106,8 +106,8 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
         ├── goodreads/
         │   └── clean/
         │       └── [member CSV files]
-        ├── bookclub_source.csv
-        └── goodreads/
+        └── bookclub/
+            ├── bookclub.csv
             └── manual_ratings.csv (optional)
         """)
         st.stop()

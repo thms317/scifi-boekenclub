@@ -184,9 +184,9 @@ def process_bookclub_data(
     goodreads_dir : Path | str | None, optional
         Directory containing Goodreads CSV files, by default "data/goodreads/clean".
     bookclub_path : Path | str | None, optional
-        Path to bookclub CSV file, by default "data/bookclub_source.csv".
+        Path to bookclub CSV file, by default "data/bookclub/bookclub.csv".
     manual_ratings_path : Path | str | None, optional
-        Path to manual ratings CSV file, by default "data/goodreads/manual_ratings.csv".
+        Path to manual ratings CSV file, by default "data/bookclub/manual_ratings.csv".
 
     Returns
     -------
@@ -202,12 +202,12 @@ def process_bookclub_data(
     goodreads_dir = Path("data/goodreads/clean") if goodreads_dir is None else Path(goodreads_dir)
 
     if bookclub_path is None:
-        bookclub_path = Path("data/bookclub_source.csv")
+        bookclub_path = Path("data/bookclub/bookclub.csv")
     else:
         bookclub_path = Path(bookclub_path)
 
     if manual_ratings_path is None:
-        manual_ratings_path = Path("data/goodreads/manual_ratings.csv")
+        manual_ratings_path = Path("data/bookclub/manual_ratings.csv")
     else:
         manual_ratings_path = Path(manual_ratings_path)
 
@@ -264,7 +264,8 @@ def save_processed_data(
     output_dir.mkdir(exist_ok=True)
 
     # Save main processed data
-    processed_path = output_dir / "bookclub_processed.csv"
+    processed_path = output_dir / "processed_data.csv"
+    processed_path.parent.mkdir(exist_ok=True)
     bookclub_processed_df.write_csv(processed_path)
 
     # Save unmatched data

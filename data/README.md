@@ -8,10 +8,10 @@ To update the source data, follow these steps:
    - Add the new members to the `get_reviewer_mapping` function in the `src/scifi/utils.py` module.
 
 2. **Update the Book Club Source**:
-    - Update the `data/bookclub_source.csv` file with the latest book club meeting records.
+    - Update the `data/bookclub/bookclub.csv` file with the latest book club meeting records.
 
 3. **Update the Manual Ratings**:
-   - A fresh Goodreads is not always necessary, instead update the `data/goodreads/manual_ratings.csv` file accordingly.
+   - A fresh Goodreads is not always necessary, instead update the `data/bookclub/manual_ratings.csv` file accordingly.
 
 4. **Merge the Data**:
    - Run the data processing script to merge the Goodreads export data with the book club meeting records. This will create a new dataset that combines both sources of information. As of now, this is done manually by running the `notebooks/aggregating.ipynb` notebook.
