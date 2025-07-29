@@ -23,7 +23,7 @@ import polars as pl
 import streamlit as st
 
 from scifi.data_processor import process_bookclub_data
-from scifi.utils import get_reviewer_mapping
+from scifi.members import BookClubMembers
 
 # Page configuration
 st.set_page_config(
@@ -117,7 +117,7 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
         st.info("💡 Check the data file formats and try again.")
         st.stop()
 
-    bookclub_members_list = list(get_reviewer_mapping().values())
+    bookclub_members_list = BookClubMembers.get_member_names()
 
     # Data preprocessing for dashboard display
     bookclub_processed_df = bookclub_processed_df.with_columns(
