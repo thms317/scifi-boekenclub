@@ -11,7 +11,7 @@ repos:
     -   id: conventional-pre-commit
         stages: [commit-msg]
 -   repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.8.3
+    rev: 0.8.4
     hooks:
     -   id: uv-lock
 -   repo: https://github.com/pre-commit/pre-commit-hooks
@@ -22,7 +22,7 @@ repos:
     -   id: check-yaml
     -   id: check-json
 -   repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.12.5
+    rev: v0.12.7
     hooks:
     -   id: ruff-check
         args:

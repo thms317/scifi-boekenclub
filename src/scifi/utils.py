@@ -40,7 +40,10 @@ def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
             pl.col("title").str.strip_chars(),
             pl.col("author").str.strip_chars(),
         )
-        .filter(pl.col("rating") > 0)
+        .with_columns(
+            # Convert 0 ratings to null to exclude from calculations but keep the book
+            pl.when(pl.col("rating") > 0).then(pl.col("rating")).otherwise(None).alias("rating")
+        )
     )
     return q.collect()
 
