@@ -1,5 +1,6 @@
 title,author,rating,average_goodreads_rating,original_publication_year,number_of_pages,path
 Galapagos by Kurt Vonnegut (1985-09-01),Kurt Vonnegut Jr.,3.0,3.87,1985,,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Fifth Season (The Broken Earth, #1)",N.K. Jemisin,,4.3,2015,468,data/goodreads/clean/Thomas is een worstje_clean.csv
 Fine Structure,qntm,2.0,4.07,2010,357,data/goodreads/clean/Thomas is een worstje_clean.csv
 Concept M,Aafke Romeijn,3.0,3.45,2018,253,data/goodreads/clean/Thomas is een worstje_clean.csv
 Het zoutpad,Raynor Winn,2.0,4.02,2018,320,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -8,67 +9,119 @@ The Midwich Cuckoos,John Wyndham,4.0,3.91,1957,220,data/goodreads/clean/Thomas i
 "Blindsight (Firefall, #1)",Peter Watts,5.0,4.01,2006,384,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Day of the Triffids,John Wyndham,4.0,4.01,1951,228,data/goodreads/clean/Thomas is een worstje_clean.csv
 In onze tijd: Leven in het Calamiteitperk,Tim Fransen,4.0,4.32,2024,368,data/goodreads/clean/Thomas is een worstje_clean.csv
+Sacred and Terrible Air,Robert Kurvitz,,3.81,2013,276,data/goodreads/clean/Thomas is een worstje_clean.csv
 Ik kom hier nog op terug,Rob van Essen,3.0,3.77,2023,398,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Gateway (Heechee Saga, #1)",Frederik Pohl,3.0,4.06,1977,278,data/goodreads/clean/Thomas is een worstje_clean.csv
+The 7 Habits of Highly Effective Families: Creating a Nurturing Family in a Turbulent World,Stephen R. Covey,,4.13,,390,data/goodreads/clean/Thomas is een worstje_clean.csv
+The New Peoplemaking,Virginia Satir,,4.14,1988,400,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Mountain in the Sea,Ray Nayler,,3.93,2022,456,data/goodreads/clean/Thomas is een worstje_clean.csv
 His Master's Voice,Stanisław Lem,5.0,4.09,1968,199,data/goodreads/clean/Thomas is een worstje_clean.csv
+Dark Matter,Blake Crouch,,4.14,2016,342,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The House in the Cerulean Sea (Cerulean Chronicles, #1)",T.J. Klune,,4.4,2020,394,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Deadhouse Gates (Malazan Book of the Fallen, #2)",Steven Erikson,5.0,4.27,2000,960,data/goodreads/clean/Thomas is een worstje_clean.csv
+Omarm je emoties,Ronald J. Frederick,,4.17,2009,183,data/goodreads/clean/Thomas is een worstje_clean.csv
 The City & the City,China Miéville,3.0,3.9,2009,312,data/goodreads/clean/Thomas is een worstje_clean.csv
 Kroniek van een aangekondigde dood,Gabriel García Márquez,3.0,3.97,1981,114,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Invention of Morel,Adolfo Bioy Casares,,4.0,1940,103,data/goodreads/clean/Thomas is een worstje_clean.csv
+Unsong,Scott   Alexander,,4.41,2017,795,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Rendezvous with Rama (Rama, #1)",Arthur C. Clarke,3.0,4.12,1973,243,data/goodreads/clean/Thomas is een worstje_clean.csv
 Blood Music,Greg Bear,3.0,3.84,1985,344,data/goodreads/clean/Thomas is een worstje_clean.csv
 Suikerbeest,Anjet Daanje,4.0,3.71,2001,151,data/goodreads/clean/Thomas is een worstje_clean.csv
 Roadside Picnic,Arkady Strugatsky,4.0,4.14,1972,145,data/goodreads/clean/Thomas is een worstje_clean.csv
+Confessions of a Philosopher: A Personal Journey Through Western Philosophy from Plato to Popper (Modern Library (Paperback)),Bryan Magee,,4.1,1997,496,data/goodreads/clean/Thomas is een worstje_clean.csv
 Valuable Humans in Transit and Other Stories,qntm,4.0,4.33,2022,101,data/goodreads/clean/Thomas is een worstje_clean.csv
 Oorlog met de salamanders,Karel Čapek,4.0,4.17,1936,286,data/goodreads/clean/Thomas is een worstje_clean.csv
+Wijze lessen: Twaalf bouwstenen voor effectieve didactiek,Tim Surma,,4.33,,170,data/goodreads/clean/Thomas is een worstje_clean.csv
+'Vijven en Zessen' van Prof. Adriaan de Groot een boekje dat geschiedenis maakte,Ferdinand Mertens,,5.0,,0,data/goodreads/clean/Thomas is een worstje_clean.csv
+Friday Black,Nana Kwame Adjei-Brenyah,,4.05,2018,194,data/goodreads/clean/Thomas is een worstje_clean.csv
 Maar je krijgt er zoveel voor terug : de paradox van het moderne ouderschap,Jennifer Senior,4.0,3.89,2014,365,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Golden Son (Red Rising Saga, #2)",Pierce Brown,2.0,4.47,2015,466,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Red Rising (Red Rising Saga, #1)",Pierce Brown,2.0,4.27,2014,382,data/goodreads/clean/Thomas is een worstje_clean.csv
 There Is No Antimemetics Division,qntm,4.0,4.25,2020,220,data/goodreads/clean/Thomas is een worstje_clean.csv
+Wanneer het water breekt,Chris De Stoop,,3.61,,239,data/goodreads/clean/Thomas is een worstje_clean.csv
+De kapperszoon,Gerbrand Bakker,,3.54,2022,304,data/goodreads/clean/Thomas is een worstje_clean.csv
+Viktor,Judith Fanto,,4.0,2020,397,data/goodreads/clean/Thomas is een worstje_clean.csv
+Schemerleven,Jaap Robben,,4.44,2022,312,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Changeling,Victor LaValle,,3.78,2017,431,data/goodreads/clean/Thomas is een worstje_clean.csv
 Kroeglopen,Simon Carmiggelt,4.0,3.98,1962,149,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Senlin Ascends (The Books of Babel, #1)",Josiah Bancroft,3.0,4.11,2013,448,data/goodreads/clean/Thomas is een worstje_clean.csv
 Verwilderd,Richard Powers,4.0,3.91,2021,304,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Take Back Plenty (Tabitha Jute, #1)",Colin Greenland,,3.36,1990,484,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Harry Potter and the Deathly Hallows (Harry Potter, #7)",J.K. Rowling,5.0,4.62,2007,759,data/goodreads/clean/Thomas is een worstje_clean.csv
 Iedereen verslaafd?,Doortje Smithuijsen,4.0,3.54,2022,256,data/goodreads/clean/Thomas is een worstje_clean.csv
+Snow Crash,Neal Stephenson,,4.02,1992,559,data/goodreads/clean/Thomas is een worstje_clean.csv
+Gloed & De erfenis van Eszter,Sándor Márai,,3.84,,411,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Jade City (The Green Bone Saga, #1)",Fonda Lee,,4.09,2017,540,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Ministry for the Future,Kim Stanley Robinson,,3.88,2020,563,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Stars Are Legion,Kameron Hurley,3.0,3.65,2017,512,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Curse of the Mistwraith (Wars of Light and Shadow, #1)",Janny Wurts,,3.77,1993,830,data/goodreads/clean/Thomas is een worstje_clean.csv
+Embassytown,China Miéville,,3.89,2011,345,data/goodreads/clean/Thomas is een worstje_clean.csv
 Tender Is the Flesh,Agustina Bazterrica,5.0,3.78,2017,209,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Boy on the Bridge (The Girl With All the Gifts, #2)",M.R. Carey,,3.94,2013,400,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Last House on Needless Street,Catriona Ward,,3.85,2021,335,data/goodreads/clean/Thomas is een worstje_clean.csv
+Swan Song,Robert McCammon,,4.29,1987,956,data/goodreads/clean/Thomas is een worstje_clean.csv
+Angelmaker,Nick Harkaway,,3.93,2012,478,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Tomorrow, and Tomorrow, and Tomorrow",Gabrielle Zevin,,4.15,2022,401,data/goodreads/clean/Thomas is een worstje_clean.csv
 Ik werk al (ik krijg er alleen niet voor betaald),Lynn  Berger,4.0,3.72,2023,124,data/goodreads/clean/Thomas is een worstje_clean.csv
+Dracula,Bram Stoker,,4.02,1897,488,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Death's End (Remembrance of Earth's Past, #3)",Liu Cixin,2.0,4.42,2010,604,data/goodreads/clean/Thomas is een worstje_clean.csv
 Tussentijds,Peter Zantingh,3.0,3.82,2022,175,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Dark Forest (Remembrance of Earth's Past, #2)",Liu Cixin,3.0,4.41,2008,512,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Mushroom at the End of the World: On the Possibility of Life in Capitalist Ruins,Anna Lowenhaupt Tsing,,3.99,2015,331,data/goodreads/clean/Thomas is een worstje_clean.csv
+Bored and Brilliant: How Spacing Out Can Unlock Your Most Productive & Creative Self,Manoush Zomorodi,,3.72,2017,192,data/goodreads/clean/Thomas is een worstje_clean.csv
+Bewilderment,Richard Powers,,3.91,2021,278,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Ancillary Justice (Imperial Radch, #1)",Ann Leckie,3.0,3.99,2013,386,data/goodreads/clean/Thomas is een worstje_clean.csv
 Fahrenheit 451,Ray Bradbury,3.0,3.96,1953,227,data/goodreads/clean/Thomas is een worstje_clean.csv
+Wounds: Six Stories from the Border of Hell,Nathan Ballingrud,,4.09,2019,288,data/goodreads/clean/Thomas is een worstje_clean.csv
+Negative Space,B.R. Yeager,,3.72,2020,364,data/goodreads/clean/Thomas is een worstje_clean.csv
 De omwenteling,Suzanna Jansen,4.0,4.26,2022,268,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Look to Windward (Culture, #7)",Iain M. Banks,4.0,4.22,2000,496,data/goodreads/clean/Thomas is een worstje_clean.csv
 Station Eleven,Emily St. John Mandel,3.0,4.07,2014,333,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Peripheral (Jackpot #1),William Gibson,,3.9,2014,485,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Screwtape Letters, Includes Screwtape Proposes a Toast",C.S. Lewis,5.0,4.3,1942,209,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Night  (The Night Trilogy, #1)",Elie Wiesel,,4.37,1956,120,data/goodreads/clean/Thomas is een worstje_clean.csv
 De Mitsukoshi Troostbaby Company,Auke Hulst,4.0,4.07,2021,608,data/goodreads/clean/Thomas is een worstje_clean.csv
+Amatka,Karin Tidbeck,,3.78,2012,224,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Fragility of Goodness: Luck and Ethics in Greek Tragedy and Philosophy,Martha C. Nussbaum,,4.23,1986,592,data/goodreads/clean/Thomas is een worstje_clean.csv
+Tragedy and Philosophy,Walter Kaufmann,,4.26,1968,480,data/goodreads/clean/Thomas is een worstje_clean.csv
 De opkomst van de meritocratie,Michael Young,3.0,3.8,1958,192,data/goodreads/clean/Thomas is een worstje_clean.csv
 Project Hail Mary,Andy Weir,2.0,4.51,2021,476,data/goodreads/clean/Thomas is een worstje_clean.csv
+Het labyrint van de wereld,Jan Amos Komenský,,3.42,1623,288,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Affirmation,Christopher Priest,,3.9,1981,213,data/goodreads/clean/Thomas is een worstje_clean.csv
+Stad der dieven,David Benioff,,4.29,2008,319,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Cyberiad,Stanisław Lem,3.0,4.14,1965,295,data/goodreads/clean/Thomas is een worstje_clean.csv
+Bast,Lucas de Waard,,3.8,,288,data/goodreads/clean/Thomas is een worstje_clean.csv
 Het kan ook nooit normaal,Lieke Hester,3.0,4.05,2022,317,data/goodreads/clean/Thomas is een worstje_clean.csv
 Orakel,Thomas Olde Heuvelt,2.0,3.75,2021,459,data/goodreads/clean/Thomas is een worstje_clean.csv
 Monterosso mon amour,Ilja Leonard Pfeijffer,3.0,3.64,2022,96,data/goodreads/clean/Thomas is een worstje_clean.csv
 I Have No Mouth & I Must Scream,Harlan Ellison,3.0,3.9,1967,134,data/goodreads/clean/Thomas is een worstje_clean.csv
 Islands of Abandonment: Life in the Post-Human Landscape,Cal Flyn,4.0,4.2,2021,376,data/goodreads/clean/Thomas is een worstje_clean.csv
 Zero K,Don DeLillo,2.0,3.2,2016,274,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Children of Time (Children of Time, #1)",Adrian Tchaikovsky,,4.3,2015,608,data/goodreads/clean/Thomas is een worstje_clean.csv
 Sywerts miljoenen: De jacht op het mondkapjesgoud,Jan-Hein Strop,4.0,4.14,2022,224,data/goodreads/clean/Thomas is een worstje_clean.csv
 De zeven vinkjes: hoe mannen zoals ik de baas spelen,Joris Luyendijk,4.0,3.62,2022,200,data/goodreads/clean/Thomas is een worstje_clean.csv
 De Visser,John  Langan,3.0,3.9,2016,320,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Wind, Sand and Stars",Antoine de Saint-Exupéry,,4.12,1939,229,data/goodreads/clean/Thomas is een worstje_clean.csv
 Opgroeien in kleur: Opvoeden zonder vooroordelen,Judi Mesman,4.0,4.19,2021,256,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Overstory,Richard Powers,5.0,4.12,2018,502,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Jazz (Beloved Trilogy, #2)",Toni Morrison,,3.89,1992,229,data/goodreads/clean/Thomas is een worstje_clean.csv
 House of Leaves,Mark Z. Danielewski,5.0,4.09,2000,710,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Rejoice, A Knife to the Heart",Steven Erikson,2.0,3.78,2018,407,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The God is Not Willing (Witness, #1)",Steven Erikson,3.0,4.61,2021,496,data/goodreads/clean/Thomas is een worstje_clean.csv
 Te veel en nooit genoeg,Mary L. Trump,3.0,3.82,2020,248,data/goodreads/clean/Thomas is een worstje_clean.csv
 Mother Night,Kurt Vonnegut Jr.,5.0,4.23,1961,282,data/goodreads/clean/Thomas is een worstje_clean.csv
 Klara and the Sun,Kazuo Ishiguro,5.0,3.74,2021,303,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Shadow of the Gods (The Bloodsworn Saga, #1)",John Gwynne,,4.23,2021,480,data/goodreads/clean/Thomas is een worstje_clean.csv
 Building Stories,Chris Ware,4.0,4.32,2012,260,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Island of Dr. Moreau,H.G. Wells,3.0,3.73,1896,160,data/goodreads/clean/Thomas is een worstje_clean.csv
 Pnin,Vladimir Nabokov,4.0,3.89,1957,184,data/goodreads/clean/Thomas is een worstje_clean.csv
 Breaking Things at Work: The Luddites Are Right About Why You Hate Your Job,Gavin Mueller,3.0,3.97,,176,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Sirens of Titan,Kurt Vonnegut Jr.,3.0,4.15,1959,224,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Stone Gods,Jeanette Winterson,3.0,3.68,2007,207,data/goodreads/clean/Thomas is een worstje_clean.csv
+Piranesi,Susanna Clarke,,4.23,2020,272,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Colonel (Firefall, #1.5)",Peter Watts,,3.85,2014,29,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Ocean at the End of the Lane,Neil Gaiman,3.0,4.02,2013,181,data/goodreads/clean/Thomas is een worstje_clean.csv
+De tweede,Lynn  Berger,,3.46,2019,208,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Screwtape Letters,C.S. Lewis,4.0,4.27,1942,222,data/goodreads/clean/Thomas is een worstje_clean.csv
 Majestic,Whitley Strieber,3.0,3.6,1989,306,data/goodreads/clean/Thomas is een worstje_clean.csv
 Ice,Anna Kavan,3.0,3.66,1967,158,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -79,22 +132,36 @@ The Word for World Is Forest,Ursula K. Le Guin,4.0,4.05,1972,160,data/goodreads/
 "Dragon's Egg (Cheela, #1)",Robert L. Forward,3.0,4.12,1980,352,data/goodreads/clean/Thomas is een worstje_clean.csv
 Grand Hotel Europa,Ilja Leonard Pfeijffer,2.0,4.04,2018,547,data/goodreads/clean/Thomas is een worstje_clean.csv
 Blind Lake,Robert Charles Wilson,3.0,3.71,2003,399,data/goodreads/clean/Thomas is een worstje_clean.csv
+Life & Times of Michael K,J.M. Coetzee,,3.86,1983,192,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Myth of Experience: Why We Learn the Wrong Lessons, and Ways to Correct Them",Emre Soyer,,3.77,,272,data/goodreads/clean/Thomas is een worstje_clean.csv
+Cavalcade,Alison Sinclair,,3.69,1998,299,data/goodreads/clean/Thomas is een worstje_clean.csv
+Fallway,Paula E. Downing,,3.61,1992,242,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Emprise (The Trigon Disunity, #1)",Michael P. Kube-McDowell,,3.88,1985,416,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Forge of God (Forge of God, #1)",Greg Bear,,3.86,1987,474,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Gods Themselves,Isaac Asimov,,4.09,1972,288,data/goodreads/clean/Thomas is een worstje_clean.csv
 Het boek waarvan je wilde dat je ouders het hadden gelezen,Philippa Perry,4.0,4.11,2019,224,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Authority (Southern Reach, #2)",Jeff VanderMeer,3.0,3.54,2014,341,data/goodreads/clean/Thomas is een worstje_clean.csv
 Fiasco,Stanisław Lem,5.0,4.11,1986,322,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Drowned World,J.G. Ballard,2.0,3.48,1962,198,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Fisherman,John  Langan,,3.9,2016,266,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Annihilation (Southern Reach, #1)",Jeff VanderMeer,4.0,3.77,2014,195,data/goodreads/clean/Thomas is een worstje_clean.csv
+A Brief History of Seven Killings,Marlon James,,3.89,2014,688,data/goodreads/clean/Thomas is een worstje_clean.csv
 De avond is ongemak,Marieke Lucas Rijneveld,3.0,3.45,2018,260,data/goodreads/clean/Thomas is een worstje_clean.csv
 Hard-Boiled Wonderland and the End of the World,Haruki Murakami,2.0,4.12,1985,400,data/goodreads/clean/Thomas is een worstje_clean.csv
 Klont,Maxim Februari,3.0,3.02,2017,270,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Sparrow (The Sparrow, #1)",Mary Doria Russell,5.0,4.14,1996,419,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Dispossessed: An Ambiguous Utopia,Ursula K. Le Guin,4.0,4.25,1974,387,data/goodreads/clean/Thomas is een worstje_clean.csv
+Wij slaven van Suriname,Anton de Kom,,4.3,1934,180,data/goodreads/clean/Thomas is een worstje_clean.csv
 Slaughterhouse-Five,Kurt Vonnegut Jr.,5.0,4.1,1969,275,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Behemoth: β-Max (Rifters, #3A)",Peter Watts,2.0,3.79,2004,304,data/goodreads/clean/Thomas is een worstje_clean.csv
 "An Absolutely Remarkable Thing (The Carls, #1)",Hank Green,2.0,4.04,2018,343,data/goodreads/clean/Thomas is een worstje_clean.csv
 Stranger in a Strange Land,Robert A. Heinlein,2.0,3.92,1961,525,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Metamorphosis of Prime Intellect,Roger    Williams,,4.11,2006,175,data/goodreads/clean/Thomas is een worstje_clean.csv
+TAZ: The Temporary Autonomous Zone (New Autonomy),Hakim Bey,,3.99,1991,160,data/goodreads/clean/Thomas is een worstje_clean.csv
+"First Light (The Red, #1)",Linda Nagata,,3.76,2013,354,data/goodreads/clean/Thomas is een worstje_clean.csv
 A Clockwork Orange,Anthony Burgess,3.0,4.0,1962,240,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Behemoth: Seppuku (Rifters, #3B)",Peter Watts,2.0,3.79,2004,304,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Axiom's End (Noumena, #1)",Lindsay  Ellis,,3.72,2020,384,data/goodreads/clean/Thomas is een worstje_clean.csv
 Bad Blood: Secrets and Lies in a Silicon Valley Startup,John Carreyrou,3.0,4.41,2018,339,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Maelstrom (Rifters, #2)",Peter Watts,3.0,3.85,2001,384,data/goodreads/clean/Thomas is een worstje_clean.csv
 De pest,Albert Camus,3.0,4.02,1947,277,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -102,10 +169,14 @@ Who Fears Death,Nnedi Okorafor,2.0,3.94,2010,386,data/goodreads/clean/Thomas is 
 "Starfish (Rifters, #1)",Peter Watts,3.0,3.95,1999,384,data/goodreads/clean/Thomas is een worstje_clean.csv
 Exhalation,Ted Chiang,4.0,4.28,2008,368,data/goodreads/clean/Thomas is een worstje_clean.csv
 Solaris,Stanisław Lem,4.0,3.99,1961,204,data/goodreads/clean/Thomas is een worstje_clean.csv
+Ratner's Star,Don DeLillo,,3.47,1976,438,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Oryx and Crake (MaddAddam, #1)",Margaret Atwood,3.0,4.01,2003,389,data/goodreads/clean/Thomas is een worstje_clean.csv
+Flight Behavior,Barbara Kingsolver,,3.81,2012,436,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Rapture,Liz Jensen,,3.3,2009,304,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Complete Maus,Art Spiegelman,4.0,4.58,1980,296,data/goodreads/clean/Thomas is een worstje_clean.csv
 Bloodchild,Octavia E. Butler,4.0,4.01,1984,31,data/goodreads/clean/Thomas is een worstje_clean.csv
 Fever Dream,Samanta Schweblin,4.0,3.72,2014,183,data/goodreads/clean/Thomas is een worstje_clean.csv
+How to Change Your Mind: The New Science of Psychedelics,Michael Pollan,,4.27,2018,480,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Gone-Away World,Nick Harkaway,5.0,4.1,2008,531,data/goodreads/clean/Thomas is een worstje_clean.csv
 Glasshouse,Charles Stross,2.0,3.88,2006,335,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Semiosis (Semiosis, #1)",Sue Burke,2.0,3.91,2018,333,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -122,6 +193,7 @@ The Power,Naomi Alderman,5.0,3.76,2016,341,data/goodreads/clean/Thomas is een wo
 Dolores Claiborne,Stephen         King,2.0,3.93,1992,388,data/goodreads/clean/Thomas is een worstje_clean.csv
 Skippy tussen de sterren,Paul Murray,3.0,3.77,2010,663,data/goodreads/clean/Thomas is een worstje_clean.csv
 Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy,Cathy O'Neil,3.0,3.88,2016,259,data/goodreads/clean/Thomas is een worstje_clean.csv
+Het achtste leven [voor Brilka],Nino Haratischwili,,4.52,2014,1275,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Windup Girl,Paolo Bacigalupi,3.0,3.75,2009,359,data/goodreads/clean/Thomas is een worstje_clean.csv
 Hoe ik talent voor het leven kreeg,Rodaan Al Galidi,4.0,4.02,2016,472,data/goodreads/clean/Thomas is een worstje_clean.csv
 The New York Trilogy (New York Trilogy #1-3),Paul Auster,3.0,3.87,1987,308,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -129,14 +201,20 @@ The Book of Illusions,Paul Auster,2.0,3.9,2002,288,data/goodreads/clean/Thomas i
 "Abaddon's Gate (The Expanse, #3)",James S.A. Corey,3.0,4.27,2013,539,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Caliban's War (The Expanse, #2)",James S.A. Corey,2.0,4.38,2012,624,data/goodreads/clean/Thomas is een worstje_clean.csv
 Leviathan Wakes (The Expanse #1),James S.A. Corey,3.0,4.31,2011,592,data/goodreads/clean/Thomas is een worstje_clean.csv
+Why I Am so Clever,Friedrich Nietzsche,,3.17,1888,52,data/goodreads/clean/Thomas is een worstje_clean.csv
 How to Live Safely in a Science Fictional Universe,Charles Yu,4.0,3.44,2010,256,data/goodreads/clean/Thomas is een worstje_clean.csv
 Fight Club,Chuck Palahniuk,3.0,4.18,1996,224,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Old Filth (Old Filth, #1)",Jane Gardam,,3.94,2004,290,data/goodreads/clean/Thomas is een worstje_clean.csv
+Sight,Jessie Greengrass,,3.39,2018,198,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Jurassic Park (Jurassic Park, #1)",Michael Crichton,3.0,4.11,1990,416,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Gambler,Fyodor Dostoevsky,2.0,3.91,1866,188,data/goodreads/clean/Thomas is een worstje_clean.csv
+The World Beyond Your Head: On Becoming an Individual in an Age of Distraction,Matthew B. Crawford,,3.79,2015,257,data/goodreads/clean/Thomas is een worstje_clean.csv
 Je moet (bijna) niks,Lianne Keemink,3.0,3.77,2018,160,data/goodreads/clean/Thomas is een worstje_clean.csv
+Other Minds,Peter Godfrey-Smith,,3.88,2016,257,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Left Hand of Darkness,Ursula K. Le Guin,4.0,4.1,1969,304,data/goodreads/clean/Thomas is een worstje_clean.csv
 Amerikanen lopen niet,Arjen van Veelen,4.0,3.95,2018,256,data/goodreads/clean/Thomas is een worstje_clean.csv
 "ThePossibility of an Island by Houellebecq, Michel ( Author ) ON Jul-03-2006, Paperback",Michel Houellebecq,4.0,3.8,2005,432,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Heart Is a Lonely Hunter,Carson McCullers,,3.99,1940,359,data/goodreads/clean/Thomas is een worstje_clean.csv
 Distress,Greg Egan,2.0,3.86,1995,456,data/goodreads/clean/Thomas is een worstje_clean.csv
 Planet of Exile,Ursula K. Le Guin,3.0,3.72,1966,126,data/goodreads/clean/Thomas is een worstje_clean.csv
 Alles wat er was,Hanna Bervoets,2.0,3.47,2013,284,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -150,17 +228,30 @@ The Remains of the Day,Kazuo Ishiguro,5.0,4.14,1989,258,data/goodreads/clean/Tho
 "God Bless You, Mr. Rosewater",Kurt Vonnegut Jr.,4.0,3.96,1965,290,data/goodreads/clean/Thomas is een worstje_clean.csv
 Cat's Cradle,Kurt Vonnegut Jr.,5.0,4.15,1963,306,data/goodreads/clean/Thomas is een worstje_clean.csv
 If on a Winter's Night a Traveler,Italo Calvino,5.0,4.03,1979,260,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Story of My Teeth,Valeria Luiselli,,3.48,2013,192,data/goodreads/clean/Thomas is een worstje_clean.csv
 "1Q84 (1Q84, #1-3)",Haruki Murakami,1.0,3.95,2009,944,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Sleeping Giants (Themis Files, #1)",Sylvain Neuvel,,3.82,2016,320,data/goodreads/clean/Thomas is een worstje_clean.csv
 Het Slot,Franz Kafka,4.0,3.93,1926,336,data/goodreads/clean/Thomas is een worstje_clean.csv
+Wittgenstein's Mistress,David Markson,,3.94,1988,279,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Bright Lights, Big City",Jay McInerney,,3.8,1984,208,data/goodreads/clean/Thomas is een worstje_clean.csv
+Cat Sense: How the New Feline Science Can Make You a Better Friend to Your Pet,John   Bradshaw,,3.55,2013,307,data/goodreads/clean/Thomas is een worstje_clean.csv
 Alleen met de goden,Alex Boogers,3.0,4.13,2015,520,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Parable of the Sower (Earthseed, #1)",Octavia E. Butler,3.0,4.21,1993,345,data/goodreads/clean/Thomas is een worstje_clean.csv
+Kraut,Peter Pontiac,,3.85,2005,,data/goodreads/clean/Thomas is een worstje_clean.csv
 Wind/Pinball: Two Novels,Haruki Murakami,2.0,3.53,1980,234,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Unbearable Lightness of Being,Milan Kundera,2.0,4.11,1984,314,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Things Fall Apart (The African Trilogy, #1)",Chinua Achebe,4.0,3.73,1958,215,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Art of Fielding,Chad Harbach,4.0,3.99,2011,605,data/goodreads/clean/Thomas is een worstje_clean.csv
 High-Rise,J.G. Ballard,3.0,3.61,1975,208,data/goodreads/clean/Thomas is een worstje_clean.csv
+The River of Consciousness,Oliver Sacks,,3.95,2017,256,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Conspiracy Against the Human Race,Thomas Ligotti,,4.03,2011,240,data/goodreads/clean/Thomas is een worstje_clean.csv
+Alias Grace,Margaret Atwood,,4.04,1996,468,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Borne (Borne, #1)",Jeff VanderMeer,3.0,3.93,2017,323,data/goodreads/clean/Thomas is een worstje_clean.csv
+"City of Saints and Madmen (Ambergris, #1)",Jeff VanderMeer,,3.86,2002,704,data/goodreads/clean/Thomas is een worstje_clean.csv
+Muidhond,Inge Schilperoord,,3.54,2015,224,data/goodreads/clean/Thomas is een worstje_clean.csv
 Neem een geit,Claudia de Breij,3.0,3.4,2015,208,data/goodreads/clean/Thomas is een worstje_clean.csv
+Het smelt,Lize Spit,,3.67,2016,480,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Enchanter,Vladimir Nabokov,,3.61,1939,114,data/goodreads/clean/Thomas is een worstje_clean.csv
 Fear and Loathing in Las Vegas,Hunter S. Thompson,3.0,4.07,1971,204,data/goodreads/clean/Thomas is een worstje_clean.csv
 Authentic: How to be yourself and why it matters,Stephen Joseph,3.0,3.88,,246,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Year of the Flood (MaddAddam, #2)",Margaret Atwood,2.0,4.06,2009,431,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -170,14 +261,18 @@ Hex,Thomas Olde Heuvelt,4.0,3.73,2013,384,data/goodreads/clean/Thomas is een wor
 "Shōgun (Asian Saga, #1)",James Clavell,2.0,4.41,1975,1152,data/goodreads/clean/Thomas is een worstje_clean.csv
 Heart of a Dog,Mikhail Bulgakov,3.0,4.1,1925,123,data/goodreads/clean/Thomas is een worstje_clean.csv
 Hallo witte mensen,Anousha Nzume,5.0,4.1,2017,140,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Power of Meaning: Crafting a Life That Matters,Emily Esfahani Smith,,4.01,2017,304,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Book of Negroes,Lawrence Hill,,4.46,2007,512,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Stranger,Albert Camus,4.0,4.03,1942,123,data/goodreads/clean/Thomas is een worstje_clean.csv
 Aurora,Kim Stanley Robinson,4.0,3.77,2015,466,data/goodreads/clean/Thomas is een worstje_clean.csv
 "A Canticle for Leibowitz (St. Leibowitz, #1)",Walter M. Miller Jr.,2.0,3.98,1959,354,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Stand,Stephen         King,4.0,4.35,1978,1152,data/goodreads/clean/Thomas is een worstje_clean.csv
+Homo Deus: A History of Tomorrow,Yuval Noah Harari,,4.2,2015,450,data/goodreads/clean/Thomas is een worstje_clean.csv
 Never Let Me Go,Kazuo Ishiguro,4.0,3.85,2005,288,data/goodreads/clean/Thomas is een worstje_clean.csv
 Tenth of December,George Saunders,3.0,3.98,2013,251,data/goodreads/clean/Thomas is een worstje_clean.csv
 De mooiste dagen zijn het ergst,Anke Scheeren,3.0,3.48,2009,158,data/goodreads/clean/Thomas is een worstje_clean.csv
 Moesasji,Eiji Yoshikawa,4.0,4.47,1935,1280,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Eon (The Way, #1)",Greg Bear,,3.88,1985,504,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Metro 2033 (Metro, #1)",Dmitry Glukhovsky,2.0,4.02,2002,458,data/goodreads/clean/Thomas is een worstje_clean.csv
 Blauwe maandagen,Arnon Grunberg,2.0,3.08,1994,271,data/goodreads/clean/Thomas is een worstje_clean.csv
 De weduwnaar,Kluun,2.0,3.24,2006,268,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -185,22 +280,31 @@ Rose Madder,Stephen         King,2.0,3.75,1995,595,data/goodreads/clean/Thomas i
 Player Piano,Kurt Vonnegut Jr.,2.0,3.9,1952,341,data/goodreads/clean/Thomas is een worstje_clean.csv
 Cell,Stephen         King,2.0,3.66,2006,449,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Player of Games (Culture #2),Iain M. Banks,4.0,4.28,1988,309,data/goodreads/clean/Thomas is een worstje_clean.csv
+Buitenaardse Beschaving,Stefan Denaerde,,3.7,1969,217,data/goodreads/clean/Thomas is een worstje_clean.csv
+Going to Pieces without Falling Apart: A Buddhist Perspective on Wholeness,Mark Epstein,,3.87,1998,200,data/goodreads/clean/Thomas is een worstje_clean.csv
 Er moet iets gebeuren,Maartje Wortel,3.0,3.45,2015,236,data/goodreads/clean/Thomas is een worstje_clean.csv
+"King Rat (Asian Saga, #4)",James Clavell,,4.19,1962,368,data/goodreads/clean/Thomas is een worstje_clean.csv
+Sapiens: A Brief History of Humankind,Yuval Noah Harari,,4.36,2011,512,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Red Mars (Mars Trilogy, #1)",Kim Stanley Robinson,,3.86,1992,572,data/goodreads/clean/Thomas is een worstje_clean.csv
 Pushing Ice,Alastair Reynolds,2.0,4.07,2005,458,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Revelation Space (Revelation Space, #1)",Alastair Reynolds,2.0,3.99,2000,585,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Normal (Normal, #1-4)",Warren Ellis,4.0,3.64,2016,148,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Wool Omnibus (Silo, #1)",Hugh Howey,4.0,4.22,2012,509,data/goodreads/clean/Thomas is een worstje_clean.csv
+"If You're So Smart, Why Aren't You Happy?",Raj Raghunathan,,3.81,2015,352,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Girl with All the Gifts (The Girl With All the Gifts, #1)",M.R. Carey,4.0,3.95,2014,461,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Wizard's First Rule (Sword of Truth, #1)",Terry Goodkind,1.0,4.12,1994,836,data/goodreads/clean/Thomas is een worstje_clean.csv
 "In the Dust of This Planet (Horror of Philosophy, #1)",Eugene Thacker,3.0,3.67,2011,179,data/goodreads/clean/Thomas is een worstje_clean.csv
+Een klein leven,Hanya Yanagihara,,4.32,2015,752,data/goodreads/clean/Thomas is een worstje_clean.csv
 Armor,John Steakley,2.0,4.11,1984,426,data/goodreads/clean/Thomas is een worstje_clean.csv
 Tractatus Logico-Philosophicus,Ludwig Wittgenstein,4.0,4.09,1921,142,data/goodreads/clean/Thomas is een worstje_clean.csv
 Freedom,Jonathan Franzen,4.0,3.79,2010,562,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Handmaid's Tale (The Handmaid's Tale, #1)",Margaret Atwood,4.0,4.14,1985,311,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Corrections,Jonathan Franzen,3.0,3.84,2001,653,data/goodreads/clean/Thomas is een worstje_clean.csv
+Island,Aldous Huxley,,3.85,1962,354,data/goodreads/clean/Thomas is een worstje_clean.csv
 Weg van liefde,Alain de Botton,2.0,4.02,2016,240,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Begraven schaamte (Poppy & Serena, #1)",Dorothy Koomson,2.0,4.01,2010,400,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Harry Potter and the Philosopher's Stone (Harry Potter, #1)",J.K. Rowling,4.0,4.47,1997,223,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Journals of John Cheever,John Cheever,,4.2,1990,399,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Mote in God's Eye (Moties, #1)",Larry Niven,4.0,4.07,1974,596,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Caves of Steel (Robot, #1)",Isaac Asimov,3.0,4.19,1953,206,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Excession (Culture, #5)",Iain M. Banks,4.0,4.2,1996,500,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -214,16 +318,20 @@ The Pale King,David Foster Wallace,4.0,3.97,2011,548,data/goodreads/clean/Thomas
 "The Silence of the Lambs  (Hannibal Lecter, #2)",Thomas  Harris,4.0,4.25,1988,421,data/goodreads/clean/Thomas is een worstje_clean.csv
 Sophie's World,Jostein Gaarder,4.0,3.96,1991,403,data/goodreads/clean/Thomas is een worstje_clean.csv
 Kafka on the Shore,Haruki Murakami,4.0,4.13,2002,467,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Small Backs of Children,Lidia Yuknavitch,,3.46,2015,224,data/goodreads/clean/Thomas is een worstje_clean.csv
 Misery,Stephen         King,4.0,4.23,1987,370,data/goodreads/clean/Thomas is een worstje_clean.csv
 A Thousand Splendid Suns,Khaled Hosseini,4.0,4.44,2007,372,data/goodreads/clean/Thomas is een worstje_clean.csv
 Dit kan niet waar zijn. Onder bankiers,Joris Luyendijk,4.0,3.84,2015,208,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Green Mile,Stephen         King,4.0,4.48,1996,480,data/goodreads/clean/Thomas is een worstje_clean.csv
 Freakonomics: A Rogue Economist Explores the Hidden Side of Everything,Steven D. Levitt,4.0,4.01,2005,268,data/goodreads/clean/Thomas is een worstje_clean.csv
+Divine Misfortune,A. Lee Martinez,,3.91,2010,307,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Passion of New Eve,Angela Carter,4.0,3.67,1977,187,data/goodreads/clean/Thomas is een worstje_clean.csv
 Lagoon,Nnedi Okorafor,2.0,3.63,2014,306,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Echopraxia (Firefall, #2)",Peter Watts,3.0,3.83,2014,384,data/goodreads/clean/Thomas is een worstje_clean.csv
 Under the Skin,Michel Faber,3.0,3.75,2000,296,data/goodreads/clean/Thomas is een worstje_clean.csv
 HhhH: Himmlers hersens heten Heydrich,Laurent Binet,2.0,4.07,2010,356,data/goodreads/clean/Thomas is een worstje_clean.csv
+Invisible Cities,Italo Calvino,,4.11,1972,165,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Pillars of the Earth (Kingsbridge, #1)",Ken Follett,,4.34,1989,976,data/goodreads/clean/Thomas is een worstje_clean.csv
 Lost in Translation: A Life in a New Language,Eva Hoffman,4.0,3.85,1989,288,data/goodreads/clean/Thomas is een worstje_clean.csv
 Permanence,Karl Schroeder,3.0,3.76,2002,480,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Zen and the Art of Motorcycle Maintenance: An Inquiry Into Values (Phaedrus, #1)",Robert M. Pirsig,3.0,3.78,1974,540,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -234,25 +342,34 @@ Bonita Avenue,Peter Buwalda,2.0,3.74,2010,536,data/goodreads/clean/Thomas is een
 The Silmarillion,J.R.R. Tolkien,2.0,4.01,1977,386,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Rosie Project (Don Tillman, #1)",Graeme Simsion,2.0,4.01,2013,292,data/goodreads/clean/Thomas is een worstje_clean.csv
 Between the World and Me,Ta-Nehisi Coates,5.0,4.4,2015,152,data/goodreads/clean/Thomas is een worstje_clean.csv
+All You Need Is Kill,Hiroshi Sakurazaka,,4.03,2004,201,data/goodreads/clean/Thomas is een worstje_clean.csv
+Invisible Man,Ralph Ellison,,3.91,1952,581,data/goodreads/clean/Thomas is een worstje_clean.csv
 Oblivion: Stories,David Foster Wallace,3.0,4.07,2004,329,data/goodreads/clean/Thomas is een worstje_clean.csv
+Affluenza,Oliver James,,3.49,2007,382,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Book of Strange New Things,Michel Faber,,3.66,2014,500,data/goodreads/clean/Thomas is een worstje_clean.csv
 Atlas Shrugged,Ayn Rand,1.0,3.69,1957,1168,data/goodreads/clean/Thomas is een worstje_clean.csv
 An Officer and a Spy,Robert   Harris,3.0,4.21,2013,429,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Me Before You (Me Before You, #1)",Jojo Moyes,3.0,4.26,2012,369,data/goodreads/clean/Thomas is een worstje_clean.csv
 De verwarde cavia,Paulien Cornelisse,3.0,3.43,2016,190,data/goodreads/clean/Thomas is een worstje_clean.csv
+Anathem,Neal Stephenson,,4.17,2008,937,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Imago (Xenogenesis, #3)",Octavia E. Butler,4.0,4.2,1989,220,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Adulthood Rites (Xenogenesis, #2)",Octavia E. Butler,4.0,4.19,1988,277,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Dawn (Xenogenesis, #1)",Octavia E. Butler,4.0,4.16,1987,248,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Altered Carbon (Takeshi Kovacs, #1)",Richard K. Morgan,2.0,4.04,2002,526,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Acceptance (Southern Reach, #3)",Jeff VanderMeer,2.0,3.64,2014,341,data/goodreads/clean/Thomas is een worstje_clean.csv
 A Farewell to Arms,Ernest Hemingway,2.0,3.82,1929,293,data/goodreads/clean/Thomas is een worstje_clean.csv
+Dhalgren,Samuel R. Delany,,3.77,1975,801,data/goodreads/clean/Thomas is een worstje_clean.csv
 Funny Girl,Nick Hornby,3.0,3.4,2014,452,data/goodreads/clean/Thomas is een worstje_clean.csv
 Als je het licht niet kunt zien,Anthony Doerr,3.0,4.31,2014,543,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Three-Body Problem (Remembrance of Earth's Past, #1)",Liu Cixin,2.0,4.08,2006,472,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Bell Jar,Sylvia Plath,2.0,4.06,1963,294,data/goodreads/clean/Thomas is een worstje_clean.csv
 De 13 ½ levens van kap'tein Blauwbeer,Walter Moers,3.0,4.3,1999,,data/goodreads/clean/Thomas is een worstje_clean.csv
+Reasons to Stay Alive,Matt Haig,,4.07,2015,259,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Invincible,Stanisław Lem,3.0,4.15,1964,223,data/goodreads/clean/Thomas is een worstje_clean.csv
 Elementaire deeltjes,Michel Houellebecq,2.0,3.8,1998,343,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Zombie Combat Manual: A Guide to Fighting the Living Dead,Roger Ma,4.0,3.85,2010,320,data/goodreads/clean/Thomas is een worstje_clean.csv
+Franny and Zooey,J.D. Salinger,,3.96,1957,201,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Good Earth (House of Earth, #1)",Pearl S. Buck,,4.0,1931,418,data/goodreads/clean/Thomas is een worstje_clean.csv
 Zendegi,Greg Egan,2.0,3.47,2010,278,data/goodreads/clean/Thomas is een worstje_clean.csv
 Childhood's End,Arthur C. Clarke,4.0,4.12,1953,224,data/goodreads/clean/Thomas is een worstje_clean.csv
 De eenzaamheid van de priemgetallen,Paolo Giordano,3.0,3.64,2008,318,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -263,20 +380,30 @@ On the Beach,Nevil Shute,4.0,3.97,1957,296,data/goodreads/clean/Thomas is een wo
 "The Chronicles of Narnia (The Chronicles of Narnia, #1-7)",C.S. Lewis,4.0,4.28,1956,767,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Not That Kind of Girl: A Young Woman Tells You What She's ""Learned""",Lena Dunham,1.0,3.29,2014,265,data/goodreads/clean/Thomas is een worstje_clean.csv
 East of Eden,John Steinbeck,4.0,4.42,1952,601,data/goodreads/clean/Thomas is een worstje_clean.csv
+Beatrice and Virgil,Yann Martel,,3.18,2010,213,data/goodreads/clean/Thomas is een worstje_clean.csv
+Gravity's Rainbow,Thomas Pynchon,,4.01,1973,776,data/goodreads/clean/Thomas is een worstje_clean.csv
 Norwegian Wood,Haruki Murakami,1.0,4.01,1987,296,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Star,Arthur C. Clarke,,4.07,1955,6,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Sixth Extinction: An Unnatural History,Elizabeth Kolbert,5.0,4.15,2014,336,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Diamond Age: Or, a Young Lady's Illustrated Primer",Neal Stephenson,3.0,4.16,1995,499,data/goodreads/clean/Thomas is een worstje_clean.csv
 Snow Crash,Neal Stephenson,3.0,4.02,1992,438,data/goodreads/clean/Thomas is een worstje_clean.csv
 Hunter's Run,George R.R. Martin,2.0,3.68,2007,320,data/goodreads/clean/Thomas is een worstje_clean.csv
+Seveneves,Neal Stephenson,,4.0,2015,872,data/goodreads/clean/Thomas is een worstje_clean.csv
 De voorzitter,Ronald Giphart,3.0,3.0,1999,157,data/goodreads/clean/Thomas is een worstje_clean.csv
 De derde persoon,Thomas Heerma van Voss,2.0,3.86,2014,192,data/goodreads/clean/Thomas is een worstje_clean.csv
 Man's Search for Meaning,Viktor E. Frankl,4.0,4.37,1946,165,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Thinking, Fast and Slow",Daniel Kahneman,,4.18,2011,499,data/goodreads/clean/Thomas is een worstje_clean.csv
 Steppenwolf,Hermann Hesse,2.0,4.13,1927,256,data/goodreads/clean/Thomas is een worstje_clean.csv
 Spiral,Andy Remic,1.0,3.73,2003,531,data/goodreads/clean/Thomas is een worstje_clean.csv
 Memoirs of an Addicted Brain: A Neuroscientist Examines his Former Life on Drugs,Marc  Lewis,4.0,4.04,2011,320,data/goodreads/clean/Thomas is een worstje_clean.csv
+99 francs,Frédéric Beigbeder,,3.54,2000,304,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Fifty Year Sword,Mark Z. Danielewski,,3.59,2012,288,data/goodreads/clean/Thomas is een worstje_clean.csv
 Birdy,William Wharton,4.0,4.02,1978,320,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Book Thief,Markus Zusak,5.0,4.39,2005,592,data/goodreads/clean/Thomas is een worstje_clean.csv
+One Hundred Years of Solitude,Gabriel García Márquez,,4.12,1967,417,data/goodreads/clean/Thomas is een worstje_clean.csv
 How to Be a Woman,Caitlin Moran,4.0,3.72,2011,312,data/goodreads/clean/Thomas is een worstje_clean.csv
+"Planetfall (Planetfall, #1)",Emma Newman,,3.72,2015,336,data/goodreads/clean/Thomas is een worstje_clean.csv
+"A Wrinkle in Time (A Wrinkle in Time Quintet, #1)",Madeleine L'Engle,,3.98,1962,211,data/goodreads/clean/Thomas is een worstje_clean.csv
 Kom hier dat ik u kus,Griet Op de Beeck,3.0,3.96,2014,382,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Harry Potter and the Order of the Phoenix (Harry Potter, #5)",J.K. Rowling,5.0,4.5,2003,766,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Harry Potter and the Prisoner of Azkaban (Harry Potter, #3)",J.K. Rowling,4.0,4.58,1999,435,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -293,6 +420,8 @@ Het zijn net mensen: Beelden uit het Midden-Oosten,Joris Luyendijk,4.0,4.16,2006
 "Catching Fire (The Hunger Games, #2)",Suzanne Collins,3.0,4.33,2009,391,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Mockingjay (The Hunger Games, #3)",Suzanne Collins,3.0,4.09,2010,390,data/goodreads/clean/Thomas is een worstje_clean.csv
 Saturday,Ian McEwan,2.0,3.64,2005,289,data/goodreads/clean/Thomas is een worstje_clean.csv
+"All the Pretty Horses (The Border Trilogy, #1)",Cormac McCarthy,,4.04,1992,302,data/goodreads/clean/Thomas is een worstje_clean.csv
+Both Flesh and Not: Essays,David Foster Wallace,,3.86,2012,328,data/goodreads/clean/Thomas is een worstje_clean.csv
 Every Love Story Is a Ghost Story: A Life of David Foster Wallace,D.T. Max,4.0,3.75,2012,356,data/goodreads/clean/Thomas is een worstje_clean.csv
 Although of Course You End Up Becoming Yourself: A Road Trip with David Foster Wallace,David Lipsky,3.0,3.92,2010,320,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Last Answer,Isaac Asimov,3.0,4.13,1980,8,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -398,8 +527,10 @@ Harry Potter and the Half-Blood Prince (Harry Potter #6),J.K. Rowling,4.0,4.58,2
 De zomer hou je ook niet tegen,Dimitri Verhulst,4.0,3.25,2015,94,data/goodreads/clean/Thomas is een worstje_clean.csv
 A Supposedly Fun Thing I'll Never Do Again:  Essays and Arguments,David Foster Wallace,4.0,4.15,1996,353,data/goodreads/clean/Thomas is een worstje_clean.csv
 Pale Fire,Vladimir Nabokov,5.0,4.17,1962,246,data/goodreads/clean/Thomas is een worstje_clean.csv
+Underworld,Don DeLillo,,3.94,1997,827,data/goodreads/clean/Thomas is een worstje_clean.csv
 Tirza,Arnon Grunberg,3.0,3.6,2006,430,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Hundred-Year-Old Man Who Climbed Out of the Window and Disappeared (The Hundred-Year-Old Man, #1)",Jonas Jonasson,3.0,3.82,2009,396,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Luminaries,Eleanor Catton,,3.75,2013,848,data/goodreads/clean/Thomas is een worstje_clean.csv
 Nooit meer slapen,Willem Frederik Hermans,4.0,3.86,1966,251,data/goodreads/clean/Thomas is een worstje_clean.csv
 De avonden,Gerard Reve,3.0,3.49,1947,191,data/goodreads/clean/Thomas is een worstje_clean.csv
 De donkere kamer van Damokles,Willem Frederik Hermans,4.0,3.8,1958,335,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -417,9 +548,11 @@ The Incredible Journey,Sheila Burnford,4.0,4.16,1960,145,data/goodreads/clean/Th
 Joe Speedboot,Tommy Wieringa,4.0,3.7,2005,315,data/goodreads/clean/Thomas is een worstje_clean.csv
 Ouwehoeren: verhalen uit de peeskamer,Martine Fokkens,1.0,2.7,2011,160,data/goodreads/clean/Thomas is een worstje_clean.csv
 De qualastofont,Herman Brusselmans,3.0,2.7,2013,176,data/goodreads/clean/Thomas is een worstje_clean.csv
+H Is for Hawk,Helen Macdonald,,3.74,2014,300,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Consider Phlebas (Culture, #1)",Iain M. Banks,3.0,3.85,1987,467,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Hyperion (Hyperion Cantos, #1)",Dan Simmons,5.0,4.27,1989,500,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Gödel, Escher, Bach: An Eternal Golden Braid",Douglas R. Hofstadter,4.0,4.29,1979,777,data/goodreads/clean/Thomas is een worstje_clean.csv
+Quiet: The Power of Introverts in a World That Can't Stop Talking,Susan Cain,,4.08,2012,333,data/goodreads/clean/Thomas is een worstje_clean.csv
 One Past Midnight: The Langoliers,Stephen         King,2.0,3.93,1990,9,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Running Man,Richard Bachman,2.0,3.9,1982,317,data/goodreads/clean/Thomas is een worstje_clean.csv
 Hearts in Atlantis,Stephen         King,3.0,3.86,1999,640,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -433,9 +566,16 @@ Nightmares and Dreamscapes,Stephen         King,3.0,3.95,1993,836,data/goodreads
 Everything's Eventual,Stephen         King,3.0,3.97,2002,605,data/goodreads/clean/Thomas is een worstje_clean.csv
 Choke,Chuck Palahniuk,3.0,3.71,2001,293,data/goodreads/clean/Thomas is een worstje_clean.csv
 American Psycho,Bret Easton Ellis,3.0,3.81,1991,399,data/goodreads/clean/Thomas is een worstje_clean.csv
+For Whom the Bell Tolls,Ernest Hemingway,,3.98,1940,471,data/goodreads/clean/Thomas is een worstje_clean.csv
+Sometimes a Great Notion,Ken Kesey,,4.26,1964,628,data/goodreads/clean/Thomas is een worstje_clean.csv
+"The Human Stain (The American Trilogy, #3)",Philip Roth,,3.91,2000,361,data/goodreads/clean/Thomas is een worstje_clean.csv
 The Bonfire of the Vanities,Tom Wolfe,4.0,3.9,1987,690,data/goodreads/clean/Thomas is een worstje_clean.csv
 The World According to Garp,John Irving,5.0,4.1,1978,610,data/goodreads/clean/Thomas is een worstje_clean.csv
+Their Eyes Were Watching God,Zora Neale Hurston,,3.98,1937,238,data/goodreads/clean/Thomas is een worstje_clean.csv
+Breakfast of Champions,Kurt Vonnegut Jr.,,4.07,1973,303,data/goodreads/clean/Thomas is een worstje_clean.csv
+The Brothers Karamazov,Fyodor Dostoevsky,,4.37,1880,796,data/goodreads/clean/Thomas is een worstje_clean.csv
 A Prayer for Owen Meany,John Irving,2.0,4.24,1989,637,data/goodreads/clean/Thomas is een worstje_clean.csv
+War and Peace,Leo Tolstoy,,4.16,1869,1392,data/goodreads/clean/Thomas is een worstje_clean.csv
 "Moby-Dick or, The Whale",Herman Melville,3.0,3.55,1851,720,data/goodreads/clean/Thomas is een worstje_clean.csv
 "The Hobbit (The Lord of the Rings, #0)",J.R.R. Tolkien,3.0,4.29,1937,366,data/goodreads/clean/Thomas is een worstje_clean.csv
 Belgarath the Sorcerer,David Eddings,4.0,4.1,1995,736,data/goodreads/clean/Thomas is een worstje_clean.csv
@@ -524,15 +664,26 @@ A Beautiful Mind,Sylvia Nasar,4.0,4.13,1998,461,data/goodreads/clean/Thomas is e
 The Diary of a Young Girl,Anne Frank,4.0,4.19,1947,283,data/goodreads/clean/Thomas is een worstje_clean.csv
 A Different Kind of Power,Jacinda Ardern,4.0,4.5,2025,352,data/goodreads/clean/dion_goodreads_library_export.csv
 I Who Have Never Known Men,Jacqueline Harpman,5.0,4.14,1995,184,data/goodreads/clean/dion_goodreads_library_export.csv
+Oroppa,Safae el Khannoussi,,3.52,2024,396,data/goodreads/clean/dion_goodreads_library_export.csv
+The Memory Police,Yōko Ogawa,,3.71,1994,274,data/goodreads/clean/dion_goodreads_library_export.csv
 All You Need Is Kill (All You Need Is Kill: Official Graphic Novel Adaptation),Nick Mamatas,2.0,3.17,,96,data/goodreads/clean/dion_goodreads_library_export.csv
 Van der Laan,Kemal Rijken,3.0,3.79,,417,data/goodreads/clean/dion_goodreads_library_export.csv
 Neuromancer (Sprawl #1),William Gibson,4.0,3.89,1984,271,data/goodreads/clean/dion_goodreads_library_export.csv
 Lord of Light,Roger Zelazny,4.0,4.05,1967,296,data/goodreads/clean/dion_goodreads_library_export.csv
 A Walk in the Woods: Rediscovering America on the Appalachian Trail,Bill Bryson,4.0,4.07,1998,397,data/goodreads/clean/dion_goodreads_library_export.csv
+"The Color of Magic (Discworld, #1; Rincewind, #1)",Terry Pratchett,,3.99,1983,228,data/goodreads/clean/dion_goodreads_library_export.csv
+Circe,Madeline Miller,,4.22,2018,393,data/goodreads/clean/dion_goodreads_library_export.csv
+"Matter (Culture, #8)",Iain M. Banks,,4.11,2008,593,data/goodreads/clean/dion_goodreads_library_export.csv
 "Assassin's Apprentice (Farseer Trilogy, #1)",Robin Hobb,3.0,4.19,1995,435,data/goodreads/clean/dion_goodreads_library_export.csv
 The Shadow over Innsmouth,H.P. Lovecraft,4.0,4.1,1936,158,data/goodreads/clean/dion_goodreads_library_export.csv
+"The Long Earth (The Long Earth, #1)",Terry Pratchett,,3.78,2012,336,data/goodreads/clean/dion_goodreads_library_export.csv
 De mens is een plofkip,Teun van de Keuken,4.0,3.7,2024,94,data/goodreads/clean/dion_goodreads_library_export.csv
+Orbital,Samantha Harvey,,3.56,2023,207,data/goodreads/clean/dion_goodreads_library_export.csv
+"Autumn (Seasonal Quartet, #1)",Ali Smith,,3.66,2016,264,data/goodreads/clean/dion_goodreads_library_export.csv
+The Day of the Triffids,John Wyndham,,4.01,1951,228,data/goodreads/clean/dion_goodreads_library_export.csv
 Dark Matter,Blake Crouch,2.0,4.14,2016,342,data/goodreads/clean/dion_goodreads_library_export.csv
+Gelijkheid: Wat het is en waarom het ertoe doet,Thomas Piketty,,3.88,2025,160,data/goodreads/clean/dion_goodreads_library_export.csv
+"Antimatter Blues (Mickey7, #2)",Edward Ashton,,3.98,2023,292,data/goodreads/clean/dion_goodreads_library_export.csv
 "Mickey7 (Mickey7, #1)",Edward Ashton,4.0,3.79,2022,296,data/goodreads/clean/dion_goodreads_library_export.csv
 Op een andere planeet kunnen ze me redden,Lieke Marsman,4.0,4.16,2025,198,data/goodreads/clean/dion_goodreads_library_export.csv
 "Pines (Wayward Pines, #1)",Blake Crouch,3.0,3.93,2012,307,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -540,6 +691,7 @@ Waardenloze politiek (Dutch Edition),Tom van der Meer,4.0,3.87,,194,data/goodrea
 We waren gewaarschuwd,Jaap Tielbeke,3.0,3.85,,184,data/goodreads/clean/dion_goodreads_library_export.csv
 The Vegetarian,Han Kang,3.0,3.64,2007,188,data/goodreads/clean/dion_goodreads_library_export.csv
 Komt een land bij de dokter: Nederland door de ogen van een straatarts,Michelle van Tongerloo,4.0,4.35,2024,284,data/goodreads/clean/dion_goodreads_library_export.csv
+Chain-Gang All-Stars,Nana Kwame Adjei-Brenyah,,4.12,2023,367,data/goodreads/clean/dion_goodreads_library_export.csv
 The Pearl,John Steinbeck,4.0,3.55,1947,96,data/goodreads/clean/dion_goodreads_library_export.csv
 De domheid regeert: Hoe opzettelijke onwetendheid een politieke strategie werd,Sander Schimmelpenninck,4.0,3.76,2024,184,data/goodreads/clean/dion_goodreads_library_export.csv
 De Mitsukoshi Troostbaby Company,Auke Hulst,4.0,4.07,2021,608,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -568,13 +720,17 @@ Neoliberalisme: Een Nederlandse Geschiedenis,Bram Mellink,4.0,4.16,,336,data/goo
 No Country for Old Men,Cormac McCarthy,5.0,4.17,2005,309,data/goodreads/clean/dion_goodreads_library_export.csv
 We hebben het over je gehad,Stéphanie Hoogenberk,3.0,3.33,,224,data/goodreads/clean/dion_goodreads_library_export.csv
 Krakatiet,Karel Čapek,4.0,3.69,1922,368,data/goodreads/clean/dion_goodreads_library_export.csv
+Een land van kleine buffers,Dirk Bezemer,,3.9,,320,data/goodreads/clean/dion_goodreads_library_export.csv
 Onder de paramariboom,Johan Fretz,4.0,3.93,2017,240,data/goodreads/clean/dion_goodreads_library_export.csv
+Chronicle of a Death Foretold,Gabriel García Márquez,,3.97,1981,120,data/goodreads/clean/dion_goodreads_library_export.csv
 Poverty Safari,Darren McGarvey,4.0,4.02,2017,224,data/goodreads/clean/dion_goodreads_library_export.csv
 Roadside Picnic,Arkady Strugatsky,4.0,4.13,1972,145,data/goodreads/clean/dion_goodreads_library_export.csv
 Oorlog met de salamanders,Karel Čapek,5.0,4.17,1936,286,data/goodreads/clean/dion_goodreads_library_export.csv
 In schaamte kun je niet wonen,Cody Hochstenbach,4.0,4.12,,100,data/goodreads/clean/dion_goodreads_library_export.csv
 Misschien moet je iets lager mikken: een verhaal over armoede en kansenongelijkheid,Milio van de Kamp,4.0,4.26,,216,data/goodreads/clean/dion_goodreads_library_export.csv
+There Is No Antimemetics Division,qntm,,4.22,2020,220,data/goodreads/clean/dion_goodreads_library_export.csv
 Verwilderd,Richard Powers,4.0,3.91,2021,304,data/goodreads/clean/dion_goodreads_library_export.csv
+"The Big Con: How the Consulting Industry Weakens our Businesses, Infantilizes our Governments and Warps our Economies",Mariana Mazzucato,,3.62,2023,352,data/goodreads/clean/dion_goodreads_library_export.csv
 Blokken / Knorrende beesten / Bint,F. Bordewijk,3.0,3.41,1949,155,data/goodreads/clean/dion_goodreads_library_export.csv
 The Word for World Is Forest,Ursula K. Le Guin,4.0,4.06,1972,160,data/goodreads/clean/dion_goodreads_library_export.csv
 Galápagos,Kurt Vonnegut Jr.,4.0,3.87,1985,324,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -588,6 +744,7 @@ News of a Kidnapping,Gabriel García Márquez,3.0,3.91,1996,291,data/goodreads/c
 Het recht van de snelste,Thalia Verkade,3.0,4.18,2020,264,data/goodreads/clean/dion_goodreads_library_export.csv
 Mission Economy: A Moonshot Guide to Changing Capitalism,Mariana Mazzucato,4.0,3.85,2020,272,data/goodreads/clean/dion_goodreads_library_export.csv
 Polarisatie - inzicht in de dynamiek van wij-zij denken,Bart Brandsma,3.0,4.09,2016,124,data/goodreads/clean/dion_goodreads_library_export.csv
+A Visit from the Goon Squad,Jennifer Egan,,3.7,2010,274,data/goodreads/clean/dion_goodreads_library_export.csv
 Tender Is the Flesh,Agustina Bazterrica,4.0,3.78,2017,209,data/goodreads/clean/dion_goodreads_library_export.csv
 Man zonder rijbewijs,Oek de Jong,3.0,3.62,2022,224,data/goodreads/clean/dion_goodreads_library_export.csv
 Avondmensen (Dutch Edition),Caroline van Keeken,5.0,3.51,,158,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -596,6 +753,8 @@ De Zwijger: Het leven van Willem van Oranje,René van Stipriaan,5.0,4.31,2021,94
 Tussentijds,Peter Zantingh,3.0,3.81,2022,175,data/goodreads/clean/dion_goodreads_library_export.csv
 Nu is het aan ons,Eva Rovers,3.0,3.94,,192,data/goodreads/clean/dion_goodreads_library_export.csv
 Rotterdam: een ode aan inefficiëntie,Arjen van Veelen,4.0,4.21,2022,368,data/goodreads/clean/dion_goodreads_library_export.csv
+"The Hydrogen Sonata (Culture, #10)",Iain M. Banks,,4.2,2012,517,data/goodreads/clean/dion_goodreads_library_export.csv
+"Surface Detail (Culture, #9)",Iain M. Banks,,4.26,2010,627,data/goodreads/clean/dion_goodreads_library_export.csv
 Zone One,Colson Whitehead,3.0,3.25,2011,259,data/goodreads/clean/dion_goodreads_library_export.csv
 't Hooge Nest,Roxane van Iperen,3.0,4.37,2018,389,data/goodreads/clean/dion_goodreads_library_export.csv
 De onmisbaren,Ron Meyer,3.0,3.57,,160,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -604,6 +763,7 @@ Eigen welzijn eerst,Roxane van Iperen,4.0,3.87,2022,144,data/goodreads/clean/dio
 De stille kracht,Louis Couperus,5.0,3.58,1900,249,data/goodreads/clean/dion_goodreads_library_export.csv
 Maar dat mag je niet zeggen: De nieuwe generatie radicaal- en extreemrechts in Nederland,Nikki Sterkenburg,4.0,3.73,2021,248,data/goodreads/clean/dion_goodreads_library_export.csv
 Station Eleven,Emily St. John Mandel,3.0,4.07,2014,333,data/goodreads/clean/dion_goodreads_library_export.csv
+"Karl Marx's Ecosocialism: Capital, Nature, and the Unfinished Critique of Political Economy",Kōhei Saitō,,4.01,2017,368,data/goodreads/clean/dion_goodreads_library_export.csv
 Tortilla Flat,John Steinbeck,4.0,3.83,1935,256,data/goodreads/clean/dion_goodreads_library_export.csv
 Heart of Darkness,Joseph Conrad,3.0,3.43,1899,188,data/goodreads/clean/dion_goodreads_library_export.csv
 De omzwervingen van Baldassare,Amin Maalouf,3.0,3.88,2000,476,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -628,8 +788,10 @@ Een wonderbaarlijk politicus: Hans van Mierlo 1931-2010,Hubert Smeets,3.0,4.14,,
 De levens van Jan Six,Geert Mak,3.0,3.87,2016,448,data/goodreads/clean/dion_goodreads_library_export.csv
 'In geouwehoer kun je niet wonen': het leven van Jan Schaefer,Louis Hoeks,4.0,4.0,2017,424,data/goodreads/clean/dion_goodreads_library_export.csv
 "Schakel (Silo, #2)",Hugh Howey,2.0,4.13,2013,416,data/goodreads/clean/dion_goodreads_library_export.csv
+Finding George Orwell in Burma,Emma Larkin,,3.96,2004,295,data/goodreads/clean/dion_goodreads_library_export.csv
 The Island of Dr. Moreau,H.G. Wells,4.0,3.73,1896,160,data/goodreads/clean/dion_goodreads_library_export.csv
 Strijd en metamorfose van een vrouw,Édouard Louis,4.0,4.17,2021,106,data/goodreads/clean/dion_goodreads_library_export.csv
+Dat hadden we nooit moeten doen,Margriet van Lith,,3.79,,302,data/goodreads/clean/dion_goodreads_library_export.csv
 Max Havelaar met zombies,Martijn Adelmund,3.0,3.31,,320,data/goodreads/clean/dion_goodreads_library_export.csv
 De tolk van Java,Alfred Birney,4.0,3.57,2016,544,data/goodreads/clean/dion_goodreads_library_export.csv
 Grand Hotel Europa,Ilja Leonard Pfeijffer,4.0,4.04,2018,547,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -642,6 +804,7 @@ De tweede,Lynn  Berger,3.0,3.45,2019,208,data/goodreads/clean/dion_goodreads_lib
 Liefde in tijden van cholera,Gabriel García Márquez,4.0,3.94,1985,511,data/goodreads/clean/dion_goodreads_library_export.csv
 "De oorlog tegemoet: Nederlanders en de strijd om Spanje, 1936-1939",Lodewijk Petram,4.0,3.88,2020,351,data/goodreads/clean/dion_goodreads_library_export.csv
 Ice,Anna Kavan,4.0,3.65,1967,158,data/goodreads/clean/dion_goodreads_library_export.csv
+"The Name of the Wind (The Kingkiller Chronicle, #1)",Patrick Rothfuss,,4.52,2007,662,data/goodreads/clean/dion_goodreads_library_export.csv
 The Condition of the Working Class in England,Friedrich Engels,4.0,4.03,1845,304,data/goodreads/clean/dion_goodreads_library_export.csv
 Lijmen / Het Been,Willem Elsschot,4.0,3.74,1938,211,data/goodreads/clean/dion_goodreads_library_export.csv
 De gedrevene: Joop den Uyl 1919-1987,Dik Verkuil,3.0,3.92,,440,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -652,6 +815,7 @@ Gelijke kansen in de stad,Herman Van De Werfhorst,4.0,4.0,2019,240,data/goodread
 Wij slaven van Suriname,Anton de Kom,4.0,4.3,1934,180,data/goodreads/clean/dion_goodreads_library_export.csv
 De held van onze tijd,Mikhail Lermontov,5.0,4.11,1839,198,data/goodreads/clean/dion_goodreads_library_export.csv
 The Drowned World,J.G. Ballard,3.0,3.47,1962,198,data/goodreads/clean/dion_goodreads_library_export.csv
+The Stars My Destination,Alfred Bester,,4.06,1956,258,data/goodreads/clean/dion_goodreads_library_export.csv
 Kaas,Willem Elsschot,4.0,3.58,1933,126,data/goodreads/clean/dion_goodreads_library_export.csv
 Revolusi: Indonesië en het ontstaan van de moderne wereld,David Van Reybrouck,5.0,4.54,2020,640,data/goodreads/clean/dion_goodreads_library_export.csv
 Klifi,Adriaan van Dis,3.0,2.96,2021,208,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -660,6 +824,8 @@ De vreemdeling,Albert Camus,3.0,4.03,1942,127,data/goodreads/clean/dion_goodread
 De avond is ongemak,Lucas Rijneveld,4.0,3.45,2018,260,data/goodreads/clean/dion_goodreads_library_export.csv
 Congo: een geschiedenis,David Van Reybrouck,5.0,4.39,2010,680,data/goodreads/clean/dion_goodreads_library_export.csv
 Het smelt,Lize Spit,4.0,3.68,2016,480,data/goodreads/clean/dion_goodreads_library_export.csv
+"Children of Time (Children of Time, #1)",Adrian Tchaikovsky,,4.3,2015,608,data/goodreads/clean/dion_goodreads_library_export.csv
+"The Sparrow (The Sparrow, #1)",Mary Doria Russell,,4.14,1996,419,data/goodreads/clean/dion_goodreads_library_export.csv
 "Troy (Stephen Fry's Great Mythology, #3)",Stephen Fry,5.0,4.35,2020,414,data/goodreads/clean/dion_goodreads_library_export.csv
 "Heroes: Mortals and Monsters, Quests and Adventures (Stephen Fry's Great Mythology, #2)",Stephen Fry,4.0,4.31,2018,415,data/goodreads/clean/dion_goodreads_library_export.csv
 The Lathe of Heaven,Ursula K. Le Guin,3.0,4.13,1971,176,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -667,15 +833,18 @@ Formule X,Jurriaan Kamer,3.0,3.87,2019,224,data/goodreads/clean/dion_goodreads_l
 "The Ghost Brigades (Old Man's War, #2)",John Scalzi,2.0,4.12,2006,343,data/goodreads/clean/dion_goodreads_library_export.csv
 Fantoomgroei,Sander Heijne,4.0,3.86,,256,data/goodreads/clean/dion_goodreads_library_export.csv
 Wibaut de Machtige. Een biografie,Herman de Liagre Böhl,4.0,3.88,2013,576,data/goodreads/clean/dion_goodreads_library_export.csv
+The Entrepreneurial State: Debunking Public vs. Private Sector Myths,Mariana Mazzucato,,3.95,2011,266,data/goodreads/clean/dion_goodreads_library_export.csv
 Stranger in a Strange Land,Robert A. Heinlein,3.0,3.92,1961,525,data/goodreads/clean/dion_goodreads_library_export.csv
 Nooit meer slapen,Willem Frederik Hermans,3.0,3.86,1966,251,data/goodreads/clean/dion_goodreads_library_export.csv
 Tsjaikovskistraat 40: Een autobiografische vertelling uit Rusland,Pieter Waterdrinker,3.0,3.57,2017,344,data/goodreads/clean/dion_goodreads_library_export.csv
+Solved: How the World's Great Cities Are Fixing the Climate Crisis,David  Miller,,4.02,,208,data/goodreads/clean/dion_goodreads_library_export.csv
 The Underground Railroad,Colson Whitehead,4.0,4.06,2016,320,data/goodreads/clean/dion_goodreads_library_export.csv
 Mijn ontelbare identiteiten,Sinan Çankaya,4.0,4.19,2020,244,data/goodreads/clean/dion_goodreads_library_export.csv
 A Clockwork Orange,Anthony Burgess,4.0,4.0,1962,240,data/goodreads/clean/dion_goodreads_library_export.csv
 "Feet of Clay (Discworld, #19; City Watch, #3)",Terry Pratchett,3.0,4.33,1996,411,data/goodreads/clean/dion_goodreads_library_export.csv
 La Superba,Ilja Leonard Pfeijffer,4.0,3.74,2013,348,data/goodreads/clean/dion_goodreads_library_export.csv
 "Ask the Dust (The Saga of Arturo Bandini, #3)",John Fante,4.0,4.1,1939,165,data/goodreads/clean/dion_goodreads_library_export.csv
+Down and Out in Paris and London,George Orwell,,4.09,1933,213,data/goodreads/clean/dion_goodreads_library_export.csv
 Homage to Catalonia,George Orwell,5.0,4.09,1938,232,data/goodreads/clean/dion_goodreads_library_export.csv
 De woede van Abraham,Conny Braam,3.0,3.81,2000,302,data/goodreads/clean/dion_goodreads_library_export.csv
 Een klein land met verre uithoeken. Ongelijke kansen in veranderend Nederland,Floor Milikowski,4.0,3.42,,296,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -684,9 +853,11 @@ The Algebraist,Iain M. Banks,3.0,4.04,2004,434,data/goodreads/clean/dion_goodrea
 Quarantaine,Erik Betten,3.0,3.46,,352,data/goodreads/clean/dion_goodreads_library_export.csv
 "The Shadow of the Wind (The Cemetery of Forgotten Books, #1)",Carlos Ruiz Zafón,4.0,4.3,2001,487,data/goodreads/clean/dion_goodreads_library_export.csv
 Solaris,Stanisław Lem,4.0,3.99,1961,204,data/goodreads/clean/dion_goodreads_library_export.csv
+Exhalation,Ted Chiang,,4.27,2019,368,data/goodreads/clean/dion_goodreads_library_export.csv
 Otmars zonen,Peter Buwalda,2.0,3.7,2018,607,data/goodreads/clean/dion_goodreads_library_export.csv
 The World According to Garp,John Irving,4.0,4.11,1978,610,data/goodreads/clean/dion_goodreads_library_export.csv
 Reizen zonder John: op zoek naar Amerika,Geert Mak,3.0,3.89,2012,575,data/goodreads/clean/dion_goodreads_library_export.csv
+Bloodchild,Octavia E. Butler,,4.0,1984,31,data/goodreads/clean/dion_goodreads_library_export.csv
 De meeste mensen deugen: Een nieuwe geschiedenis van de mens,Rutger Bregman,4.0,4.32,2019,523,data/goodreads/clean/dion_goodreads_library_export.csv
 The Plague,Albert Camus,4.0,4.02,1947,308,data/goodreads/clean/dion_goodreads_library_export.csv
 Weerwater,Renate Dorrestein,3.0,3.21,2015,262,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -696,6 +867,7 @@ The Gone-Away World,Nick Harkaway,4.0,4.1,2008,531,data/goodreads/clean/dion_goo
 Bonita Avenue,Peter Buwalda,4.0,3.75,,536,data/goodreads/clean/dion_goodreads_library_export.csv
 Echo,Thomas Olde Heuvelt,2.0,3.46,2019,616,data/goodreads/clean/dion_goodreads_library_export.csv
 Ivanov,Hanna Bervoets,2.0,3.62,2016,320,data/goodreads/clean/dion_goodreads_library_export.csv
+Rethinking the Economics of Land and Housing,Josh Ryan-Collins,,4.3,2017,280,data/goodreads/clean/dion_goodreads_library_export.csv
 De goede zoon,Rob van Essen,4.0,3.35,2018,384,data/goodreads/clean/dion_goodreads_library_export.csv
 Wees onzichtbaar,Murat Isik,4.0,4.25,2017,597,data/goodreads/clean/dion_goodreads_library_export.csv
 "MaddAddam (MaddAddam, #3)",Margaret Atwood,2.0,4.02,2013,394,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -706,7 +878,9 @@ The Book of Illusions,Paul Auster,3.0,3.9,2002,288,data/goodreads/clean/dion_goo
 Behind the Door,Giorgio Bassani,4.0,3.79,1964,150,data/goodreads/clean/dion_goodreads_library_export.csv
 Vooruitgang: tien redenen om naar de toekomst uit te kijken,Johan Norberg,4.0,4.05,2016,255,data/goodreads/clean/dion_goodreads_library_export.csv
 "The Handmaid's Tale (The Handmaid's Tale, #1)",Margaret Atwood,4.0,4.15,1985,311,data/goodreads/clean/dion_goodreads_library_export.csv
+The Garden of the Finzi-Continis,Giorgio Bassani,,3.78,1962,246,data/goodreads/clean/dion_goodreads_library_export.csv
 "Consider Phlebas (Culture, #1)",Iain M. Banks,4.0,3.85,1987,467,data/goodreads/clean/dion_goodreads_library_export.csv
+Snow Country,Yasunari Kawabata,,3.57,1948,175,data/goodreads/clean/dion_goodreads_library_export.csv
 Gratis geld voor iedereen (Dutch Edition),Rutger Bregman,4.0,4.22,2014,255,data/goodreads/clean/dion_goodreads_library_export.csv
 "Cannery Row (Cannery Row, #1)",John Steinbeck,4.0,4.06,1943,181,data/goodreads/clean/dion_goodreads_library_export.csv
 Why Can't You Afford a Home? (The Future of Capitalism),Josh Ryan-Collins,4.0,4.17,,136,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -725,21 +899,27 @@ The Unbearable Lightness of Being,Milan Kundera,2.0,4.11,1984,314,data/goodreads
 Evicted: Poverty and Profit in the American City,Matthew Desmond,5.0,4.47,2016,418,data/goodreads/clean/dion_goodreads_library_export.csv
 "Together: The Rituals, Pleasures and Politics of Cooperation",Richard Sennett,4.0,3.8,2011,336,data/goodreads/clean/dion_goodreads_library_export.csv
 "The Year of the Flood (MaddAddam, #2)",Margaret Atwood,3.0,4.07,2009,431,data/goodreads/clean/dion_goodreads_library_export.csv
+In Defense of Housing: The Politics of Crisis,Peter Marcuse,,4.04,2016,240,data/goodreads/clean/dion_goodreads_library_export.csv
 Cat's Cradle,Kurt Vonnegut Jr.,4.0,4.15,1963,306,data/goodreads/clean/dion_goodreads_library_export.csv
 East of Eden,John Steinbeck,5.0,4.43,1952,601,data/goodreads/clean/dion_goodreads_library_export.csv
 "Saga, Volume 7",Brian K. Vaughan,3.0,4.48,2017,152,data/goodreads/clean/dion_goodreads_library_export.csv
 House of Leaves,Mark Z. Danielewski,3.0,4.09,2000,710,data/goodreads/clean/dion_goodreads_library_export.csv
 De betonnen droom,Daan Dekker,3.0,3.55,2016,336,data/goodreads/clean/dion_goodreads_library_export.csv
+Cities of Tomorrow: An Intellectual History of Urban Planning and Design in the Twentieth Century,Peter Geoffrey Hall,,3.84,1988,576,data/goodreads/clean/dion_goodreads_library_export.csv
 Klont,Maxim Februari,4.0,3.03,2017,270,data/goodreads/clean/dion_goodreads_library_export.csv
 "Good Omens: The Nice and Accurate Prophecies of Agnes Nutter, Witch",Terry Pratchett,4.0,4.25,1990,491,data/goodreads/clean/dion_goodreads_library_export.csv
 Van wie is de stad. De strijd om Amsterdam,Floor Milikowski,4.0,3.64,2018,286,data/goodreads/clean/dion_goodreads_library_export.csv
+Expulsions: Brutality and Complexity in the Global Economy,Saskia Sassen,,3.97,2014,304,data/goodreads/clean/dion_goodreads_library_export.csv
+"Parable of the Talents (Earthseed, #2)",Octavia E. Butler,,4.32,1998,448,data/goodreads/clean/dion_goodreads_library_export.csv
 "Parable of the Sower (Earthseed, #1)",Octavia E. Butler,4.0,4.2,1993,345,data/goodreads/clean/dion_goodreads_library_export.csv
 Central Station,Lavie Tidhar,1.0,3.51,2016,275,data/goodreads/clean/dion_goodreads_library_export.csv
 Hex (Robert Grim #1),Thomas Olde Heuvelt,4.0,3.72,2013,384,data/goodreads/clean/dion_goodreads_library_export.csv
+The Real Life of Sebastian Knight,Vladimir Nabokov,,3.94,1941,181,data/goodreads/clean/dion_goodreads_library_export.csv
 Pale Fire,Vladimir Nabokov,5.0,4.17,1962,246,data/goodreads/clean/dion_goodreads_library_export.csv
 Happy City: Transforming Our Lives Through Urban Design,Charles Montgomery,4.0,4.36,2012,368,data/goodreads/clean/dion_goodreads_library_export.csv
 Verzet! Pleidooi voor communisme,Gustaaf Peek,4.0,2.96,,67,data/goodreads/clean/dion_goodreads_library_export.csv
 "Things Fall Apart (The African Trilogy, #1)",Chinua Achebe,4.0,3.74,1958,215,data/goodreads/clean/dion_goodreads_library_export.csv
+"No Longer at Ease (The African Trilogy, #2)",Chinua Achebe,,3.87,1960,196,data/goodreads/clean/dion_goodreads_library_export.csv
 Een toekomst voor Europa,Jürgen Habermas,3.0,2.71,,112,data/goodreads/clean/dion_goodreads_library_export.csv
 A Scanner Darkly,Philip K. Dick,4.0,4.03,1977,324,data/goodreads/clean/dion_goodreads_library_export.csv
 The Time Machine,H.G. Wells,3.0,3.89,1895,118,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -748,10 +928,13 @@ Joe Speedboot,Tommy Wieringa,4.0,3.68,2005,316,data/goodreads/clean/dion_goodrea
 High-Rise,J.G. Ballard,4.0,3.6,1975,208,data/goodreads/clean/dion_goodreads_library_export.csv
 A Clockwork Orange,Anthony Burgess,5.0,4.0,1962,192,data/goodreads/clean/dion_goodreads_library_export.csv
 Saga #1,Brian K. Vaughan,4.0,4.2,2012,66,data/goodreads/clean/dion_goodreads_library_export.csv
+"The Rise of Endymion (Hyperion Cantos, #4)",Dan Simmons,,4.17,1997,709,data/goodreads/clean/dion_goodreads_library_export.csv
 "Endymion (Hyperion Cantos, #3)",Dan Simmons,3.0,4.19,1996,563,data/goodreads/clean/dion_goodreads_library_export.csv
 "All Systems Red (The Murderbot Diaries, #1)",Martha Wells,3.0,4.13,2017,144,data/goodreads/clean/dion_goodreads_library_export.csv
+"The Quantum Thief (Jean le Flambeur, #1)",Hannu Rajaniemi,,3.83,2010,336,data/goodreads/clean/dion_goodreads_library_export.csv
 Lord of the Flies,William Golding,5.0,3.7,1954,182,data/goodreads/clean/dion_goodreads_library_export.csv
 Fear and Loathing in Las Vegas: A Savage Journey to the Heart of the American Dream,Hunter S. Thompson,4.0,4.07,1971,204,data/goodreads/clean/dion_goodreads_library_export.csv
+Urban Outcasts: A Comparative Sociology of Advanced Marginality,Loïc Wacquant,,3.88,2001,360,data/goodreads/clean/dion_goodreads_library_export.csv
 Arrival City: The Final Migration and Our Next World,Doug Saunders,5.0,4.09,2010,368,data/goodreads/clean/dion_goodreads_library_export.csv
 Underground Airlines,Ben H. Winters,2.0,3.82,2016,336,data/goodreads/clean/dion_goodreads_library_export.csv
 The Great Gatsby,F. Scott Fitzgerald,4.0,3.93,1925,180,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -769,16 +952,19 @@ Het pauperparadijs,Suzanna Jansen,4.0,3.77,2008,255,data/goodreads/clean/dion_go
 The Master and Margarita,Mikhail Bulgakov,5.0,4.28,1967,372,data/goodreads/clean/dion_goodreads_library_export.csv
 "Saga, Volume 6",Brian K. Vaughan,4.0,4.46,2016,152,data/goodreads/clean/dion_goodreads_library_export.csv
 "Descender, Vol. 1: Tin Stars",Jeff Lemire,5.0,4.08,2015,160,data/goodreads/clean/dion_goodreads_library_export.csv
+The White Guard,Mikhail Bulgakov,,4.0,1924,304,data/goodreads/clean/dion_goodreads_library_export.csv
 Never Let Me Go,Kazuo Ishiguro,2.0,3.85,2005,288,data/goodreads/clean/dion_goodreads_library_export.csv
 The Man in the High Castle,Philip K. Dick,3.0,3.59,1962,259,data/goodreads/clean/dion_goodreads_library_export.csv
 Norwegian Wood,Haruki Murakami,4.0,4.0,1987,296,data/goodreads/clean/dion_goodreads_library_export.csv
 De goede stad,Geert Mak,4.0,3.12,2001,255,data/goodreads/clean/dion_goodreads_library_export.csv
 Armor,John Steakley,3.0,4.1,1984,426,data/goodreads/clean/dion_goodreads_library_export.csv
+"How to Kill a City: Gentrification, Inequality, and the Fight for the Neighborhood",Peter Moskowitz,,4.09,2017,272,data/goodreads/clean/dion_goodreads_library_export.csv
 Watchmen,Alan Moore,5.0,4.39,1987,416,data/goodreads/clean/dion_goodreads_library_export.csv
 Rebel Cities: From the Right to the City to the Urban Revolution,David Harvey,4.0,3.92,2012,206,data/goodreads/clean/dion_goodreads_library_export.csv
 "Rendezvous with Rama (Rama, #1)",Arthur C. Clarke,3.0,4.12,1973,243,data/goodreads/clean/dion_goodreads_library_export.csv
 "Normal (Normal, #1-4)",Warren Ellis,3.0,3.64,2016,148,data/goodreads/clean/dion_goodreads_library_export.csv
 Blade Runner (Do Androids Dream of Electric Sheep?),Philip K. Dick,5.0,4.09,1968,0,data/goodreads/clean/dion_goodreads_library_export.csv
+Crime and Punishment,Fyodor Dostoevsky,,4.28,1866,671,data/goodreads/clean/dion_goodreads_library_export.csv
 The Brothers Karamazov,Fyodor Dostoevsky,4.0,4.38,1880,796,data/goodreads/clean/dion_goodreads_library_export.csv
 Pushing Ice,Alastair Reynolds,3.0,4.07,2005,458,data/goodreads/clean/dion_goodreads_library_export.csv
 En ik herinner me Titus Broederland,Auke Hulst,3.0,3.7,2016,272,data/goodreads/clean/dion_goodreads_library_export.csv
@@ -874,6 +1060,7 @@ MPH,Mark Millar,2.0,3.54,2015,136,data/goodreads/clean/dion_goodreads_library_ex
 "Saga, Volume 4",Brian K. Vaughan,5.0,4.41,2014,144,data/goodreads/clean/dion_goodreads_library_export.csv
 "Saga, Volume 3",Brian K. Vaughan,5.0,4.48,2014,144,data/goodreads/clean/dion_goodreads_library_export.csv
 "Saga, Volume 2",Brian K. Vaughan,5.0,4.49,2013,144,data/goodreads/clean/dion_goodreads_library_export.csv
+"Absalom, Absalom!",William Faulkner,,3.99,1936,316,data/goodreads/clean/dion_goodreads_library_export.csv
 The Drowned World,J.G. Ballard,1.0,3.48,1962,198,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Vochtige streken,Charlotte Roche,3.0,2.86,2008,215,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Black Science, Vol. 5: True Atonement",Rick Remender,3.0,4.12,2016,128,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
@@ -907,21 +1094,45 @@ V for Vendetta,Alan Moore,4.0,4.26,1990,296,data/goodreads/clean/goodreads_libra
 Spoetnikliefde,Haruki Murakami,3.0,3.83,1999,222,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Concept M,Aafke Romeijn,3.0,3.45,2018,253,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Galápagos,Kurt Vonnegut Jr.,3.0,3.87,1985,324,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+"Authority (Southern Reach, #2)",Jeff VanderMeer,,3.54,2014,341,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Flowers for Algernon,Daniel Keyes,4.0,4.22,1966,311,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Name of the Rose,Umberto Eco,,4.14,1980,552,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Cosmicomics,Italo Calvino,,4.16,1965,153,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Unsong,Scott   Alexander,,4.41,2017,795,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+De lijst van Violet Sopjes,David Vlietstra,,4.19,,223,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Het archief,Thomas Heerma van Voss,,4.31,2024,250,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+There There,Tommy Orange,,3.98,2018,290,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Tijl (Dutch Edition),Daniel Kehlmann,4.0,3.94,2017,293,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Siege of Burning Grass,Premee Mohamed,,3.93,2024,368,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Library of Broken Worlds,Alaya Dawn Johnson,,3.09,2023,448,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+It Lasts Forever and Then It's Over,Anne de Marcken,,3.81,2024,132,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+"Too Like the Lightning (Terra Ignota, #1)",Ada Palmer,,3.81,2016,533,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Orbital,Samantha Harvey,,3.72,2023,207,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Saint Sebastian's Abyss,Mark Haber,,3.72,2022,153,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Crooked Plow,Itamar Vieira Junior,,4.48,2019,288,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Details,Ia Genberg,,3.9,2022,128,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Het hart van een giraf is ongelooflijk groot (Dutch Edition),Sofia Chanfreau,,4.08,2022,196,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Mr. Cables,Ronald Malfi,4.0,3.99,,99,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Het personeel,Olga Ravn,4.0,3.67,2018,135,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Monk,Matthew Gregory Lewis,,3.84,1796,431,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Annihilation (Southern Reach, #1)",Jeff VanderMeer,4.0,3.77,2014,195,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Blindsight (Firefall, #1)",Peter Watts,5.0,4.01,2006,384,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Ones Who Walk Away from Omelas,Ursula K. Le Guin,,4.37,1973,32,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Het zwaard van de Radch (Imperial Radch, #2)",Ann Leckie,2.0,4.08,2014,281,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Ancillary Mercy (Imperial Radch, #3)",Ann Leckie,2.0,4.22,2015,330,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 The Vegetarian,Han Kang,4.0,3.57,2007,188,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 His Master's Voice,Stanisław Lem,4.0,4.09,1968,199,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Small Things Like These,Claire Keegan,,4.18,2021,128,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+"The Wager: A Tale of Shipwreck, Mutiny and Murder",David Grann,,4.19,2023,331,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 The City & the City,China Miéville,4.0,3.9,2009,312,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Tosca,Maud Vanhauwaert,,3.96,,243,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Moravagine,Blaise Cendrars,2.0,3.82,1926,229,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Ik kom hier nog op terug,Rob van Essen,4.0,3.77,2023,398,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Bewilderment,Richard Powers,5.0,3.91,2021,278,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Tender Is the Flesh,Agustina Bazterrica,5.0,3.78,2017,209,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Void Trilogy (Void #1-3),Peter F. Hamilton,,4.61,2014,2292,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Conspiracy Against the Human Race,Thomas Ligotti,,4.03,2011,240,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Songs of a Dead Dreamer and Grimscribe,Thomas Ligotti,,3.97,2015,448,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Siddharta,Hermann Hesse,3.0,4.07,1922,152,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 The Price of Salt,Patricia Highsmith,1.0,4.02,1952,262,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Snow Crash,Neal Stephenson,3.0,4.02,1992,559,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
@@ -934,28 +1145,42 @@ Oorlog met de salamanders,Karel Čapek,4.0,4.17,1936,286,data/goodreads/clean/go
 In schaamte kun je niet wonen,Cody Hochstenbach,4.0,4.11,,100,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Roadside Picnic,Arkady Strugatsky,3.0,4.14,1972,145,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Children of Ruin (Children of Time, #2)",Adrian Tchaikovsky,3.0,4.06,2019,597,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+"A Psalm for the Wild-Built (Monk & Robot, #1)",Becky  Chambers,,4.27,2021,160,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Children of Time (Children of Time, #1)",Adrian Tchaikovsky,3.0,4.3,2015,608,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Kindred,Octavia E. Butler,,4.3,1979,295,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 A Visit from the Goon Squad,Jennifer Egan,3.0,3.7,2010,274,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Childhood's End,Arthur C. Clarke,4.0,4.12,1953,224,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Lapvona,Ottessa Moshfegh,4.0,3.53,2022,313,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Uitgewoond,Cody Hochstenbach,,4.36,2022,347,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Neuromancer (Sprawl, #1)",William Gibson,3.0,3.89,1984,288,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 De linkerhand van het duister,Ursula K. Le Guin,4.0,4.1,1969,284,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Dolores Dolly Poppedijn,Thomas Olde Heuvelt,3.0,2.93,2019,93,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 If on a Winter's Night a Traveler,Italo Calvino,4.0,4.03,1979,260,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Ancillary Justice (Imperial Radch, #1)",Ann Leckie,3.0,3.99,2013,386,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Always Coming Home,Ursula K. Le Guin,,4.06,1985,525,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Ubik,Philip K. Dick,3.0,4.11,1969,288,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "Look to Windward (Culture, #7)",Iain M. Banks,4.0,4.22,2000,496,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Station Eleven,Emily St. John Mandel,3.0,4.07,2014,333,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Moskou op sterk water,Venedikt Erofeev,,4.04,1969,149,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Kokoro,Natsume Sōseki,,4.04,1914,248,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Black Rain,Masuji Ibuse,,3.99,1965,304,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+"Blood Meridian, or, the Evening Redness in the West",Cormac McCarthy,,4.16,1985,351,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Road,Cormac McCarthy,,3.99,2006,241,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+De held van onze tijd,Mikhail Lermontov,,4.11,1839,198,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Museum of Whales You Will Never See: And Other Excursions to Iceland's Most Unusual Museums,A. Kendra Greene,,3.75,2020,272,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Ik ben er niet,Lize Spit,4.0,4.1,2020,576,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Quest for Corvo: An Experiment in Biography,A.J.A. Symons,,3.99,1934,289,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 The Affirmation,Christopher Priest,3.0,3.9,1981,213,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Vlucht naar de top,Richard Bachman,1.0,3.9,1982,199,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Hex,Thomas Olde Heuvelt,4.0,3.73,2013,384,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Tortilla Flat,John Steinbeck,2.0,3.83,1935,256,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Passagiers / Achterblijvers,Thomas Heerma van Voss,4.0,3.9,2022,224,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 De Mitsukoshi Troostbaby Company,Auke Hulst,4.0,4.07,2021,608,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+Notities uit de jungle,Hanya Yanagihara,,3.73,2013,416,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Aleksandra,Lisa Weeda,3.0,3.55,2021,351,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Upgrade Soul,Ezra Claytan Daniels,4.0,4.1,2018,272,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 "King Leopold's Ghost: A Story of Greed, Terror, and Heroism in Colonial Africa",Adam Hochschild,4.0,4.18,1998,442,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+In the Heart of the Sea: The Tragedy of the Whaleship Essex,Nathaniel Philbrick,,4.16,2000,302,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Zero K,Don DeLillo,3.0,3.2,2016,274,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 The Remains of the Day,Kazuo Ishiguro,4.0,4.14,1989,258,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Weg met Eddy Bellegueule,Édouard Louis,3.0,3.93,2014,202,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
@@ -1008,6 +1233,8 @@ Starship Troopers,Robert A. Heinlein,3.0,4.01,1959,264,data/goodreads/clean/good
 Do Androids Dream of Electric Sheep?,Philip K. Dick,3.0,4.09,1968,244,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Brave New World,Aldous Huxley,4.0,3.99,1932,268,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
 Accelerando,Charles Stross,4.0,3.87,2005,415,data/goodreads/clean/goodreads_library_export-PHT_clean.csv
+The Vegetarian,Han Kang,,3.58,2007,188,data/goodreads/clean/goodreads_library_export-thirsa.csv
+De onzichtbaren,Frank Nellen,,3.88,2023,234,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "Echo of Worlds (Pandominion, #2)",M.R. Carey,3.0,4.34,2024,496,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Galápagos,Kurt Vonnegut Jr.,3.0,3.87,1985,324,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Honderd jaar eenzaamheid,Gabriel García Márquez,5.0,4.12,1967,428,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1021,6 +1248,9 @@ The City & the City,China Miéville,3.0,3.9,2009,312,data/goodreads/clean/goodre
 Mijn jaar van rust en kalmte,Ottessa Moshfegh,4.0,3.63,2018,240,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De fabriek,Hiroko Oyamada,2.0,3.34,2010,176,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De haas met de amberkleurige ogen,Edmund de Waal,4.0,3.95,2010,320,data/goodreads/clean/goodreads_library_export-thirsa.csv
+"All Systems Red (The Murderbot Diaries, #1)",Martha Wells,,4.14,2017,144,data/goodreads/clean/goodreads_library_export-thirsa.csv
+"The Poppy War (The Poppy War, #1)",R.F. Kuang,,4.17,2018,545,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Kroniek van een aangekondigde dood,Gabriel García Márquez,,3.97,1981,114,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Babel,R.F. Kuang,4.0,4.17,2022,544,data/goodreads/clean/goodreads_library_export-thirsa.csv
 The Yellow Wallpaper,Charlotte Perkins Gilman,4.0,4.08,1892,63,data/goodreads/clean/goodreads_library_export-thirsa.csv
 The Turn of the Screw,Henry James,3.0,3.39,1898,121,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1032,14 +1262,19 @@ Van vrouwen en zout,Gabriela  Garcia,3.0,3.69,2021,256,data/goodreads/clean/good
 Schoonheid is een vloek (Dutch Edition),Eka Kurniawan,3.0,4.05,2002,480,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Bewilderment,Richard Powers,4.0,3.91,2021,278,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Het lied van ooievaar en dromedaris,Anjet Daanje,4.0,4.37,2022,655,data/goodreads/clean/goodreads_library_export-thirsa.csv
+"A Song of Ice and Fire, 5 Book Set Series: A Game of Thrones, A Clash of Kings, A Storm of Swords, A Feast for Crows, A Dance with Dragons",George R.R. Martin,,4.6,2000,5199,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Het licht,Torgny Lindgren,3.0,3.98,1987,293,data/goodreads/clean/goodreads_library_export-thirsa.csv
+"Use of Weapons (Culture, #3)",Iain M. Banks,,4.17,1990,411,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De bergen zingen,Nguyễn Phan Quế Mai,3.0,4.32,2020,424,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Lapvona,Ottessa Moshfegh,4.0,3.53,2022,313,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Kroniek van het vermoorde huis,Lúcio Cardoso,3.0,4.27,1959,680,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Tussentijds,Peter Zantingh,2.0,3.83,2022,175,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Stille sneeuwval,Jun'ichirō Tanizaki,,4.03,1948,638,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Dingen die we verloren in het vuur,Mariana Enríquez,4.0,4.06,2016,268,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "Wool Omnibus (Silo, #1)",Hugh Howey,2.0,4.22,2012,509,data/goodreads/clean/goodreads_library_export-thirsa.csv
+"A Closed and Common Orbit (Wayfarers, #2)",Becky  Chambers,,4.37,2016,365,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "The Long Way to a Small, Angry Planet (Wayfarers, #1)",Becky  Chambers,4.0,4.18,2014,518,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Tender Is the Flesh,Agustina Bazterrica,,3.78,2017,209,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De jacht op het snoekje,Juhani Karila,3.0,4.35,2019,325,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Station Eleven,Emily St. John Mandel,3.0,4.07,2014,333,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De belofte,Damon Galgut,4.0,3.86,2021,318,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1047,6 +1282,7 @@ De opkomst van de meritocratie,Michael Young,4.0,3.8,1958,192,data/goodreads/cle
 Utopia Avenue,David Mitchell,2.0,4.0,2020,574,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Een zeeman door de zee verstoten,Yukio Mishima,3.0,3.85,1963,160,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De zwemmers,Julie Otsuka,4.0,3.67,2022,118,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Waanzin aan het einde van de aarde,Julian Sancton,,4.27,2021,473,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De stad der blinden,José Saramago,3.0,4.17,1995,304,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "Het recht van de Radch (Imperial Radch, #1)",Ann Leckie,4.0,3.99,2013,400,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Buurtsupermens,Sayaka Murata,4.0,3.68,2016,143,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1063,8 +1299,11 @@ De tuin van de avondnevel,Tan Twan Eng,4.0,4.14,2011,374,data/goodreads/clean/go
 De Mitsukoshi Troostbaby Company,Auke Hulst,5.0,4.07,2021,608,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Earthlings,Sayaka Murata,2.0,3.6,2018,247,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Cage of Souls,Adrian Tchaikovsky,4.0,4.13,2019,602,data/goodreads/clean/goodreads_library_export-thirsa.csv
+All the Murmuring Bones,A.G. Slatter,,3.93,2021,337,data/goodreads/clean/goodreads_library_export-thirsa.csv
+The Island of Dr. Moreau,H.G. Wells,,3.73,1896,160,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Wij zijn licht,Gerda Blees,4.0,3.69,2020,224,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De aarde blijft altijd bestaan,George R. Stewart,3.0,3.95,1949,464,data/goodreads/clean/goodreads_library_export-thirsa.csv
+"Empire in Black and Gold (Shadows of the Apt, #1)",Adrian Tchaikovsky,,3.75,2008,612,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Mother Night,Kurt Vonnegut Jr.,4.0,4.23,1961,282,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De gifhouten bijbel,Barbara Kingsolver,3.0,4.1,1998,566,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De geschiedenis van mijn seksualiteit,Sofie Lakmaker,4.0,3.76,2021,223,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1079,9 +1318,12 @@ The Stars My Destination,Alfred Bester,4.0,4.06,1956,258,data/goodreads/clean/go
 "The Caves of Steel (Robot, #1)",Isaac Asimov,3.0,4.19,1953,206,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De avond is ongemak,Marieke Lucas Rijneveld,4.0,3.45,2018,260,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Het kaartenhuis,Mark Z. Danielewski,4.0,4.09,2000,713,data/goodreads/clean/goodreads_library_export-thirsa.csv
+The Invisible Life of Addie LaRue,Victoria Schwab,,4.18,2020,448,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Als op een winternacht een reiziger,Italo Calvino,4.0,4.03,1979,300,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Klont,Maxim Februari,,3.02,2017,270,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "Consider Phlebas (Culture, #1)",Iain M. Banks,4.0,3.85,1987,467,data/goodreads/clean/goodreads_library_export-thirsa.csv
 The Dutch House,Ann Patchett,4.0,4.1,2019,337,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Stranger in a Strange Land,Robert A. Heinlein,,3.92,1961,525,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De jongens van Nickel,Colson Whitehead,4.0,4.26,2019,271,data/goodreads/clean/goodreads_library_export-thirsa.csv
 The Thousand Autumns of Jacob de Zoet,David Mitchell,4.0,4.02,2010,479,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De geestverwantschap,David Mitchell,3.0,4.05,1999,444,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1106,8 +1348,10 @@ De pest,Albert Camus,4.0,4.02,1947,277,data/goodreads/clean/goodreads_library_ex
 Bijna een paradijs,John Cheever,3.0,3.47,1977,156,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Melmoth,Sarah Perry,2.0,3.43,2018,,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Echo,Thomas Olde Heuvelt,2.0,3.46,2019,616,data/goodreads/clean/goodreads_library_export-thirsa.csv
+De boekbinder,Bridget Collins,,3.86,2019,464,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Het ijspaleis,Tarjei Vesaas,4.0,3.86,1963,141,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Het achtste leven [voor Brilka],Nino Haratischwili,4.0,4.52,2014,1275,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Open Veins of Latin America: Five Centuries of the Pillage of a Continent,Eduardo Galeano,,4.31,1971,317,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De goede zoon,Rob van Essen,4.0,3.35,2018,384,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De ontembare,Guillermo Arriaga,4.0,4.42,2016,678,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Catch-22,Joseph Heller,4.0,3.99,1961,453,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1135,10 +1379,13 @@ The Ocean at the End of the Lane,Neil Gaiman,5.0,4.02,2013,181,data/goodreads/cl
 "Borne (Borne, #1)",Jeff VanderMeer,4.0,3.93,2017,323,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "1Q84 (1Q84, #1-3)",Haruki Murakami,3.0,3.95,2009,944,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "Descender, Vol. 1: Tin Stars",Jeff Lemire,4.0,4.08,2015,160,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Het meisje dat de maan dronk,Kelly Barnhill,,4.12,2016,269,data/goodreads/clean/goodreads_library_export-thirsa.csv
 The Necrophiliac,Gabrielle Wittkop,4.0,3.8,1972,92,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "Geheimen van het Wilde Woud  (De brief voor de koning, #2)",Tonke Dragt,4.0,4.22,1965,469,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Moxyland,Lauren Beukes,3.0,3.58,2008,367,data/goodreads/clean/goodreads_library_export-thirsa.csv
 The Left Hand of Darkness,Ursula K. Le Guin,3.0,4.1,1969,304,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Stranders,Iris Stobbelaar,,4.12,2015,445,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Een indiaan als jij en ik,Erna Sassen,,3.94,,123,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "Rosemary's Baby (Rosemary's Baby, #1)",Ira Levin,3.0,4.04,1967,308,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De gespleten burggraaf,Italo Calvino,5.0,3.82,1952,114,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Ice,Anna Kavan,4.0,3.66,1967,158,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1152,8 +1399,11 @@ Oorlog met de salamanders,Karel Čapek,4.0,4.17,1936,286,data/goodreads/clean/go
 De stad van de wilde goden,Isabel Allende,2.0,3.74,2002,285,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Koorts,Deon Meyer,4.0,4.29,2016,480,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Rampokan Jawa & Selebes,Peter van Dongen,3.0,3.58,2013,161,data/goodreads/clean/goodreads_library_export-thirsa.csv
+Scherven,Erik de Graaf,,3.38,2010,264,data/goodreads/clean/goodreads_library_export-thirsa.csv
+De ondergrondse spoorweg,Colson Whitehead,,4.06,2016,347,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "Parable of the Sower (Earthseed, #1)",Octavia E. Butler,4.0,4.21,1993,345,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Kraut,Peter Pontiac,4.0,3.85,2005,,data/goodreads/clean/goodreads_library_export-thirsa.csv
+The Punisher: Born,Garth Ennis,,4.19,2016,112,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "The Three-Body Problem (Remembrance of Earth's Past, #1)",Liu Cixin,2.0,4.08,2006,472,data/goodreads/clean/goodreads_library_export-thirsa.csv
 High-Rise,J.G. Ballard,4.0,3.61,1975,208,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Onzichtbaar,Paul Auster,4.0,3.74,2009,238,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1206,6 +1456,7 @@ Het Interessegebied,Martin Amis,4.0,3.7,2014,349,data/goodreads/clean/goodreads_
 "Mr. Mercedes (Bill Hodges Trilogy, #1)",Stephen        King,3.0,4.02,2014,437,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De geheime tuin,Frances Hodgson Burnett,3.0,4.16,1911,218,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De woongroep,Franca Treur,3.0,2.79,2014,338,data/goodreads/clean/goodreads_library_export-thirsa.csv
+In de Cameliastraat,Mercè Rodoreda,,3.96,1966,224,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De ijsbaan,Roberto Bolaño,3.0,3.69,1993,205,data/goodreads/clean/goodreads_library_export-thirsa.csv
 De vrouw van de tijdreiziger,Audrey Niffenegger,4.0,4.0,2003,512,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Jurasic Parc,Michael Crichton,4.0,4.11,1990,659,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1265,6 +1516,7 @@ Barracuda,Christos Tsiolkas,3.0,3.69,2013,516,data/goodreads/clean/goodreads_lib
 World War Z: An Oral History of the Zombie War,Max Brooks,3.0,4.02,2006,342,data/goodreads/clean/goodreads_library_export-thirsa.csv
 "Ready Player One (Ready Player One, #1)",Ernest Cline,4.0,4.23,2011,374,data/goodreads/clean/goodreads_library_export-thirsa.csv
 What Is the What,Dave Eggers,3.0,4.14,2006,475,data/goodreads/clean/goodreads_library_export-thirsa.csv
+"""We're All Infected"": Essays on AMC's The Walking Dead and the Fate of the Human (Contributions to Zombie Studies)",Dawn Keetley,,3.97,2014,256,data/goodreads/clean/goodreads_library_export-thirsa.csv
 The Road,Cormac McCarthy,4.0,3.99,2006,241,data/goodreads/clean/goodreads_library_export-thirsa.csv
 A Visit from the Goon Squad,Jennifer Egan,4.0,3.7,2010,274,data/goodreads/clean/goodreads_library_export-thirsa.csv
 Three Lives of Tomomi Ishikawa,Benjamin Constable,4.0,3.62,2011,337,data/goodreads/clean/goodreads_library_export-thirsa.csv
@@ -1308,8 +1560,10 @@ The Marriage Plot,Jeffrey Eugenides,3.0,3.47,2011,406,data/goodreads/clean/goodr
 Galapagos,Kurt Vonnegut Jr.,3.0,3.87,1985,302,data/goodreads/clean/koen_goodreads_library_export.csv
 "1Q84 Book 1 (1Q84, #1)",Haruki Murakami,4.0,3.96,2009,554,data/goodreads/clean/koen_goodreads_library_export.csv
 His Master's Voice,Stanisław Lem,3.0,4.09,1968,199,data/goodreads/clean/koen_goodreads_library_export.csv
+Hersenschimmen,J. Bernlef,,3.89,1984,160,data/goodreads/clean/koen_goodreads_library_export.csv
 Concept M,Aafke Romeijn,3.0,3.46,2018,253,data/goodreads/clean/koen_goodreads_library_export.csv
 In the Company of Men,Véronique Tadjo,3.0,3.84,2017,160,data/goodreads/clean/koen_goodreads_library_export.csv
+The Overstory,Richard Powers,,4.12,2018,502,data/goodreads/clean/koen_goodreads_library_export.csv
 The City & the City,China Miéville,4.0,3.9,2009,312,data/goodreads/clean/koen_goodreads_library_export.csv
 De fabriek,Hiroko Oyamada,1.0,3.34,2010,176,data/goodreads/clean/koen_goodreads_library_export.csv
 Klara and the Sun,Kazuo Ishiguro,2.0,3.75,2021,303,data/goodreads/clean/koen_goodreads_library_export.csv
@@ -1320,6 +1574,7 @@ Roadside Picnic,Arkady Strugatsky,4.0,4.14,1972,145,data/goodreads/clean/koen_go
 Oorlog met de salamanders,Karel Čapek,4.0,4.17,1936,286,data/goodreads/clean/koen_goodreads_library_export.csv
 De Mitsukoshi Troostbaby Company,Auke Hulst,4.0,4.07,2021,608,data/goodreads/clean/koen_goodreads_library_export.csv
 Bewilderment,Richard Powers,4.0,3.92,2021,278,data/goodreads/clean/koen_goodreads_library_export.csv
+The Black Cloud,Fred Hoyle,,3.91,1957,200,data/goodreads/clean/koen_goodreads_library_export.csv
 Snow Crash,Neal Stephenson,2.0,4.02,1992,438,data/goodreads/clean/koen_goodreads_library_export.csv
 A Visit from the Goon Squad,Jennifer Egan,4.0,3.7,2010,274,data/goodreads/clean/koen_goodreads_library_export.csv
 Birk,Jaap Robben,3.0,3.42,2014,256,data/goodreads/clean/koen_goodreads_library_export.csv
@@ -1327,6 +1582,7 @@ Tender Is the Flesh,Agustina Bazterrica,5.0,3.79,2017,209,data/goodreads/clean/k
 Tussentijds,Peter Zantingh,3.0,3.82,2022,175,data/goodreads/clean/koen_goodreads_library_export.csv
 "Ancillary Justice (Imperial Radch, #1)",Ann Leckie,2.0,3.99,2013,386,data/goodreads/clean/koen_goodreads_library_export.csv
 De jacht op het snoekje,Juhani Karila,3.0,4.35,2019,325,data/goodreads/clean/koen_goodreads_library_export.csv
+Blokken,F. Bordewijk,,3.32,1931,39,data/goodreads/clean/koen_goodreads_library_export.csv
 Station Eleven,Emily St. John Mandel,4.0,4.07,2014,333,data/goodreads/clean/koen_goodreads_library_export.csv
 "Ready Player Two (Ready Player One, #2)",Ernest Cline,2.0,3.43,2020,370,data/goodreads/clean/koen_goodreads_library_export.csv
 One Flew Over the Cuckoo's Nest,Ken Kesey,4.0,4.2,1962,325,data/goodreads/clean/koen_goodreads_library_export.csv
@@ -1382,7 +1638,9 @@ V for Vendetta,Alan Moore,5.0,4.26,1990,296,data/goodreads/clean/koen_goodreads_
 De renner,Tim Krabbé,1.0,4.23,1978,157,data/goodreads/clean/koen_goodreads_library_export.csv
 "Annihilation (Southern Reach, #1)",Jeff VanderMeer,4.0,3.77,2014,195,data/goodreads/clean/koen_goodreads_library_export.csv
 The Gambler,Fyodor Dostoevsky,3.0,3.91,1866,188,data/goodreads/clean/koen_goodreads_library_export.csv
+The Grapes of Wrath,John Steinbeck,,4.01,1939,479,data/goodreads/clean/koen_goodreads_library_export.csv
 Wir Kinder vom Bahnhof Zoo,Christiane V. Felscherinow,3.0,4.34,1978,367,data/goodreads/clean/koen_goodreads_library_export.csv
+The Necrophiliac,Gabrielle Wittkop,,3.8,1972,92,data/goodreads/clean/koen_goodreads_library_export.csv
 De gedaanteverwisseling,Franz Kafka,3.0,3.88,1915,61,data/goodreads/clean/koen_goodreads_library_export.csv
 The Power,Naomi Alderman,4.0,3.76,2016,341,data/goodreads/clean/koen_goodreads_library_export.csv
 De kleine prins,Antoine de Saint-Exupéry,4.0,4.33,1943,95,data/goodreads/clean/koen_goodreads_library_export.csv
@@ -1437,7 +1695,12 @@ De eenzaamheid van de priemgetallen,Paolo Giordano,3.0,3.64,2008,318,data/goodre
 "The Three-Body Problem (Remembrance of Earth's Past, #1)",Liu Cixin,3.0,4.08,2006,472,data/goodreads/clean/koen_goodreads_library_export.csv
 "Harry Potter and the Half-Blood Prince (Harry Potter, #6)",J.K. Rowling,5.0,4.58,2005,652,data/goodreads/clean/koen_goodreads_library_export.csv
 "Harry Potter and the Order of the Phoenix (Harry Potter, #5)",J.K. Rowling,4.0,4.5,2003,912,data/goodreads/clean/koen_goodreads_library_export.csv
+De vliegeraar,Khaled Hosseini,,4.35,2003,352,data/goodreads/clean/koen_goodreads_library_export.csv
+"The Shining (The Shining, #1)",Stephen         King,,4.27,1977,497,data/goodreads/clean/koen_goodreads_library_export.csv
+The Catcher in the Rye,J.D. Salinger,,3.8,1951,277,data/goodreads/clean/koen_goodreads_library_export.csv
+To Kill a Mockingbird,Harper Lee,,4.26,1960,323,data/goodreads/clean/koen_goodreads_library_export.csv
 "The Hunger Games (The Hunger Games, #1)",Suzanne Collins,4.0,4.34,2008,374,data/goodreads/clean/koen_goodreads_library_export.csv
+"Red Dragon (Hannibal Lecter, #1)",Thomas  Harris,,4.06,1981,454,data/goodreads/clean/koen_goodreads_library_export.csv
 Fahrenheit 451,Ray Bradbury,3.0,3.96,1953,158,data/goodreads/clean/koen_goodreads_library_export.csv
 "Harry Potter and the Goblet of Fire (Harry Potter, #4)",J.K. Rowling,5.0,4.57,2000,734,data/goodreads/clean/koen_goodreads_library_export.csv
 "Harry Potter and the Prisoner of Azkaban (Harry Potter, #3)",J.K. Rowling,5.0,4.58,1999,435,data/goodreads/clean/koen_goodreads_library_export.csv
@@ -1465,59 +1728,109 @@ Galapagos,Kurt Vonnegut Jr.,4.0,3.87,1985,302,data/goodreads/clean/koen_m_goodre
 His Master's Voice,Stanisław Lem,3.0,4.09,1968,199,data/goodreads/clean/koen_m_goodreads_library_export.csv
 Concept M,Aafke Romeijn,2.0,3.46,2018,253,data/goodreads/clean/koen_m_goodreads_library_export.csv
 The City & the City,China Miéville,2.0,3.9,2009,312,data/goodreads/clean/koen_m_goodreads_library_export.csv
+The Man Who Fell to Earth,Walter Tevis,,4.04,1963,209,data/goodreads/clean/thomas_goodreads_library_export.csv
+When Nietzsche Wept,Irvin D. Yalom,,4.36,1992,310,data/goodreads/clean/thomas_goodreads_library_export.csv
 I Who Have Never Known Men,Jacqueline Harpman,5.0,4.14,1995,184,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Road,Cormac McCarthy,,4.0,2006,241,data/goodreads/clean/thomas_goodreads_library_export.csv
 De kleine kapitein,Paul Biegel,4.0,4.04,1970,127,data/goodreads/clean/thomas_goodreads_library_export.csv
 Groeten uit Benidorm,Hendrik Groen,2.0,3.15,2023,212,data/goodreads/clean/thomas_goodreads_library_export.csv
+Neuromancer (Sprawl #1),William Gibson,,3.89,1984,271,data/goodreads/clean/thomas_goodreads_library_export.csv
+Galapagos,Kurt Vonnegut Jr.,,3.87,1985,302,data/goodreads/clean/thomas_goodreads_library_export.csv
+Pnin,Vladimir Nabokov,,3.88,1957,184,data/goodreads/clean/thomas_goodreads_library_export.csv
 Lord of Light,Roger Zelazny,2.0,4.05,1967,296,data/goodreads/clean/thomas_goodreads_library_export.csv
+De regen kwam van binnen,Dennis Biesma,,3.95,,320,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Clockwork Orange,Anthony Burgess,5.0,4.0,1962,240,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Book of the New Sun,Gene Wolfe,,4.23,1983,950,data/goodreads/clean/thomas_goodreads_library_export.csv
+Stories of Your Life and Others,Ted Chiang,,4.25,2002,281,data/goodreads/clean/thomas_goodreads_library_export.csv
+Exhalation,Ted Chiang,,4.27,2019,368,data/goodreads/clean/thomas_goodreads_library_export.csv
 Dark Matter,Blake Crouch,2.0,4.14,2016,342,data/goodreads/clean/thomas_goodreads_library_export.csv
+Chinaman: The Legend of Pradeep Mathew,Shehan Karunatilaka,,4.16,2010,416,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Beartown (Beartown, #1)",Fredrik Backman,3.0,4.29,2016,432,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Lazarus Heist: From Hollywood to High Finance: Inside North Korea's Global Cyber War,Geoff    White,,4.15,2022,304,data/goodreads/clean/thomas_goodreads_library_export.csv
+Het smelt,Lize Spit,,3.68,2016,480,data/goodreads/clean/thomas_goodreads_library_export.csv
+Ik ben er niet,Lize Spit,,4.1,2020,576,data/goodreads/clean/thomas_goodreads_library_export.csv
+Autobiografie van mijn lichaam,Lize Spit,,4.3,2024,392,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Acceptance (Southern Reach, #3)",Jeff VanderMeer,,3.66,2014,341,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Authority (Southern Reach, #2)",Jeff VanderMeer,,3.55,2014,341,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Annihilation (Southern Reach, #1)",Jeff VanderMeer,4.0,3.79,2014,195,data/goodreads/clean/thomas_goodreads_library_export.csv
+How Music Works,David   Byrne,,4.01,2014,345,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Us Against You (Beartown, #2)",Fredrik Backman,4.0,4.37,2017,448,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Left Hand of Darkness,Ursula K. Le Guin,4.0,4.1,1969,304,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Vegetarian,Han Kang,5.0,3.64,2007,188,data/goodreads/clean/thomas_goodreads_library_export.csv
 Flatland: A Romance of Many Dimensions,Edwin A. Abbott,4.0,3.81,1884,96,data/goodreads/clean/thomas_goodreads_library_export.csv
 His Master's Voice,Stanisław Lem,5.0,4.08,1968,199,data/goodreads/clean/thomas_goodreads_library_export.csv
-Concept M,Aafke Romeijn,2.0,3.44,2018,253,data/goodreads/clean/thomas_goodreads_library_export.csv
+Concept M,Aafke Romeijn,2.0,3.43,2018,253,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Unicorn Project (The Phoenix Project),Gene Kim,4.0,4.07,2019,352,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Phoenix Project: A Novel About IT, DevOps, and Helping Your Business Win",Gene Kim,5.0,4.26,2013,345,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Haçienda: How Not to Run a Club,Peter Hook,,3.84,2008,352,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Blindsight (Firefall, #1)",Peter Watts,5.0,4.01,2006,384,data/goodreads/clean/thomas_goodreads_library_export.csv
+A Scanner Darkly,Philip K. Dick,,4.03,1977,324,data/goodreads/clean/thomas_goodreads_library_export.csv
+Transition,Iain M. Banks,,3.87,2009,404,data/goodreads/clean/thomas_goodreads_library_export.csv
 Babel,R.F. Kuang,4.0,4.16,2022,544,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Blood Meridian, or, the Evening Redness in the West",Cormac McCarthy,,4.16,1985,351,data/goodreads/clean/thomas_goodreads_library_export.csv
+Tender Is the Flesh,Agustina Bazterrica,,3.78,2017,209,data/goodreads/clean/thomas_goodreads_library_export.csv
+I'm Glad My Mom Died,Jennette McCurdy,,4.44,2022,320,data/goodreads/clean/thomas_goodreads_library_export.csv
 There Is No Antimemetics Division,qntm,4.0,4.22,2020,220,data/goodreads/clean/thomas_goodreads_library_export.csv
 Roadside Picnic,Arkady Strugatsky,5.0,4.13,1972,145,data/goodreads/clean/thomas_goodreads_library_export.csv
 Oorlog met de salamanders,Karel Čapek,3.0,4.17,1936,286,data/goodreads/clean/thomas_goodreads_library_export.csv
+Foreskin's Lament,Shalom Auslander,,3.88,2007,320,data/goodreads/clean/thomas_goodreads_library_export.csv
+"A Psalm for the Wild-Built (Monk & Robot, #1)",Becky Chambers,,4.23,2021,151,data/goodreads/clean/thomas_goodreads_library_export.csv
 Lolita,Vladimir Nabokov,5.0,3.87,1955,368,data/goodreads/clean/thomas_goodreads_library_export.csv
+Can't Stop Won't Stop: A History of the Hip-Hop Generation,Jeff Chang,,4.14,2005,546,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Overstory,Richard Powers,,4.12,2018,502,data/goodreads/clean/thomas_goodreads_library_export.csv
 Bewilderment,Richard Powers,3.0,3.91,2021,278,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Corrections,Jonathan Franzen,,3.84,2001,653,data/goodreads/clean/thomas_goodreads_library_export.csv
+De wetten,Connie Palmen,,3.59,1991,238,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Handmaid’s Tale (The Handmaid's Tale, #1)",Margaret Atwood,,4.15,1985,311,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Summer (Seasonal Quartet, #4)",Ali Smith,5.0,4.04,2020,384,data/goodreads/clean/thomas_goodreads_library_export.csv
+How to be Both,Ali Smith,,3.66,2014,376,data/goodreads/clean/thomas_goodreads_library_export.csv
+Oblomov,Ivan Goncharov,,4.13,1859,586,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Spring (Seasonal Quartet, #3)",Ali Smith,4.0,4.06,2019,336,data/goodreads/clean/thomas_goodreads_library_export.csv
 Snow Crash,Neal Stephenson,2.0,4.01,1992,438,data/goodreads/clean/thomas_goodreads_library_export.csv
 De ontdekking van Urk,Matthias M.R. Declercq,4.0,3.93,2020,326,data/goodreads/clean/thomas_goodreads_library_export.csv
+Lapvona,Ottessa Moshfegh,,3.54,2022,313,data/goodreads/clean/thomas_goodreads_library_export.csv
 Croc Attack!,Assaf Gavvron,3.0,3.76,2006,328,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Use of Weapons (Culture, #3)",Iain M. Banks,4.0,4.16,1990,411,data/goodreads/clean/thomas_goodreads_library_export.csv
 Survival in Auschwitz,Primo Levi,5.0,4.34,1947,187,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Berserker (Berserker, #1)",Fred Saberhagen,,3.86,1967,256,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Black Leopard, Red Wolf (The Dark Star Trilogy, #1)",Marlon James,,3.45,2019,640,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Moon Witch, Spider King (The Dark Star Trilogy #2)",Marlon James,,4.17,2022,626,data/goodreads/clean/thomas_goodreads_library_export.csv
+De eetclub,Saskia Noort,,3.14,2004,239,data/goodreads/clean/thomas_goodreads_library_export.csv
+Excession (Culture #5),Iain M. Banks,,4.2,1996,500,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Ancillary Sword (Imperial Radch, #2)",Ann Leckie,,4.08,2014,359,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Ancillary Justice (Imperial Radch, #1)",Ann Leckie,4.0,3.99,2013,386,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Winter (Seasonal, #2)",Ali Smith,5.0,3.79,2017,322,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Autumn (Seasonal Quartet, #1)",Ali Smith,4.0,3.66,2016,264,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Sense of an Ending,Julian Barnes,4.0,3.74,2011,150,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Every (The Circle, #2)",Dave Eggers,4.0,3.69,2021,580,data/goodreads/clean/thomas_goodreads_library_export.csv
+De Mitsukoshi Troostbaby Company,Auke Hulst,,4.06,2021,608,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Circle (The Circle, #1)",Dave Eggers,5.0,3.43,2013,493,data/goodreads/clean/thomas_goodreads_library_export.csv
+De geschiedenis van mijn seksualiteit,Tobi Lakmaker,,3.76,2021,223,data/goodreads/clean/thomas_goodreads_library_export.csv
 Nachtdier,Joost van Bellen,4.0,3.56,,389,data/goodreads/clean/thomas_goodreads_library_export.csv
 Devil in a Coma,Mark Lanegan,2.0,3.92,2021,148,data/goodreads/clean/thomas_goodreads_library_export.csv
 Crossroads,Jonathan Franzen,4.0,4.06,2021,592,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Barcelona Complex: Lionel Messi and the Making--and Unmaking--of the World's Greatest Soccer Club,Simon Kuper,4.0,4.22,2021,416,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Great Believers,Rebecca Makkai,5.0,4.29,2018,421,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Rise of the Meritocracy (Classics in Organization and Management Series),Michael Young,,3.79,1958,198,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Colonel (Firefall, #1.5)",Peter Watts,,3.85,2014,29,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Visit from the Goon Squad,Jennifer Egan,5.0,3.7,2010,274,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Arrow of God (The African Trilogy, #3)",Chinua Achebe,,3.79,1964,230,data/goodreads/clean/thomas_goodreads_library_export.csv
+"No Longer at Ease (The African Trilogy, #2)",Chinua Achebe,,3.87,1960,196,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Things Fall Apart (The African Trilogy, #1)",Chinua Achebe,5.0,3.74,1958,215,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Hundred-Year-Old Man Who Climbed Out of the Window and Disappeared (The Hundred-Year-Old Man, #1)",Jonas Jonasson,4.0,3.82,2009,396,data/goodreads/clean/thomas_goodreads_library_export.csv
 Solaris,Stanisław Lem,3.0,3.99,1961,204,data/goodreads/clean/thomas_goodreads_library_export.csv
 Things The Grandchildren Should Know,Mark Oliver Everett,4.0,4.25,2007,246,data/goodreads/clean/thomas_goodreads_library_export.csv
+Invisible Man,Ralph Ellison,,3.92,1952,581,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Without You, There Is No Us: My Time with the Sons of North Korea's Elite",Suki Kim,4.0,3.93,2014,291,data/goodreads/clean/thomas_goodreads_library_export.csv
 The End of Loneliness,Benedict Wells,3.0,4.38,2016,274,data/goodreads/clean/thomas_goodreads_library_export.csv
 Kafka on the Shore,Haruki Murakami,5.0,4.12,2002,467,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Prayer for Owen Meany,John Irving,4.0,4.24,1989,637,data/goodreads/clean/thomas_goodreads_library_export.csv
 Scar Tissue,Anthony Kiedis,3.0,4.11,2004,465,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Captain and the Glory,Dave Eggers,3.0,3.42,2019,114,data/goodreads/clean/thomas_goodreads_library_export.csv
-"Ender's Game (Ender's Saga, #1)",Orson Scott Card,4.0,4.31,1985,324,data/goodreads/clean/thomas_goodreads_library_export.csv
+Mijn ontelbare identiteiten,Sinan Çankaya,,4.19,2020,244,data/goodreads/clean/thomas_goodreads_library_export.csv
+Stranger in a Strange Land,Robert A. Heinlein,,3.92,1961,525,data/goodreads/clean/thomas_goodreads_library_export.csv
+An American Marriage,Tayari Jones,,3.93,2018,308,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Ender’s Game (Ender's Saga, #1)",Orson Scott Card,4.0,4.31,1985,324,data/goodreads/clean/thomas_goodreads_library_export.csv
 Schuld en Boete,Fyodor Dostoevsky,3.0,4.28,1866,570,data/goodreads/clean/thomas_goodreads_library_export.csv
 Between the World and Me,Ta-Nehisi Coates,5.0,4.4,2015,152,data/goodreads/clean/thomas_goodreads_library_export.csv
 The 7 Habits of Highly Effective People: Powerful Lessons in Personal Change,Stephen R. Covey,5.0,4.16,1989,372,data/goodreads/clean/thomas_goodreads_library_export.csv
@@ -1532,100 +1845,222 @@ Eating Mammals: Three Novellas,John Barlow,3.0,3.18,2004,272,data/goodreads/clea
 The Goldfinch,Donna Tartt,4.0,3.96,2013,771,data/goodreads/clean/thomas_goodreads_library_export.csv
 Eat That Frog!: 21 Great Ways to Stop Procrastinating and Get More Done in Less Time,Brian Tracy,2.0,3.87,2001,144,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Man Called Ove,Fredrik Backman,5.0,4.38,2012,337,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Time Traveler's Wife,Audrey Niffenegger,,4.0,2003,537,data/goodreads/clean/thomas_goodreads_library_export.csv
 "A Storm of Swords (A Song of Ice and Fire, #3)",George R.R. Martin,5.0,4.55,2000,1177,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Underground Railroad,Colson Whitehead,4.0,4.06,2016,320,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Monk of Mokha,Dave Eggers,4.0,4.08,2018,353,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Daring Greatly: How the Courage to Be Vulnerable Transforms the Way We Live, Love, Parent, and Lead",Brené Brown,4.0,4.29,2012,287,data/goodreads/clean/thomas_goodreads_library_export.csv
+GRM: Brainfuck,Sibylle Berg,,3.64,2019,634,data/goodreads/clean/thomas_goodreads_library_export.csv
+Droneland,Tom Hillenbrand,,4.01,2014,482,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Ajax, the Dutch, the War : Football in Europe During the Second World War",Simon Kuper,,3.9,2003,256,data/goodreads/clean/thomas_goodreads_library_export.csv
 "A Clash of Kings  (A Song of Ice and Fire, #2)",George R.R. Martin,4.0,4.42,1998,1009,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Power,Naomi Alderman,4.0,3.75,2016,341,data/goodreads/clean/thomas_goodreads_library_export.csv
 Sapiens: A Brief History of Humankind,Yuval Noah Harari,4.0,4.34,2011,512,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Fountainhead,Ayn Rand,,3.89,1943,704,data/goodreads/clean/thomas_goodreads_library_export.csv
 Lord of the Flies,William Golding,4.0,3.7,1954,182,data/goodreads/clean/thomas_goodreads_library_export.csv
+Aura,Carlos Fuentes,,3.82,1962,118,data/goodreads/clean/thomas_goodreads_library_export.csv
 Here I Am,Jonathan Safran Foer,4.0,3.64,2016,571,data/goodreads/clean/thomas_goodreads_library_export.csv
+De kleine prins,Antoine de Saint-Exupéry,,4.33,1943,95,data/goodreads/clean/thomas_goodreads_library_export.csv
+All Quiet on the Western Front,Erich Maria Remarque,,4.1,1928,296,data/goodreads/clean/thomas_goodreads_library_export.csv
+Catch-22,Joseph Heller,,3.99,1961,453,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Art of War,Sun Tzu,,3.95,-500,170,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Elephant Vanishes,Haruki Murakami,,3.83,1993,327,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Dune (Dune, #1)",Frank Herbert,,4.28,1965,604,data/goodreads/clean/thomas_goodreads_library_export.csv
 I.M.: Ischa Meijer. In Margine. In Memoriam,Connie Palmen,4.0,4.01,1998,400,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Book of Illusions,Paul Auster,3.0,3.9,2002,288,data/goodreads/clean/thomas_goodreads_library_export.csv
+Into Thin Air: A Personal Account of the Mt. Everest Disaster,Jon Krakauer,,4.26,1997,368,data/goodreads/clean/thomas_goodreads_library_export.csv
+"1Q84 (1Q84, #1-3)",Haruki Murakami,,3.95,2009,944,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Big Short: Inside the Doomsday Machine,Michael   Lewis,,4.3,2010,284,data/goodreads/clean/thomas_goodreads_library_export.csv
 Homo Deus: A History of Tomorrow,Yuval Noah Harari,4.0,4.19,2015,450,data/goodreads/clean/thomas_goodreads_library_export.csv
+Het dertigersdilemma,Nienke Wijnants,,3.21,2008,253,data/goodreads/clean/thomas_goodreads_library_export.csv
+De vrije wil bestaat niet: over wie er echt de baas is in het brein,Victor Lamme,,3.87,2010,332,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Red Rising (Red Rising Saga, #1)",Pierce Brown,,4.27,2014,382,data/goodreads/clean/thomas_goodreads_library_export.csv
 Zeitoun,Dave Eggers,3.0,4.05,2009,342,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future",Ashlee Vance,,4.13,2015,392,data/goodreads/clean/thomas_goodreads_library_export.csv
 One Hundred Years of Solitude,Gabriel García Márquez,4.0,4.12,1967,417,data/goodreads/clean/thomas_goodreads_library_export.csv
 Animal Farm,George Orwell,4.0,4.01,1945,129,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Lord of the Rings,J.R.R. Tolkien,5.0,4.54,1954,1216,data/goodreads/clean/thomas_goodreads_library_export.csv
+Man's Search for Meaning,Viktor E. Frankl,,4.37,1946,165,data/goodreads/clean/thomas_goodreads_library_export.csv
+Heart of Darkness,Joseph Conrad,,3.43,1899,188,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Zen and the Art of Motorcycle Maintenance: An Inquiry Into Values (Phaedrus, #1)",Robert M. Pirsig,,3.78,1974,540,data/goodreads/clean/thomas_goodreads_library_export.csv
+Who Rules the World?,Noam Chomsky,,4.05,2014,307,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The New York Trilogy (New York Trilogy, #1-3)",Paul Auster,5.0,3.86,1987,308,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Pogingen iets van het leven te maken: Het geheime dagboek van Hendrik Groen, 83¼ jaar (Hendrik Groen, #1)",Hendrik Groen,3.0,3.93,2014,356,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Hyperion (Hyperion Cantos, #1)",Dan Simmons,4.0,4.27,1989,500,data/goodreads/clean/thomas_goodreads_library_export.csv
+Godverdomse dagen op een godverdomse bol,Dimitri Verhulst,,3.09,2008,180,data/goodreads/clean/thomas_goodreads_library_export.csv
+All the Rivers,Dorit Rabinyan,,3.76,2014,344,data/goodreads/clean/thomas_goodreads_library_export.csv
 Kaddisj voor een kut,Dimitri Verhulst,2.0,3.49,2014,160,data/goodreads/clean/thomas_goodreads_library_export.csv
 De laatste liefde van mijn moeder,Dimitri Verhulst,3.0,3.46,2010,236,data/goodreads/clean/thomas_goodreads_library_export.csv
 De helaasheid der dingen,Dimitri Verhulst,5.0,3.81,2006,207,data/goodreads/clean/thomas_goodreads_library_export.csv
 Never Let Me Go,Kazuo Ishiguro,4.0,3.85,2005,288,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Shadow of the Wind (The Cemetery of Forgotten Books, #1)",Carlos Ruiz Zafón,5.0,4.3,2001,487,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Passion of New Eve,Angela Carter,2.0,3.67,1977,187,data/goodreads/clean/thomas_goodreads_library_export.csv
+Cloud Atlas,David Mitchell,,4.01,2004,509,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Player of Games (Culture, #2)",Iain M. Banks,3.0,4.28,1988,293,data/goodreads/clean/thomas_goodreads_library_export.csv
 Che la festa cominci,Niccolò Ammaniti,3.0,3.52,2009,328,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Thinking, Fast and Slow",Daniel Kahneman,,4.17,2011,499,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Rendezvous with Rama (Rama, #1)",Arthur C. Clarke,,4.12,1973,243,data/goodreads/clean/thomas_goodreads_library_export.csv
+The People in the Trees,Hanya Yanagihara,,3.73,2013,369,data/goodreads/clean/thomas_goodreads_library_export.csv
 Er moet iets gebeuren,Maartje Wortel,5.0,3.45,2015,236,data/goodreads/clean/thomas_goodreads_library_export.csv
+Infinite Jest,David Foster Wallace,,4.25,1996,1088,data/goodreads/clean/thomas_goodreads_library_export.csv
 Pushing Ice,Alastair Reynolds,3.0,4.07,2005,458,data/goodreads/clean/thomas_goodreads_library_export.csv
 Troubling Love,Elena Ferrante,3.0,3.25,1992,144,data/goodreads/clean/thomas_goodreads_library_export.csv
+Armor,John Steakley,2.0,4.1,1984,426,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Master and Margarita,Mikhail Bulgakov,,4.28,1967,372,data/goodreads/clean/thomas_goodreads_library_export.csv
+Dit kan niet waar zijn. Onder bankiers,Joris Luyendijk,,3.84,2015,208,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Small Backs of Children,Lidia Yuknavitch,,3.46,2015,224,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Thousand Splendid Suns,Khaled Hosseini,4.0,4.45,2007,372,data/goodreads/clean/thomas_goodreads_library_export.csv
 Zendegi,Greg Egan,2.0,3.47,2010,288,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Last Question,Isaac Asimov,5.0,4.53,1956,9,data/goodreads/clean/thomas_goodreads_library_export.csv
-Ons kamp,Marja Vuijsje,4.0,3.77,2012,335,data/goodreads/clean/thomas_goodreads_library_export.csv
+Ons kamp,Marja Vuijsje,4.0,3.78,2012,335,data/goodreads/clean/thomas_goodreads_library_export.csv
 Lagoon,Nnedi Okorafor,2.0,3.63,2014,306,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Little Life,Hanya Yanagihara,4.0,4.29,2015,720,data/goodreads/clean/thomas_goodreads_library_export.csv
+Heroes of the Frontier,Dave Eggers,,3.44,2016,400,data/goodreads/clean/thomas_goodreads_library_export.csv
 "A Fire Upon the Deep (Zones of Thought, #1)",Vernor Vinge,1.0,4.14,1992,613,data/goodreads/clean/thomas_goodreads_library_export.csv
 Accelerando,Charles Stross,5.0,3.87,2005,415,data/goodreads/clean/thomas_goodreads_library_export.csv
+Less Than Zero,Bret Easton Ellis,,3.6,1985,208,data/goodreads/clean/thomas_goodreads_library_export.csv
+Meneer Beerta (Het Bureau #1),J.J. Voskuil,,4.1,1996,780,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Consider Phlebas (Culture, #1)",Iain M. Banks,,3.85,1987,467,data/goodreads/clean/thomas_goodreads_library_export.csv
 Starship Troopers,Robert A. Heinlein,3.0,4.01,1959,264,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Mote in God's Eye (Moties, #1)",Larry Niven,,4.07,1974,596,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Ender's Game (Ender's Saga, #1)",Orson Scott Card,,4.31,1985,324,data/goodreads/clean/thomas_goodreads_library_export.csv
+De nieuwe tsaar: de weergaloze opkomst en heerschappij van Vladimir Poetin,Steven Lee Myers,,4.07,2014,870,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Rosie Project (Don Tillman, #1)",Graeme Simsion,,4.01,2013,292,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Age of Spiritual Machines,Ray Kurzweil,4.0,3.9,1998,388,data/goodreads/clean/thomas_goodreads_library_export.csv
+"People Skills: How to Assert Yourself, Listen to Others, and Resolve Conflicts",Robert   Bolton,,4.01,1979,300,data/goodreads/clean/thomas_goodreads_library_export.csv
+World War Z: An Oral History of the Zombie War,Max Brooks,,4.02,2006,342,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Altered Carbon (Takeshi Kovacs, #1)",Richard K. Morgan,4.0,4.04,2002,526,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Superintelligence: Paths, Dangers, Strategies",Nick Bostrom,,3.85,2014,352,data/goodreads/clean/thomas_goodreads_library_export.csv
+Highways to a War,Christopher J. Koch,,4.28,1995,496,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Rapture of the Nerds,Cory Doctorow,,3.39,2012,351,data/goodreads/clean/thomas_goodreads_library_export.csv
+Glasshouse,Charles Stross,,3.88,2006,335,data/goodreads/clean/thomas_goodreads_library_export.csv
+Diaspora,Greg Egan,,4.1,1997,443,data/goodreads/clean/thomas_goodreads_library_export.csv
+Eichmann in Jerusalem: A Report on the Banality of Evil,Hannah Arendt,,4.2,1963,312,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Republic,Plato,,3.96,-400,416,data/goodreads/clean/thomas_goodreads_library_export.csv
+De heerser,Niccolò Machiavelli,,3.84,1513,218,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Slap,Christos Tsiolkas,,3.26,2008,485,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Emperor's New Mind,Roger Penrose,,3.91,1989,602,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Quiet American,Graham Greene,5.0,3.98,1955,180,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Girl Who Saved The King Of Sweden,Jonas Jonasson,3.0,3.78,2013,421,data/goodreads/clean/thomas_goodreads_library_export.csv
 1984,George Orwell,5.0,4.2,1949,328,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Plot Against America,Philip Roth,,3.81,2004,391,data/goodreads/clean/thomas_goodreads_library_export.csv
+Miss Saigon (Piano/ Vocal Selections),Alain Boublil,,4.22,1990,96,data/goodreads/clean/thomas_goodreads_library_export.csv
 De hemel van Hollywood,Leon de Winter,3.0,3.21,1997,329,data/goodreads/clean/thomas_goodreads_library_export.csv
 Zionoco,Leon de Winter,3.0,3.24,1995,415,data/goodreads/clean/thomas_goodreads_library_export.csv
+Seveneves,Neal Stephenson,,4.0,2015,867,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Golden Son (Red Rising Saga, #2)",Pierce Brown,,4.49,2015,447,data/goodreads/clean/thomas_goodreads_library_export.csv
+Go Set a Watchman,Harper Lee,,3.31,2015,278,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Chosen (Reuven Malther, #1)",Chaim Potok,,4.07,1966,304,data/goodreads/clean/thomas_goodreads_library_export.csv
 "A Game of Thrones (A Song of Ice and Fire, #1)",George R.R. Martin,4.0,4.45,1996,835,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Restaurant at the End of the Universe (The Hitchhiker's Guide to the Galaxy, #2)",Douglas Adams,4.0,4.2,1980,250,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Life, the Universe and Everything (The Hitchhiker's Guide to the Galaxy, #3)",Douglas Adams,3.0,4.16,1982,224,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Hitchhiker's Guide to the Galaxy (Hitchhiker's Guide to the Galaxy, #1)",Douglas Adams,4.0,4.22,1979,216,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Hitchhiker’s Guide to the Galaxy (Hitchhiker's Guide to the Galaxy, #1)",Douglas Adams,4.0,4.22,1979,216,data/goodreads/clean/thomas_goodreads_library_export.csv
+Player Piano,Kurt Vonnegut Jr.,,3.9,1952,341,data/goodreads/clean/thomas_goodreads_library_export.csv
+Hunter's Run,George R.R. Martin,,3.7,2007,320,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Foundation Trilogy (Foundation, #1-3)",Isaac Asimov,4.0,4.42,1953,679,data/goodreads/clean/thomas_goodreads_library_export.csv
+Kaas,Willem Elsschot,,3.58,1933,126,data/goodreads/clean/thomas_goodreads_library_export.csv
+Bint,F. Bordewijk,,3.1,1934,76,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Spinoza Problem,Irvin D. Yalom,4.0,4.26,2012,321,data/goodreads/clean/thomas_goodreads_library_export.csv
+The City & the City,China Miéville,,3.9,2009,312,data/goodreads/clean/thomas_goodreads_library_export.csv
+Alleen maar nette mensen,Robert Vuijsje,,2.84,2008,288,data/goodreads/clean/thomas_goodreads_library_export.csv
 De buitenvrouw,Joost Zwagerman,1.0,2.96,1994,235,data/goodreads/clean/thomas_goodreads_library_export.csv
+Onder professoren,Willem Frederik Hermans,,3.71,1975,425,data/goodreads/clean/thomas_goodreads_library_export.csv
+Ik Jan Cremer,Jan Cremer,,3.2,1964,389,data/goodreads/clean/thomas_goodreads_library_export.csv
+Post Office,Charles Bukowski,,3.93,1971,208,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Lost Weekend,Charles Jackson,5.0,4.09,1944,244,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Savage Detectives,Roberto Bolaño,,4.17,1998,577,data/goodreads/clean/thomas_goodreads_library_export.csv
+Burmese Days,George Orwell,,3.87,1934,276,data/goodreads/clean/thomas_goodreads_library_export.csv
 Brave New World,Aldous Huxley,4.0,3.99,1932,268,data/goodreads/clean/thomas_goodreads_library_export.csv
 Aung San Suu Kyi: A Biography,Jesper Bengtsson,3.0,3.48,2010,240,data/goodreads/clean/thomas_goodreads_library_export.csv
 Do Androids Dream of Electric Sheep?,Philip K. Dick,4.0,4.09,1968,244,data/goodreads/clean/thomas_goodreads_library_export.csv
+House of Leaves,Mark Z. Danielewski,,4.09,2000,710,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Idiot,Fyodor Dostoevsky,,4.21,1869,667,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Brothers Karamazov,Fyodor Dostoevsky,,4.38,1880,796,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Fraction of the Whole,Steve Toltz,5.0,4.14,2008,530,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Cook's Tour: Global Adventures in Extreme Cuisines,Anthony Bourdain,3.0,4.1,2001,277,data/goodreads/clean/thomas_goodreads_library_export.csv
 Taal is zeg maar echt mijn ding,Paulien Cornelisse,3.0,3.65,2009,212,data/goodreads/clean/thomas_goodreads_library_export.csv
 Anna Karenina,Leo Tolstoy,5.0,4.1,1878,964,data/goodreads/clean/thomas_goodreads_library_export.csv
+A Hologram for the King,Dave Eggers,,3.29,2012,312,data/goodreads/clean/thomas_goodreads_library_export.csv
 Until I Find You,John Irving,4.0,3.67,2005,820,data/goodreads/clean/thomas_goodreads_library_export.csv
-Bonita Avenue,Peter Buwalda,3.0,3.75,,543,data/goodreads/clean/thomas_goodreads_library_export.csv
+Bonita Avenue,Peter Buwalda,3.0,3.75,2010,543,data/goodreads/clean/thomas_goodreads_library_export.csv
+色彩を持たない多崎つくると、彼の巡礼の年,Haruki Murakami,,3.87,2013,376,data/goodreads/clean/thomas_goodreads_library_export.csv
+"De Uitvreter, Titaantjes, Dichtertje, Mene Tekel",Nescio,,4.0,1956,157,data/goodreads/clean/thomas_goodreads_library_export.csv
+Bartleby the Scrivener,Herman Melville,,3.93,1853,64,data/goodreads/clean/thomas_goodreads_library_export.csv
+Het verdriet van België,Hugo Claus,,3.64,1983,774,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Road to Reality: A Complete Guide to the Laws of the Universe,Roger Penrose,,4.16,2004,1099,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Teachings of Don Juan: A Yaqui Way of Knowledge,Carlos Castaneda,,3.94,1968,288,data/goodreads/clean/thomas_goodreads_library_export.csv
+Mexico,James A. Michener,,3.75,1992,672,data/goodreads/clean/thomas_goodreads_library_export.csv
+Giovanni’s Room,James Baldwin,,4.34,1956,159,data/goodreads/clean/thomas_goodreads_library_export.csv
 Born on a Blue Day,Daniel Tammet,3.0,3.84,2006,226,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Old Patagonian Express: By Train Through the Americas,Paul Theroux,,3.94,1979,430,data/goodreads/clean/thomas_goodreads_library_export.csv
 Kitchen Confidential: Adventures in the Culinary Underbelly,Anthony Bourdain,5.0,4.18,2000,312,data/goodreads/clean/thomas_goodreads_library_export.csv
 God's Gym,Leon de Winter,2.0,3.4,2002,370,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Firm,Robin Waterfield,3.0,4.06,1991,76,data/goodreads/clean/thomas_goodreads_library_export.csv
-Knielen op een bed violen,Jan Siebelink,4.0,3.58,2005,446,data/goodreads/clean/thomas_goodreads_library_export.csv
+Knielen op een bed violen,Jan Siebelink,4.0,3.59,2005,446,data/goodreads/clean/thomas_goodreads_library_export.csv
 De thuiskomst,Anna Enquist,2.0,3.83,2005,415,data/goodreads/clean/thomas_goodreads_library_export.csv
+The God Delusion,Richard Dawkins,,3.9,2006,374,data/goodreads/clean/thomas_goodreads_library_export.csv
+Of Blood and Hope,Samuel Pisar,,3.92,1979,311,data/goodreads/clean/thomas_goodreads_library_export.csv
+Doctor Zhivago,Boris Pasternak,,4.01,1957,592,data/goodreads/clean/thomas_goodreads_library_export.csv
 Een kleine geschiedenis van Amsterdam,Geert Mak,3.0,3.9,1994,446,data/goodreads/clean/thomas_goodreads_library_export.csv
 Shantaram,Gregory David Roberts,5.0,4.28,2003,936,data/goodreads/clean/thomas_goodreads_library_export.csv
+De herfst zal schitterend zijn,Jan Siebelink,,2.98,1980,299,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Shining (The Shining, #1)",Stephen        King,3.0,4.28,1977,497,data/goodreads/clean/thomas_goodreads_library_export.csv
 "Angels & Demons (Robert Langdon, #1)",Dan    Brown,2.0,3.95,2000,736,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The da Vinci Code (Robert Langdon, #2)",Dan    Brown,3.0,3.93,2003,489,data/goodreads/clean/thomas_goodreads_library_export.csv
 Brida,Paulo Coelho,2.0,3.51,1990,264,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Witch of Portobello,Paulo Coelho,3.0,3.56,2006,320,data/goodreads/clean/thomas_goodreads_library_export.csv
+De nacht van de schreeuw,Marjon van Royen,,4.11,,,data/goodreads/clean/thomas_goodreads_library_export.csv
+Ierse nachten,Simon Vestdijk,,3.45,1946,286,data/goodreads/clean/thomas_goodreads_library_export.csv
+Het woeden der gehele wereld,Maarten 't Hart,,3.83,1993,282,data/goodreads/clean/thomas_goodreads_library_export.csv
+Eva Luna,Isabel Allende,,4.0,1987,307,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Kijk niet achterom (Konrad Sejer, #2)",Karin Fossum,,3.78,2004,312,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Death of Artemio Cruz,Carlos Fuentes,4.0,3.86,1962,307,data/goodreads/clean/thomas_goodreads_library_export.csv
 Into the Wild,Jon Krakauer,3.0,4.02,1996,207,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Neverending Story,Michael Ende,5.0,4.18,1979,396,data/goodreads/clean/thomas_goodreads_library_export.csv
+Neither Here nor There: Travels in Europe,Bill Bryson,,3.85,1991,254,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Luminaries,Eleanor Catton,,3.75,2013,848,data/goodreads/clean/thomas_goodreads_library_export.csv
+Ex-drummer,Herman Brusselmans,,3.26,1994,176,data/goodreads/clean/thomas_goodreads_library_export.csv
 De donkere kamer van Damokles,Willem Frederik Hermans,5.0,3.8,1958,335,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Metamorphosis,Franz Kafka,,3.9,1915,201,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Art of Travel,Alain de Botton,,3.82,2002,272,data/goodreads/clean/thomas_goodreads_library_export.csv
+On Love,Alain de Botton,,3.96,1993,194,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Max Havelaar, or the Coffee Auctions of the Dutch Trading Company",Multatuli,,3.53,1860,352,data/goodreads/clean/thomas_goodreads_library_export.csv
+Disgrace,J.M. Coetzee,,3.86,1999,220,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Perks of Being a Wallflower,Stephen Chbosky,,4.24,1999,213,data/goodreads/clean/thomas_goodreads_library_export.csv
+I Know This Much Is True,Wally Lamb,,4.21,1998,897,data/goodreads/clean/thomas_goodreads_library_export.csv
+Fear and Loathing in Las Vegas: A Savage Journey to the Heart of the American Dream,Hunter S. Thompson,,4.07,1971,204,data/goodreads/clean/thomas_goodreads_library_export.csv
+"Angela’s Ashes (Frank McCourt, #1)",Frank McCourt,,4.15,1996,452,data/goodreads/clean/thomas_goodreads_library_export.csv
+On the Road,Jack Kerouac,,3.61,1957,307,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Color Purple,Alice Walker,5.0,4.27,1982,295,data/goodreads/clean/thomas_goodreads_library_export.csv
+In Cold Blood,Truman Capote,,4.09,1966,343,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Bell Jar,Sylvia Plath,,4.05,1963,294,data/goodreads/clean/thomas_goodreads_library_export.csv
+The Catcher in the Rye,J.D. Salinger,,3.8,1951,277,data/goodreads/clean/thomas_goodreads_library_export.csv
+To Kill a Mockingbird,Harper Lee,,4.26,1960,323,data/goodreads/clean/thomas_goodreads_library_export.csv
+Nader tot U,Gerard Reve,,3.8,1966,166,data/goodreads/clean/thomas_goodreads_library_export.csv
 De avonden,Gerard Reve,4.0,3.49,1947,191,data/goodreads/clean/thomas_goodreads_library_export.csv
+Eric in the Land of the Insects,Godfried Bomans,,3.61,1940,196,data/goodreads/clean/thomas_goodreads_library_export.csv
+De ontdekking van de hemel,Harry Mulisch,,4.17,1992,905,data/goodreads/clean/thomas_goodreads_library_export.csv
 Nooit meer slapen,Willem Frederik Hermans,4.0,3.86,1966,251,data/goodreads/clean/thomas_goodreads_library_export.csv
+Het huis van de moskee,Kader Abdolah,,4.13,2005,412,data/goodreads/clean/thomas_goodreads_library_export.csv
 Hersenschimmen,J. Bernlef,5.0,3.9,,160,data/goodreads/clean/thomas_goodreads_library_export.csv
+Publieke werken,Thomas Rosenboom,,3.82,1999,488,data/goodreads/clean/thomas_goodreads_library_export.csv
+Freedom,Jonathan Franzen,,3.79,2010,562,data/goodreads/clean/thomas_goodreads_library_export.csv
+"La Vérité sur l'Affaire Harry Quebert (Marcus Goldman, #1)",Joël Dicker,,4.2,2012,863,data/goodreads/clean/thomas_goodreads_library_export.csv
+Norwegian Wood,Haruki Murakami,4.0,4.0,1987,296,data/goodreads/clean/thomas_goodreads_library_export.csv
 Veronika Decides to Die,Paulo Coelho,2.0,3.73,1998,285,data/goodreads/clean/thomas_goodreads_library_export.csv
 Extremely Loud & Incredibly Close,Jonathan Safran Foer,3.0,3.97,2005,326,data/goodreads/clean/thomas_goodreads_library_export.csv
 In One Person,John Irving,3.0,3.7,2012,425,data/goodreads/clean/thomas_goodreads_library_export.csv
 A Brief History of Time,Stephen Hawking,4.0,4.21,1988,226,data/goodreads/clean/thomas_goodreads_library_export.csv
 Eating Animals,Jonathan Safran Foer,2.0,4.21,2009,341,data/goodreads/clean/thomas_goodreads_library_export.csv
+Tirza,Arnon Grunberg,,3.61,2006,430,data/goodreads/clean/thomas_goodreads_library_export.csv
+Tonio: een requiemroman,A.F.Th. van der Heijden,,3.91,2011,635,data/goodreads/clean/thomas_goodreads_library_export.csv
 Everything is Illuminated,Jonathan Safran Foer,5.0,3.89,2002,276,data/goodreads/clean/thomas_goodreads_library_export.csv
+Een landingspoging op Newfoundland,Willem Frederik Hermans,,3.7,1957,192,data/goodreads/clean/thomas_goodreads_library_export.csv
 Dit zijn de namen,Tommy Wieringa,4.0,3.57,2012,303,data/goodreads/clean/thomas_goodreads_library_export.csv
-"The Girl Who Kicked the Hornet's Nest (Millennium, #3)",Stieg Larsson,4.0,4.24,2007,566,data/goodreads/clean/thomas_goodreads_library_export.csv
+"The Girl Who Kicked the Hornet’s Nest (Millennium, #3)",Stieg Larsson,4.0,4.24,2007,566,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Girl Who Played with Fire (Millennium #2),Stieg Larsson,4.0,4.26,2006,503,data/goodreads/clean/thomas_goodreads_library_export.csv
 "The Girl With the Dragon Tattoo (Millennium, #1)",Stieg Larsson,4.0,4.17,2005,480,data/goodreads/clean/thomas_goodreads_library_export.csv
-Watchmen,Alan Moore,5.0,4.39,1987,416,data/goodreads/clean/thomas_goodreads_library_export.csv
+Watchmen,Alan             Moore,5.0,4.39,1987,416,data/goodreads/clean/thomas_goodreads_library_export.csv
 Het derde huwelijk,Tom Lanoye,2.0,3.39,2006,337,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Alchemist,Paulo Coelho,3.0,3.92,1988,197,data/goodreads/clean/thomas_goodreads_library_export.csv
 The Pilgrimage,Paulo Coelho,2.0,3.65,1987,226,data/goodreads/clean/thomas_goodreads_library_export.csv

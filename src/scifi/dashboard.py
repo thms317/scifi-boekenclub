@@ -15,6 +15,8 @@ Make sure bookclub_processed.csv is in the data/ directory!
 Built with ❤️ using Streamlit, Plotly, and Polars
 """
 
+from datetime import date
+
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -96,7 +98,11 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
     try:
         with st.spinner("🔄 Processing book club data from sources..."):
             # Run the data processing pipeline
-            bookclub_processed_df, unmatched_df, goodreads_df = process_bookclub_data()
+            bookclub_processed_df, unmatched_df, goodreads_df = process_bookclub_data(
+                goodreads_dir="data/goodreads/clean",
+                bookclub_path="data/bookclub/bookclub.csv",
+                manual_ratings_path="data/bookclub/manual_ratings.csv",
+            )
 
     except FileNotFoundError as e:
         st.error(f"📁 Data files not found: {e}")
@@ -137,6 +143,61 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
     bookclub_processed_df = bookclub_processed_df.filter(pl.col("date_parsed").is_not_null())
 
     return bookclub_processed_df, bookclub_members_list
+
+
+def create_current_book_banner(bookclub_processed_df: pl.DataFrame) -> None:
+    """Create a compact banner showing the current/next book with key stats"""
+    today = date.today()
+
+    # Convert polars dates to pandas for easier date handling
+    df_pandas = bookclub_processed_df.to_pandas()
+    df_pandas["date_parsed"] = pd.to_datetime(df_pandas["date_parsed"], errors="coerce").dt.date
+
+    # Find current book (next future date or most recent if no future dates)
+    future_books = df_pandas[df_pandas["date_parsed"] >= today].sort_values(
+        "date_parsed", ascending=True
+    )
+
+    if len(future_books) > 0:
+        current_book = future_books.iloc[0]
+        days_diff = (current_book["date_parsed"] - today).days
+        is_upcoming = True
+    else:
+        # No future books, show most recent
+        current_book = df_pandas.sort_values("date_parsed").iloc[-1]
+        days_diff = (today - current_book["date_parsed"]).days
+        is_upcoming = False
+
+    # Get book details
+    title = str(current_book["title"])
+    author = str(current_book["author"])
+    date_formatted = current_book["date_parsed"].strftime("%b %d")
+
+    # Handle ratings
+    goodreads_rating = current_book.get("average_goodreads_rating")
+    goodreads_display = (
+        f"{goodreads_rating:.1f}" if pd.notna(goodreads_rating) and goodreads_rating > 0 else "N/A"
+    )
+
+    club_rating = current_book.get("average_bookclub_rating", 0) if not is_upcoming else "TBD"
+    club_display = club_rating if isinstance(club_rating, str) else f"{club_rating:.1f}"
+
+    # Create countdown text
+    if is_upcoming:
+        if days_diff == 0:
+            countdown_text = "📅 TODAY"
+        elif days_diff == 1:
+            countdown_text = "📅 TOMORROW"
+        else:
+            countdown_text = f"📅 {days_diff} days"
+    else:
+        countdown_text = f"📚 {days_diff} days ago"
+
+    # Compact single-row banner
+    st.markdown(f"""
+    **📖 {title}** by *{author}* • {countdown_text} • {date_formatted} • ⭐ {goodreads_display} • 🎯 {club_display}
+    """)
+    st.divider()
 
 
 def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[str]) -> None:

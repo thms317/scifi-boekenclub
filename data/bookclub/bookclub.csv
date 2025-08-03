@@ -49,12 +49,12 @@ Datum,Nummer,Boek,Auteur,# pagina's,Wie heeft gekozen?,Locatie
 1/5/2021,48,Klont,Maxim Februari,,Robert,Skype
 2/17/2021,49,De avond is ongemak,Marieke Lucas Rijneveld,,Dion,Teams
 4/4/2021,50,The Drowned World,J.G. Ballard,,David,Laurynas - Keizersgracht 92k
-5/22/2021,51,The Things,Peter Watts,,gezamenlijk,Laurynas - Keizersgracht 92k
-8/13/2021,52,Het ijs,Anna Kavan,,gezamenlijk,Boekenclub Weekend
-10/16/2021,53,Mother Night,Kurt Vonnegut,,gezamenlijk,Robert - Atjehstraat 7
-12/8/2021,54,The Island of Dr. Moreau,H.G. Wells,,gezamenlijk,
-2/2/2022,55,House of Leaves,Mark Z. Danielewski,,gezamenlijk,De Doelen
-3/31/2022,56,Zero K,Don DeLillo,,gezamenlijk,
+5/22/2021,51,The Things,Peter Watts,,Peter,Laurynas - Keizersgracht 92k
+8/13/2021,52,Het ijs,Anna Kavan,,Thirsa,Boekenclub Weekend
+10/16/2021,53,Mother Night,Kurt Vonnegut,,Robert,Robert - Atjehstraat 7
+12/8/2021,54,The Island of Dr. Moreau,H.G. Wells,,Laurynas,
+2/2/2022,55,House of Leaves,Mark Z. Danielewski,,Robert,De Doelen
+3/31/2022,56,Zero K,Don DeLillo,,Marloes,
 6/6/2022,57,One Flew Over the Cuckoo's Nest,Ken Kesey,,David,De Doelen
 9/7/2022,58,De Opkomst van de Meritocratie,Michael Young,,Dion,Vooges Centraal
 11/10/2022,59,Station Eleven,Emily St. John Mandel,,Koen,De Doelen
@@ -74,3 +74,4 @@ Datum,Nummer,Boek,Auteur,# pagina's,Wie heeft gekozen?,Locatie
 3/23/2025,73,Dark Matter,Blake Crouch,,Koen_M,Cafe Bruxelles
 5/21/2025,74,Lord of Light,Roger Zelazny,,Laurynas,De Doelen
 7/13/2025,75,I who have never known men,Jacqueline Harpman,,Marloes,Tolhuistuin
+8/24/2025,76,The Man Who Fell to Earth,Walter Tevis,,Peter,
