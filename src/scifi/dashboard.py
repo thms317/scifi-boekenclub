@@ -247,10 +247,26 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
     color_by = "original_publication_year"
     size_by = "average_goodreads_rating"
 
-    # Prepare data for plotting - handle null values
-    bookclub_processed_df_pandas = bookclub_processed_df.with_columns(
-        pl.col("original_publication_year").fill_null(0).alias("original_publication_year")
-    ).to_pandas()
+    # Prepare data for plotting - handle null values and filter out unrated books
+    bookclub_processed_df_pandas = (
+        bookclub_processed_df.with_columns(
+            [
+                pl.col("original_publication_year").fill_null(0).alias("original_publication_year"),
+                pl.col("suggested_by").fill_null("Unknown").alias("suggested_by"),
+            ]
+        )
+        .filter(
+            # Exclude books with no ratings
+            pl.col("average_bookclub_rating").is_not_null()
+            & pl.col("average_goodreads_rating").is_not_null()
+        )
+        .to_pandas()
+    )
+
+    # Format date for display
+    bookclub_processed_df_pandas["date_formatted"] = pd.to_datetime(
+        bookclub_processed_df_pandas["date_parsed"]
+    ).dt.strftime("%B %d, %Y")
 
     # Add perfect correlation line (x=y from 1 to 5) - FIRST so it's behind data
     fig = go.Figure()
@@ -273,7 +289,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
         y=y_axis,
         color=color_by,
         size=size_by,
-        hover_data=["title", "author", "suggested_by", "date"],
+        hover_data=["title", "author", "suggested_by", "date_formatted"],
         title="📚 Goodreads Rating vs Club Rating",
         template="plotly_dark",
         size_max=20,
@@ -310,7 +326,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
         marker={"line": {"width": 1, "color": "white"}, "opacity": 0.8},
         hovertemplate="<b>%{customdata[0]}</b><br>"
         "Author: %{customdata[1]}<br>"
-        "Suggested by: %{customdata[2]|default:'Unknown'}<br>"
+        "Suggested by: %{customdata[2]}<br>"
         "Club Rating: %{x:.1f}<br>"
         "Goodreads Rating: %{y:.1f}<br>"
         "<extra></extra>",
@@ -408,7 +424,7 @@ def create_selected_book_analysis(
             <div>
                 <h1>📖 {selected_book["title"]}</h1>
                 <h2>✍️ by {selected_book["author"]}</h2>
-                <p><strong>📅 Read on:</strong> {selected_book["date_parsed"]}</p>
+                <p><strong>📅 Read on:</strong> {pd.to_datetime(selected_book["date_parsed"]).strftime("%B %d, %Y")}</p>
                 <p><strong>🏠 Location:</strong> {selected_book["location"]}</p>
             </div>
             <div style="text-align: right;">
@@ -517,10 +533,13 @@ def create_selected_book_analysis(
         st.subheader("📈 Book Rankings")
 
         # Position in overall rankings - more informative display
-        all_ratings = df["average_bookclub_rating"].sort(descending=True)
+        all_ratings = df["average_bookclub_rating"].drop_nulls().sort(descending=True)
         book_position = None
         for i, rating in enumerate(all_ratings):
-            if abs(rating - selected_book["average_bookclub_rating"]) < 0.001:
+            if (
+                rating is not None
+                and abs(rating - selected_book["average_bookclub_rating"]) < 0.001
+            ):
                 book_position = i + 1
                 break
 
@@ -1092,10 +1111,13 @@ def create_book_selector(df: pl.DataFrame, members: list[str]) -> None:
 
         with col2:
             # Position in overall rankings - more informative display
-            all_ratings = df["average_bookclub_rating"].sort(descending=True)
+            all_ratings = df["average_bookclub_rating"].drop_nulls().sort(descending=True)
             book_position = None
             for i, rating in enumerate(all_ratings):
-                if abs(rating - selected_book["average_bookclub_rating"]) < 0.001:
+                if (
+                    rating is not None
+                    and abs(rating - selected_book["average_bookclub_rating"]) < 0.001
+                ):
                     book_position = i + 1
                     break
 
