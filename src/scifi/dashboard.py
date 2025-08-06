@@ -338,7 +338,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
     # Book selection for detailed analysis
     st.markdown("---")
     st.subheader("🔍 Select a Book for Detailed Analysis")
-    book_titles = bookclub_processed_df_pandas["title"].to_list()
+    book_titles = sorted(bookclub_processed_df_pandas["title"].unique().tolist())
     selected_book_title = st.selectbox("Choose a book:", book_titles, key="overview_book_selector")
 
     if selected_book_title:
@@ -357,8 +357,9 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
         [
             "title",
             "author",
-            "suggested_by",
             "original_publication_year",
+            "number_of_pages",
+            "suggested_by",
             "average_goodreads_rating",
             "average_bookclub_rating",
         ],
@@ -375,15 +376,17 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
         "Rank",
         "Title",
         "Author",
+        "Year",
+        "Pages",
         "Suggested By",
-        "Published",
         "Goodreads Rating",
         "Club Rating",
     ]
 
-    # Round ratings
+    # Round ratings and pages
     ranking_df["Goodreads Rating"] = ranking_df["Goodreads Rating"].round(2)
     ranking_df["Club Rating"] = ranking_df["Club Rating"].round(2)
+    ranking_df["Pages"] = ranking_df["Pages"].round(0)
 
     # Display sortable table
     st.dataframe(
@@ -394,8 +397,9 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
             "Rank": st.column_config.NumberColumn("Rank", width="small"),
             "Title": st.column_config.TextColumn("Title", width="large"),
             "Author": st.column_config.TextColumn("Author", width="medium"),
+            "Year": st.column_config.NumberColumn("Year", width="small"),
+            "Pages": st.column_config.NumberColumn("Pages", format="%.0f", width="small"),
             "Suggested By": st.column_config.TextColumn("Suggested By", width="small"),
-            "Published": st.column_config.NumberColumn("Published", width="small"),
             "Goodreads Rating": st.column_config.NumberColumn(
                 "Goodreads",
                 format="%.2f",
@@ -477,11 +481,16 @@ def create_selected_book_analysis(
             fig_radar.update_layout(
                 polar={
                     "radialaxis": {"visible": True, "range": [0, 5]},
+                    "angularaxis": {
+                        "tickmode": "array",
+                        "tickvals": list(range(len(members_with_ratings))),
+                        "ticktext": list(members_with_ratings),
+                    },
                 },
                 showlegend=False,
                 template="plotly_dark",
-                height=350,
-                margin={"l": 0, "r": 0, "t": 30, "b": 0},
+                height=400,
+                margin={"l": 60, "r": 60, "t": 60, "b": 60},
             )
             st.plotly_chart(fig_radar, use_container_width=True)
         else:
@@ -581,68 +590,6 @@ def create_selected_book_analysis(
 
         else:
             st.warning("Could not determine ranking for this book.")
-
-    # Additional insights section
-    st.markdown("### 🔍 Additional Insights")
-
-    insight_col1, insight_col2 = st.columns(2)
-
-    with insight_col1:
-        # Publication era analysis
-        st.subheader("📅 Publication Era Context")
-
-        pub_year = selected_book["original_publication_year"]
-
-        # Categorize by era
-        if pub_year < 1960:
-            era = "Golden Age (pre-1960)"
-            era_emoji = "🏛️"
-        elif pub_year < 1980:
-            era = "New Wave (1960s-70s)"
-            era_emoji = "🌊"
-        elif pub_year < 2000:
-            era = "Cyberpunk Era (1980s-90s)"
-            era_emoji = "🤖"
-        else:
-            era = "Modern Sci-Fi (2000+)"
-            era_emoji = "🚀"
-
-        st.write(f"{era_emoji} **Era:** {era}")
-        st.write(f"📅 **Published:** {pub_year}")
-
-        # Compare with other books from same era
-        era_books = df.filter(
-            pl.col("original_publication_year").is_between(pub_year - 10, pub_year + 10),
-        )
-        avg_era_rating = era_books["average_bookclub_rating"].mean()
-
-        if selected_book["average_bookclub_rating"] > avg_era_rating:
-            st.success(f"📈 Above average for its era! ({avg_era_rating:.2f})")
-        else:
-            st.info(f"📊 Era average: {avg_era_rating:.2f}")
-
-    with insight_col2:
-        # Book statistics
-        st.subheader("📊 Book Statistics")
-
-        # How many members rated this book
-        member_ratings_count = sum(1 for member in members if not pd.isna(selected_book[member]))
-        st.write(f"👥 **Members who rated:** {member_ratings_count}/{len(members)}")
-
-        # Rating spread
-        ratings = [
-            selected_book[member] for member in members if not pd.isna(selected_book[member])
-        ]
-        if ratings:
-            rating_spread = max(ratings) - min(ratings)
-            st.write(f"📏 **Rating spread:** {rating_spread:.1f} points")
-
-            if rating_spread < 1:
-                st.success("🎯 High consensus!")
-            elif rating_spread < 2:
-                st.info("👍 Good agreement")
-            else:
-                st.warning("🤷 Mixed opinions")
 
     return selected_book
 
@@ -1019,7 +966,7 @@ def create_book_selector(df: pl.DataFrame, members: list[str]) -> None:
     st.subheader("🔍 Book Deep Dive")
 
     # Book selector
-    book_titles = df["title"].to_list()
+    book_titles = sorted(df["title"].unique().tolist())
     selected_book_title = st.selectbox("Select a book for detailed analysis:", book_titles)
 
     # Get selected book data
@@ -1074,11 +1021,17 @@ def create_book_selector(df: pl.DataFrame, members: list[str]) -> None:
                     "visible": True,
                     "range": [0, 5],
                 },
+                "angularaxis": {
+                    "tickmode": "array",
+                    "tickvals": list(range(len(members_list))),
+                    "ticktext": members_list,
+                },
             },
             showlegend=True,
-            title=f"Member Ratings for '{selected_book['title']}'",
+            title=f"Member Ratings for '{selected_book['title']}'"[:50] + "...",
             template="plotly_dark",
-            height=500,
+            height=550,
+            margin={"l": 80, "r": 80, "t": 100, "b": 80},
         )
 
         st.plotly_chart(fig, use_container_width=True)
