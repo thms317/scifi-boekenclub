@@ -163,3 +163,18 @@ def calculate_rating_consensus(ratings: list[float]) -> tuple[float, str]:
         consensus_level = "Mixed opinions"
 
     return rating_spread, consensus_level
+
+
+def create_rating_comparison_section(selected_book: pd.Series) -> None:
+    """Create rating comparison section showing Goodreads vs Club rating difference.
+
+    This was moved from the main dashboard's Selected Book Deep Dive section.
+    """
+    # Show difference
+    diff = selected_book["average_bookclub_rating"] - selected_book["average_goodreads_rating"]
+    if diff > 0:
+        st.success(f"📈 We rated it {diff:.2f} points higher than Goodreads!")
+    elif diff < 0:
+        st.error(f"📉 We rated it {abs(diff):.2f} points lower than Goodreads")
+    else:
+        st.info("🎯 Perfect match with Goodreads rating!")

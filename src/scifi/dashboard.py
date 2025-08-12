@@ -338,7 +338,8 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
     # Book selection for detailed analysis
     st.markdown("---")
     st.subheader("🔍 Select a Book for Detailed Analysis")
-    book_titles = sorted(bookclub_processed_df_pandas["title"].unique().tolist())
+    # Sort books by index (chronological order) with latest first
+    book_titles = bookclub_processed_df_pandas.sort_index(ascending=False)["title"].tolist()
     selected_book_title = st.selectbox("Choose a book:", book_titles, key="overview_book_selector")
 
     if selected_book_title:
@@ -446,6 +447,75 @@ def create_selected_book_analysis(
     col1, col2, col3 = st.columns(3)
 
     with col1:
+        # Book ranking and statistics
+        st.subheader("📈 Book Rankings")
+
+        # Position in overall rankings - more informative display
+        all_ratings = df["average_bookclub_rating"].drop_nulls().sort(descending=True)
+        book_position = None
+        for i, rating in enumerate(all_ratings):
+            if (
+                rating is not None
+                and abs(rating - selected_book["average_bookclub_rating"]) < 0.001
+            ):
+                book_position = i + 1
+                break
+
+        if book_position:
+            # Calculate percentile for better understanding
+            percentile = ((len(df) - book_position + 1) / len(df)) * 100
+
+            # Create informative ranking display
+
+            # Big ranking number
+            st.markdown(
+                f"""
+            <div style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        padding: 2rem; border-radius: 15px; color: white; margin: 1rem 0;">
+                <h1 style="font-size: 4rem; margin: 0; color: white;">#{book_position}</h1>
+                <h3 style="margin: 0.5rem 0; color: white;">out of {len(df)} books</h3>
+                <h4 style="margin: 0; opacity: 0.9; color: white;">Top {int(percentile)}% of club ratings</h4>
+            </div>
+            """,
+                unsafe_allow_html=True,
+            )
+
+        else:
+            st.warning("Could not determine ranking for this book.")
+
+    with col2:
+        # Rating comparisons
+        st.subheader("📊 Rating Analysis")
+
+        # Club vs Goodreads comparison
+        fig_comp = go.Figure()
+        fig_comp.add_trace(
+            go.Bar(
+                x=["Goodreads", "Our Club"],
+                y=[
+                    selected_book["average_goodreads_rating"],
+                    selected_book["average_bookclub_rating"],
+                ],
+                marker_color=["#FF6B6B", "#4ECDC4"],
+                text=[
+                    f"{selected_book['average_goodreads_rating']:.2f}",
+                    f"{selected_book['average_bookclub_rating']:.2f}",
+                ],
+                textposition="auto",
+            ),
+        )
+
+        fig_comp.update_layout(
+            title="Rating Comparison",
+            yaxis_title="Rating (1-5)",
+            yaxis={"range": [0, 5]},
+            template="plotly_dark",
+            height=350,
+            margin={"l": 0, "r": 0, "t": 50, "b": 0},
+        )
+        st.plotly_chart(fig_comp, use_container_width=True)
+
+    with col3:
         # Member ratings radar chart
         st.subheader("👥 Member Ratings")
         member_ratings_data = []
@@ -495,101 +565,6 @@ def create_selected_book_analysis(
             st.plotly_chart(fig_radar, use_container_width=True)
         else:
             st.info("No member ratings available for this book")
-
-    with col2:
-        # Rating comparisons
-        st.subheader("📊 Rating Analysis")
-
-        # Club vs Goodreads comparison
-        fig_comp = go.Figure()
-        fig_comp.add_trace(
-            go.Bar(
-                x=["Goodreads", "Our Club"],
-                y=[
-                    selected_book["average_goodreads_rating"],
-                    selected_book["average_bookclub_rating"],
-                ],
-                marker_color=["#FF6B6B", "#4ECDC4"],
-                text=[
-                    f"{selected_book['average_goodreads_rating']:.2f}",
-                    f"{selected_book['average_bookclub_rating']:.2f}",
-                ],
-                textposition="auto",
-            ),
-        )
-
-        fig_comp.update_layout(
-            title="Rating Comparison",
-            yaxis_title="Rating (1-5)",
-            yaxis={"range": [0, 5]},
-            template="plotly_dark",
-            height=350,
-            margin={"l": 0, "r": 0, "t": 50, "b": 0},
-        )
-        st.plotly_chart(fig_comp, use_container_width=True)
-
-        # Show difference
-        diff = selected_book["average_bookclub_rating"] - selected_book["average_goodreads_rating"]
-        if diff > 0:
-            st.success(f"📈 We rated it {diff:.2f} points higher than Goodreads!")
-        elif diff < 0:
-            st.error(f"📉 We rated it {abs(diff):.2f} points lower than Goodreads")
-        else:
-            st.info("🎯 Perfect match with Goodreads rating!")
-
-    with col3:
-        # Book ranking and statistics
-        st.subheader("📈 Book Rankings")
-
-        # Position in overall rankings - more informative display
-        all_ratings = df["average_bookclub_rating"].drop_nulls().sort(descending=True)
-        book_position = None
-        for i, rating in enumerate(all_ratings):
-            if (
-                rating is not None
-                and abs(rating - selected_book["average_bookclub_rating"]) < 0.001
-            ):
-                book_position = i + 1
-                break
-
-        if book_position:
-            # Calculate percentile for better understanding
-            percentile = ((len(df) - book_position + 1) / len(df)) * 100
-
-            # Create informative ranking display
-
-            # Big ranking number
-            st.markdown(
-                f"""
-            <div style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                        padding: 2rem; border-radius: 15px; color: white; margin: 1rem 0;">
-                <h1 style="font-size: 4rem; margin: 0; color: white;">#{book_position}</h1>
-                <h3 style="margin: 0.5rem 0; color: white;">out of {len(df)} books</h3>
-                <h4 style="margin: 0; opacity: 0.9; color: white;">Top {int(percentile)}% of club ratings</h4>
-            </div>
-            """,
-                unsafe_allow_html=True,
-            )
-
-            # Ranking breakdown
-            if percentile >= 90:
-                st.success("🏆 **Exceptional!** This is one of our highest-rated books!")
-            elif percentile >= 75:
-                st.info("⭐ **Great choice!** Well above average rating.")
-            elif percentile >= 50:
-                st.warning("📚 **Solid book.** Above median rating.")
-            elif percentile >= 25:
-                st.warning("📖 **Mixed reception.** Below average rating.")
-            else:
-                st.error("😬 **Tough crowd.** This one didn't land well with us.")
-
-            # Additional context
-            books_above = book_position - 1
-            books_below = len(df) - book_position
-            st.caption(f"📈 {books_above} books rated higher • {books_below} books rated lower")
-
-        else:
-            st.warning("Could not determine ranking for this book.")
 
     return selected_book
 
@@ -1092,23 +1067,6 @@ def create_book_selector(df: pl.DataFrame, members: list[str]) -> None:
                 """,
                     unsafe_allow_html=True,
                 )
-
-                # Ranking breakdown
-                if percentile >= 90:
-                    st.success("🏆 **Exceptional!** This is one of our highest-rated books!")
-                elif percentile >= 75:
-                    st.info("⭐ **Great choice!** Well above average rating.")
-                elif percentile >= 50:
-                    st.warning("📚 **Solid book.** Above median rating.")
-                elif percentile >= 25:
-                    st.warning("📖 **Mixed reception.** Below average rating.")
-                else:
-                    st.error("😬 **Tough crowd.** This one didn't land well with us.")
-
-                # Additional context
-                books_above = book_position - 1
-                books_below = len(df) - book_position
-                st.caption(f"📈 {books_above} books rated higher • {books_below} books rated lower")
 
             else:
                 st.warning("Could not determine ranking for this book.")
