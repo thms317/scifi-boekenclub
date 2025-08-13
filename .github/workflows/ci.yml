@@ -21,11 +21,18 @@ jobs:
         uses: astral-sh/setup-uv@v6
 
       - name: Install dependencies
-        run: uv sync --group dev
+        run: uv sync --frozen
 
-      - name: Run pre-commit checks
-        uses: pre-commit-ci/lite-action@v1.1.0
-        if: always()
+      - name: Run Formatting Checks
+        run: |
+          set -e
+          echo "Running ruff"
+          uv run ruff check --output-format=github .
+          echo "Running ty"
+          uv run ty check .
+          echo "Running pydoclint"
+          uv run pydoclint .
+          echo "Formatting checks passed ✅"
 
       - name: Run tests with coverage report
         run: uv run pytest -v tests --cov=src --cov-report term

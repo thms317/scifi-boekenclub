@@ -1,4 +1,4 @@
-.PHONY: setup clean test tree lint
+.PHONY: setup clean test tree lint dashboard update-pre-commit update-venv validate-update update
 
 .DEFAULT_GOAL := setup
 
@@ -60,3 +60,27 @@ lint:
 dashboard:
 	@echo "Building dashboard locally..."
 	@uv run streamlit run src/scifi/dashboard.py
+
+# Update pre-commit hooks to latest versions
+update-pre-commit:
+	@echo "Updating pre-commit hooks..."
+	@uv run pre-commit autoupdate
+
+# Update virtual environment dependencies to latest versions
+update-venv:
+	@echo "Updating virtual environment dependencies..."
+	@uv sync --upgrade
+
+# Validate synchronization between venv and pre-commit hook versions
+validate-update:
+	@for tool in ruff ty pydoclint; do \
+		pc_ver=$$(grep -v '^\s*#' .pre-commit-config.yaml | grep -A1 "$$tool" | grep rev | sed 's/.*v//' | tr -d ' ' | sed 's/://'); \
+		uv_ver=$$(awk '/\[\[package\]\]/{p=0} /name = "'"$$tool"'"/{p=1} p && /version = /{print $$NF; exit}' uv.lock | tr -d '"'); \
+		[ -n "$$pc_ver" ] && [ -n "$$uv_ver" ] && \
+		[ "$$(echo $$pc_ver | cut -d. -f1-2)" != "$$(echo $$uv_ver | cut -d. -f1-2)" ] && \
+		echo "❌ $$tool: $$pc_ver vs $$uv_ver"; \
+	done; true
+
+# Update both pre-commit hooks and virtual environment dependencies
+update: update-pre-commit update-venv validate-update
+	@echo "All dependencies updated and synced"
