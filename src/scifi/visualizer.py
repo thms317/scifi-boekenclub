@@ -5,6 +5,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import polars as pl
 
+from .members import BookClubMembers
+
 
 def rating_to_color(rating: float, alpha: float = 0.3) -> str:
     """Convert a rating to an RGBA color string.
@@ -71,42 +73,74 @@ def create_member_rating_heatmap(df: pl.DataFrame, member_cols: list[str]) -> go
     go.Figure
         A Plotly heatmap figure showing member ratings.
     """
-    # Ensure member columns are cast to Float64 for proper matrix behavior
-    df_processed = df.with_columns([pl.col(col).cast(pl.Float64) for col in member_cols])
+    # Get ordered member names starting with Thirsa (index 0)
+    all_members = BookClubMembers.get_all_members()
+    ordered_member_names = [member.name for member in sorted(all_members, key=lambda x: x.index)]
 
-    rating_values = df_processed.select(member_cols).to_numpy().T
-    fig_heatmap = go.Figure(
+    # Filter to only include members that are in member_cols and reverse order for display
+    ordered_member_cols = [name for name in ordered_member_names if name in member_cols]
+    reversed_member_cols = list(reversed(ordered_member_cols))  # Reverse so Thirsa is at top
+
+    # Ensure member columns are cast to Float64 for proper matrix behavior
+    df_processed = df.with_columns([pl.col(col).cast(pl.Float64) for col in reversed_member_cols])
+
+    # Get book titles for hover text
+    book_titles = df_processed.select("title").to_series().to_list()
+
+    rating_values = df_processed.select(reversed_member_cols).to_numpy().T
+
+    # Create custom hover text that handles null values
+    hover_text = []
+    for i, member in enumerate(reversed_member_cols):
+        member_row = []
+        for j, book_title in enumerate(book_titles):
+            rating = rating_values[i, j]
+            if np.isnan(rating):
+                member_row.append(f"<b>{member}</b><br>Book: {book_title}<br>No rating")
+            else:
+                member_row.append(f"<b>{member}</b><br>Book: {book_title}<br>Rating: {rating:.1f}")
+        hover_text.append(member_row)
+
+    fig = go.Figure(
         data=go.Heatmap(
             z=rating_values,
-            x=[f"Book {i + 1}" for i in range(rating_values.shape[1])],
-            y=member_cols,
-            colorscale="RdBu",
-            colorbar={"title": "Rating"},
+            x=book_titles,
+            y=reversed_member_cols,
+            colorscale=[
+                [0, "#d9f2d9"],
+                [0.25, "#a8dba8"],
+                [0.5, "#74c476"],
+                [0.75, "#31a354"],
+                [1, "#006d2c"],
+            ],  # Darker light green for visibility
+            showscale=False,  # Remove colorbar legend
+            hovertemplate="%{customdata}<extra></extra>",
+            customdata=hover_text,
+            zmin=1,  # Set minimum value to 1 to exclude nulls from color mapping
+            zmax=5,  # Set maximum value to 5
         )
     )
-    fig_heatmap.update_layout(title="🤝 Member Rating Heatmap")
-    return fig_heatmap
 
-
-def create_member_alignment_matrix(df: pl.DataFrame, member_cols: list[str]) -> go.Figure:
-    """Create a correlation matrix showing member rating alignment.
-
-    Parameters
-    ----------
-    df : pl.DataFrame
-        The processed book club data containing member rating columns.
-    member_cols : list[str]
-        List of column names representing club members.
-
-    Returns
-    -------
-    go.Figure
-        A Plotly imshow figure showing member rating correlations.
-    """
-    matrix = df.select(member_cols).to_pandas().corr()
-    return px.imshow(
-        matrix, text_auto=True, color_continuous_scale="YlGnBu", title="💬 Member Alignment Matrix"
+    fig.update_layout(
+        xaxis_title="",  # Remove x-axis label
+        xaxis={
+            "showticklabels": False,
+            "showgrid": True,
+            "gridcolor": "white",
+            "gridwidth": 2,
+        },  # Grid lines
+        yaxis={
+            "dtick": 1,
+            "tickfont": {"size": 10},
+            "showgrid": True,
+            "gridcolor": "white",
+            "gridwidth": 2,
+        },  # Grid lines
+        height=max(300, len(reversed_member_cols) * 40),  # Reduce height per member
+        plot_bgcolor="white",
     )
+
+    return fig
 
 
 def create_club_vs_goodreads_discrepancies(df: pl.DataFrame) -> go.Figure:

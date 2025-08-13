@@ -1,16 +1,14 @@
 """
-🚀 Comprehensive Sci-Fi Book Club Analytics Dashboard
+🚀 Sci-Fi Book Club Analytics Dashboard
 
 This dashboard provides deep insights into your book club's reading patterns and preferences.
 Key features:
-- Fixed overview scatter plot with trendline and 1-5 axes range
+- Overview scatter plot with trendline and 1-5 axes range
 - Member correlation analysis with clickable shared book exploration
 - Time-series analysis with decade publication views
 - Book deep dive with ranking explanations
-- Beautiful, modern UI with uniform metric cards
 
 To run: streamlit run dashboard.py
-Make sure bookclub_processed.csv is in the data/ directory!
 
 Built with ❤️ using Streamlit, Plotly, and Polars
 """
@@ -23,9 +21,15 @@ import plotly.express as px
 import plotly.graph_objects as go
 import polars as pl
 import streamlit as st
+from scipy import stats
 
 from scifi.data_processor import process_bookclub_data
 from scifi.members import BookClubMembers
+from scifi.visualizer import (
+    create_club_vs_goodreads_discrepancies,
+    create_member_rating_heatmap,
+    create_polarizing_books_analysis,
+)
 
 # Page configuration
 st.set_page_config(
@@ -173,31 +177,50 @@ def create_current_book_banner(bookclub_processed_df: pl.DataFrame) -> None:
     author = str(current_book["author"])
     date_formatted = current_book["date_parsed"].strftime("%b %d")
 
-    # Handle ratings
-    goodreads_rating = current_book.get("average_goodreads_rating")
-    goodreads_display = (
-        f"{goodreads_rating:.1f}" if pd.notna(goodreads_rating) and goodreads_rating > 0 else "N/A"
-    )
+    # Handle ratings and book details
+    # Get publication year and pages
+    pub_year = current_book.get("original_publication_year")
+    year_display = f"{int(pub_year)}" if pd.notna(pub_year) and pub_year > 0 else "N/A"
 
-    club_rating = current_book.get("average_bookclub_rating", 0) if not is_upcoming else "TBD"
-    club_display = club_rating if isinstance(club_rating, str) else f"{club_rating:.1f}"
+    pages = current_book.get("number_of_pages")
+    pages_display = f"{int(pages)}" if pd.notna(pages) and pages > 0 else "N/A"
 
     # Create countdown text
     if is_upcoming:
         if days_diff == 0:
-            countdown_text = "📅 TODAY"
+            countdown_text = f"{date_formatted} (TODAY)"
         elif days_diff == 1:
-            countdown_text = "📅 TOMORROW"
+            countdown_text = f"{date_formatted} (TOMORROW)"
         else:
-            countdown_text = f"📅 {days_diff} days"
+            countdown_text = f"{date_formatted} ({days_diff} days left)"
     else:
-        countdown_text = f"📚 {days_diff} days ago"
+        countdown_text = f"{date_formatted} ({days_diff} days ago)"
 
-    # Compact single-row banner
-    st.markdown(f"""
-    **📖 {title}** by *{author}* • {countdown_text} • {date_formatted} • ⭐ {goodreads_display} • 🎯 {club_display}
-    """)
-    st.divider()
+    # Styled current book banner
+    st.markdown(
+        f"""
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                color: white;
+                margin: 1rem 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;">
+        <div>
+            <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📖 Current Book</div>
+            <div style="font-size: 1.3rem;">
+                <strong>{title}</strong> by <em>{author}</em> <span style="font-size: 1.0rem;">({year_display} | {pages_display} pages)</span>
+            </div>
+        </div>
+        <div style="font-size: 1.2rem; text-align: right;">
+            Next Bookclub Meeting 📅<br><span style="font-size: 1.2rem;">{countdown_text}</span>
+        </div>
+    </div>
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[str]) -> None:
@@ -361,6 +384,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
             "original_publication_year",
             "number_of_pages",
             "suggested_by",
+            "date_parsed",
             "average_goodreads_rating",
             "average_bookclub_rating",
         ],
@@ -372,6 +396,9 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
     )
     ranking_df.insert(0, "Rank", range(1, len(ranking_df) + 1))
 
+    # Format date column
+    ranking_df["date_parsed"] = pd.to_datetime(ranking_df["date_parsed"]).dt.strftime("%b %d, %Y")
+
     # Rename columns for better display
     ranking_df.columns = [
         "Rank",
@@ -380,6 +407,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
         "Year",
         "Pages",
         "Suggested By",
+        "Read on",
         "Goodreads Rating",
         "Club Rating",
     ]
@@ -401,6 +429,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
             "Year": st.column_config.NumberColumn("Year", width="small"),
             "Pages": st.column_config.NumberColumn("Pages", format="%.0f", width="small"),
             "Suggested By": st.column_config.TextColumn("Suggested By", width="small"),
+            "Read on": st.column_config.TextColumn("Read on", width="medium"),
             "Goodreads Rating": st.column_config.NumberColumn(
                 "Goodreads",
                 format="%.2f",
@@ -591,175 +620,47 @@ def create_member_comparison(df: pl.DataFrame, members: list[str]) -> None:
 
     stats_df = pl.DataFrame(member_stats)
 
-    # Create tabs for different views
-    tab1, tab2 = st.tabs(["📊 Summary Stats", "🔍 Individual Book Ratings"])
+    # Create clean comparison charts
+    col1, col2 = st.columns(2)
 
-    with tab1:
-        # Create clean comparison charts
-        col1, col2 = st.columns(2)
-
-        with col1:
-            # Rating counts
-            fig_counts = go.Figure()
-            fig_counts.add_trace(
-                go.Bar(
-                    x=stats_df["Member"],
-                    y=stats_df["Count"],
-                    marker_color="lightblue",
-                    text=stats_df["Count"],
-                    textposition="auto",
-                ),
-            )
-            fig_counts.update_layout(
-                title="📊 Books Rated by Each Member",
-                template="plotly_dark",
-                height=400,
-            )
-            st.plotly_chart(fig_counts, use_container_width=True)
-
-        with col2:
-            # Average ratings
-            fig_avg = go.Figure()
-            fig_avg.add_trace(
-                go.Bar(
-                    x=stats_df["Member"],
-                    y=stats_df["Average"],
-                    marker_color="lightcoral",
-                    text=[f"{avg:.2f}" for avg in stats_df["Average"]],
-                    textposition="auto",
-                ),
-            )
-            fig_avg.update_layout(
-                title="⭐ Average Rating by Member",
-                yaxis={"range": [1, 5]},
-                template="plotly_dark",
-                height=400,
-            )
-            st.plotly_chart(fig_avg, use_container_width=True)
-
-        # Show member activity summary table
-        st.subheader("📋 Member Activity Summary")
-
-        # Create a nice summary table
-        summary_data = []
-        for member in members:
-            ratings = df[member].drop_nulls()
-            member_books = df.filter(pl.col(member).is_not_null())
-
-            if len(ratings) > 0:
-                # Get favorite book (highest rated)
-                favorite_book = member_books.filter(pl.col(member) == ratings.max())[
-                    "title"
-                ].to_list()[0]
-
-                summary_data.append(
-                    {
-                        "Member": member,
-                        "Books Rated": len(ratings),
-                        "Average Rating": f"{ratings.mean():.2f}",
-                        "Favorite Book": str(favorite_book),
-                    },
-                )
-            else:
-                summary_data.append(
-                    {
-                        "Member": member,
-                        "Books Rated": 0,
-                        "Average Rating": "N/A",
-                        "Favorite Book": "N/A",
-                    },
-                )
-
-        summary_df = pd.DataFrame(summary_data)
-        st.dataframe(summary_df, use_container_width=True, hide_index=True)
-
-    with tab2:
-        # Individual book ratings scatter plot with violin plot background
-        st.subheader("🔍 Individual Book Ratings by Member")
-        st.write(
-            "Scatter points show individual book ratings with violin plot distributions in the background",
+    with col1:
+        # Rating counts
+        fig_counts = go.Figure()
+        fig_counts.add_trace(
+            go.Bar(
+                x=stats_df["Member"],
+                y=stats_df["Count"],
+                marker_color="lightblue",
+                text=stats_df["Count"],
+                textposition="auto",
+            ),
         )
-
-        # Create combined plot
-        fig_individual = go.Figure()
-
-        df_pandas = df.to_pandas()
-        colors = ["lightblue", "lightcoral", "lightgreen", "orange", "purple", "pink"]
-
-        # First, add violin plots as background (more transparent)
-        for i, member in enumerate(members):
-            member_ratings = df[member].drop_nulls().to_list()
-            if member_ratings and len(member_ratings) >= 3:  # Need at least 3 ratings for violin
-                fig_individual.add_trace(
-                    go.Violin(
-                        x=[i] * len(ratings),
-                        y=member_ratings,
-                        name=f"{member} Distribution",
-                        line_color=colors[i % len(colors)],
-                        fillcolor=colors[i % len(colors)],
-                        opacity=0.3,  # Make transparent for background
-                        side="both",
-                        width=0.6,
-                        points=False,  # Don't show individual points on violin
-                        box_visible=False,  # Don't show box plot
-                        meanline_visible=False,
-                        showlegend=False,  # Don't clutter legend
-                    ),
-                )
-
-        # Then, add scatter points on top
-        for i, member in enumerate(members):
-            member_books_mask = df_pandas[member].notna()
-            member_books_df = df_pandas[member_books_mask]
-            if len(member_books_df) > 0:
-                # Add some horizontal spread manually to avoid overlap
-                rng = np.random.default_rng()
-                x_positions = [i + rng.uniform(-0.15, 0.15) for _ in range(len(member_books_df))]
-
-                fig_individual.add_trace(
-                    go.Scatter(
-                        x=x_positions,
-                        y=member_books_df[member],
-                        mode="markers",
-                        name=member,
-                        marker={
-                            "color": colors[i % len(colors)],
-                            "size": 8,
-                            "opacity": 0.8,  # More opaque than violin
-                            "line": {"width": 1, "color": "white"},
-                        },
-                        text=member_books_df["title"],
-                        hovertemplate="<b>%{text}</b><br>"
-                        f"{member}: %{{y}}<br>"
-                        "Author: %{customdata[0]}<br>"
-                        "Year: %{customdata[1]}<br>"
-                        "<extra></extra>",
-                        customdata=member_books_df[["author", "original_publication_year"]].values,
-                    ),
-                )
-
-        fig_individual.update_layout(
-            title="Individual Book Ratings with Distribution Background",
-            xaxis={
-                "tickvals": list(range(len(members))),
-                "ticktext": members,
-                "title": "Member",
-            },
-            yaxis_title="Rating",
-            yaxis={"range": [0.5, 5.5]},
+        fig_counts.update_layout(
+            title="📊 Books Rated by Each Member",
             template="plotly_dark",
-            height=600,
-            showlegend=True,
-            legend={
-                "orientation": "h",
-                "yanchor": "bottom",
-                "y": 1.02,
-                "xanchor": "right",
-                "x": 1,
-            },
+            height=400,
         )
+        st.plotly_chart(fig_counts, use_container_width=True)
 
-        st.plotly_chart(fig_individual, use_container_width=True)
+    with col2:
+        # Average ratings
+        fig_avg = go.Figure()
+        fig_avg.add_trace(
+            go.Bar(
+                x=stats_df["Member"],
+                y=stats_df["Average"],
+                marker_color="lightcoral",
+                text=[f"{avg:.2f}" for avg in stats_df["Average"]],
+                textposition="auto",
+            ),
+        )
+        fig_avg.update_layout(
+            title="⭐ Average Rating by Member",
+            yaxis={"range": [1, 5]},
+            template="plotly_dark",
+            height=400,
+        )
+        st.plotly_chart(fig_avg, use_container_width=True)
 
 
 def create_time_analysis(df: pl.DataFrame) -> None:
@@ -832,7 +733,32 @@ def create_time_analysis(df: pl.DataFrame) -> None:
         df_pandas["average_bookclub_rating"].rolling(window=7, min_periods=1).mean()
     )
 
+    # Calculate linear trendline
+    # Convert dates to numeric for linear regression
+    df_pandas["date_numeric"] = pd.to_numeric(df_pandas["date_parsed"])
+    valid_ratings = df_pandas.dropna(subset=["average_bookclub_rating"])
+
+    if len(valid_ratings) > 1:
+        slope, intercept, r_value, p_value, std_err = stats.linregress(
+            valid_ratings["date_numeric"], valid_ratings["average_bookclub_rating"]
+        )
+
+        # Create trendline values
+        trendline_y = slope * valid_ratings["date_numeric"] + intercept
+
     fig_trend = go.Figure()
+
+    # Linear trendline (background layer)
+    if len(valid_ratings) > 1:
+        fig_trend.add_trace(
+            go.Scatter(
+                x=valid_ratings["date_parsed"],
+                y=trendline_y,
+                mode="lines",
+                name="Linear Trend",
+                line={"color": "grey", "width": 1, "dash": "dash"},
+            ),
+        )
 
     # Individual points
     fig_trend.add_trace(
@@ -847,7 +773,7 @@ def create_time_analysis(df: pl.DataFrame) -> None:
         ),
     )
 
-    # Trend line
+    # 7-book moving average (foreground layer)
     fig_trend.add_trace(
         go.Scatter(
             x=df_pandas["date_parsed"],
@@ -868,222 +794,30 @@ def create_time_analysis(df: pl.DataFrame) -> None:
     )
     st.plotly_chart(fig_trend, use_container_width=True)
 
-    st.markdown("---")
-    st.write("**Reading Trends and Patterns Over Time**")
-
-    # Calculate yearly trends
-    yearly_data = (
-        df_pandas.groupby("year")
-        .agg(
-            {
-                "average_bookclub_rating": "mean",
-                "average_goodreads_rating": "mean",
-                "title": "count",
-            },
-        )
-        .reset_index()
-    )
-    yearly_data.columns = ["year", "club_rating", "goodreads_rating", "book_count"]
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        # Rating trends
-        fig_trend_yearly = go.Figure()
-        fig_trend_yearly.add_trace(
-            go.Scatter(
-                x=yearly_data["year"],
-                y=yearly_data["club_rating"],
-                name="Club Average",
-                line={"color": "cyan", "width": 3},
-                mode="lines+markers",
-            ),
-        )
-        fig_trend_yearly.add_trace(
-            go.Scatter(
-                x=yearly_data["year"],
-                y=yearly_data["goodreads_rating"],
-                name="Goodreads Average",
-                line={"color": "orange", "width": 3},
-                mode="lines+markers",
-            ),
-        )
-        fig_trend_yearly.update_layout(
-            title="Average Ratings by Year",
-            yaxis={"range": [1, 5]},
-            template="plotly_dark",
-            height=400,
-        )
-        st.plotly_chart(fig_trend_yearly, use_container_width=True)
-
-    with col2:
-        # Books per year trend
-        fig_count_trend = go.Figure()
-        fig_count_trend.add_trace(
-            go.Bar(
-                x=yearly_data["year"],
-                y=yearly_data["book_count"],
-                marker_color="lightgreen",
-                text=yearly_data["book_count"],
-                textposition="auto",
-            ),
-        )
-        fig_count_trend.update_layout(
-            title="Books Read Per Year Trend",
-            template="plotly_dark",
-            height=400,
-        )
-        st.plotly_chart(fig_count_trend, use_container_width=True)
-
-
-def create_book_selector(df: pl.DataFrame, members: list[str]) -> None:
-    """Create interactive book selector with detailed view"""
-    st.subheader("🔍 Book Deep Dive")
-
-    # Book selector
-    book_titles = sorted(df["title"].unique().tolist())
-    selected_book_title = st.selectbox("Select a book for detailed analysis:", book_titles)
-
-    # Get selected book data
-    selected_book = df.filter(pl.col("title") == selected_book_title).to_pandas().iloc[0]
-
-    # Create detailed book view
-    st.markdown(
-        f"""
-    <div class="book-detail-card">
-        <h2>📖 {selected_book["title"]}</h2>
-        <h3>✍️ by {selected_book["author"]}</h3>
-        <div style="display: flex; justify-content: space-between; margin: 1rem 0;">
-            <div><strong>Published:</strong> {selected_book["original_publication_year"]}</div>
-            <div><strong>Suggested by:</strong> {selected_book["suggested_by"]}</div>
-            <div><strong>Goodreads:</strong> ⭐ {selected_book["average_goodreads_rating"]:.2f}</div>
-            <div><strong>Club Average:</strong> 🎯 {selected_book["average_bookclub_rating"]:.2f}</div>
-        </div>
-    </div>
-    """,
-        unsafe_allow_html=True,
-    )
-
-    # Member ratings visualization for selected book
-    member_ratings = []
-    for member in members:
-        rating = selected_book[member]
-        if not pd.isna(rating):
-            member_ratings.append({"Member": member, "Rating": rating})
-
-    if member_ratings:
-        pl.DataFrame(member_ratings)
-
-        # Create radar chart for member ratings
-        fig = go.Figure()
-
-        ratings_list = [r["Rating"] for r in member_ratings]
-        members_list = [r["Member"] for r in member_ratings]
-
-        fig.add_trace(
-            go.Scatterpolar(
-                r=[*ratings_list, ratings_list[0]],  # Close the radar
-                theta=[*members_list, members_list[0]],
-                fill="toself",
-                name=selected_book["title"],
-                line_color="rgb(255, 195, 0)",
-            ),
-        )
-
-        fig.update_layout(
-            polar={
-                "radialaxis": {
-                    "visible": True,
-                    "range": [0, 5],
-                },
-                "angularaxis": {
-                    "tickmode": "array",
-                    "tickvals": list(range(len(members_list))),
-                    "ticktext": members_list,
-                },
-            },
-            showlegend=True,
-            title=f"Member Ratings for '{selected_book['title']}'"[:50] + "...",
-            template="plotly_dark",
-            height=550,
-            margin={"l": 80, "r": 80, "t": 100, "b": 80},
-        )
-
-        st.plotly_chart(fig, use_container_width=True)
-
-        # Comparison with club averages
-        st.subheader("📊 How does this book compare?")
-
-        col1, col2 = st.columns(2)
-
-        with col1:
-            # Rating comparison
-            fig_comp = go.Figure()
-            fig_comp.add_trace(
-                go.Bar(
-                    x=["Goodreads", "Our Club"],
-                    y=[
-                        selected_book["average_goodreads_rating"],
-                        selected_book["average_bookclub_rating"],
-                    ],
-                    marker_color=["lightblue", "lightcoral"],
-                ),
-            )
-            fig_comp.update_layout(
-                title="Rating Comparison",
-                yaxis_title="Rating",
-                template="plotly_dark",
-                height=400,
-            )
-            st.plotly_chart(fig_comp, use_container_width=True)
-
-        with col2:
-            # Position in overall rankings - more informative display
-            all_ratings = df["average_bookclub_rating"].drop_nulls().sort(descending=True)
-            book_position = None
-            for i, rating in enumerate(all_ratings):
-                if (
-                    rating is not None
-                    and abs(rating - selected_book["average_bookclub_rating"]) < 0.001
-                ):
-                    book_position = i + 1
-                    break
-
-            if book_position:
-                # Calculate percentile for better understanding
-                percentile = ((len(df) - book_position + 1) / len(df)) * 100
-
-                # Create informative ranking display
-
-                # Big ranking number
-                st.markdown(
-                    f"""
-                <div style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                            padding: 2rem; border-radius: 15px; color: white; margin: 1rem 0;">
-                    <h1 style="font-size: 4rem; margin: 0; color: white;">#{book_position}</h1>
-                    <h3 style="margin: 0.5rem 0; color: white;">out of {len(df)} books</h3>
-                    <h4 style="margin: 0; opacity: 0.9; color: white;">Top {int(percentile)}% of club ratings</h4>
-                </div>
-                """,
-                    unsafe_allow_html=True,
-                )
-
-            else:
-                st.warning("Could not determine ranking for this book.")
-
 
 def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
     """Create advanced analytics section"""
     # CORRELATION ANALYSIS SECTION
     st.markdown("### 📊 Correlation Analysis")
 
+    # Filter to active members with 5+ ratings
+    active_members = []
+    for member in members:
+        rating_count = df[member].drop_nulls().len()
+        if rating_count >= 5:
+            active_members.append(member)
+
+    if len(active_members) < 2:
+        st.warning("Not enough members with 5+ ratings to create correlation analysis.")
+        return
+
     # Create correlation matrix with book details
     correlation_data = []
-    correlation_matrix = np.zeros((len(members), len(members)))
+    correlation_matrix = np.zeros((len(active_members), len(active_members)))
     correlation_books = {}  # Store books for each pair
 
-    for i, member1 in enumerate(members):
-        for j, member2 in enumerate(members):
+    for i, member1 in enumerate(active_members):
+        for j, member2 in enumerate(active_members):
             if i == j:
                 correlation_matrix[i][j] = 1.0
             elif i < j:  # Only calculate upper triangle
@@ -1123,94 +857,81 @@ def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
                     correlation_matrix[i][j] = 0
                     correlation_matrix[j][i] = 0
 
-    # Create enhanced heatmap
+    # Create enhanced heatmap with better styling
+    # Reverse matrix rows to match reversed y-axis labels (diagonal at top-left)
+    reversed_matrix = np.flipud(correlation_matrix)
+
     fig = go.Figure(
         data=go.Heatmap(
-            z=correlation_matrix,
-            x=members,
-            y=members,
-            colorscale="RdBu",
-            zmid=0,
-            text=np.round(correlation_matrix, 3),
+            z=reversed_matrix,
+            x=active_members,
+            y=list(reversed(active_members)),  # Reverse y-axis so diagonal starts top-left
+            colorscale="RdYlGn",  # Red-Yellow-Green: Red=0, Yellow=0.5, Green=1
+            zmin=-0.25,
+            zmax=1,
+            text=np.round(reversed_matrix, 3),
             texttemplate="%{text}",
-            textfont={"size": 14},
+            textfont={"size": 12, "color": "black"},
             hoverongaps=False,
-            customdata=np.array(
-                [
-                    [f"{members[i]}-{members[j]}" for j in range(len(members))]
-                    for i in range(len(members))
-                ],
-            ),
-        ),
+            hovertemplate="<b>%{y} vs %{x}</b><br>Correlation: %{z:.3f}<extra></extra>",
+        )
     )
 
     fig.update_layout(
-        title="Member Rating Correlations (Dark Blue = Similar Taste)",
-        template="plotly_dark",
-        height=500,
+        title="📊 Member Rating Correlations (Green = Similar Taste)",
+        template="plotly_white",
+        height=600,
+        width=600,
         xaxis_title="Member",
         yaxis_title="Member",
+        xaxis={"side": "bottom"},
+        font={"size": 12},
     )
 
-    # Display correlation plot with click detection
+    # Display correlation plot
     st.plotly_chart(fig, use_container_width=True, key="correlation_heatmap")
 
-    # Alternative: Use selectbox for member pair selection instead of click detection
-    st.markdown("**Select Member Pair to See Shared Books:**")
-    col1, col2 = st.columns(2)
-    with col1:
-        member1_select = st.selectbox("First Member:", members, key="corr_member1")
-    with col2:
-        member2_select = st.selectbox(
-            "Second Member:",
-            [m for m in members if m != member1_select],
-            key="corr_member2",
-        )
 
-    # Show shared books for selected pair
-    if member1_select != member2_select:
-        pair_key = (
-            f"{member1_select}-{member2_select}"
-            if f"{member1_select}-{member2_select}" in correlation_books
-            else f"{member2_select}-{member1_select}"
-        )
+def create_temp_analysis(df: pl.DataFrame, members: list[str]) -> None:
+    """Create temporary analysis page with visualizations from visualizer module"""
+    # Current Book Banner at the top
+    create_current_book_banner(df)
 
-        if pair_key in correlation_books:
-            st.markdown("---")
-            st.subheader(f"📚 Shared Books: {member1_select} & {member2_select}")
+    st.subheader("🧪 Temporary Analysis - Visualizer Module Functions")
+    st.write(
+        "This page contains unique visualizations from the visualizer module that aren't yet integrated into other sections."
+    )
 
-            shared_books_df = correlation_books[pair_key]
+    # Section 1: Member Rating Heatmap
+    st.markdown("---")
+    st.subheader("🔥 Member Rating Heatmap")
 
-            # Display the shared books nicely
-            col1, col2, col3, col4 = st.columns(4)
-            for _, book in shared_books_df.iterrows():
-                with col1:
-                    st.write(f"**{book['title']}** by {book['author']}")
-                with col2:
-                    st.metric(member1_select, f"{book[member1_select]:.1f}")
-                with col3:
-                    st.metric(member2_select, f"{book[member2_select]:.1f}")
-                with col4:
-                    diff = book[member1_select] - book[member2_select]
-                    st.metric("Diff", f"{diff:+.1f}")
+    try:
+        fig_heatmap = create_member_rating_heatmap(df, members)
+        st.plotly_chart(fig_heatmap, use_container_width=True)
+    except (ValueError, KeyError, AttributeError) as e:
+        st.error(f"Error creating member rating heatmap: {e}")
 
-            # Show correlation for this pair
-            member1_idx = members.index(member1_select)
-            member2_idx = members.index(member2_select)
-            corr_value = correlation_matrix[member1_idx][member2_idx]
+    # Section 2: Club vs Goodreads Discrepancies
+    st.markdown("---")
+    st.subheader("🎯 Club vs Goodreads Discrepancies")
 
-            if corr_value > 0.7:
-                st.success(f"🔥 Very similar taste! Correlation: {corr_value:.3f}")
-            elif corr_value > 0.4:
-                st.info(f"👍 Similar taste. Correlation: {corr_value:.3f}")
-            elif corr_value > 0:
-                st.warning(f"😐 Somewhat similar. Correlation: {corr_value:.3f}")
-            else:
-                st.error(f"👎 Different tastes. Correlation: {corr_value:.3f}")
-        else:
-            st.info(
-                f"No shared books with enough ratings between {member1_select} and {member2_select}.",
-            )
+    try:
+        fig_discrepancies = create_club_vs_goodreads_discrepancies(df)
+        st.plotly_chart(fig_discrepancies, use_container_width=True)
+    except (ValueError, KeyError, AttributeError) as e:
+        st.error(f"Error creating discrepancies chart: {e}")
+
+    # Section 4: Most Polarizing Books
+    st.markdown("---")
+    st.subheader("🤯 Most Polarizing Books")
+    st.write("Books with the highest rating standard deviation - where members disagreed the most.")
+
+    try:
+        fig_polarizing = create_polarizing_books_analysis(df, members)
+        st.plotly_chart(fig_polarizing, use_container_width=True)
+    except (ValueError, KeyError, AttributeError) as e:
+        st.error(f"Error creating polarizing books chart: {e}")
 
 
 def main() -> None:
@@ -1235,8 +956,8 @@ def main() -> None:
             "📊 Overview",
             "👥 Member Insights",
             "📅 Time Analysis",
-            "🔍 Book Explorer",
             "🔬 Advanced Analytics",
+            "🧪 Temp Analysis",
         ],
     )
 
@@ -1252,11 +973,11 @@ def main() -> None:
     elif page == "📅 Time Analysis":
         create_time_analysis(bookclub_processed_df)
 
-    elif page == "🔍 Book Explorer":
-        create_book_selector(bookclub_processed_df, members)
-
     elif page == "🔬 Advanced Analytics":
         create_advanced_analytics(bookclub_processed_df, members)
+
+    elif page == "🧪 Temp Analysis":
+        create_temp_analysis(bookclub_processed_df, members)
 
     # Footer
     st.markdown("---")
