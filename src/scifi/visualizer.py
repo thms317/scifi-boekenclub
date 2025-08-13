@@ -122,13 +122,9 @@ def create_member_rating_heatmap(df: pl.DataFrame, member_cols: list[str]) -> go
     )
 
     fig.update_layout(
-        xaxis_title="",  # Remove x-axis label
         xaxis={
-            "showticklabels": False,
-            "showgrid": True,
-            "gridcolor": "white",
-            "gridwidth": 2,
-        },  # Grid lines
+            "visible": False,  # Hide x-axis completely
+        },
         yaxis={
             "dtick": 1,
             "tickfont": {"size": 10},
@@ -136,8 +132,9 @@ def create_member_rating_heatmap(df: pl.DataFrame, member_cols: list[str]) -> go
             "gridcolor": "white",
             "gridwidth": 2,
         },  # Grid lines
-        height=max(300, len(reversed_member_cols) * 40),  # Reduce height per member
+        height=max(150, len(reversed_member_cols) * 20),  # Even smaller height per member
         plot_bgcolor="white",
+        margin={"l": 0, "r": 0, "t": 20, "b": 0},  # Add small top padding
     )
 
     return fig
@@ -176,6 +173,8 @@ def create_club_vs_goodreads_discrepancies(df: pl.DataFrame) -> go.Figure:
         title="🎯 Club vs Goodreads: Sorted Discrepancies",
     )
     fig_diff.update_layout(yaxis_title="Book Title", xaxis_title="Club - Goodreads")
+    # Update hover template to show 3 decimal places
+    fig_diff.update_traces(hovertemplate="<b>%{y}</b><br>Discrepancy: %{x:.3f}<br><extra></extra>")
     return fig_diff
 
 
@@ -217,5 +216,13 @@ def create_polarizing_books_analysis(df: pl.DataFrame, member_cols: list[str]) -
         color_continuous_scale="Agsunset",
         title="🤯 Most Polarizing Books",
     )
-    fig_polar.update_layout(yaxis_title="Book Title", xaxis_title="Standard Deviation of Ratings")
+    fig_polar.update_layout(
+        yaxis_title="Book Title",
+        xaxis_title="Standard Deviation of Ratings",
+        yaxis={"categoryorder": "total ascending"},  # This will put highest values at top
+    )
+    # Update hover template to show 3 decimal places
+    fig_polar.update_traces(
+        hovertemplate="<b>%{y}</b><br>Rating Std Dev: %{x:.3f}<br><extra></extra>"
+    )
     return fig_polar

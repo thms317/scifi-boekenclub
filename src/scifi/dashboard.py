@@ -52,6 +52,10 @@ st.markdown(
         -webkit-text-fill-color: transparent;
         margin-bottom: 2rem;
     }
+    .main-header .rocket-emoji {
+        -webkit-text-fill-color: initial;
+        color: #667eea;
+    }
     .metric-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 1rem;
@@ -228,8 +232,8 @@ def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[s
     col1, col2, col3, col4, col5 = st.columns(5)
 
     total_books = len(bookclub_processed_df)
-    avg_goodreads = bookclub_processed_df["average_goodreads_rating"].mean() or 0.0
-    avg_bookclub = bookclub_processed_df["average_bookclub_rating"].mean() or 0.0
+    avg_goodreads = float(bookclub_processed_df["average_goodreads_rating"].mean() or 0.0)
+    avg_bookclub = float(bookclub_processed_df["average_bookclub_rating"].mean() or 0.0)
     most_active = max(members, key=lambda m: bookclub_processed_df[m].count())
 
     # Calculate bookclub duration
@@ -262,11 +266,11 @@ def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[s
             )
 
 
-def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str]) -> go.Figure:
+def create_rating_scatter(bookclub_processed_df: pl.DataFrame) -> go.Figure:
     """Create fixed scatter plot with trendline for overview"""
-    # Fixed scatter plot settings
-    x_axis = "average_bookclub_rating"
-    y_axis = "average_goodreads_rating"
+    # Fixed scatter plot settings - inverted axes
+    x_axis = "average_goodreads_rating"
+    y_axis = "average_bookclub_rating"
     color_by = "original_publication_year"
     size_by = "average_goodreads_rating"
 
@@ -325,9 +329,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
 
     # Fixed axes 1-5 for both rating axes
     fig.update_layout(
-        height=700,
-        title="📚 Goodreads vs Club Ratings",
-        title_font_size=24,
+        height=525,  # Reduced by 25% from 700
         font={"size": 12},
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0.1)",
@@ -340,8 +342,8 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
             "x": 1,
             "title": "Publication Year",
         },
-        xaxis={"range": [1, 5], "title": "Club Rating"},
-        yaxis={"range": [1, 5], "title": "Goodreads Rating"},
+        xaxis={"range": [1, 5], "title": "Goodreads Rating"},
+        yaxis={"range": [1, 5], "title": "Club Rating"},
     )
 
     # Enhanced hover template - handle null values
@@ -350,94 +352,13 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame, members: list[str
         hovertemplate="<b>%{customdata[0]}</b><br>"
         "Author: %{customdata[1]}<br>"
         "Suggested by: %{customdata[2]}<br>"
-        "Club Rating: %{x:.1f}<br>"
-        "Goodreads Rating: %{y:.1f}<br>"
+        "Goodreads Rating: %{x:.1f}<br>"
+        "Club Rating: %{y:.1f}<br>"
         "<extra></extra>",
     )
 
     # Display the plot
     st.plotly_chart(fig, use_container_width=True, key="overview_scatter")
-
-    # Book selection for detailed analysis
-    st.markdown("---")
-    st.subheader("🔍 Select a Book for Detailed Analysis")
-    # Sort books by index (chronological order) with latest first
-    book_titles = bookclub_processed_df_pandas.sort_index(ascending=False)["title"].tolist()
-    selected_book_title = st.selectbox("Choose a book:", book_titles, key="overview_book_selector")
-
-    if selected_book_title:
-        selected_book_data = (
-            bookclub_processed_df.filter(pl.col("title") == selected_book_title).to_pandas().iloc[0]
-        )
-        create_selected_book_analysis(selected_book_data, bookclub_processed_df, members)
-
-    # Overall ranking table
-    st.markdown("---")
-    st.subheader("📋 Overall Book Rankings")
-    st.write("**All books ranked by club average rating** (sortable by any column)")
-
-    # Create ranking dataframe
-    ranking_df = bookclub_processed_df.select(
-        [
-            "title",
-            "author",
-            "original_publication_year",
-            "number_of_pages",
-            "suggested_by",
-            "date_parsed",
-            "average_goodreads_rating",
-            "average_bookclub_rating",
-        ],
-    ).to_pandas()
-
-    # Add ranking column
-    ranking_df = ranking_df.sort_values("average_bookclub_rating", ascending=False).reset_index(
-        drop=True,
-    )
-    ranking_df.insert(0, "Rank", range(1, len(ranking_df) + 1))
-
-    # Format date column
-    ranking_df["date_parsed"] = pd.to_datetime(ranking_df["date_parsed"]).dt.strftime("%b %d, %Y")
-
-    # Rename columns for better display
-    ranking_df.columns = [
-        "Rank",
-        "Title",
-        "Author",
-        "Year",
-        "Pages",
-        "Suggested By",
-        "Read on",
-        "Goodreads Rating",
-        "Club Rating",
-    ]
-
-    # Round ratings and pages
-    ranking_df["Goodreads Rating"] = ranking_df["Goodreads Rating"].round(2)
-    ranking_df["Club Rating"] = ranking_df["Club Rating"].round(2)
-    ranking_df["Pages"] = ranking_df["Pages"].round(0)
-
-    # Display sortable table
-    st.dataframe(
-        ranking_df,
-        use_container_width=True,
-        hide_index=True,
-        column_config={
-            "Rank": st.column_config.NumberColumn("Rank", width="small"),
-            "Title": st.column_config.TextColumn("Title", width="large"),
-            "Author": st.column_config.TextColumn("Author", width="medium"),
-            "Year": st.column_config.NumberColumn("Year", width="small"),
-            "Pages": st.column_config.NumberColumn("Pages", format="%.0f", width="small"),
-            "Suggested By": st.column_config.TextColumn("Suggested By", width="small"),
-            "Read on": st.column_config.TextColumn("Read on", width="medium"),
-            "Goodreads Rating": st.column_config.NumberColumn(
-                "Goodreads",
-                format="%.2f",
-                width="small",
-            ),
-            "Club Rating": st.column_config.NumberColumn("Club", format="%.2f", width="small"),
-        },
-    )
 
     return fig
 
@@ -448,7 +369,7 @@ def create_selected_book_analysis(
     members: list[str],
 ) -> pd.Series:
     """Create detailed analysis for a selected book (triggered by scatter plot click)"""
-    st.markdown("### 🎯 Selected Book Deep Dive")
+    # st.markdown("### 🎯 Selected Book Deep Dive")
 
     # Book header with enhanced styling
     st.markdown(
@@ -710,7 +631,7 @@ def create_time_analysis(df: pl.DataFrame) -> None:
                 y=decade_counts["count"],
                 marker={
                     "color": "lightgreen",
-                    "line": {"color": "darkgreen", "width": 2},  # Add outline
+                    "line": {"color": "darkgreen", "width": 2},
                 },
                 text=decade_counts["count"],
                 textposition="auto",
@@ -725,8 +646,11 @@ def create_time_analysis(df: pl.DataFrame) -> None:
         )
         st.plotly_chart(fig_decades, use_container_width=True)
 
-    # Rating trend over time (with extended y-range)
-    st.subheader("📈 Rating Trends Over Time")
+
+def create_rating_trends_chart(df: pl.DataFrame) -> None:
+    """Create rating trends over time chart (separate from time analysis)"""
+    df_pandas = df.to_pandas()
+    df_pandas["date_parsed"] = pd.to_datetime(df_pandas["date_parsed"], errors="coerce").dt.date
 
     # Create rolling average for smoother trend
     df_pandas["rating_7ma"] = (
@@ -735,14 +659,13 @@ def create_time_analysis(df: pl.DataFrame) -> None:
 
     # Calculate linear trendline
     # Convert dates to numeric for linear regression
-    df_pandas["date_numeric"] = pd.to_numeric(df_pandas["date_parsed"])
+    df_pandas["date_numeric"] = pd.to_numeric(pd.to_datetime(df_pandas["date_parsed"]))
     valid_ratings = df_pandas.dropna(subset=["average_bookclub_rating"])
 
     if len(valid_ratings) > 1:
         slope, intercept, r_value, p_value, std_err = stats.linregress(
             valid_ratings["date_numeric"], valid_ratings["average_bookclub_rating"]
         )
-
         # Create trendline values
         trendline_y = slope * valid_ratings["date_numeric"] + intercept
 
@@ -785,20 +708,140 @@ def create_time_analysis(df: pl.DataFrame) -> None:
     )
 
     fig_trend.update_layout(
-        title="Club Rating Trend Over Time",
         xaxis_title="Date",
         yaxis_title="Rating",
-        yaxis={"range": [0.5, 5.5]},  # Extended range so dots don't fall off
+        yaxis={"range": [0.5, 5.5]},
         template="plotly_dark",
         height=500,
+        showlegend=False,
     )
     st.plotly_chart(fig_trend, use_container_width=True)
+
+
+def create_suggester_analysis(df: pl.DataFrame) -> None:
+    """Create jitter box plot showing ratings by book suggester"""
+    st.subheader("🎯 Ratings by Book Suggester")
+    st.write(
+        "Distribution of average club ratings for books suggested by members (3+ books or active members)"
+    )
+
+    # Handle both column name possibilities
+    suggester_col = "suggested_by" if "suggested_by" in df.columns else "blame"
+
+    # Get active member names from BookClubMembers
+    active_member_names = [member.name for member in BookClubMembers.get_active_members()]
+
+    # Calculate average ratings per suggester for ordering, with combined filtering logic
+    suggester_stats = (
+        df.group_by(suggester_col)
+        .agg(
+            [
+                pl.col("average_bookclub_rating").mean().alias("avg_rating"),
+                pl.col("average_bookclub_rating").count().alias("book_count"),
+            ]
+        )
+        .filter(
+            # Show if: (3+ books) OR (active member with any books)
+            (pl.col("book_count") >= 3) | (pl.col(suggester_col).is_in(active_member_names))
+        )
+        .sort("avg_rating", descending=True)
+        .to_pandas()
+    )
+
+    if len(suggester_stats) == 0:
+        st.warning("No members meet the criteria (3+ books or active members).")
+        return
+
+    # Create ordered list of suggesters (meeting criteria)
+    ordered_suggesters = suggester_stats[suggester_col].tolist()
+
+    # Convert main dataframe to pandas for box plot
+    df_pandas = df.to_pandas()
+
+    # Create the jitter box plot
+    fig = go.Figure()
+
+    for suggester in ordered_suggesters:
+        suggester_books = df_pandas[df_pandas[suggester_col] == suggester]
+        ratings = suggester_books["average_bookclub_rating"].tolist()
+
+        # Add stylized box plot with subtle design
+        fig.add_trace(
+            go.Box(
+                x=[suggester] * len(ratings),
+                y=ratings,
+                name=suggester,
+                boxpoints="all",  # Show all points with jitter
+                jitter=0.4,  # Slightly more jitter for better spread
+                pointpos=0,  # Center the points
+                marker={
+                    "size": 5,
+                    "opacity": 0.6,
+                    "color": "#555555",  # Dark gray points
+                    "line": {"width": 0.5, "color": "white"},  # Subtle white outline on points
+                },
+                line={"color": "#333333", "width": 1.5},  # Slightly thinner dark outline
+                fillcolor="rgba(240, 240, 240, 0.3)",  # Very light gray fill
+                boxmean=True,  # Show mean as well as median
+                customdata=suggester_books[["title", "author"]].values,
+                hovertemplate=(
+                    "<b>%{customdata[0]}</b><br>"
+                    "Author: %{customdata[1]}<br>"
+                    "Rating: %{y:.2f}<br>"
+                    f"Suggested by: {suggester}<br>"
+                    "<extra></extra>"
+                ),
+                showlegend=False,
+            )
+        )
+
+    fig.update_layout(
+        xaxis_title="Book Suggester",
+        yaxis_title="Average Club Rating",
+        yaxis={
+            "range": [1, 5],
+            "gridcolor": "rgba(128, 128, 128, 0.2)",  # Subtle grid lines
+            "gridwidth": 1,
+        },
+        xaxis={
+            "tickangle": -45,
+            "tickfont": {"size": 11},
+            "gridcolor": "rgba(128, 128, 128, 0.1)",  # Very subtle vertical grid
+        },
+        template="plotly_white",  # Clean white background
+        height=600,
+        plot_bgcolor="rgba(250, 250, 250, 0.8)",  # Very light background
+        paper_bgcolor="white",
+        font={"family": "Arial, sans-serif", "size": 12, "color": "#333333"},
+        margin={"l": 60, "r": 20, "t": 20, "b": 80},  # Better spacing
+    )
+
+    # Create layout with violin plot and stats side by side
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        st.plotly_chart(fig, use_container_width=True)
+
+    with col2:
+        # Simple stats display
+        st.subheader("📈 Suggester Statistics")
+        st.dataframe(
+            suggester_stats[[suggester_col, "book_count", "avg_rating"]].round(2),
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                suggester_col: "Suggester",
+                "book_count": "Books",
+                "avg_rating": "Avg Rating",
+            },
+        )
 
 
 def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
     """Create advanced analytics section"""
     # CORRELATION ANALYSIS SECTION
     st.markdown("### 📊 Correlation Analysis")
+    st.write("How similar are member tastes?")
 
     # Filter to active members with 5+ ratings
     active_members = []
@@ -878,7 +921,6 @@ def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
     )
 
     fig.update_layout(
-        title="📊 Member Rating Correlations (Green = Similar Taste)",
         template="plotly_white",
         height=600,
         width=600,
@@ -891,38 +933,7 @@ def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
     # Display correlation plot
     st.plotly_chart(fig, use_container_width=True, key="correlation_heatmap")
 
-
-def create_temp_analysis(df: pl.DataFrame, members: list[str]) -> None:
-    """Create temporary analysis page with visualizations from visualizer module"""
-    # Current Book Banner at the top
-    create_current_book_banner(df)
-
-    st.subheader("🧪 Temporary Analysis - Visualizer Module Functions")
-    st.write(
-        "This page contains unique visualizations from the visualizer module that aren't yet integrated into other sections."
-    )
-
-    # Section 1: Member Rating Heatmap
-    st.markdown("---")
-    st.subheader("🔥 Member Rating Heatmap")
-
-    try:
-        fig_heatmap = create_member_rating_heatmap(df, members)
-        st.plotly_chart(fig_heatmap, use_container_width=True)
-    except (ValueError, KeyError, AttributeError) as e:
-        st.error(f"Error creating member rating heatmap: {e}")
-
-    # Section 2: Club vs Goodreads Discrepancies
-    st.markdown("---")
-    st.subheader("🎯 Club vs Goodreads Discrepancies")
-
-    try:
-        fig_discrepancies = create_club_vs_goodreads_discrepancies(df)
-        st.plotly_chart(fig_discrepancies, use_container_width=True)
-    except (ValueError, KeyError, AttributeError) as e:
-        st.error(f"Error creating discrepancies chart: {e}")
-
-    # Section 4: Most Polarizing Books
+    # Section 1: Most Polarizing Books
     st.markdown("---")
     st.subheader("🤯 Most Polarizing Books")
     st.write("Books with the highest rating standard deviation - where members disagreed the most.")
@@ -933,12 +944,24 @@ def create_temp_analysis(df: pl.DataFrame, members: list[str]) -> None:
     except (ValueError, KeyError, AttributeError) as e:
         st.error(f"Error creating polarizing books chart: {e}")
 
+    # Section 2: Club vs Goodreads Discrepancies
+    st.markdown("---")
+    st.subheader("🎯 Club vs Goodreads Discrepancies")
+    st.write("Books where our club ratings differ most from the general Goodreads community.")
+
+    try:
+        fig_discrepancies = create_club_vs_goodreads_discrepancies(df)
+        fig_discrepancies.update_layout(height=800)  # Increase height for better readability
+        st.plotly_chart(fig_discrepancies, use_container_width=True)
+    except (ValueError, KeyError, AttributeError) as e:
+        st.error(f"Error creating discrepancies chart: {e}")
+
 
 def main() -> None:
     """Run Streamlit dashboard"""
     # Main header
     st.markdown(
-        '<h1 class="main-header">🚀 Sci-Fi Book Club Analytics Dashboard</h1>',
+        '<h1 class="main-header"><span class="rocket-emoji">🚀</span> Sci-Fi Book Club Analytics Dashboard</h1>',
         unsafe_allow_html=True,
     )
 
@@ -957,27 +980,158 @@ def main() -> None:
             "👥 Member Insights",
             "📅 Time Analysis",
             "🔬 Advanced Analytics",
-            "🧪 Temp Analysis",
         ],
     )
 
     # Main content based on selection
     if page == "📊 Overview":
+        # Add header at the top
+        create_current_book_banner(bookclub_processed_df)
         create_overview_metrics(bookclub_processed_df, members)
+
+        # Book selection for detailed analysis
         st.markdown("---")
-        create_rating_scatter(bookclub_processed_df, members)
+        st.subheader("🔍 Select a Book for Detailed Analysis")
+        # Convert to pandas for sorting and date filtering
+        bookclub_processed_df_pandas = bookclub_processed_df.to_pandas()
+        bookclub_processed_df_pandas["date_parsed"] = pd.to_datetime(
+            bookclub_processed_df_pandas["date_parsed"], errors="coerce"
+        ).dt.date
+
+        # Filter to only past books (exclude current/upcoming books)
+        today = date.today()
+        past_books = bookclub_processed_df_pandas[
+            bookclub_processed_df_pandas["date_parsed"] < today
+        ]
+
+        if len(past_books) > 0:
+            # Sort past books by date (most recent first) and get titles
+            book_titles = past_books.sort_values("date_parsed", ascending=False)["title"].tolist()
+        else:
+            # Fallback to all books if no past books found
+            book_titles = bookclub_processed_df_pandas.sort_index(ascending=False)["title"].tolist()
+
+        selected_book_title = st.selectbox(
+            "Choose a book:", book_titles, key="overview_book_selector"
+        )
+
+        if selected_book_title:
+            selected_book_data = (
+                bookclub_processed_df.filter(pl.col("title") == selected_book_title)
+                .to_pandas()
+                .iloc[0]
+            )
+            create_selected_book_analysis(selected_book_data, bookclub_processed_df, members)
+
+        # Overall ranking table
+        st.markdown("---")
+        st.subheader("📋 Overall Book Rankings")
+        st.write("**All books ranked by club average rating** (sortable by any column)")
+
+        # Create ranking dataframe
+        ranking_df = bookclub_processed_df.select(
+            [
+                "title",
+                "author",
+                "original_publication_year",
+                "number_of_pages",
+                "suggested_by",
+                "date_parsed",
+                "average_goodreads_rating",
+                "average_bookclub_rating",
+            ],
+        ).to_pandas()
+
+        # Add ranking column
+        ranking_df = ranking_df.sort_values("average_bookclub_rating", ascending=False).reset_index(
+            drop=True,
+        )
+        ranking_df.insert(0, "Rank", range(1, len(ranking_df) + 1))
+
+        # Format date column
+        ranking_df["date_parsed"] = pd.to_datetime(ranking_df["date_parsed"]).dt.strftime(
+            "%b %d, %Y"
+        )
+
+        # Rename columns for better display
+        ranking_df = ranking_df.set_axis(
+            [
+                "Rank",
+                "Title",
+                "Author",
+                "Year",
+                "Pages",
+                "Suggested By",
+                "Read on",
+                "Goodreads Rating",
+                "Club Rating",
+            ],
+            axis=1,
+        )
+
+        # Round ratings and pages
+        ranking_df["Goodreads Rating"] = ranking_df["Goodreads Rating"].round(2)
+        ranking_df["Club Rating"] = ranking_df["Club Rating"].round(2)
+        ranking_df["Pages"] = ranking_df["Pages"].round(0)
+
+        # Display sortable table
+        st.dataframe(
+            ranking_df,
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "Rank": st.column_config.NumberColumn("Rank", width="small"),
+                "Title": st.column_config.TextColumn("Title", width="large"),
+                "Author": st.column_config.TextColumn("Author", width="medium"),
+                "Year": st.column_config.NumberColumn("Year", width="small"),
+                "Pages": st.column_config.NumberColumn("Pages", format="%.0f", width="small"),
+                "Suggested By": st.column_config.TextColumn("Suggested By", width="small"),
+                "Read on": st.column_config.TextColumn("Read on", width="medium"),
+                "Goodreads Rating": st.column_config.NumberColumn(
+                    "Goodreads",
+                    format="%.2f",
+                    width="small",
+                ),
+                "Club Rating": st.column_config.NumberColumn("Club", format="%.2f", width="small"),
+            },
+        )
 
     elif page == "👥 Member Insights":
+        # Add member rating heatmap at the top of Member Insights page
+        try:
+            fig_heatmap = create_member_rating_heatmap(bookclub_processed_df, members)
+            st.plotly_chart(fig_heatmap, use_container_width=True)
+        except (ValueError, KeyError, AttributeError) as e:
+            st.error(f"Error creating member rating heatmap: {e}")
+
         create_member_comparison(bookclub_processed_df, members)
 
+        # Add suggester violin plot
+        st.markdown("---")
+        create_suggester_analysis(bookclub_processed_df)
+
     elif page == "📅 Time Analysis":
+        # First show the time analysis with bar charts
         create_time_analysis(bookclub_processed_df)
+
+        # Then show the two main charts side by side
+        st.markdown("---")
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.subheader("📚 Goodreads vs Club Ratings")
+            st.write(
+                "Points above the diagonal line indicate books we rated higher than Goodreads users."
+            )
+            create_rating_scatter(bookclub_processed_df)
+
+        with col2:
+            st.subheader("📈 Rating Trends Over Time")
+            st.write("The orange line shows a 7-book (+/- 1 year) moving average of club ratings.")
+            create_rating_trends_chart(bookclub_processed_df)
 
     elif page == "🔬 Advanced Analytics":
         create_advanced_analytics(bookclub_processed_df, members)
-
-    elif page == "🧪 Temp Analysis":
-        create_temp_analysis(bookclub_processed_df, members)
 
     # Footer
     st.markdown("---")
