@@ -106,7 +106,7 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
     try:
         with st.spinner("🔄 Processing book club data from sources..."):
             # Run the data processing pipeline
-            bookclub_processed_df, unmatched_df, goodreads_df = process_bookclub_data(
+            bookclub_processed_df, _unmatched_df, _goodreads_df = process_bookclub_data(
                 goodreads_dir="data/goodreads/clean",
                 bookclub_path="data/bookclub/bookclub.csv",
                 manual_ratings_path="data/bookclub/manual_ratings.csv",
@@ -663,7 +663,7 @@ def create_rating_trends_chart(df: pl.DataFrame) -> None:
     valid_ratings = df_pandas.dropna(subset=["average_bookclub_rating"])
 
     if len(valid_ratings) > 1:
-        slope, intercept, r_value, p_value, std_err = stats.linregress(
+        slope, intercept, _r_value, _p_value, _std_err = stats.linregress(
             valid_ratings["date_numeric"], valid_ratings["average_bookclub_rating"]
         )
         # Create trendline values
@@ -1048,10 +1048,8 @@ def main() -> None:
         )
         ranking_df.insert(0, "Rank", range(1, len(ranking_df) + 1))
 
-        # Format date column
-        ranking_df["date_parsed"] = pd.to_datetime(ranking_df["date_parsed"]).dt.strftime(
-            "%b %d, %Y"
-        )
+        # Convert date column to proper datetime for sorting
+        ranking_df["date_parsed"] = pd.to_datetime(ranking_df["date_parsed"])
 
         # Rename columns for better display
         ranking_df = ranking_df.set_axis(
@@ -1086,7 +1084,9 @@ def main() -> None:
                 "Year": st.column_config.NumberColumn("Year", width="small"),
                 "Pages": st.column_config.NumberColumn("Pages", format="%.0f", width="small"),
                 "Suggested By": st.column_config.TextColumn("Suggested By", width="small"),
-                "Read on": st.column_config.TextColumn("Read on", width="medium"),
+                "Read on": st.column_config.DateColumn(
+                    "Read on", format="MMM DD, YYYY", width="medium"
+                ),
                 "Goodreads Rating": st.column_config.NumberColumn(
                     "Goodreads",
                     format="%.2f",
