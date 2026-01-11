@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/thms317/scifi-boekenclub/compare/v1.3.0...v1.3.1) (2026-01-11)
+
+
+### Bug Fixes
+
+* add 2025 ratings ([67806b2](https://github.com/thms317/scifi-boekenclub/commit/67806b2f91a23f594ecd1288bc8af1c66eea6f47))
+
 # [1.3.0](https://github.com/thms317/scifi-boekenclub/compare/v1.2.0...v1.3.0) (2025-08-13)
 
 
