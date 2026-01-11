@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/thms317/scifi-boekenclub/compare/v1.4.0...v1.4.1) (2026-01-11)
+
+
+### Bug Fixes
+
+* 2025 data additions ([012e3a2](https://github.com/thms317/scifi-boekenclub/commit/012e3a241f24199ee19eef25f88a0b3aa9bf0a78))
+
 # [1.4.0](https://github.com/thms317/scifi-boekenclub/compare/v1.3.1...v1.4.0) (2026-01-11)
 
 
