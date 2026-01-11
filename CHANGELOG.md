@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/thms317/scifi-boekenclub/compare/v1.4.1...v1.4.2) (2026-01-11)
+
+
+### Bug Fixes
+
+* update date formatting and recalculate average book club rating ([2a94b21](https://github.com/thms317/scifi-boekenclub/commit/2a94b215d49e940b2c3c8477d41038362672606e))
+
 ## [1.4.1](https://github.com/thms317/scifi-boekenclub/compare/v1.4.0...v1.4.1) (2026-01-11)
 
 
