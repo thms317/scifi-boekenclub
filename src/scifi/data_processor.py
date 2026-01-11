@@ -133,6 +133,14 @@ def match_and_merge_data(
         manual_ratings_df=manual_ratings_df,
         on="title",
     )
+    # Recalculate the average_bookclub_rating after merging manual ratings
+    member_columns = BookClubMembers.get_member_names()
+    existing_member_columns = [
+        col for col in member_columns if col in bookclub_processed_df.columns
+    ]
+    bookclub_processed_df = bookclub_processed_df.with_columns(
+        pl.mean_horizontal(*existing_member_columns).alias("average_bookclub_rating"),
+    )
     return bookclub_processed_df, unmatched_df
 
 
