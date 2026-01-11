@@ -11,8 +11,10 @@ setup:
 		git init -b main > /dev/null; \
 	fi
 
-	@echo "Setting up pre-commit..."
-	@uv run pre-commit install --hook-type pre-commit --hook-type commit-msg
+	@echo "Setting up pre-commit hooks (with prek)..."
+	@uv run prek install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
+	@uv run prek autoupdate
+
 
 	@echo "Setup completed successfully!"
 
