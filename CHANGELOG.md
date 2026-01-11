@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/thms317/scifi-boekenclub/compare/v1.3.1...v1.4.0) (2026-01-11)
+
+
+### Features
+
+* update pre-commit setup to use prek and add pre-push hook ([8d6f558](https://github.com/thms317/scifi-boekenclub/commit/8d6f558fafcf0abb8aecbcb9cb69bcf7fc1ad3e4))
+
 ## [1.3.1](https://github.com/thms317/scifi-boekenclub/compare/v1.3.0...v1.3.1) (2026-01-11)
 
 
