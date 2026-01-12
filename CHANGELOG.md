@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/thms317/scifi-boekenclub/compare/v1.4.2...v1.4.3) (2026-01-12)
+
+
+### Bug Fixes
+
+* update ratings for Rosemary's Baby ([bc54c14](https://github.com/thms317/scifi-boekenclub/commit/bc54c145754e74b2ef2432055e134349b90d3b5c))
+
 ## [1.4.2](https://github.com/thms317/scifi-boekenclub/compare/v1.4.1...v1.4.2) (2026-01-11)
 
 
