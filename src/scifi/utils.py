@@ -37,8 +37,8 @@ def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
         .select([*columns.keys(), "path"])
         .rename(columns)
         .with_columns(
-            pl.col("title").str.strip_chars(),
-            pl.col("author").str.strip_chars(),
+            pl.col("title").str.strip_chars().str.replace_all(r"\s+", " "),
+            pl.col("author").str.strip_chars().str.replace_all(r"\s+", " "),
         )
         .with_columns(
             # Convert 0 ratings to null to exclude from calculations but keep the book

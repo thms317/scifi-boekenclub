@@ -16,8 +16,7 @@ index,date,title,author,suggested_by,location,title_right,author_right,original_
 15,2016-10-12,Brave New World,Aldous Huxley,,Van Zeggelenstraat 71,Brave New World,Aldous Huxley,1932,3.9900000000000007,269.2,5.0,4.0,4.0,,4.0,,4.0,4.2,,
 16,2016-11-30,The Heart of a Dog,Mikhail Bulgakov,Bram,Cafe Kostverloren,The Heart of a Dog,bulgakov-mikhail,1925,4.1,128.0,,,,,3.0,,,3.0,,
 17,2017-01-18,The Windup Girl,Paolo Bacigalupi,Thirsa & Koen,De Doelen,The Windup Girl,Paolo Bacigalupi,2009,3.75,359.0,3.0,3.0,1.0,3.0,2.0,,,2.4,,
-18,2017-03-14,Watchmen,Alan Moore & Dave Gibbons,Laurynas,,Watchmen,Alan Moore,1987,4.382499999999999,415.5,4.0,5.0,,4.0,4.0,,,4.25,,
-18,2017-03-14,Watchmen,Alan Moore & Dave Gibbons,Laurynas,,Watchmen,Alan             Moore,1987,4.39,416.0,,,,,,,5.0,5.0,,
+18,2017-03-14,Watchmen,Alan Moore & Dave Gibbons,Laurynas,,Watchmen,Alan Moore,1987,4.3839999999999995,415.6,4.0,5.0,,4.0,4.0,,5.0,4.4,,
 19,2017-05-02,Never Let Me Go,Kazuo Ishiguro,Iona,Thirsa - Keizersgracht 151D,Never Let Me Go,Kazuo Ishiguro,2005,3.85,288.0,4.0,2.0,3.0,3.0,2.0,,4.0,3.0,,
 20,2017-06-01,"A Canticle for Leibowitz (St. Leibowitz, #1)",Walter M. Miller,Dion,De Doelen,"A Canticle for Leibowitz (St. Leibowitz, #1)",Walter M. Miller Jr.,1959,3.9850000000000003,354.0,2.0,4.0,,,,,,3.0,,
 21,2017-07-11,Pnin,Vladimir Nabokov,Robert,Robert - Uithoornstraat 17-3,Pnin,Vladimir Nabokov,1957,3.8825000000000003,184.0,4.0,4.0,,4.0,,,,4.0,,
@@ -70,12 +69,12 @@ index,date,title,author,suggested_by,location,title_right,author_right,original_
 68,2024-04-07,The City & the City,China Miéville,Laurynas,"vandeStreek, Utrecht",The City & the City,China Miéville,2009,3.8999999999999995,315.42857142857144,3.0,3.0,4.0,3.0,4.0,2.0,,3.1666666666666665,,
 69,2024-05-24,His Master's Voice,Stanislaw Lem,Robert,"Knossos, Den Haag",His Master's Voice,Stanisław Lem,1968,4.083333333333333,199.0,5.0,4.0,4.0,,3.0,3.0,5.0,4.0,,
 70,2024-07-20,Concept M,Aafke Romeijn,Thomas,Cafe Cook,Concept M,Aafke Romeijn,2018,3.4442857142857144,253.0,3.0,3.0,3.0,3.0,3.0,2.0,2.0,2.7142857142857144,,
-71,2024-09-11,Galapagos,Kurt Vonnegut,Dion,De Doelen,Galapagos,Kurt Vonnegut Jr.,1985,3.8699999999999997,302.0,3.0,,3.0,3.0,3.0,4.0,,3.5,,
-72,2024-11-08,The Vegetarian,Han Kang,Koen,De Doelen,The Vegetarian,Han Kang,2007,3.61,180.5,4.0,3.0,4.0,4.0,4.0,2.0,5.0,4.0,,
-73,2025-03-23,Dark Matter,Blake Crouch,Koen_M,Cafe Bruxelles,Dark Matter,Blake Crouch,2016,4.136666666666667,342.0,2.0,2.0,1.0,2.0,2.0,1.0,2.0,2.0,,
-74,2025-05-21,Lord of Light,Roger Zelazny,Laurynas,De Doelen,Lord of Light,Roger Zelazny,1967,4.05,296.0,2.0,4.0,2.0,2.0,2.0,2.0,2.0,3.0,,1.0
-75,2025-07-13,I who have never known men,Jacqueline Harpman,Marloes,Tolhuistuin,I Who Have Never Known Men,Jacqueline Harpman,1995,4.156666666666666,192.0,5.0,5.0,5.0,4.0,5.0,4.0,5.0,4.666666666666667,4.0,4.0
-76,2025-08-24,The Man Who Fell to Earth,Walter Tevis,Peter,Restaurant Two Chefs,The Man Who Fell to Earth,Walter Tevis,1963,4.04,209.0,3.0,4.0,3.0,3.0,3.0,3.0,3.0,3.0,,3.0
-77,2025-10-05,Eifelheim,Michael Flynn,Robert,Uiver,Eifelheim,Michael Flynn,2006,3.78,320.0,3.0,2.0,2.0,2.0,,2.0,,,,
-78,2025-11-21,Blindness,Jose Saramago,Thomas,Vespuccistraat 104H,Blindness,José Saramago,1995,4.18,349.0,2.0,2.0,,2.0,,1.0,3.0,3.0,,
-79,2026-01-10,"Rosemary's Baby (Rosemary's Baby, #1)",Ira Levin,Thirsa,Tolhuistuin,"Rosemary's Baby (Rosemary's Baby, #1)",Ira Levin,1967,4.04,308.0,3.0,,,3.0,,,,3.0,,
+71,2024-09-11,Galapagos,Kurt Vonnegut,Dion,De Doelen,Galapagos,Kurt Vonnegut Jr.,1985,3.8699999999999997,302.0,3.0,,3.0,3.0,3.0,4.0,,3.2,,
+72,2024-11-08,The Vegetarian,Han Kang,Koen,De Doelen,The Vegetarian,Han Kang,2007,3.61,180.5,4.0,3.0,4.0,4.0,4.0,2.0,5.0,3.7142857142857144,,
+73,2025-03-23,Dark Matter,Blake Crouch,Koen_M,Cafe Bruxelles,Dark Matter,Blake Crouch,2016,4.136666666666667,342.0,2.0,2.0,1.0,2.0,2.0,1.0,2.0,1.7142857142857142,,
+74,2025-05-21,Lord of Light,Roger Zelazny,Laurynas,De Doelen,Lord of Light,Roger Zelazny,1967,4.05,296.0,2.0,4.0,2.0,2.0,2.0,2.0,2.0,2.125,,1.0
+75,2025-07-13,I who have never known men,Jacqueline Harpman,Marloes,Tolhuistuin,I Who Have Never Known Men,Jacqueline Harpman,1995,4.156666666666666,192.0,5.0,5.0,5.0,4.0,5.0,4.0,5.0,4.555555555555555,4.0,4.0
+76,2025-08-24,The Man Who Fell to Earth,Walter Tevis,Peter,Restaurant Two Chefs,The Man Who Fell to Earth,Walter Tevis,1963,4.04,209.0,3.0,4.0,3.0,3.0,3.0,3.0,3.0,3.125,,3.0
+77,2025-10-05,Eifelheim,Michael Flynn,Robert,Uiver,Eifelheim,Michael Flynn,2006,3.78,320.0,3.0,2.0,2.0,2.0,,2.0,,2.2,,
+78,2025-11-21,Blindness,Jose Saramago,Thomas,Vespuccistraat 104H,Blindness,José Saramago,1995,4.18,349.0,2.0,2.0,,2.0,,1.0,3.0,2.0,,
+79,2026-01-11,"Rosemary's Baby (Rosemary's Baby, #1)",Ira Levin,Thirsa,Tolhuistuin,"Rosemary's Baby (Rosemary's Baby, #1)",Ira Levin,1967,4.04,308.0,3.0,5.0,3.0,3.0,3.0,2.0,4.0,3.2857142857142856,,

@@ -59,8 +59,8 @@ def load_and_combine_goodreads_data(goodreads_dir: Path) -> pl.DataFrame:
         .select([*columns.keys(), "path"])
         .rename(columns)
         .with_columns(
-            pl.col("title").str.strip_chars(),
-            pl.col("author").str.strip_chars(),
+            pl.col("title").str.strip_chars().str.replace_all(r"\s+", " "),
+            pl.col("author").str.strip_chars().str.replace_all(r"\s+", " "),
             # Convert rating to numeric, handling non-numeric values
             pl.col("rating").cast(pl.Float64, strict=False),
             pl.col("average_goodreads_rating").cast(pl.Float64, strict=False),
