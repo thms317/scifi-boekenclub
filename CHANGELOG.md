@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/thms317/scifi-boekenclub/compare/v1.4.3...v1.4.4) (2026-01-12)
+
+
+### Bug Fixes
+
+* update processed data and notebook execution counts ([a53479f](https://github.com/thms317/scifi-boekenclub/commit/a53479ff1a565c4799d36edc29577bfafbc9f853))
+
 ## [1.4.3](https://github.com/thms317/scifi-boekenclub/compare/v1.4.2...v1.4.3) (2026-01-12)
 
 

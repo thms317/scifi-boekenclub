@@ -1,6 +1,6 @@
 [project]
 name = "scifi"
-version = "1.4.3"
+version = "1.4.4"
 description = "Analyse van alle boeken van de enige echte Sci-Fi Boekenclub."
 authors = [
     { name = "Thomas Brouwer", email = "brouwer.thomas@gmail.com" },
