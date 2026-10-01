@@ -896,15 +896,12 @@ def create_author_analysis(df: pl.DataFrame) -> None:
     )
 
     dimensions = {
-        "Gender": "author_gender",
-        "Country": "author_country",
-        "Religion": "author_religion",
-        "LGBTQ+": "author_lgbtq",
-        "Ethnicity": "author_ethnicity",
+        "Gender": "gender",
+        "Country": "country",
+        "Religion": "religion",
+        "LGBTQ+": "lgbtq",
+        "Ethnicity": "ethnicity",
     }
-    if not all(col in df.columns for col in dimensions.values()):
-        st.warning("No author data found. Add data/bookclub/authors.csv.")
-        return
 
     dimension = st.radio("Group authors by:", list(dimensions), horizontal=True)
     group_col = dimensions[dimension]
@@ -956,7 +953,6 @@ def create_author_analysis(df: pl.DataFrame) -> None:
             "author",
             "date",
             *dimensions.values(),
-            "author_source",
             "average_bookclub_rating",
         )
         .to_pandas()
@@ -968,7 +964,6 @@ def create_author_analysis(df: pl.DataFrame) -> None:
             "author": st.column_config.TextColumn("Author", width="medium"),
             "date": st.column_config.DateColumn("Read on", format="MMM DD, YYYY"),
             **{col: label for label, col in dimensions.items()},
-            "author_source": st.column_config.LinkColumn("Source", display_text="bron"),
             "average_bookclub_rating": st.column_config.NumberColumn("Club", format="%.2f"),
         },
     )
