@@ -23,7 +23,9 @@ def load_and_combine_goodreads_data(goodreads_dir: Path) -> pl.DataFrame:
     """Load and combine all Goodreads CSV files with improved error handling.
 
     This is an enhanced version of read_combine_goodreads that handles
-    non-numeric rating values properly.
+    non-numeric rating values properly. Files are combined by column name, so an
+    export without a column (e.g. "Average Rating") gets nulls for it instead of
+    failing.
 
     Parameters
     ----------
@@ -54,7 +56,10 @@ def load_and_combine_goodreads_data(goodreads_dir: Path) -> pl.DataFrame:
         "Number of Pages": "number_of_pages",
     }
     q = (
-        pl.scan_csv(goodreads_dir, include_file_paths="path")
+        pl.concat(
+            [pl.scan_csv(csv_file, include_file_paths="path") for csv_file in csv_files],
+            how="diagonal_relaxed",
+        )
         # .filter(pl.col("Exclusive Shelf") == "read")
         .select([*columns.keys(), "path"])
         .rename(columns)

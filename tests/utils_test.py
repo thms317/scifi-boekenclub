@@ -224,6 +224,19 @@ class TestPivotGoodreadsData:
         # Assert that the averaged number if  is correct (in case of different editions with different page counts)
         assert df_pivot["number_of_pages"][0] == 275
 
+    def test_pivot_goodreads_data_different_years(
+        self,
+        df_goodreads: pl.DataFrame,
+        reviewer_mapping: dict[str, str],
+    ) -> None:
+        """Test that editions with a different original year are still one book."""
+        df_goodreads = df_goodreads.with_columns(
+            pl.Series("original_publication_year", [1963, 1953])
+        )
+        df_pivot = pivot_goodreads_data(df_goodreads, reviewer_mapping)
+        assert df_pivot.shape[0] == 1
+        assert df_pivot["original_publication_year"][0] == 1953
+
 
 class TestMatchDataframes:
     """Test class for the match_dataframes function."""

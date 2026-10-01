@@ -103,17 +103,24 @@ def pivot_goodreads_data(
     pl.DataFrame
         The pivoted Goodreads data.
     """
-    index_cols = ["title", "author", "original_publication_year"]
+    index_cols = ["title", "author"]
     return (
         goodreads_df.with_columns(
             [
                 pl.mean("average_goodreads_rating").over(index_cols),
                 pl.mean("number_of_pages").over(index_cols),
+                # Editions can list a different original year; the earliest is the original
+                pl.min("original_publication_year").over(index_cols),
             ],
         )
         .pivot(
             "path",
-            index=[*index_cols, "average_goodreads_rating", "number_of_pages"],
+            index=[
+                *index_cols,
+                "original_publication_year",
+                "average_goodreads_rating",
+                "number_of_pages",
+            ],
             values="rating",
             aggregate_function="mean",
         )
