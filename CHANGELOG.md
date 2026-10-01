@@ -1,3 +1,11 @@
+## [1.4.5](https://github.com/thms317/scifi-boekenclub/compare/v1.4.4...v1.4.5) (2026-10-01)
+
+
+### Bug Fixes
+
+* add book club data up to September 2026 ([c79c1be](https://github.com/thms317/scifi-boekenclub/commit/c79c1be5ef87d12dc172dfd4f7818d1e80d92200)), closes [#72](https://github.com/thms317/scifi-boekenclub/issues/72) [#79](https://github.com/thms317/scifi-boekenclub/issues/79)
+* normalise location names in book club data ([1ebe5c5](https://github.com/thms317/scifi-boekenclub/commit/1ebe5c5c8beb1a7d53c7dbf78f858f571522209b))
+
 ## [1.4.4](https://github.com/thms317/scifi-boekenclub/compare/v1.4.3...v1.4.4) (2026-01-12)
 
 
