@@ -1,3 +1,10 @@
+## [1.4.6](https://github.com/thms317/scifi-boekenclub/compare/v1.4.5...v1.4.6) (2026-10-01)
+
+
+### Bug Fixes
+
+* let manual ratings take precedence over Goodreads ratings ([2c6a4d9](https://github.com/thms317/scifi-boekenclub/commit/2c6a4d9807639f00b9d69eaff5fcc04f30bdcaf8))
+
 ## [1.4.5](https://github.com/thms317/scifi-boekenclub/compare/v1.4.4...v1.4.5) (2026-10-01)
 
 
