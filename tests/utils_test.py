@@ -83,17 +83,41 @@ class TestReadGoodreads:
         ]
         for column in expected_columns:
             assert column in df_goodreads_test.columns, f"Missing column: {column}"
-        # Assert that only read books are included
-        expected = {"Sample Book", "Another Book"}
+        # Assert that books on every shelf are included (to-read books still provide book data)
+        expected = {"Sample Book", "Another Book", "Unread Book"}
         result = set(df_goodreads_test["title"].to_list())
         assert expected == result, "Titles in the DataFrame do not match expected values"
+        # Assert that a 0 rating (not rated) becomes null
+        unread = df_goodreads_test.filter(pl.col("title") == "Unread Book")
+        assert unread["rating"][0] is None
+
+    def test_read_goodreads_missing_column(self, test_goodreads_dir: Path) -> None:
+        """Test that an export without a column gets nulls for it instead of failing."""
+        with TemporaryDirectory() as tmpdir:
+            tmpdir_path = Path(tmpdir)
+            for csv_file in test_goodreads_dir.glob("*.csv"):
+                (tmpdir_path / csv_file.name).write_text(csv_file.read_text())
+            pl.DataFrame(
+                {
+                    "Title": ["New Export Book"],
+                    "Author": ["New Author"],
+                    "My Rating": [3],
+                    "Original Publication Year": [2021],
+                    "Number of Pages": [100],
+                    "Exclusive Shelf": ["read"],
+                },
+            ).write_csv(tmpdir_path / "new_export.csv")
+            df_goodreads_test = read_combine_goodreads(tmpdir_path)
+        new_book = df_goodreads_test.filter(pl.col("title") == "New Export Book")
+        assert new_book["average_goodreads_rating"][0] is None
+        assert df_goodreads_test.height == 4
 
     def test_read_goodreads_empty_directory(self) -> None:
         """Test how read_goodreads handles an empty directory."""
         with TemporaryDirectory() as tmpdir:
             tmpdir_path = Path(tmpdir)
             # Call the function with an empty directory
-            with pytest.raises(pl.exceptions.ComputeError, match="expected at least 1 source"):
+            with pytest.raises(FileNotFoundError, match="No CSV files found"):
                 _ = read_combine_goodreads(tmpdir_path)
 
 
@@ -213,12 +237,9 @@ class TestPivotGoodreadsData:
             "number_of_pages",
             "Koen",
             "Thomas",
-            "average_bookclub_rating",
         ]
         assert set(df_pivot.columns) == set(expected_columns)
         assert df_pivot.shape[0] == 1
-        # Assert average_bookclub_rating calculation
-        assert df_pivot["average_bookclub_rating"][0] == 4.5
         # Assert that the averaged goodreads value is correct (in case of rating drift)
         assert df_pivot["average_goodreads_rating"][0] == 4.6
         # Assert that the averaged number if  is correct (in case of different editions with different page counts)

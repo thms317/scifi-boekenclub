@@ -11,7 +11,10 @@ from scifi.members import BookClubMembers
 def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
     """Read and combine all Goodreads CSVs into a Polars DataFrame.
 
-    The title and author columns are stripped of whitespace.
+    Books on every shelf are kept, so to-read entries still provide book data.
+    Files are combined by column name, so an export without a column (e.g.
+    "Average Rating") gets nulls for it instead of failing. Non-numeric values
+    become null, and so do 0 ratings (not rated).
 
     Parameters
     ----------
@@ -21,8 +24,17 @@ def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
     Returns
     -------
     pl.DataFrame
-        The Goodreads data.
+        The Goodreads data, one row per book per export.
+
+    Raises
+    ------
+    FileNotFoundError
+        If the directory contains no CSV files.
     """
+    csv_files = list(goodreads_dir.glob("*.csv"))
+    if not csv_files:
+        msg = f"No CSV files found in: {goodreads_dir}"
+        raise FileNotFoundError(msg)
     columns = {
         "Title": "title",
         "Author": "author",
@@ -32,17 +44,22 @@ def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
         "Number of Pages": "number_of_pages",
     }
     q = (
-        pl.scan_csv(goodreads_dir, include_file_paths="path")
-        .filter(pl.col("Exclusive Shelf") == "read")
+        pl.concat(
+            [pl.scan_csv(csv_file, include_file_paths="path") for csv_file in csv_files],
+            how="diagonal_relaxed",
+        )
         .select([*columns.keys(), "path"])
         .rename(columns)
         .with_columns(
             pl.col("title").str.strip_chars().str.replace_all(r"\s+", " "),
             pl.col("author").str.strip_chars().str.replace_all(r"\s+", " "),
+            pl.col("rating").cast(pl.Float64, strict=False),
+            pl.col("average_goodreads_rating").cast(pl.Float64, strict=False),
+            pl.col("original_publication_year").cast(pl.Int64, strict=False),
+            pl.col("number_of_pages").cast(pl.Int64, strict=False),
         )
         .with_columns(
-            # Convert 0 ratings to null to exclude from calculations but keep the book
-            pl.when(pl.col("rating") > 0).then(pl.col("rating")).otherwise(None).alias("rating")
+            pl.when(pl.col("rating") > 0).then(pl.col("rating")).otherwise(None).alias("rating"),
         )
     )
     return q.collect()
@@ -89,7 +106,7 @@ def pivot_goodreads_data(
     goodreads_df: pl.DataFrame,
     reviewer_mapping: dict[str, str],
 ) -> pl.DataFrame:
-    """Pivot the Goodreads data, grouping by book, and calculating average ratings.
+    """Pivot the Goodreads data to one row per book with a rating column per member.
 
     Parameters
     ----------
@@ -125,11 +142,6 @@ def pivot_goodreads_data(
             aggregate_function="mean",
         )
         .rename(reviewer_mapping)
-        .with_columns(
-            pl.mean_horizontal(*list(reviewer_mapping.values())).alias("average_bookclub_rating"),
-            pl.col("average_goodreads_rating"),
-            pl.col("number_of_pages"),
-        )
     )
 
 
