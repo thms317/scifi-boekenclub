@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/thms317/scifi-boekenclub/compare/v1.4.7...v1.5.0) (2026-10-01)
+
+
+### Features
+
+* add The Sparrow physics notebooks ([c25119b](https://github.com/thms317/scifi-boekenclub/commit/c25119b1e840a6b9ea286df98a36e337d2128317)), closes [#49](https://github.com/thms317/scifi-boekenclub/issues/49)
+
 ## [1.4.7](https://github.com/thms317/scifi-boekenclub/compare/v1.4.6...v1.4.7) (2026-10-01)
 
 
