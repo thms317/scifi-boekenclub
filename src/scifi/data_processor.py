@@ -12,8 +12,10 @@ import polars as pl
 from scifi.members import BookClubMembers
 from scifi.utils import (
     match_dataframes,
+    merge_authors,
     merge_manual_ratings,
     pivot_goodreads_data,
+    read_authors,
     read_bookclub,
     read_manual_ratings,
 )
@@ -153,6 +155,7 @@ def process_bookclub_data(
     goodreads_dir: Path | str,
     bookclub_path: Path | str,
     manual_ratings_path: Path | str,
+    authors_path: Path | str | None = None,
 ) -> tuple[pl.DataFrame, pl.DataFrame, pl.DataFrame]:
     """Process all book club data from raw sources.
 
@@ -167,6 +170,8 @@ def process_bookclub_data(
         Path to bookclub CSV file.
     manual_ratings_path : Path | str
         Path to manual ratings CSV file.
+    authors_path : Path | str | None, optional
+        Path to authors CSV file (gender, country, religion, ...), by default None.
 
     Returns
     -------
@@ -188,7 +193,13 @@ def process_bookclub_data(
         goodreads_pivot_df=goodreads_pivot_df,
         manual_ratings_path=Path(manual_ratings_path),
     )
-    # Step 5: Sort by date
+    # Step 5: Merge author data
+    if authors_path is not None:
+        bookclub_processed_df = merge_authors(
+            bookclub_processed_df=bookclub_processed_df,
+            authors_df=read_authors(Path(authors_path)),
+        )
+    # Step 6: Sort by date
     bookclub_processed_df = bookclub_processed_df.sort("date")
     return bookclub_processed_df, unmatched_df, goodreads_df
 
@@ -233,6 +244,7 @@ if __name__ == "__main__":
         goodreads_dir=Path("data/goodreads/clean"),
         bookclub_path=Path("data/bookclub/bookclub.csv"),
         manual_ratings_path=Path("data/bookclub/manual_ratings.csv"),
+        authors_path=Path("data/bookclub/authors.csv"),
     )
     # Save the results
     save_processed_data(processed_df, unmatched_df, goodreads_df)

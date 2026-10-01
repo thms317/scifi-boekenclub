@@ -9,9 +9,12 @@ import polars as pl
 import pytest
 
 from scifi.utils import (
+    AUTHOR_CATEGORIES,
     match_dataframes,
+    merge_authors,
     merge_manual_ratings,
     pivot_goodreads_data,
+    read_authors,
     read_bookclub,
     read_combine_goodreads,
 )
@@ -330,3 +333,33 @@ class TestMergeManualRatings:
         merged = merge_manual_ratings(processed, manual)
         assert merged["Robert"][0] == 4.0
         assert merged["Peter"][0] == 4.0
+
+
+class TestAuthors:
+    """Test class for the authors data and functions."""
+
+    data_dir = Path(__file__).parents[1] / "data" / "bookclub"
+
+    def test_authors_csv_contract(self) -> None:
+        """Test that the real authors CSV only uses allowed values and covers every book."""
+        authors = read_authors(self.data_dir / "authors.csv")
+        assert authors["author"].is_unique().all()
+        for col, allowed in AUTHOR_CATEGORIES.items():
+            invalid = authors.filter(~pl.col(f"author_{col}").is_in(allowed).fill_null(False))
+            assert invalid.is_empty(), f"Invalid {col} values:\n{invalid}"
+        assert authors["author_country"].null_count() == 0
+        # Public LGBTQ+ information always needs a source
+        assert authors.filter(pl.col("author_lgbtq") == "ja")["author_source"].null_count() == 0
+        # Every author in the bookclub data needs a row
+        bookclub_authors = set(read_bookclub(self.data_dir / "bookclub.csv")["author"])
+        assert bookclub_authors <= set(authors["author"])
+
+    def test_merge_authors(self) -> None:
+        """Test that authors join case-insensitively and unmatched books are kept."""
+        processed = pl.DataFrame(
+            {"title": ["Book A", "Book B"], "author": ["UNA AUTHOR", "Unknown"]}
+        )
+        authors = pl.DataFrame({"author": ["Una Author"], "author_gender": ["vrouw"]})
+        merged = merge_authors(processed, authors)
+        assert merged["author"].to_list() == ["UNA AUTHOR", "Unknown"]
+        assert merged["author_gender"].to_list() == ["vrouw", None]

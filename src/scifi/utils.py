@@ -257,6 +257,69 @@ def merge_manual_ratings(
     return joined_df
 
 
+# Allowed values per author column (country is free: one country per author)
+AUTHOR_CATEGORIES = {
+    "gender": ["man", "vrouw", "non-binair", "gemengd"],
+    "religion": ["christelijk", "joods", "boeddhistisch", "spiritueel", "seculier", "onbekend"],
+    "lgbtq": ["ja", "onbekend"],
+    "ethnicity": ["europees", "afrikaans", "aziatisch", "latijns-amerikaans", "onbekend"],
+}
+
+
+def read_authors(authors_path: Path) -> pl.DataFrame:
+    """Read the authors CSV into a Polars DataFrame.
+
+    The columns other than author are prefixed with "author_" so they do not
+    clash with the bookclub columns after the merge.
+
+    Parameters
+    ----------
+    authors_path : Path
+        Path to the authors CSV.
+
+    Returns
+    -------
+    pl.DataFrame
+        One row per author with gender, country, religion, lgbtq, ethnicity and source.
+    """
+    df = pl.read_csv(authors_path).with_columns(pl.all().str.strip_chars())
+    return df.rename({col: f"author_{col}" for col in df.columns if col != "author"})
+
+
+def merge_authors(
+    bookclub_processed_df: pl.DataFrame,
+    authors_df: pl.DataFrame,
+    on: str = "author",
+) -> pl.DataFrame:
+    """Merge author data into the processed bookclub data.
+
+    Parameters
+    ----------
+    bookclub_processed_df : pl.DataFrame
+        The processed bookclub DataFrame.
+    authors_df : pl.DataFrame
+        The authors DataFrame.
+    on : str, optional
+        The column to join on, by default "author"
+
+    Returns
+    -------
+    pl.DataFrame
+        The processed bookclub data with the author columns added.
+    """
+    return (
+        bookclub_processed_df.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column"))
+        .join(
+            authors_df.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column")).drop(
+                on
+            ),
+            on="temp_match_column",
+            how="left",
+        )
+        .drop("temp_match_column")
+    )
+
+
 def get_active_book_suggesters(
     bookclub_df: pl.DataFrame,
     min_suggestions: int = 2,

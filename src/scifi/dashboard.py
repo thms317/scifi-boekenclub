@@ -110,6 +110,7 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
                 goodreads_dir="data/goodreads/clean",
                 bookclub_path="data/bookclub/bookclub.csv",
                 manual_ratings_path="data/bookclub/manual_ratings.csv",
+                authors_path="data/bookclub/authors.csv",
             )
 
     except FileNotFoundError as e:
@@ -122,7 +123,8 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
         │       └── [member CSV files]
         └── bookclub/
             ├── bookclub.csv
-            └── manual_ratings.csv (optional)
+            ├── manual_ratings.csv (optional)
+            └── authors.csv
         """)
         st.stop()
 
@@ -837,6 +839,141 @@ def create_suggester_analysis(df: pl.DataFrame) -> None:
         )
 
 
+def create_author_bar_chart(
+    stats_df: pd.DataFrame, value_col: str, x_title: str, x_max: float, decimals: int
+) -> go.Figure:
+    """Create a horizontal bar chart of one author statistic per group"""
+    # Groups without ratings (e.g. only an unrated book) get a label instead of NaN
+    labels = [
+        f"{value:.{decimals}f}" if pd.notna(value) else "no ratings"
+        for value in stats_df[value_col]
+    ]
+    rating_labels = [
+        f"{value:.2f}" if pd.notna(value) else "no ratings" for value in stats_df["avg_rating"]
+    ]
+    fig = go.Figure(
+        go.Bar(
+            x=stats_df[value_col],
+            y=stats_df["group"],
+            orientation="h",
+            marker={"color": "#555555", "line": {"width": 2, "color": "white"}},
+            customdata=list(zip(stats_df["book_count"], rating_labels, strict=True)),
+            hovertemplate=(
+                "<b>%{y}</b><br>"
+                "Books: %{customdata[0]}<br>"
+                "Avg club rating: %{customdata[1]}<br>"
+                "<extra></extra>"
+            ),
+            text=labels,
+            textposition="outside",
+            textfont={"color": "#333333"},
+            cliponaxis=False,
+        )
+    )
+    fig.update_layout(
+        xaxis_title=x_title,
+        yaxis={"autorange": "reversed", "tickfont": {"size": 11}},
+        # Leave headroom so the value labels outside the bars are not clipped
+        xaxis={"range": [0, x_max], "gridcolor": "rgba(128, 128, 128, 0.2)"},
+        template="plotly_white",
+        height=max(250, 40 * len(stats_df) + 80),
+        plot_bgcolor="rgba(250, 250, 250, 0.8)",
+        paper_bgcolor="white",
+        font={"family": "Arial, sans-serif", "size": 12, "color": "#333333"},
+        margin={"l": 20, "r": 20, "t": 20, "b": 50},
+        showlegend=False,
+    )
+    return fig
+
+
+def create_author_analysis(df: pl.DataFrame) -> None:
+    """Create charts of book counts and club ratings by author background"""
+    st.subheader("✍️ Who Are We Reading?")
+    st.write(
+        "Author background for every book we read, one row per author in "
+        "data/bookclub/authors.csv. LGBTQ+ only counts what is public; ethnicity is the "
+        "club's judgement from public biographies."
+    )
+
+    dimensions = {
+        "Gender": "author_gender",
+        "Country": "author_country",
+        "Religion": "author_religion",
+        "LGBTQ+": "author_lgbtq",
+        "Ethnicity": "author_ethnicity",
+    }
+    if not all(col in df.columns for col in dimensions.values()):
+        st.warning("No author data found. Add data/bookclub/authors.csv.")
+        return
+
+    dimension = st.radio("Group authors by:", list(dimensions), horizontal=True)
+    group_col = dimensions[dimension]
+
+    stats_df = (
+        df.filter(pl.col(group_col).is_not_null())
+        .group_by(group_col)
+        .agg(
+            pl.len().alias("book_count"),
+            pl.col("average_bookclub_rating").mean().alias("avg_rating"),
+        )
+        .rename({group_col: "group"})
+        .sort(["book_count", "group"], descending=[True, False])
+        .to_pandas()
+    )
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("**📚 Books read**")
+        st.plotly_chart(
+            create_author_bar_chart(
+                stats_df,
+                "book_count",
+                "Number of books",
+                x_max=stats_df["book_count"].max() * 1.15,
+                decimals=0,
+            ),
+            use_container_width=True,
+        )
+    with col2:
+        st.markdown("**⭐ Average club rating**")
+        st.plotly_chart(
+            create_author_bar_chart(
+                stats_df, "avg_rating", "Average club rating (1-5)", x_max=5.6, decimals=2
+            ),
+            use_container_width=True,
+        )
+    st.caption(
+        "Groups with only one or two books say little about taste; hover for counts. "
+        "'onbekend' means unknown, not a default."
+    )
+
+    st.markdown("---")
+    st.subheader("📋 Author Details per Book")
+    st.dataframe(
+        df.sort("date", descending=True)
+        .select(
+            "title",
+            "author",
+            "date",
+            *dimensions.values(),
+            "author_source",
+            "average_bookclub_rating",
+        )
+        .to_pandas()
+        .round({"average_bookclub_rating": 2}),
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "title": st.column_config.TextColumn("Title", width="large"),
+            "author": st.column_config.TextColumn("Author", width="medium"),
+            "date": st.column_config.DateColumn("Read on", format="MMM DD, YYYY"),
+            **{col: label for label, col in dimensions.items()},
+            "author_source": st.column_config.LinkColumn("Source", display_text="bron"),
+            "average_bookclub_rating": st.column_config.NumberColumn("Club", format="%.2f"),
+        },
+    )
+
+
 def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
     """Create advanced analytics section"""
     # CORRELATION ANALYSIS SECTION
@@ -979,6 +1116,7 @@ def main() -> None:
             "📊 Overview",
             "👥 Member Insights",
             "📅 Time Analysis",
+            "✍️ Author Insights",
             "🔬 Advanced Analytics",
         ],
     )
@@ -1129,6 +1267,9 @@ def main() -> None:
             st.subheader("📈 Rating Trends Over Time")
             st.write("The orange line shows a 7-book (+/- 1 year) moving average of club ratings.")
             create_rating_trends_chart(bookclub_processed_df)
+
+    elif page == "✍️ Author Insights":
+        create_author_analysis(bookclub_processed_df)
 
     elif page == "🔬 Advanced Analytics":
         create_advanced_analytics(bookclub_processed_df, members)
