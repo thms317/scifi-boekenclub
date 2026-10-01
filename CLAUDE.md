@@ -55,5 +55,6 @@ The core data processing uses Polars for performance. Key functions in `src/scif
 - `read_bookclub()`: Processes book club meeting data
 - `pivot_goodreads_data()`: Transforms individual ratings into club member columns
 - `match_dataframes()`: Joins book club and Goodreads data on title/author
+- `merge_manual_ratings()`: Adds manual ratings; these take precedence over Goodreads ratings
 
 The processed data is saved as `data/processed_data.csv`. The project handles multiple reviewer mappings and calculates both individual and average ratings across club members.

@@ -196,8 +196,8 @@ def merge_manual_ratings(
 ) -> pl.DataFrame:
     """Merge manual ratings into the processed bookclub data.
 
-    Empty/null values in manual ratings will not overwrite existing ratings
-    in the bookclub processed data. Only non-null manual ratings will be used.
+    Non-null manual ratings take precedence over existing (Goodreads) ratings.
+    Empty/null values in manual ratings will not overwrite existing ratings.
 
     Parameters
     ----------
@@ -211,8 +211,8 @@ def merge_manual_ratings(
     Returns
     -------
     pl.DataFrame
-        The joined DataFrame where manual ratings supplement existing ratings
-        without overwriting them when manual ratings are empty/null.
+        The joined DataFrame where manual ratings override existing ratings,
+        except when the manual rating is empty/null.
     """
     # Get the member columns
     bookclub_members_list = [
@@ -231,13 +231,13 @@ def merge_manual_ratings(
         )
         .drop("temp_match_column")
     )
-    # Use manual rating only if there is no existing rating
+    # Prefer the manual rating; fall back to the existing rating when it is empty
     coalesce_exprs = []
     for col in bookclub_members_list:
         manual_col = f"{col}_manual"
         if col in bookclub_processed_df.columns and manual_col in joined_df.columns:
-            # Use coalesce to prefer existing ratings over manual ratings when both exist
-            coalesce_exprs.append(pl.coalesce([pl.col(col), pl.col(manual_col)]).alias(col))
+            # Use coalesce to prefer manual ratings over existing ratings when both exist
+            coalesce_exprs.append(pl.coalesce([pl.col(manual_col), pl.col(col)]).alias(col))
         elif manual_col in joined_df.columns:
             # If original column doesn't exist, just rename the manual column
             coalesce_exprs.append(pl.col(manual_col).alias(col))

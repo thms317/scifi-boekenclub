@@ -10,6 +10,7 @@ import pytest
 
 from scifi.utils import (
     match_dataframes,
+    merge_manual_ratings,
     pivot_goodreads_data,
     read_bookclub,
     read_combine_goodreads,
@@ -301,3 +302,18 @@ class TestMatchDataframes:
         matched_df = match_dataframes(df_bookclub, df_pivot, on="title", how="anti")
         assert matched_df.shape[0] == 1
         assert matched_df["title"][0] == "Non-Matching Book"
+
+
+class TestMergeManualRatings:
+    """Test class for the merge_manual_ratings function."""
+
+    def test_manual_rating_overrides_existing(self) -> None:
+        """Test that a manual rating wins over an existing rating, and empty ones do not."""
+        processed = pl.DataFrame({"title": ["Book A"], "Robert": [5.0], "Peter": [4.0]})
+        manual = pl.DataFrame(
+            {"title": ["book a"], "author": ["X"], "Robert": [4.0], "Peter": [None]},
+            schema_overrides={"Peter": pl.Float64},
+        )
+        merged = merge_manual_ratings(processed, manual)
+        assert merged["Robert"][0] == 4.0
+        assert merged["Peter"][0] == 4.0
