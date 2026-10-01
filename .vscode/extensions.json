@@ -1,10 +1,10 @@
 {
   "recommendations": [
+    "astral-sh.ty",
     "charliermarsh.ruff",
     "davidanson.vscode-markdownlint",
     "esbenp.prettier-vscode",
     "mechatroner.rainbow-csv",
-    "ms-python.vscode-pylance",
     "ms-vscode.makefile-tools",
     "njpwerner.autodocstring",
     "redhat.vscode-yaml",
