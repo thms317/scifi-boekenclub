@@ -44,7 +44,7 @@ test:
 
 tree:
 	@echo "Generating project tree..."
-	@tree -I '.venv|__pycache__|archive|scratch|.databricks|.ruff_cache|.mypy_cache|.pytest_cache|.git|htmlcov|site|dist|.DS_Store|fixtures' -a
+	@tree -I '.venv|__pycache__|archive|scratch|.databricks|.ruff_cache|.pytest_cache|.git|htmlcov|site|dist|.DS_Store|fixtures' -a
 
 lint:
 	@echo "Linting the project..."

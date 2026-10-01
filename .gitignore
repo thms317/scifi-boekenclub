@@ -143,11 +143,6 @@ venv.bak/
 # mkdocs documentation
 /site
 
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
 # Pyre type checker
 .pyre/
 
@@ -170,9 +165,6 @@ cython_debug/
 
 # ruff
 .ruff_cache/
-
-# LSP config files
-pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
 
