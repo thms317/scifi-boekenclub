@@ -1,3 +1,10 @@
+## [1.4.7](https://github.com/thms317/scifi-boekenclub/compare/v1.4.6...v1.4.7) (2026-10-01)
+
+
+### Bug Fixes
+
+* **ci:** use CLAUDE_CODE_OAUTH_TOKEN in Claude Code workflow ([94ffa26](https://github.com/thms317/scifi-boekenclub/commit/94ffa26869b0e3e0c77ec9125c4682ca89e9398a))
+
 ## [1.4.6](https://github.com/thms317/scifi-boekenclub/compare/v1.4.5...v1.4.6) (2026-10-01)
 
 
