@@ -184,3 +184,7 @@ scratch/**
 
 # Book files (copyrighted, never commit)
 *.epub
+
+# Pipeline outputs, written on every run (data/processed_data.csv stays tracked)
+data/goodreads/goodreads_combined.csv
+data/goodreads/goodreads_unmatched.csv
