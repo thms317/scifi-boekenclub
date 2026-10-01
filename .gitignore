@@ -181,3 +181,6 @@ spark-warehouse/
 .databricks/
 scratch/**
 !scratch/README.md
+
+# Book files (copyrighted, never commit)
+*.epub
