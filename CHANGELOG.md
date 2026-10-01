@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/thms317/scifi-boekenclub/compare/v1.5.0...v1.6.0) (2026-10-01)
+
+
+### Bug Fixes
+
+* handle Goodreads export differences ([a103ca1](https://github.com/thms317/scifi-boekenclub/commit/a103ca1480ff840c91b65aaeb8a4e8d772aee3f8))
+
+
+### Features
+
+* add author data and Author Insights page ([587acd1](https://github.com/thms317/scifi-boekenclub/commit/587acd10ea83c01d4ecfc5a1f4beea586378c1bd))
+
 # [1.5.0](https://github.com/thms317/scifi-boekenclub/compare/v1.4.7...v1.5.0) (2026-10-01)
 
 
