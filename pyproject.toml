@@ -26,7 +26,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "nbconvert>=7.17.1",
-    "notebook>=7.4.5",
+    "notebook>=7.5.6",
     "pre-commit>=4.2.0",
     "prek>=0.2.27",
     "pydoclint>=0.6.6",
