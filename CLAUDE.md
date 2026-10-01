@@ -14,6 +14,7 @@ The project follows a data pipeline structure:
    - Goodreads CSV exports from individual members (in `data/goodreads/`)
    - Book club meeting records (`data/bookclub/bookclub.csv`)
    - Manual ratings (`data/bookclub/manual_ratings.csv`)
+   - Authors, one row per author (`data/bookclub/authors.csv`)
 
 2. **Core Processing**:
    - Data cleaning and combination utilities in `src/scifi/utils.py`

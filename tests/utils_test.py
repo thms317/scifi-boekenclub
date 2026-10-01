@@ -224,6 +224,19 @@ class TestPivotGoodreadsData:
         # Assert that the averaged number if  is correct (in case of different editions with different page counts)
         assert df_pivot["number_of_pages"][0] == 275
 
+    def test_pivot_goodreads_data_different_years(
+        self,
+        df_goodreads: pl.DataFrame,
+        reviewer_mapping: dict[str, str],
+    ) -> None:
+        """Test that editions with a different original year are still one book."""
+        df_goodreads = df_goodreads.with_columns(
+            pl.Series("original_publication_year", [1963, 1953])
+        )
+        df_pivot = pivot_goodreads_data(df_goodreads, reviewer_mapping)
+        assert df_pivot.shape[0] == 1
+        assert df_pivot["original_publication_year"][0] == 1953
+
 
 class TestMatchDataframes:
     """Test class for the match_dataframes function."""
@@ -317,3 +330,18 @@ class TestMergeManualRatings:
         merged = merge_manual_ratings(processed, manual)
         assert merged["Robert"][0] == 4.0
         assert merged["Peter"][0] == 4.0
+
+
+class TestAuthors:
+    """Test class for the authors data."""
+
+    data_dir = Path(__file__).parents[1] / "data" / "bookclub"
+
+    def test_authors_csv(self) -> None:
+        """Test that every book club author has exactly one complete row in authors.csv."""
+        authors = pl.read_csv(self.data_dir / "authors.csv")
+        assert authors["author"].is_unique().all()
+        assert authors.null_count().sum_horizontal().item() == 0
+        # The pipeline joins on the exact author name
+        bookclub_authors = set(read_bookclub(self.data_dir / "bookclub.csv")["author"])
+        assert bookclub_authors <= set(authors["author"])
