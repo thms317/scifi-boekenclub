@@ -1,0 +1,119 @@
+"""Member Insights page of the Sci-Fi Book Club Analytics Dashboard."""
+
+import polars as pl
+import streamlit as st
+
+from scifi.analysis import member_stats, suggester_stats
+from scifi.members import BookClubMembers
+from scifi.ui.data import get_bookclub
+from scifi.visualizer import (
+    create_member_average_bar,
+    create_member_count_bar,
+    create_member_rating_heatmap,
+    create_suggester_box_plot,
+)
+
+
+def render() -> None:
+    """Render the Member Insights page."""
+    bookclub_processed_df = get_bookclub()
+    members = BookClubMembers.get_member_names()
+
+    # Add member rating heatmap at the top
+    fig_heatmap = create_member_rating_heatmap(bookclub_processed_df, members)
+    st.plotly_chart(fig_heatmap, width="stretch")
+
+    _create_member_comparison(bookclub_processed_df, members)
+
+    # Add suggester violin plot
+    st.markdown("---")
+    _create_suggester_analysis(bookclub_processed_df)
+
+
+def _create_member_comparison(df: pl.DataFrame, members: list[str]) -> None:
+    """Create member rating comparison.
+
+    Parameters
+    ----------
+    df : pl.DataFrame
+        The processed book club data.
+    members : list[str]
+        List of member names.
+    """
+    st.subheader("👥 Member Rating Patterns")
+
+    # Calculate member statistics
+    stats_df = member_stats(df, members)
+    stats_df = stats_df.select(
+        pl.col("member").alias("Member"),
+        pl.col("count").alias("Count"),
+        pl.col("average").alias("Average"),
+        pl.col("std_dev").alias("Std Dev"),
+        pl.col("min").alias("Min"),
+        pl.col("max").alias("Max"),
+    )
+
+    # Create clean comparison charts
+    col1, col2 = st.columns(2)
+
+    with col1:
+        # Rating counts
+        fig_counts = create_member_count_bar(stats_df)
+        st.plotly_chart(fig_counts, width="stretch")
+
+    with col2:
+        # Average ratings
+        fig_avg = create_member_average_bar(stats_df)
+        st.plotly_chart(fig_avg, width="stretch")
+
+
+def _create_suggester_analysis(df: pl.DataFrame) -> None:
+    """Create jitter box plot showing ratings by book suggester.
+
+    Parameters
+    ----------
+    df : pl.DataFrame
+        The processed book club data.
+    """
+    st.subheader("🎯 Ratings by Book Suggester")
+    st.write(
+        "Distribution of average club ratings for books suggested by members (3+ books or active members)"
+    )
+
+    # Get active member names from BookClubMembers
+    active_member_names = [member.name for member in BookClubMembers.get_active_members()]
+
+    # Calculate average ratings per suggester using analysis function
+    stats_result = suggester_stats(df, active_member_names)
+
+    if stats_result is None or len(stats_result) == 0:
+        st.warning("No members meet the criteria (3+ books or active members).")
+        return
+
+    # Create the jitter box plot
+    fig = create_suggester_box_plot(df, stats_result)
+
+    # Create layout with violin plot and stats side by side
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        st.plotly_chart(fig, width="stretch")
+
+    with col2:
+        # Simple stats display
+        st.subheader("📈 Suggester Statistics")
+        stats_df = stats_result.select(
+            pl.col("suggested_by"),
+            pl.col("book_count"),
+            pl.col("avg_rating").round(2),
+        )
+        st.dataframe(
+            stats_df,
+            width="stretch",
+            hide_index=True,
+            column_config={
+                "suggested_by": "Suggester",
+                "book_count": "Books",
+                "avg_rating": "Avg Rating",
+            },
+        )
