@@ -25,22 +25,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS for cards that need gradient styling
-st.markdown(
-    """
-<style>
-    .book-detail-card {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        padding: 2rem;
-        border-radius: 15px;
-        color: white;
-        margin: 1rem 0;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    }
-</style>
-""",
-    unsafe_allow_html=True,
-)
 
 # Setup navigation
 page = st.navigation(
