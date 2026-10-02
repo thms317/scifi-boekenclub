@@ -583,30 +583,32 @@ def main() -> None:
         # Book selection for detailed analysis
         st.markdown("---")
         st.subheader("🔍 Select a Book for Detailed Analysis")
-        # Convert to pandas for sorting and date filtering
-        bookclub_processed_df_pandas = bookclub_processed_df.to_pandas()
-        bookclub_processed_df_pandas["date"] = pd.to_datetime(
-            bookclub_processed_df_pandas["date"], errors="coerce"
-        ).dt.date
 
-        # Filter to only past books (exclude current/upcoming books)
+        # Past books, newest first, and a title for each index
         today = date.today()
-        past_books = bookclub_processed_df_pandas[bookclub_processed_df_pandas["date"] < today]
-
-        if len(past_books) > 0:
-            # Sort past books by date (most recent first) and get titles
-            book_titles = past_books.sort_values("date", ascending=False)["title"].tolist()
-        else:
-            # Fallback to all books if no past books found
-            book_titles = bookclub_processed_df_pandas.sort_index(ascending=False)["title"].tolist()
-
-        selected_book_title = st.selectbox(
-            "Choose a book:", book_titles, key="overview_book_selector"
+        book_indices = (
+            bookclub_processed_df.filter(pl.col("date") < today)
+            .sort("date", descending=True)["index"]
+            .to_list()
+        )
+        book_index_to_title = dict(
+            zip(
+                bookclub_processed_df["index"].to_list(),
+                bookclub_processed_df["title"].to_list(),
+                strict=False,
+            )
         )
 
-        if selected_book_title:
+        selected_book_index = st.selectbox(
+            "Choose a book:",
+            options=book_indices,
+            format_func=lambda idx: book_index_to_title.get(idx, f"Book {idx}"),
+            key="overview_book_selector",
+        )
+
+        if selected_book_index is not None:
             selected_book_data = (
-                bookclub_processed_df.filter(pl.col("title") == selected_book_title)
+                bookclub_processed_df.filter(pl.col("index") == selected_book_index)
                 .to_pandas()
                 .iloc[0]
             )
