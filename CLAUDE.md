@@ -44,7 +44,7 @@ Use the provided Makefile for common tasks:
 
 - `make setup`: Complete development environment setup (installs dependencies, pre-commit hooks)
 - `make test`: Run full test suite with coverage reporting
-- `make clean`: Remove virtual environment, caches, and build artifacts; keeps `uv.lock`
+- `make clean`: Remove caches and build artifacts; keeps `uv.lock` and the virtual environment
 - `make dashboard`: Run the Streamlit app from `app.py`
 
 Python package management uses `uv`:
@@ -68,7 +68,7 @@ The core data processing uses Polars for performance. Key functions in `src/scif
 - `read_combine_goodreads()`: Loads and standardizes Goodreads CSV exports
 - `read_bookclub()`: Processes book club meeting data
 - `pivot_goodreads_data()`: Transforms individual ratings into club member columns
-- `match_dataframes()`: Joins book club and Goodreads data on title/author
+- `match_dataframes()`: Joins book club and Goodreads data on the lowercased title
 - `merge_manual_ratings()`: Adds manual ratings; these take precedence over Goodreads ratings
 
 The app runs the pipeline live; `data/processed_data.csv` is only an export.
