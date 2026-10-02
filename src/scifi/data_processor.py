@@ -67,16 +67,13 @@ def process_bookclub_data(
     all_member_names = BookClubMembers.get_member_names()
 
     # Ensure all members have a Float64 column, even if null
-    for member_name in all_member_names:
-        if member_name not in bookclub_processed_df.columns:
-            bookclub_processed_df = bookclub_processed_df.with_columns(
-                pl.lit(None, dtype=pl.Float64).alias(member_name)
-            )
-        else:
-            # Cast to Float64 if it exists
-            bookclub_processed_df = bookclub_processed_df.with_columns(
-                pl.col(member_name).cast(pl.Float64)
-            )
+    member_exprs = [
+        pl.col(member_name).cast(pl.Float64)
+        if member_name in bookclub_processed_df.columns
+        else pl.lit(None, dtype=pl.Float64).alias(member_name)
+        for member_name in all_member_names
+    ]
+    bookclub_processed_df = bookclub_processed_df.with_columns(member_exprs)
 
     # Calculate average over the member ratings
     bookclub_processed_df = bookclub_processed_df.with_columns(
