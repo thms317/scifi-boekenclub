@@ -1,17 +1,11 @@
 # TODO
 
-## High Priority
-
-- [ ] Depict latest book in overview
-- [ ] Labels are falling off the spider chart
-
-## Nice to Have
-
-- [ ] Create more tests
-- [ ] Fix the JOIN - it creates duplicate columns
-
 ## Done
 
+- [x] Depict latest book in overview
+- [x] Labels are falling off the spider chart
+- [x] Create more tests
+- [x] Fix the JOIN - it creates duplicate columns
 - [x] Upload new GoodReads export of Thomas
 - [x] Update [`bookclub.csv`](https://tinyurl.com/3k56h92v) (now located in `data/bookclub/`)
 - [x] Manually add missing ratings from the rest of the group
