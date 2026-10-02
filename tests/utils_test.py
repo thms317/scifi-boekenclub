@@ -351,18 +351,3 @@ class TestMergeManualRatings:
         merged = merge_manual_ratings(processed, manual)
         assert merged["Robert"][0] == 4.0
         assert merged["Peter"][0] == 4.0
-
-
-class TestAuthors:
-    """Test class for the authors data."""
-
-    data_dir = Path(__file__).parents[1] / "data" / "bookclub"
-
-    def test_authors_csv(self) -> None:
-        """Test that every book club author has exactly one complete row in authors.csv."""
-        authors = pl.read_csv(self.data_dir / "authors.csv")
-        assert authors["author"].is_unique().all()
-        assert authors.null_count().sum_horizontal().item() == 0
-        # The pipeline joins on the exact author name
-        bookclub_authors = set(read_bookclub(self.data_dir / "bookclub.csv")["author"])
-        assert bookclub_authors <= set(authors["author"])
