@@ -220,6 +220,12 @@ def _create_selected_book_analysis(
     book_title = escape(str(selected_book["title"]))
     book_author = escape(str(selected_book["author"]))
     book_location = escape(str(selected_book.get("location", "N/A")))
+    book_date = selected_book["date"].strftime("%B %d, %Y")
+
+    # Format rating, handling None for unrated books
+    rating_value = selected_book["average_bookclub_rating"]
+    rating_display = f"{rating_value:.2f}" if rating_value is not None else "-"
+
     st.markdown(
         f"""
     <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -232,12 +238,12 @@ def _create_selected_book_analysis(
             <div>
                 <h1>📖 {book_title}</h1>
                 <h2>✍️ by {book_author}</h2>
-                <p><strong>📅 Read on:</strong> {selected_book["date"]}</p>
+                <p><strong>📅 Read on:</strong> {book_date}</p>
                 <p><strong>🏠 Location:</strong> {book_location}</p>
             </div>
             <div style="text-align: right;">
                 <div style="font-size: 3em;">⭐</div>
-                <div style="font-size: 1.5em;">{selected_book["average_bookclub_rating"]:.2f}</div>
+                <div style="font-size: 1.5em;">{rating_display}</div>
                 <div>Club Rating</div>
             </div>
         </div>
