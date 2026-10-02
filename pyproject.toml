@@ -8,19 +8,10 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "defusedxml>=0.7.1",
-    "ipykernel>=6.30.0",
-    "matplotlib>=3.10.5",
-    "nbformat>=5.10.4",
     "numpy>=2.2.6",
-    "openpyxl>=3.1.5",
-    "pandas-stubs>=2.3.0.250703",
     "plotly>=6.2.0",
     "polars>=1.32.0",
-    "scipy>=1.16.1",
-    "seaborn>=0.13.2",
-    "streamlit>=1.47.1",
-    "watchdog>=6.0.0",
+    "streamlit>=1.59",
 ]
 
 [dependency-groups]
@@ -33,10 +24,22 @@ dev = [
     "pytest>=9.0.3",
     "ruff>=0.12.7",
     "ty>=0.0.1a16",
+    "watchdog>=6.0.0",
 ]
+notebooks = [
+    "ipykernel>=6.30.0",
+    "matplotlib>=3.10.5",
+    "nbformat>=5.10.4",
+    "seaborn>=0.13.2",
+]
+
+[build-system]
+requires = ["uv_build>=0.10.0,<0.11"]
+build-backend = "uv_build"
 
 [tool.uv]
 package = true
+default-groups = ["dev", "notebooks"]
 
 [tool.ty.environment]
 python-version = "3.12"
