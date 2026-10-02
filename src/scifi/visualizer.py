@@ -1,7 +1,6 @@
 """Visualization functions for the scifi project."""
 
 import numpy as np
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import polars as pl
@@ -165,7 +164,7 @@ def create_club_vs_goodreads_discrepancies(df: pl.DataFrame) -> go.Figure:
 
     sorted_diff = df_with_diff.select(["title", "rating_diff"]).drop_nulls().sort("rating_diff")
     fig_diff = px.bar(
-        sorted_diff.to_pandas(),
+        sorted_diff,
         x="rating_diff",
         y="title",
         orientation="h",
@@ -209,7 +208,7 @@ def create_polarizing_books_analysis(df: pl.DataFrame, member_cols: list[str]) -
     )
 
     fig_polar = px.bar(
-        polarizing.head(10).to_pandas(),
+        polarizing.head(10),
         x="rating_std",
         y="title",
         orientation="h",
@@ -249,23 +248,24 @@ def create_rating_scatter(df: pl.DataFrame) -> go.Figure:
     size_by = "average_goodreads_rating"
 
     # Prepare data for plotting - handle null values and filter out unrated books
-    df_processed = (
-        df.with_columns(
-            [
-                pl.col("original_publication_year").fill_null(0).alias("original_publication_year"),
-                pl.col("suggested_by").fill_null("Unknown").alias("suggested_by"),
-            ]
-        )
-        .filter(
-            # Exclude books with no ratings
-            pl.col("average_bookclub_rating").is_not_null()
-            & pl.col("average_goodreads_rating").is_not_null()
-        )
-        .to_pandas()
+    # Handle date column which may be string or date type
+    date_expr = (
+        pl.col("date").dt.strftime("%B %d, %Y")
+        if df["date"].dtype != pl.String
+        else pl.col("date").str.to_datetime().dt.strftime("%B %d, %Y")
     )
 
-    # Format date for display
-    df_processed["date_formatted"] = pd.to_datetime(df_processed["date"]).dt.strftime("%B %d, %Y")
+    df_processed = df.with_columns(
+        [
+            pl.col("original_publication_year").fill_null(0).alias("original_publication_year"),
+            pl.col("suggested_by").fill_null("Unknown").alias("suggested_by"),
+            date_expr.alias("date_formatted"),
+        ]
+    ).filter(
+        # Exclude books with no ratings
+        pl.col("average_bookclub_rating").is_not_null()
+        & pl.col("average_goodreads_rating").is_not_null()
+    )
 
     # Add perfect correlation line (x=y from 1 to 5) - FIRST so it's behind data
     fig = go.Figure()
@@ -575,17 +575,15 @@ def create_rating_trend_chart(trend_df: pl.DataFrame) -> go.Figure:
     go.Figure
         A Plotly figure with trend data.
     """
-    trend_pd = trend_df.to_pandas()
-
     fig_trend = go.Figure()
 
     # Linear trendline (background layer)
-    valid_trend = trend_pd.dropna(subset=["trend"])
+    valid_trend = trend_df.filter(pl.col("trend").is_not_null())
     if len(valid_trend) > 1:
         fig_trend.add_trace(
             go.Scatter(
-                x=valid_trend["date"],
-                y=valid_trend["trend"],
+                x=valid_trend["date"].to_list(),
+                y=valid_trend["trend"].to_list(),
                 mode="lines",
                 name="Linear Trend",
                 line={"color": "grey", "width": 1, "dash": "dash"},
@@ -593,25 +591,25 @@ def create_rating_trend_chart(trend_df: pl.DataFrame) -> go.Figure:
         )
 
     # Individual points (all books with ratings)
-    rated_data = trend_pd.dropna(subset=["average_bookclub_rating"])
+    rated_data = trend_df.filter(pl.col("average_bookclub_rating").is_not_null())
     fig_trend.add_trace(
         go.Scatter(
-            x=rated_data["date"],
-            y=rated_data["average_bookclub_rating"],
+            x=rated_data["date"].to_list(),
+            y=rated_data["average_bookclub_rating"].to_list(),
             mode="markers",
             name="Individual Ratings",
             marker={"color": "lightblue", "size": 6, "opacity": 0.6},
             hovertemplate="<b>%{customdata}</b><br>Rating: %{y}<br>Date: %{x}<extra></extra>",
-            customdata=rated_data["title"],
+            customdata=rated_data["title"].to_list(),
         ),
     )
 
     # 7-book moving average (foreground layer)
-    valid_ma = trend_pd.dropna(subset=["rolling_avg"])
+    valid_ma = trend_df.filter(pl.col("rolling_avg").is_not_null())
     fig_trend.add_trace(
         go.Scatter(
-            x=valid_ma["date"],
-            y=valid_ma["rolling_avg"],
+            x=valid_ma["date"].to_list(),
+            y=valid_ma["rolling_avg"].to_list(),
             mode="lines",
             name="7-Book Moving Average",
             line={"color": "orange", "width": 3},
@@ -647,18 +645,19 @@ def create_suggester_box_plot(df: pl.DataFrame, suggester_stats_df: pl.DataFrame
     suggester_col = "suggested_by" if "suggested_by" in df.columns else "blame"
 
     # Create ordered list of suggesters (meeting criteria)
-    stats_df = suggester_stats_df.to_pandas()
-    ordered_suggesters = stats_df["suggested_by"].tolist()
-
-    # Convert main dataframe to pandas for box plot
-    df_pandas = df.to_pandas()
+    ordered_suggesters = suggester_stats_df["suggested_by"].to_list()
 
     # Create the jitter box plot
     fig = go.Figure()
 
     for suggester in ordered_suggesters:
-        suggester_books = df_pandas[df_pandas[suggester_col] == suggester]
-        ratings = suggester_books["average_bookclub_rating"].tolist()
+        suggester_books = df.filter(pl.col(suggester_col) == suggester)
+        ratings = suggester_books["average_bookclub_rating"].to_list()
+
+        # Create customdata as list of lists for hover
+        titles = suggester_books["title"].to_list()
+        authors = suggester_books["author"].to_list()
+        customdata = list(zip(titles, authors, strict=False))
 
         # Add stylized box plot with subtle design
         fig.add_trace(
@@ -678,7 +677,7 @@ def create_suggester_box_plot(df: pl.DataFrame, suggester_stats_df: pl.DataFrame
                 line={"color": "#333333", "width": 1.5},  # Slightly thinner dark outline
                 fillcolor="rgba(240, 240, 240, 0.3)",  # Very light gray fill
                 boxmean=True,  # Show mean as well as median
-                customdata=suggester_books[["title", "author"]].values,
+                customdata=customdata,
                 hovertemplate=(
                     "<b>%{customdata[0]}</b><br>"
                     "Author: %{customdata[1]}<br>"
@@ -737,23 +736,24 @@ def create_author_bar_chart(
     go.Figure
         A Plotly bar figure.
     """
-    stats_pd = stats_df.to_pandas()
-
     # Groups without ratings (e.g. only an unrated book) get a label instead of NaN
+    value_col_list = stats_df[value_col].to_list()
+    avg_rating_list = stats_df["avg_rating"].to_list()
+
     labels = [
-        f"{value:.{decimals}f}" if pd.notna(value) else "no ratings"
-        for value in stats_pd[value_col]
+        f"{value:.{decimals}f}" if value is not None else "no ratings" for value in value_col_list
     ]
     rating_labels = [
-        f"{value:.2f}" if pd.notna(value) else "no ratings" for value in stats_pd["avg_rating"]
+        f"{value:.2f}" if value is not None else "no ratings" for value in avg_rating_list
     ]
+
     fig = go.Figure(
         go.Bar(
-            x=stats_pd[value_col],
-            y=stats_pd["group"],
+            x=value_col_list,
+            y=stats_df["group"].to_list(),
             orientation="h",
             marker={"color": "#555555", "line": {"width": 2, "color": "white"}},
-            customdata=list(zip(stats_pd["book_count"], rating_labels, strict=True)),
+            customdata=list(zip(stats_df["book_count"].to_list(), rating_labels, strict=False)),
             hovertemplate=(
                 "<b>%{y}</b><br>"
                 "Books: %{customdata[0]}<br>"
@@ -772,7 +772,7 @@ def create_author_bar_chart(
         # Leave headroom so the value labels outside the bars are not clipped
         xaxis={"range": [0, x_max], "gridcolor": "rgba(128, 128, 128, 0.2)"},
         template="plotly_white",
-        height=max(250, 40 * len(stats_pd) + 80),
+        height=max(250, 40 * len(stats_df) + 80),
         plot_bgcolor="rgba(250, 250, 250, 0.8)",
         paper_bgcolor="white",
         font={"family": "Arial, sans-serif", "size": 12, "color": "#333333"},
@@ -796,19 +796,20 @@ def create_correlation_heatmap(correlations_df: pl.DataFrame) -> go.Figure:
         A Plotly heatmap figure.
     """
     # Build correlation matrix from long-format data
-    corr_pd = correlations_df.to_pandas()
-    active_members = sorted(set(corr_pd["member_1"].tolist() + corr_pd["member_2"].tolist()))
+    member_1_list = correlations_df["member_1"].to_list()
+    member_2_list = correlations_df["member_2"].to_list()
+    active_members = sorted(set(member_1_list + member_2_list))
 
     # Create matrix
     correlation_matrix = np.eye(len(active_members))
     member_to_idx = {m: i for i, m in enumerate(active_members)}
 
-    for row in corr_pd.to_dict("records"):
-        i = member_to_idx[row["member_1"]]
-        j = member_to_idx[row["member_2"]]
+    for row in correlations_df.rows(named=True):
+        idx_1 = member_to_idx[row["member_1"]]
+        idx_2 = member_to_idx[row["member_2"]]
         corr = row["correlation"]
-        correlation_matrix[i][j] = corr if pd.notna(corr) else 0
-        correlation_matrix[j][i] = corr if pd.notna(corr) else 0
+        correlation_matrix[idx_1][idx_2] = corr if corr is not None else 0
+        correlation_matrix[idx_2][idx_1] = corr if corr is not None else 0
 
     # Create enhanced heatmap with better styling
     # Reverse matrix rows to match reversed y-axis labels (diagonal at top-left)
