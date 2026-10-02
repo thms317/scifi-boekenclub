@@ -59,7 +59,7 @@ lint:
 
 dashboard:
 	@echo "Building dashboard locally..."
-	@uv run streamlit run src/scifi/dashboard.py
+	@uv run streamlit run app.py
 
 # Update pre-commit hooks to latest versions
 update-pre-commit:
