@@ -23,7 +23,7 @@ import polars as pl
 import streamlit as st
 from scipy import stats
 
-from scifi.data_processor import process_bookclub_data
+from scifi.data_processor import load_dashboard_data
 from scifi.members import BookClubMembers
 from scifi.visualizer import (
     create_club_vs_goodreads_discrepancies,
@@ -106,7 +106,7 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
     try:
         with st.spinner("🔄 Processing book club data from sources..."):
             # Run the data processing pipeline
-            bookclub_processed_df, _unmatched_df, _goodreads_df = process_bookclub_data()
+            bookclub_processed_df = load_dashboard_data()
 
     except FileNotFoundError as e:
         st.error(f"📁 Data files not found: {e}")
@@ -130,23 +130,6 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
 
     bookclub_members_list = BookClubMembers.get_member_names()
 
-    # Data preprocessing for dashboard display
-    bookclub_processed_df = bookclub_processed_df.with_columns(
-        [
-            # Date is already parsed by data processor, just create alias for compatibility
-            pl.col("date").alias("date_parsed"),
-            # Data types are already handled by data processor, but ensure float types for calculations
-            *[
-                pl.col(member).cast(pl.Float64, strict=False)
-                for member in bookclub_members_list
-                if member in bookclub_processed_df.columns
-            ],
-        ],
-    )
-
-    # Handle missing dates by using a default or removing rows
-    bookclub_processed_df = bookclub_processed_df.filter(pl.col("date_parsed").is_not_null())
-
     return bookclub_processed_df, bookclub_members_list
 
 
@@ -156,27 +139,25 @@ def create_current_book_banner(bookclub_processed_df: pl.DataFrame) -> None:
 
     # Convert polars dates to pandas for easier date handling
     df_pandas = bookclub_processed_df.to_pandas()
-    df_pandas["date_parsed"] = pd.to_datetime(df_pandas["date_parsed"], errors="coerce").dt.date
+    df_pandas["date"] = pd.to_datetime(df_pandas["date"], errors="coerce").dt.date
 
     # Find current book (next future date or most recent if no future dates)
-    future_books = df_pandas[df_pandas["date_parsed"] >= today].sort_values(
-        "date_parsed", ascending=True
-    )
+    future_books = df_pandas[df_pandas["date"] >= today].sort_values("date", ascending=True)
 
     if len(future_books) > 0:
         current_book = future_books.iloc[0]
-        days_diff = (current_book["date_parsed"] - today).days
+        days_diff = (current_book["date"] - today).days
         is_upcoming = True
     else:
         # No future books, show most recent
-        current_book = df_pandas.sort_values("date_parsed").iloc[-1]
-        days_diff = (today - current_book["date_parsed"]).days
+        current_book = df_pandas.sort_values("date").iloc[-1]
+        days_diff = (today - current_book["date"]).days
         is_upcoming = False
 
     # Get book details
     title = str(current_book["title"])
     author = str(current_book["author"])
-    date_formatted = current_book["date_parsed"].strftime("%b %d")
+    date_formatted = current_book["date"].strftime("%b %d")
 
     # Handle ratings and book details
     # Get publication year and pages
@@ -239,8 +220,8 @@ def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[s
 
     # Calculate bookclub duration
     bookclub_processed_df_pandas = bookclub_processed_df.to_pandas()
-    first_date = bookclub_processed_df_pandas["date_parsed"].min()
-    last_date = bookclub_processed_df_pandas["date_parsed"].max()
+    first_date = bookclub_processed_df_pandas["date"].min()
+    last_date = bookclub_processed_df_pandas["date"].max()
     duration = last_date - first_date
     years = duration.days // 365
     months = (duration.days % 365) // 30
@@ -293,7 +274,7 @@ def create_rating_scatter(bookclub_processed_df: pl.DataFrame) -> go.Figure:
 
     # Format date for display
     bookclub_processed_df_pandas["date_formatted"] = pd.to_datetime(
-        bookclub_processed_df_pandas["date_parsed"]
+        bookclub_processed_df_pandas["date"]
     ).dt.strftime("%B %d, %Y")
 
     # Add perfect correlation line (x=y from 1 to 5) - FIRST so it's behind data
@@ -380,7 +361,7 @@ def create_selected_book_analysis(
             <div>
                 <h1>📖 {selected_book["title"]}</h1>
                 <h2>✍️ by {selected_book["author"]}</h2>
-                <p><strong>📅 Read on:</strong> {pd.to_datetime(selected_book["date_parsed"]).strftime("%B %d, %Y")}</p>
+                <p><strong>📅 Read on:</strong> {pd.to_datetime(selected_book["date"]).strftime("%B %d, %Y")}</p>
                 <p><strong>🏠 Location:</strong> {selected_book["location"]}</p>
             </div>
             <div style="text-align: right;">
@@ -590,11 +571,11 @@ def create_time_analysis(df: pl.DataFrame) -> None:
     st.subheader("📅 Reading Journey Over Time")
 
     df_pandas = df.to_pandas()
-    df_pandas["year"] = df_pandas["date_parsed"].dt.year
-    df_pandas["month"] = df_pandas["date_parsed"].dt.month
+    df_pandas["year"] = df_pandas["date"].dt.year
+    df_pandas["month"] = df_pandas["date"].dt.month
 
     # Sort by date for cleaner trends
-    df_pandas = df_pandas.sort_values("date_parsed")
+    df_pandas = df_pandas.sort_values("date")
 
     col1, col2 = st.columns(2)
 
@@ -651,7 +632,7 @@ def create_time_analysis(df: pl.DataFrame) -> None:
 def create_rating_trends_chart(df: pl.DataFrame) -> None:
     """Create rating trends over time chart (separate from time analysis)"""
     df_pandas = df.to_pandas()
-    df_pandas["date_parsed"] = pd.to_datetime(df_pandas["date_parsed"], errors="coerce").dt.date
+    df_pandas["date"] = pd.to_datetime(df_pandas["date"], errors="coerce").dt.date
 
     # Create rolling average for smoother trend
     df_pandas["rating_7ma"] = (
@@ -660,7 +641,7 @@ def create_rating_trends_chart(df: pl.DataFrame) -> None:
 
     # Calculate linear trendline
     # Convert dates to numeric for linear regression
-    df_pandas["date_numeric"] = pd.to_numeric(pd.to_datetime(df_pandas["date_parsed"]))
+    df_pandas["date_numeric"] = pd.to_numeric(pd.to_datetime(df_pandas["date"]))
     valid_ratings = df_pandas.dropna(subset=["average_bookclub_rating"])
 
     if len(valid_ratings) > 1:
@@ -676,7 +657,7 @@ def create_rating_trends_chart(df: pl.DataFrame) -> None:
     if len(valid_ratings) > 1:
         fig_trend.add_trace(
             go.Scatter(
-                x=valid_ratings["date_parsed"],
+                x=valid_ratings["date"],
                 y=trendline_y,
                 mode="lines",
                 name="Linear Trend",
@@ -687,7 +668,7 @@ def create_rating_trends_chart(df: pl.DataFrame) -> None:
     # Individual points
     fig_trend.add_trace(
         go.Scatter(
-            x=df_pandas["date_parsed"],
+            x=df_pandas["date"],
             y=df_pandas["average_bookclub_rating"],
             mode="markers",
             name="Individual Ratings",
@@ -700,7 +681,7 @@ def create_rating_trends_chart(df: pl.DataFrame) -> None:
     # 7-book moving average (foreground layer)
     fig_trend.add_trace(
         go.Scatter(
-            x=df_pandas["date_parsed"],
+            x=df_pandas["date"],
             y=df_pandas["rating_7ma"],
             mode="lines",
             name="7-Book Moving Average",
@@ -1126,19 +1107,17 @@ def main() -> None:
         st.subheader("🔍 Select a Book for Detailed Analysis")
         # Convert to pandas for sorting and date filtering
         bookclub_processed_df_pandas = bookclub_processed_df.to_pandas()
-        bookclub_processed_df_pandas["date_parsed"] = pd.to_datetime(
-            bookclub_processed_df_pandas["date_parsed"], errors="coerce"
+        bookclub_processed_df_pandas["date"] = pd.to_datetime(
+            bookclub_processed_df_pandas["date"], errors="coerce"
         ).dt.date
 
         # Filter to only past books (exclude current/upcoming books)
         today = date.today()
-        past_books = bookclub_processed_df_pandas[
-            bookclub_processed_df_pandas["date_parsed"] < today
-        ]
+        past_books = bookclub_processed_df_pandas[bookclub_processed_df_pandas["date"] < today]
 
         if len(past_books) > 0:
             # Sort past books by date (most recent first) and get titles
-            book_titles = past_books.sort_values("date_parsed", ascending=False)["title"].tolist()
+            book_titles = past_books.sort_values("date", ascending=False)["title"].tolist()
         else:
             # Fallback to all books if no past books found
             book_titles = bookclub_processed_df_pandas.sort_index(ascending=False)["title"].tolist()
@@ -1168,7 +1147,7 @@ def main() -> None:
                 "original_publication_year",
                 "number_of_pages",
                 "suggested_by",
-                "date_parsed",
+                "date",
                 "average_goodreads_rating",
                 "average_bookclub_rating",
             ],
@@ -1181,7 +1160,7 @@ def main() -> None:
         ranking_df.insert(0, "Rank", range(1, len(ranking_df) + 1))
 
         # Convert date column to proper datetime for sorting
-        ranking_df["date_parsed"] = pd.to_datetime(ranking_df["date_parsed"])
+        ranking_df["date"] = pd.to_datetime(ranking_df["date"])
 
         # Rename columns for better display
         ranking_df = ranking_df.set_axis(
