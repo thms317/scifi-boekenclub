@@ -12,12 +12,12 @@ logger = logging.getLogger(__name__)
 
 
 @st.cache_data(show_spinner="🔄 Processing book club data from sources...")
-def load_bookclub(_fingerprint: tuple[tuple[str, int, int], ...]) -> pl.DataFrame:
+def load_bookclub(fingerprint: tuple[tuple[str, int, int], ...]) -> pl.DataFrame:
     """Return the dashboard data; fingerprint only keys the cache.
 
     Parameters
     ----------
-    _fingerprint : tuple[tuple[str, int, int], ...]
+    fingerprint : tuple[tuple[str, int, int], ...]
         A fingerprint of input files used to invalidate the cache when
         the input data changes. Only used as a cache key; not accessed in the function.
 
@@ -26,6 +26,7 @@ def load_bookclub(_fingerprint: tuple[tuple[str, int, int], ...]) -> pl.DataFram
     pl.DataFrame
         The processed book club data.
     """
+    del fingerprint  # only keys the cache; must not start with _, or Streamlit won't hash it
     return load_dashboard_data()
 
 
@@ -36,6 +37,11 @@ def get_bookclub() -> pl.DataFrame:
     -------
     pl.DataFrame
         The processed book club data.
+
+    Raises
+    ------
+    AssertionError
+        Never in practice: st.stop() ends the script run before it.
     """
     try:
         return load_bookclub(source_fingerprint(input_files()))
@@ -55,10 +61,9 @@ def get_bookclub() -> pl.DataFrame:
             "    └── authors.csv\n"
             "```"
         )
-        st.stop()
-        return pl.DataFrame()  # type: ignore[unreachable]
     except (pl.exceptions.PolarsError, ValueError, OSError) as e:
         logger.exception("Error processing data")
         st.error(f"❌ Error processing data: {e}")
-        st.stop()
-        return pl.DataFrame()  # type: ignore[unreachable]
+    st.stop()
+    msg = "st.stop() ends the script run"
+    raise AssertionError(msg)
