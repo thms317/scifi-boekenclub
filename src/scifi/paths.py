@@ -15,7 +15,7 @@ def input_files(data_dir: Path = DATA_DIR) -> list[Path]:
     """Return the input files for the data pipeline.
 
     Returns the Goodreads export CSVs and the three bookclub input files,
-    but not the generated outputs like processed_data.csv.
+    but not the generated outputs like processed_data.csv or goodreads_*.csv.
 
     Parameters
     ----------
@@ -27,12 +27,18 @@ def input_files(data_dir: Path = DATA_DIR) -> list[Path]:
     list[Path]
         A sorted list of input file paths.
     """
-    files = []
+    files: list[Path] = []
 
-    # Add Goodreads CSV exports
+    # Add Goodreads CSV exports, excluding generated outputs
     goodreads_dir = data_dir / "goodreads" / "clean"
     if goodreads_dir.is_dir():
-        files.extend(sorted(goodreads_dir.glob("*.csv")))
+        files.extend(
+            [
+                path
+                for path in sorted(goodreads_dir.glob("*.csv"))
+                if not path.name.startswith("goodreads_")
+            ]
+        )
 
     # Add bookclub input files
     bookclub_dir = data_dir / "bookclub"
