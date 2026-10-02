@@ -1,5 +1,7 @@
 """Tests for the visualizer module."""
 
+from datetime import date
+
 import plotly.graph_objects as go
 import polars as pl
 import pytest
@@ -28,7 +30,7 @@ def sample_df() -> pl.DataFrame:
             "index": [1, 2, 3],
             "title": ["Book A", "Book B", "Book C"],
             "author": ["Author A", "Author B", "Author C"],
-            "date": ["2024-01-01", "2024-02-01", "2024-03-01"],
+            "date": [date(2024, 1, 1), date(2024, 2, 1), date(2024, 3, 1)],
             "suggested_by": ["Member1", "Member2", "Member1"],
             "original_publication_year": [2020, 2021, 2022],
             "average_goodreads_rating": [4.0, 3.5, 4.5],
@@ -157,7 +159,7 @@ class TestCreateRatingTrendChart:
         """Test that create_rating_trend_chart returns a go.Figure."""
         trend_df = pl.DataFrame(
             {
-                "date": ["2024-01-01", "2024-02-01", "2024-03-01"],
+                "date": [date(2024, 1, 1), date(2024, 2, 1), date(2024, 3, 1)],
                 "title": ["Book A", "Book B", "Book C"],
                 "average_bookclub_rating": [4.0, 4.5, 4.2],
                 "rolling_avg": [4.0, 4.25, 4.35],
