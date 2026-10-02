@@ -31,7 +31,7 @@ def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
     FileNotFoundError
         If the directory contains no CSV files.
     """
-    csv_files = list(goodreads_dir.glob("*.csv"))
+    csv_files = sorted(goodreads_dir.glob("*.csv"))
     if not csv_files:
         msg = f"No CSV files found in: {goodreads_dir}"
         raise FileNotFoundError(msg)
@@ -154,7 +154,8 @@ def match_dataframes(
     """Match the Bookclub and Goodreads DataFrames on a column.
 
     The match column is converted to lowercase before matching.
-    After the match, the match column is dropped.
+    After the match, the match column is dropped, and any right-hand columns
+    that also exist on the left are removed to keep the left side's canonical values.
 
     Parameters
     ----------
@@ -170,9 +171,9 @@ def match_dataframes(
     Returns
     -------
     pl.DataFrame
-        The matched DataFrame.
+        The matched DataFrame with no `_right` suffix columns.
     """
-    return (
+    result = (
         bookclub_df.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column"))
         .join(
             goodreads_pivot_df.with_columns(
@@ -183,6 +184,11 @@ def match_dataframes(
         )
         .drop("temp_match_column")
     )
+    # Drop all right-hand columns to keep the left side's canonical values
+    right_cols_to_drop = [col for col in result.columns if col.endswith("_right")]
+    if right_cols_to_drop:
+        result = result.drop(right_cols_to_drop)
+    return result
 
 
 def read_manual_ratings(manual_ratings_path: Path) -> pl.DataFrame:
