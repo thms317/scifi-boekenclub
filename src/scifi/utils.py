@@ -154,8 +154,8 @@ def match_dataframes(
     """Match the Bookclub and Goodreads DataFrames on a column.
 
     The match column is converted to lowercase before matching.
-    After the match, the match column is dropped, and any right-hand columns
-    that also exist on the left are removed to keep the left side's canonical values.
+    Right-hand columns that also exist on the left are dropped before the join
+    to keep the left side's canonical values and avoid duplicate _right columns.
 
     Parameters
     ----------
@@ -173,6 +173,11 @@ def match_dataframes(
     pl.DataFrame
         The matched DataFrame with no `_right` suffix columns.
     """
+    bookclub_cols = set(bookclub_df.columns)
+    # Drop right-hand columns that also exist on the left to avoid _right duplicates
+    cols_to_drop = [col for col in goodreads_pivot_df.columns if col in bookclub_cols and col != on]
+    goodreads_pivot_df = goodreads_pivot_df.drop(cols_to_drop)
+
     result = (
         bookclub_df.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column"))
         .join(
@@ -184,10 +189,10 @@ def match_dataframes(
         )
         .drop("temp_match_column")
     )
-    # Drop all right-hand columns to keep the left side's canonical values
-    right_cols_to_drop = [col for col in result.columns if col.endswith("_right")]
-    if right_cols_to_drop:
-        result = result.drop(right_cols_to_drop)
+    # Drop any remaining _right columns (should be none if cols_to_drop worked)
+    right_cols = [c for c in result.columns if c.endswith("_right")]
+    if right_cols:
+        result = result.drop(right_cols)
     return result
 
 
