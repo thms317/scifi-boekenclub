@@ -25,46 +25,10 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS for beautiful styling
+# Custom CSS for cards that need gradient styling
 st.markdown(
     """
 <style>
-    .main-header {
-        font-size: 3rem;
-        font-weight: bold;
-        text-align: center;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 2rem;
-    }
-    .main-header .rocket-emoji {
-        -webkit-text-fill-color: initial;
-        color: #667eea;
-    }
-    .metric-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 1rem;
-        border-radius: 10px;
-        color: white;
-        text-align: center;
-        margin: 0.2rem;
-        height: 100px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .metric-card h3 {
-        margin: 0;
-        font-size: 0.9rem;
-        opacity: 0.9;
-    }
-    .metric-card h2 {
-        margin: 0.2rem 0 0 0;
-        font-size: 1.8rem;
-        font-weight: bold;
-    }
     .book-detail-card {
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         padding: 2rem;
@@ -72,13 +36,6 @@ st.markdown(
         color: white;
         margin: 1rem 0;
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    }
-    .sidebar .sidebar-content {
-        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-    }
-    .stSelectbox > div > div {
-        background-color: #f0f2f6;
-        border-radius: 5px;
     }
 </style>
 """,
@@ -106,22 +63,11 @@ page = st.navigation(
 )
 
 # Main header
-st.markdown(
-    '<h1 class="main-header"><span class="rocket-emoji">🚀</span> Sci-Fi Book Club Analytics Dashboard</h1>',
-    unsafe_allow_html=True,
-)
+st.title("🚀 Sci-Fi Book Club Analytics Dashboard")
 
 # Run the selected page
 page.run()
 
 # Footer
 st.markdown("---")
-st.markdown(
-    """
-    <div style='text-align: center; color: #666; padding: 2rem;'>
-        📚 Built with ❤️ for the Sci-Fi Book Club |
-        Powered by Streamlit, Plotly & Polars
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+st.caption("📚 Built with ❤️ for the Sci-Fi Book Club | Powered by Streamlit, Plotly & Polars")
