@@ -21,8 +21,21 @@ import plotly.express as px
 import plotly.graph_objects as go
 import polars as pl
 import streamlit as st
-from scipy import stats
 
+from scifi.analysis import (
+    author_stats,
+    books_per_decade,
+    books_per_year,
+    club_duration_label,
+    countdown_label,
+    current_meeting,
+    member_correlations,
+    member_stats,
+    overview_metrics,
+    rank_books,
+    rating_trend,
+    suggester_stats,
+)
 from scifi.data_processor import load_dashboard_data
 from scifi.members import BookClubMembers
 from scifi.visualizer import (
@@ -136,102 +149,57 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
 def create_current_book_banner(bookclub_processed_df: pl.DataFrame) -> None:
     """Create a compact banner showing the current/next book with key stats"""
     today = date.today()
+    meeting = current_meeting(bookclub_processed_df, today)
 
-    # Convert polars dates to pandas for easier date handling
-    df_pandas = bookclub_processed_df.to_pandas()
-    df_pandas["date"] = pd.to_datetime(df_pandas["date"], errors="coerce").dt.date
+    if not meeting or not meeting.books:
+        st.info("No books scheduled yet.")
+        return
 
-    # Find current book (next future date or most recent if no future dates)
-    future_books = df_pandas[df_pandas["date"] >= today].sort_values("date", ascending=True)
+    # Display each book in the meeting
+    for book in meeting.books:
+        year_display = f"{book.year}" if book.year else "N/A"
+        pages_display = f"{book.pages}" if book.pages else "N/A"
+        countdown_text = countdown_label(meeting.date, today)
+        status = "Next Bookclub Meeting" if meeting.is_upcoming else "Last Bookclub Meeting"
 
-    if len(future_books) > 0:
-        current_book = future_books.iloc[0]
-        days_diff = (current_book["date"] - today).days
-        is_upcoming = True
-    else:
-        # No future books, show most recent
-        current_book = df_pandas.sort_values("date").iloc[-1]
-        days_diff = (today - current_book["date"]).days
-        is_upcoming = False
-
-    # Get book details
-    title = str(current_book["title"])
-    author = str(current_book["author"])
-    date_formatted = current_book["date"].strftime("%b %d")
-
-    # Handle ratings and book details
-    # Get publication year and pages
-    pub_year = current_book.get("original_publication_year")
-    year_display = f"{int(pub_year)}" if pd.notna(pub_year) and pub_year > 0 else "N/A"
-
-    pages = current_book.get("number_of_pages")
-    pages_display = f"{int(pages)}" if pd.notna(pages) and pages > 0 else "N/A"
-
-    # Create countdown text
-    if is_upcoming:
-        if days_diff == 0:
-            countdown_text = f"{date_formatted} (TODAY)"
-        elif days_diff == 1:
-            countdown_text = f"{date_formatted} (TOMORROW)"
-        else:
-            countdown_text = f"{date_formatted} ({days_diff} days left)"
-    else:
-        countdown_text = f"{date_formatted} ({days_diff} days ago)"
-
-    # Styled current book banner
-    st.markdown(
-        f"""
-    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                padding: 1rem 2rem;
-                border-radius: 10px;
-                color: white;
-                margin: 1rem 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;">
-        <div>
-            <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📖 Current Book</div>
-            <div style="font-size: 1.3rem;">
-                <strong>{title}</strong> by <em>{author}</em> <span style="font-size: 1.0rem;">({year_display} | {pages_display} pages)</span>
+        st.markdown(
+            f"""
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    padding: 1rem 2rem;
+                    border-radius: 10px;
+                    color: white;
+                    margin: 1rem 0;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;">
+            <div>
+                <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📖 Book</div>
+                <div style="font-size: 1.3rem;">
+                    <strong>{book.title}</strong> by <em>{book.author}</em> <span style="font-size: 1.0rem;">({year_display} | {pages_display} pages)</span>
+                </div>
+            </div>
+            <div style="font-size: 1.2rem; text-align: right;">
+                {status} 📅<br><span style="font-size: 1.2rem;">{countdown_text}</span>
             </div>
         </div>
-        <div style="font-size: 1.2rem; text-align: right;">
-            Next Bookclub Meeting 📅<br><span style="font-size: 1.2rem;">{countdown_text}</span>
-        </div>
-    </div>
-    """,
-        unsafe_allow_html=True,
-    )
+        """,
+            unsafe_allow_html=True,
+        )
 
 
 def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[str]) -> None:
     """Create overview metrics cards"""
     col1, col2, col3, col4, col5 = st.columns(5)
 
-    total_books = len(bookclub_processed_df)
-    avg_goodreads = float(
-        bookclub_processed_df.select(pl.col("average_goodreads_rating").mean()).item() or 0.0
-    )
-    avg_bookclub = float(
-        bookclub_processed_df.select(pl.col("average_bookclub_rating").mean()).item() or 0.0
-    )
-    most_active = max(members, key=lambda m: bookclub_processed_df[m].count())
-
-    # Calculate bookclub duration
-    bookclub_processed_df_pandas = bookclub_processed_df.to_pandas()
-    first_date = bookclub_processed_df_pandas["date"].min()
-    last_date = bookclub_processed_df_pandas["date"].max()
-    duration = last_date - first_date
-    years = duration.days // 365
-    months = (duration.days % 365) // 30
-    duration_text = f"{years}y {months}m" if years > 0 else f"{months}m"
+    metrics_data = overview_metrics(bookclub_processed_df, members)
+    duration_text = club_duration_label(metrics_data.first_date, metrics_data.last_date)
 
     metrics = [
-        ("📚 Total Books", total_books, col1),
-        ("⭐ Goodreads Avg", f"{avg_goodreads:.2f}", col2),
-        ("🎯 Club Avg", f"{avg_bookclub:.2f}", col3),
-        ("👑 Most Active", str(most_active), col4),
+        ("📚 Total Books", metrics_data.total_books, col1),
+        ("⭐ Goodreads Avg", f"{metrics_data.goodreads_avg:.2f}", col2),
+        ("🎯 Club Avg", f"{metrics_data.club_avg:.2f}", col3),
+        ("👑 Most Active", str(metrics_data.most_active_member), col4),
         ("⏰ Duration", str(duration_text), col5),
     ]
 
@@ -382,38 +350,32 @@ def create_selected_book_analysis(
         # Book ranking and statistics
         st.subheader("📈 Book Rankings")
 
-        # Position in overall rankings - more informative display
-        all_ratings = df["average_bookclub_rating"].drop_nulls().sort(descending=True)
-        book_position = None
-        for i, rating in enumerate(all_ratings):
-            if (
-                rating is not None
-                and abs(rating - selected_book["average_bookclub_rating"]) < 0.001
-            ):
-                book_position = i + 1
-                break
+        # Get book ranking using the analysis function
+        ranked = rank_books(df)
+        book_index = int(selected_book["index"])
+        book_rank = ranked.filter(pl.col("index") == book_index).to_pandas()
 
-        if book_position:
-            # Calculate percentile for better understanding
-            percentile = ((len(df) - book_position + 1) / len(df)) * 100
+        if not book_rank.empty and pd.notna(book_rank.iloc[0]["rank"]):
+            # Book is rated
+            rank_value = int(book_rank.iloc[0]["rank"])
+            top_percent = int(book_rank.iloc[0]["top_percent"])
+            out_of_rated = int(book_rank.iloc[0]["out_of_rated"])
 
             # Create informative ranking display
-
-            # Big ranking number
             st.markdown(
                 f"""
             <div style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                         padding: 2rem; border-radius: 15px; color: white; margin: 1rem 0;">
-                <h1 style="font-size: 4rem; margin: 0; color: white;">#{book_position}</h1>
-                <h3 style="margin: 0.5rem 0; color: white;">out of {len(df)} books</h3>
-                <h4 style="margin: 0; opacity: 0.9; color: white;">Top {int(percentile)}% of club ratings</h4>
+                <h1 style="font-size: 4rem; margin: 0; color: white;">#{rank_value}</h1>
+                <h3 style="margin: 0.5rem 0; color: white;">out of {out_of_rated} rated books</h3>
+                <h4 style="margin: 0; opacity: 0.9; color: white;">Top {top_percent}% of club ratings</h4>
             </div>
             """,
                 unsafe_allow_html=True,
             )
-
         else:
-            st.warning("Could not determine ranking for this book.")
+            # Book is unrated
+            st.info("This book has not been rated yet.")
 
     with col2:
         # Rating comparisons
@@ -506,22 +468,15 @@ def create_member_comparison(df: pl.DataFrame, members: list[str]) -> None:
     st.subheader("👥 Member Rating Patterns")
 
     # Calculate member statistics
-    member_stats = []
-    for member in members:
-        ratings = df[member].drop_nulls()
-        if len(ratings) > 0:
-            member_stats.append(
-                {
-                    "Member": member,
-                    "Count": len(ratings),
-                    "Average": ratings.mean(),
-                    "Std Dev": ratings.std(),
-                    "Min": ratings.min(),
-                    "Max": ratings.max(),
-                },
-            )
-
-    stats_df = pl.DataFrame(member_stats)
+    stats_df = member_stats(df, members)
+    stats_df = stats_df.select(
+        pl.col("member").alias("Member"),
+        pl.col("count").alias("Count"),
+        pl.col("average").alias("Average"),
+        pl.col("std_dev").alias("Std Dev"),
+        pl.col("min").alias("Min"),
+        pl.col("max").alias("Max"),
+    )
 
     # Create clean comparison charts
     col1, col2 = st.columns(2)
@@ -570,18 +525,11 @@ def create_time_analysis(df: pl.DataFrame) -> None:
     """Create time-based analysis"""
     st.subheader("📅 Reading Journey Over Time")
 
-    df_pandas = df.to_pandas()
-    df_pandas["year"] = df_pandas["date"].dt.year
-    df_pandas["month"] = df_pandas["date"].dt.month
-
-    # Sort by date for cleaner trends
-    df_pandas = df_pandas.sort_values("date")
-
     col1, col2 = st.columns(2)
 
     with col1:
         # Books per year
-        yearly_counts = df_pandas.groupby("year").size().reset_index(name="count")
+        yearly_counts = books_per_year(df).to_pandas()
 
         fig_yearly = go.Figure()
         fig_yearly.add_trace(
@@ -602,9 +550,7 @@ def create_time_analysis(df: pl.DataFrame) -> None:
 
     with col2:
         # Publication decades with outlined bars
-        df_pandas["decade"] = (df_pandas["original_publication_year"] // 10) * 10
-        decade_counts = df_pandas.groupby("decade").size().reset_index(name="count")
-        decade_counts["decade_label"] = decade_counts["decade"].astype(str) + "s"
+        decade_counts = books_per_decade(df).to_pandas()
 
         fig_decades = go.Figure()
         fig_decades.add_trace(
@@ -631,58 +577,44 @@ def create_time_analysis(df: pl.DataFrame) -> None:
 
 def create_rating_trends_chart(df: pl.DataFrame) -> None:
     """Create rating trends over time chart (separate from time analysis)"""
-    df_pandas = df.to_pandas()
-    df_pandas["date"] = pd.to_datetime(df_pandas["date"], errors="coerce").dt.date
-
-    # Create rolling average for smoother trend
-    df_pandas["rating_7ma"] = (
-        df_pandas["average_bookclub_rating"].rolling(window=7, min_periods=1).mean()
-    )
-
-    # Calculate linear trendline
-    # Convert dates to numeric for linear regression
-    df_pandas["date_numeric"] = pd.to_numeric(pd.to_datetime(df_pandas["date"]))
-    valid_ratings = df_pandas.dropna(subset=["average_bookclub_rating"])
-
-    if len(valid_ratings) > 1:
-        slope, intercept, _r_value, _p_value, _std_err = stats.linregress(
-            valid_ratings["date_numeric"], valid_ratings["average_bookclub_rating"]
-        )
-        # Create trendline values
-        trendline_y = slope * valid_ratings["date_numeric"] + intercept
+    # Get trend data from analysis
+    trend_data = rating_trend(df).to_pandas()
 
     fig_trend = go.Figure()
 
     # Linear trendline (background layer)
-    if len(valid_ratings) > 1:
+    valid_trend = trend_data.dropna(subset=["trend"])
+    if len(valid_trend) > 1:
         fig_trend.add_trace(
             go.Scatter(
-                x=valid_ratings["date"],
-                y=trendline_y,
+                x=valid_trend["date"],
+                y=valid_trend["trend"],
                 mode="lines",
                 name="Linear Trend",
                 line={"color": "grey", "width": 1, "dash": "dash"},
             ),
         )
 
-    # Individual points
+    # Individual points (all books with ratings)
+    rated_data = trend_data.dropna(subset=["average_bookclub_rating"])
     fig_trend.add_trace(
         go.Scatter(
-            x=df_pandas["date"],
-            y=df_pandas["average_bookclub_rating"],
+            x=rated_data["date"],
+            y=rated_data["average_bookclub_rating"],
             mode="markers",
             name="Individual Ratings",
             marker={"color": "lightblue", "size": 6, "opacity": 0.6},
             hovertemplate="<b>%{customdata}</b><br>Rating: %{y}<br>Date: %{x}<extra></extra>",
-            customdata=df_pandas["title"],
+            customdata=rated_data["title"],
         ),
     )
 
     # 7-book moving average (foreground layer)
+    valid_ma = trend_data.dropna(subset=["rolling_avg"])
     fig_trend.add_trace(
         go.Scatter(
-            x=df_pandas["date"],
-            y=df_pandas["rating_7ma"],
+            x=valid_ma["date"],
+            y=valid_ma["rolling_avg"],
             mode="lines",
             name="7-Book Moving Average",
             line={"color": "orange", "width": 3},
@@ -713,29 +645,16 @@ def create_suggester_analysis(df: pl.DataFrame) -> None:
     # Get active member names from BookClubMembers
     active_member_names = [member.name for member in BookClubMembers.get_active_members()]
 
-    # Calculate average ratings per suggester for ordering, with combined filtering logic
-    suggester_stats = (
-        df.group_by(suggester_col)
-        .agg(
-            [
-                pl.col("average_bookclub_rating").mean().alias("avg_rating"),
-                pl.col("average_bookclub_rating").count().alias("book_count"),
-            ]
-        )
-        .filter(
-            # Show if: (3+ books) OR (active member with any books)
-            (pl.col("book_count") >= 3) | (pl.col(suggester_col).is_in(active_member_names))
-        )
-        .sort("avg_rating", descending=True)
-        .to_pandas()
-    )
+    # Calculate average ratings per suggester using analysis function
+    stats_result = suggester_stats(df, active_member_names)
 
-    if len(suggester_stats) == 0:
+    if stats_result is None or len(stats_result) == 0:
         st.warning("No members meet the criteria (3+ books or active members).")
         return
 
     # Create ordered list of suggesters (meeting criteria)
-    ordered_suggesters = suggester_stats[suggester_col].tolist()
+    stats_df = stats_result.to_pandas()
+    ordered_suggesters = stats_df["suggested_by"].tolist()
 
     # Convert main dataframe to pandas for box plot
     df_pandas = df.to_pandas()
@@ -808,11 +727,11 @@ def create_suggester_analysis(df: pl.DataFrame) -> None:
         # Simple stats display
         st.subheader("📈 Suggester Statistics")
         st.dataframe(
-            suggester_stats[[suggester_col, "book_count", "avg_rating"]].round(2),
+            stats_df[["suggested_by", "book_count", "avg_rating"]].round(2),
             use_container_width=True,
             hide_index=True,
             column_config={
-                suggester_col: "Suggester",
+                "suggested_by": "Suggester",
                 "book_count": "Books",
                 "avg_rating": "Avg Rating",
             },
@@ -886,17 +805,12 @@ def create_author_analysis(df: pl.DataFrame) -> None:
     dimension = st.radio("Group authors by:", list(dimensions), horizontal=True)
     group_col = dimensions[dimension]
 
-    stats_df = (
-        df.filter(pl.col(group_col).is_not_null())
-        .group_by(group_col)
-        .agg(
-            pl.len().alias("book_count"),
-            pl.col("average_bookclub_rating").mean().alias("avg_rating"),
-        )
-        .rename({group_col: "group"})
-        .sort(["book_count", "group"], descending=[True, False])
-        .to_pandas()
-    )
+    stats_result = author_stats(df, group_col)
+    stats_df = stats_result.to_pandas() if stats_result is not None else None
+
+    if stats_df is None or len(stats_df) == 0:
+        st.info(f"No data available for {dimension}.")
+        return
 
     col1, col2 = st.columns(2)
     with col1:
@@ -955,62 +869,27 @@ def create_advanced_analytics(df: pl.DataFrame, members: list[str]) -> None:
     st.markdown("### 📊 Correlation Analysis")
     st.write("How similar are member tastes?")
 
-    # Filter to active members with 5+ ratings
-    active_members = []
-    for member in members:
-        rating_count = df[member].drop_nulls().len()
-        if rating_count >= 5:
-            active_members.append(member)
+    # Get member correlations using analysis function
+    correlations = member_correlations(df, members)
 
-    if len(active_members) < 2:
+    if correlations is None or len(correlations) == 0:
         st.warning("Not enough members with 5+ ratings to create correlation analysis.")
         return
 
-    # Create correlation matrix with book details
-    correlation_data = []
-    correlation_matrix = np.zeros((len(active_members), len(active_members)))
-    correlation_books = {}  # Store books for each pair
+    # Build correlation matrix from long-format data
+    corr_pd = correlations.to_pandas()
+    active_members = sorted(set(corr_pd["member_1"].tolist() + corr_pd["member_2"].tolist()))
 
-    for i, member1 in enumerate(active_members):
-        for j, member2 in enumerate(active_members):
-            if i == j:
-                correlation_matrix[i][j] = 1.0
-            elif i < j:  # Only calculate upper triangle
-                # Get books rated by both members
-                both_rated = df.filter(
-                    (pl.col(member1).is_not_null()) & (pl.col(member2).is_not_null()),
-                )
+    # Create matrix
+    correlation_matrix = np.eye(len(active_members))
+    member_to_idx = {m: i for i, m in enumerate(active_members)}
 
-                if len(both_rated) >= 3:  # Need at least 3 books for meaningful correlation
-                    ratings1 = both_rated[member1].to_list()
-                    ratings2 = both_rated[member2].to_list()
-
-                    if len(set(ratings1)) > 1 and len(set(ratings2)) > 1:  # Need variance
-                        corr = np.corrcoef(ratings1, ratings2)[0, 1]
-                        correlation_matrix[i][j] = corr
-                        correlation_matrix[j][i] = corr  # Mirror
-
-                        # Store books for this pair
-                        pair_key = f"{member1}-{member2}"
-                        correlation_books[pair_key] = both_rated[
-                            ["title", "author", member1, member2]
-                        ].to_pandas()
-
-                        # Store detailed info
-                        correlation_data.append(
-                            {
-                                "Member1": member1,
-                                "Member2": member2,
-                                "Correlation": corr,
-                                "Shared_Books": len(both_rated),
-                            },
-                        )
-                    else:
-                        correlation_matrix[i][j] = 0
-                        correlation_matrix[j][i] = 0
-                else:
-                    correlation_matrix[i][j] = 0
-                    correlation_matrix[j][i] = 0
+    for row in corr_pd.to_dict("records"):
+        i = member_to_idx[row["member_1"]]
+        j = member_to_idx[row["member_2"]]
+        corr = row["correlation"]
+        correlation_matrix[i][j] = corr if not pd.isna(corr) else 0
+        correlation_matrix[j][i] = corr if not pd.isna(corr) else 0
 
     # Create enhanced heatmap with better styling
     # Reverse matrix rows to match reversed y-axis labels (diagonal at top-left)
@@ -1139,44 +1018,44 @@ def main() -> None:
         st.subheader("📋 Overall Book Rankings")
         st.write("**All books ranked by club average rating** (sortable by any column)")
 
-        # Create ranking dataframe
-        ranking_df = bookclub_processed_df.select(
-            [
-                "title",
-                "author",
-                "original_publication_year",
-                "number_of_pages",
-                "suggested_by",
-                "date",
-                "average_goodreads_rating",
-                "average_bookclub_rating",
-            ],
+        # Create ranking dataframe using analysis function
+        ranked = rank_books(bookclub_processed_df)
+
+        # Join with original data to get other columns
+        ranking_df = ranked.join(
+            bookclub_processed_df.select(
+                [
+                    "index",
+                    "original_publication_year",
+                    "number_of_pages",
+                    "suggested_by",
+                    "date",
+                    "average_goodreads_rating",
+                ]
+            ),
+            on="index",
         ).to_pandas()
 
-        # Add ranking column
-        ranking_df = ranking_df.sort_values("average_bookclub_rating", ascending=False).reset_index(
-            drop=True,
+        # Rename columns for better display
+        ranking_df = ranking_df.rename(
+            columns={
+                "rank": "Rank",
+                "title": "Title",
+                "author": "Author",
+                "original_publication_year": "Year",
+                "number_of_pages": "Pages",
+                "suggested_by": "Suggested By",
+                "date": "Read on",
+                "average_goodreads_rating": "Goodreads Rating",
+                "average_bookclub_rating": "Club Rating",
+            }
         )
-        ranking_df.insert(0, "Rank", range(1, len(ranking_df) + 1))
+
+        # Drop the index column
+        ranking_df = ranking_df.drop(columns=["index", "top_percent", "out_of_rated"])
 
         # Convert date column to proper datetime for sorting
-        ranking_df["date"] = pd.to_datetime(ranking_df["date"])
-
-        # Rename columns for better display
-        ranking_df = ranking_df.set_axis(
-            [
-                "Rank",
-                "Title",
-                "Author",
-                "Year",
-                "Pages",
-                "Suggested By",
-                "Read on",
-                "Goodreads Rating",
-                "Club Rating",
-            ],
-            axis=1,
-        )
+        ranking_df["Read on"] = pd.to_datetime(ranking_df["Read on"])
 
         # Round ratings and pages
         ranking_df["Goodreads Rating"] = ranking_df["Goodreads Rating"].round(2)
@@ -1238,7 +1117,7 @@ def main() -> None:
 
         with col2:
             st.subheader("📈 Rating Trends Over Time")
-            st.write("The orange line shows a 7-book (+/- 1 year) moving average of club ratings.")
+            st.write("The orange line shows a 7-book moving average of club ratings.")
             create_rating_trends_chart(bookclub_processed_df)
 
     elif page == "✍️ Author Insights":
