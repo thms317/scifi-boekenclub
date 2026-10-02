@@ -1,74 +1,61 @@
-"""Tests for the multipage Streamlit application."""
+"""Smoke tests for the multipage Streamlit dashboard."""
 
 from unittest.mock import patch
 
 import pytest
+import streamlit as st
 from streamlit.testing.v1 import AppTest
 
 from scifi.paths import ROOT_DIR
 
-
-def test_app_renders() -> None:
-    """Test that app.py renders the default page without exception.
-
-    This is a smoke test that verifies the app can start and the default
-    Overview page renders without errors.
-    """
-    app = AppTest.from_file(str(ROOT_DIR / "app.py"), default_timeout=30)
-    app.run(timeout=30)
-    assert not app.exception
+PAGES = ["overview", "member_insights", "time_analysis", "author_insights", "advanced_analytics"]
 
 
-@pytest.mark.parametrize(
-    "module_name",
-    ["overview", "member_insights", "time_analysis", "author_insights", "advanced_analytics"],
-)
-def test_page_renders(module_name: str) -> None:
-    """Test that each page module renders without exception.
-
-    Parameters
-    ----------
-    module_name : str
-        The name of the page module to test (without the .py extension).
-    """
-    code = f"from scifi.ui import {module_name}\n{module_name}.render()"
-    app = AppTest.from_string(code, default_timeout=30)
-    app.run(timeout=30)
-    assert not app.exception
+def book_card_text(at: AppTest) -> str:
+    """Return the markdown of the selected-book detail card."""
+    return "\n".join(m.value for m in at.markdown if "Read on" in m.value)
 
 
-def test_data_error_handling() -> None:
-    """Test that missing data files are handled gracefully.
+class TestDashboard:
+    """Test class for the Streamlit dashboard."""
 
-    This test patches load_dashboard_data to raise FileNotFoundError
-    and verifies that get_bookclub() shows an error message and stops.
-    """
-    st_cache_code = """
-import streamlit as st
-st.cache_data.clear()
-from scifi.ui.data import get_bookclub
-try:
-    get_bookclub()
-except SystemExit:
-    pass
-"""
+    def test_app_renders(self) -> None:
+        """Test that app.py renders the default page without an exception."""
+        at = AppTest.from_file(str(ROOT_DIR / "app.py"), default_timeout=30).run()
+        assert not at.exception
 
-    with patch("scifi.data_processor.load_dashboard_data") as mock_load:
-        mock_load.side_effect = FileNotFoundError("x")
-        app = AppTest.from_string(st_cache_code, default_timeout=30)
-        app.run(timeout=30)
+    def test_shim_renders(self) -> None:
+        """Test that the old src/scifi/dashboard.py entrypoint still renders the app."""
+        shim = ROOT_DIR / "src" / "scifi" / "dashboard.py"
+        at = AppTest.from_file(str(shim), default_timeout=30).run()
+        assert not at.exception
 
-        # Just verify that the app ran (it calls st.stop() which raises SystemExit)
-        # and doesn't have an unhandled exception
-        assert not app.exception or "FileNotFoundError" in str(app.exception)
+    @pytest.mark.parametrize("page", PAGES)
+    def test_page_renders(self, page: str) -> None:
+        """Test that every page renders without an exception on the real data."""
+        at = AppTest.from_string(
+            f"from scifi.ui import {page}\n{page}.render()", default_timeout=30
+        )
+        assert not at.run().exception
 
+    def test_book_selection_changes_book_card(self) -> None:
+        """Test that choosing another book shows that book in the detail card."""
+        at = AppTest.from_string(
+            "from scifi.ui import overview\noverview.render()", default_timeout=30
+        )
+        at.run()
+        titles = at.selectbox(key="overview_book_selector").options
+        assert titles[0] in book_card_text(at)
+        at.selectbox(key="overview_book_selector").select_index(1).run()
+        assert titles[1] in book_card_text(at)
+        assert titles[0] not in book_card_text(at)
 
-def test_shim_renders() -> None:
-    """Test that the dashboard.py shim still works.
-
-    This ensures backwards compatibility with the old entry point.
-    """
-    dashboard_path = ROOT_DIR / "src" / "scifi" / "dashboard.py"
-    app = AppTest.from_file(str(dashboard_path), default_timeout=30)
-    app.run(timeout=30)
-    assert not app.exception
+    def test_missing_data_shows_error(self) -> None:
+        """Test that a missing data file shows a readable error instead of a traceback."""
+        st.cache_data.clear()
+        with patch("scifi.ui.data.load_dashboard_data", side_effect=FileNotFoundError("x.csv")):
+            at = AppTest.from_string(
+                "from scifi.ui.data import get_bookclub\nget_bookclub()", default_timeout=30
+            ).run()
+        assert not at.exception
+        assert "Data files not found" in at.error[0].value
