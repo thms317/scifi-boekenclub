@@ -79,7 +79,7 @@ class TestReadGoodreads:
             "average_goodreads_rating",
             "original_publication_year",
             "number_of_pages",
-            "path",
+            "file_name",
         ]
         for column in expected_columns:
             assert column in df_goodreads_test.columns, f"Missing column: {column}"
@@ -195,10 +195,10 @@ class TestPivotGoodreadsData:
 
     @pytest.fixture(scope="class")
     def reviewer_mapping(self) -> dict[str, str]:
-        """Fixture for dictionary mapping file paths to reviewer names."""
+        """Fixture for dictionary mapping file names to reviewer names."""
         return {
-            "data/goodreads/koen_goodreads_library_export.csv": "Koen",
-            "data/goodreads/thomas_goodreads_library_export.csv": "Thomas",
+            "koen_goodreads_library_export.csv": "Koen",
+            "thomas_goodreads_library_export.csv": "Thomas",
         }
 
     @pytest.fixture(scope="class")
@@ -212,9 +212,9 @@ class TestPivotGoodreadsData:
                 "original_publication_year": [2020, 2020],
                 "number_of_pages": [250, 300],
                 "rating": [5, 4],
-                "path": [
-                    "data/goodreads/koen_goodreads_library_export.csv",
-                    "data/goodreads/thomas_goodreads_library_export.csv",
+                "file_name": [
+                    "koen_goodreads_library_export.csv",
+                    "thomas_goodreads_library_export.csv",
                 ],
             },
         )
@@ -257,6 +257,31 @@ class TestPivotGoodreadsData:
         df_pivot = pivot_goodreads_data(df_goodreads, reviewer_mapping)
         assert df_pivot.shape[0] == 1
         assert df_pivot["original_publication_year"][0] == 1953
+
+    def test_pivot_goodreads_data_with_unmapped_files(
+        self,
+        df_goodreads: pl.DataFrame,
+    ) -> None:
+        """Test that a mapping with unmapped file names doesn't raise and renames existing columns.
+
+        When a file is mapped but has no rows (e.g., an empty export), the pivot
+        doesn't create a column for it. The rename with strict=False should skip
+        the missing column and still rename the columns that exist.
+        """
+        reviewer_mapping = {
+            "koen_goodreads_library_export.csv": "Koen",
+            "thomas_goodreads_library_export.csv": "Thomas",
+            "empty_file_export.csv": "EmptyMember",  # This file has no rows
+        }
+        df_pivot = pivot_goodreads_data(df_goodreads, reviewer_mapping)
+        # Assert that the existing columns are renamed
+        assert "Koen" in df_pivot.columns
+        assert "Thomas" in df_pivot.columns
+        # The empty member should not have a column
+        assert "EmptyMember" not in df_pivot.columns
+        # The other columns should still be there
+        assert "title" in df_pivot.columns
+        assert "author" in df_pivot.columns
 
 
 class TestMatchDataframes:
