@@ -1,11 +1,14 @@
 """Smoke tests for the multipage Streamlit dashboard."""
 
+from datetime import date
 from unittest.mock import patch
 
 import pytest
 import streamlit as st
 from streamlit.testing.v1 import AppTest
 
+from scifi.analysis import past_books
+from scifi.data_processor import load_dashboard_data
 from scifi.paths import ROOT_DIR
 
 PAGES = ["overview", "member_insights", "time_analysis", "author_insights", "advanced_analytics"]
@@ -46,7 +49,9 @@ class TestDashboard:
         at.run()
         titles = at.selectbox(key="overview_book_selector").options
         assert titles[0] in book_card_text(at)
-        at.selectbox(key="overview_book_selector").select_index(1).run()
+        # select_index passes the label to format_func, so set the option value (index) itself
+        second_index = past_books(load_dashboard_data(), date.today())["index"][1]
+        at.selectbox(key="overview_book_selector").set_value(second_index).run()
         assert titles[1] in book_card_text(at)
         assert titles[0] not in book_card_text(at)
 
