@@ -129,11 +129,9 @@ def create_member_rating_heatmap(df: pl.DataFrame, member_cols: list[str]) -> go
             "dtick": 1,
             "tickfont": {"size": 10},
             "showgrid": True,
-            "gridcolor": "white",
             "gridwidth": 2,
         },  # Grid lines
         height=max(150, len(reversed_member_cols) * 20),  # Even smaller height per member
-        plot_bgcolor="white",
         margin={"l": 0, "r": 0, "t": 20, "b": 0},  # Add small top padding
     )
 
@@ -248,12 +246,7 @@ def create_rating_scatter(df: pl.DataFrame) -> go.Figure:
     size_by = "average_goodreads_rating"
 
     # Prepare data for plotting - handle null values and filter out unrated books
-    # Handle date column which may be string or date type
-    date_expr = (
-        pl.col("date").dt.strftime("%B %d, %Y")
-        if df["date"].dtype != pl.String
-        else pl.col("date").str.to_datetime().dt.strftime("%B %d, %Y")
-    )
+    date_expr = pl.col("date").dt.strftime("%B %d, %Y")
 
     df_processed = df.with_columns(
         [
@@ -290,7 +283,6 @@ def create_rating_scatter(df: pl.DataFrame) -> go.Figure:
         size=size_by,
         hover_data=["title", "author", "suggested_by", "date_formatted"],
         title="📚 Goodreads Rating vs Club Rating",
-        template="plotly_dark",
         size_max=20,
     )
 
@@ -301,9 +293,6 @@ def create_rating_scatter(df: pl.DataFrame) -> go.Figure:
     # Fixed axes 1-5 for both rating axes
     fig.update_layout(
         height=525,  # Reduced by 25% from 700
-        font={"size": 12},
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0.1)",
         showlegend=True,
         legend={
             "orientation": "h",
@@ -367,7 +356,6 @@ def create_rating_comparison_bar(
         title="Rating Comparison",
         yaxis_title="Rating (1-5)",
         yaxis={"range": [0, 5]},
-        template="plotly_dark",
         height=350,
         margin={"l": 0, "r": 0, "t": 50, "b": 0},
     )
@@ -423,11 +411,11 @@ def create_member_radar(
     fig_radar.update_layout(
         polar={
             "radialaxis": {"visible": True, "range": [0, 5]},
+            "angularaxis": {"tickfont": {"size": 11}},
         },
         showlegend=False,
-        template="plotly_dark",
         height=400,
-        margin={"l": 60, "r": 60, "t": 60, "b": 60},
+        margin={"l": 80, "r": 80, "t": 60, "b": 60},
     )
     return fig_radar
 
@@ -457,7 +445,6 @@ def create_member_count_bar(stats_df: pl.DataFrame) -> go.Figure:
     )
     fig_counts.update_layout(
         title="📊 Books Rated by Each Member",
-        template="plotly_dark",
         height=400,
     )
     return fig_counts
@@ -488,8 +475,7 @@ def create_member_average_bar(stats_df: pl.DataFrame) -> go.Figure:
     )
     fig_avg.update_layout(
         title="⭐ Average Rating by Member",
-        yaxis={"range": [1, 5]},
-        template="plotly_dark",
+        yaxis={"range": [0, 5]},
         height=400,
     )
     return fig_avg
@@ -520,7 +506,6 @@ def create_books_per_year_bar(yearly_df: pl.DataFrame) -> go.Figure:
     )
     fig_yearly.update_layout(
         title="📚 Books Read Per Year",
-        template="plotly_dark",
         height=400,
     )
     return fig_yearly
@@ -556,7 +541,6 @@ def create_books_per_decade_bar(decade_df: pl.DataFrame) -> go.Figure:
         title="📖 Books by Publication Decade",
         xaxis_title="Publication Decade",
         yaxis_title="Number of Books",
-        template="plotly_dark",
         height=400,
     )
     return fig_decades
@@ -619,8 +603,7 @@ def create_rating_trend_chart(trend_df: pl.DataFrame) -> go.Figure:
     fig_trend.update_layout(
         xaxis_title="Date",
         yaxis_title="Rating",
-        yaxis={"range": [0.5, 5.5]},
-        template="plotly_dark",
+        yaxis={"range": [1, 5]},
         height=500,
         showlegend=False,
     )
@@ -671,10 +654,7 @@ def create_suggester_box_plot(df: pl.DataFrame, suggester_stats_df: pl.DataFrame
                 marker={
                     "size": 5,
                     "opacity": 0.6,
-                    "color": "#555555",  # Dark gray points
-                    "line": {"width": 0.5, "color": "white"},  # Subtle white outline on points
                 },
-                line={"color": "#333333", "width": 1.5},  # Slightly thinner dark outline
                 fillcolor="rgba(240, 240, 240, 0.3)",  # Very light gray fill
                 boxmean=True,  # Show mean as well as median
                 customdata=customdata,
@@ -694,19 +674,13 @@ def create_suggester_box_plot(df: pl.DataFrame, suggester_stats_df: pl.DataFrame
         yaxis_title="Average Club Rating",
         yaxis={
             "range": [1, 5],
-            "gridcolor": "rgba(128, 128, 128, 0.2)",  # Subtle grid lines
             "gridwidth": 1,
         },
         xaxis={
             "tickangle": -45,
             "tickfont": {"size": 11},
-            "gridcolor": "rgba(128, 128, 128, 0.1)",  # Very subtle vertical grid
         },
-        template="plotly_white",  # Clean white background
         height=600,
-        plot_bgcolor="rgba(250, 250, 250, 0.8)",  # Very light background
-        paper_bgcolor="white",
-        font={"family": "Arial, sans-serif", "size": 12, "color": "#333333"},
         margin={"l": 60, "r": 20, "t": 20, "b": 80},  # Better spacing
     )
 
@@ -752,7 +726,6 @@ def create_author_bar_chart(
             x=value_col_list,
             y=stats_df["group"].to_list(),
             orientation="h",
-            marker={"color": "#555555", "line": {"width": 2, "color": "white"}},
             customdata=list(zip(stats_df["book_count"].to_list(), rating_labels, strict=False)),
             hovertemplate=(
                 "<b>%{y}</b><br>"
@@ -762,7 +735,6 @@ def create_author_bar_chart(
             ),
             text=labels,
             textposition="outside",
-            textfont={"color": "#333333"},
             cliponaxis=False,
         )
     )
@@ -770,12 +742,8 @@ def create_author_bar_chart(
         xaxis_title=x_title,
         yaxis={"autorange": "reversed", "tickfont": {"size": 11}},
         # Leave headroom so the value labels outside the bars are not clipped
-        xaxis={"range": [0, x_max], "gridcolor": "rgba(128, 128, 128, 0.2)"},
-        template="plotly_white",
+        xaxis={"range": [0, x_max]},
         height=max(250, 40 * len(stats_df) + 80),
-        plot_bgcolor="rgba(250, 250, 250, 0.8)",
-        paper_bgcolor="white",
-        font={"family": "Arial, sans-serif", "size": 12, "color": "#333333"},
         margin={"l": 20, "r": 20, "t": 20, "b": 50},
         showlegend=False,
     )
@@ -825,20 +793,17 @@ def create_correlation_heatmap(correlations_df: pl.DataFrame) -> go.Figure:
             zmax=1,
             text=np.round(reversed_matrix, 3),
             texttemplate="%{text}",
-            textfont={"size": 12, "color": "black"},
             hoverongaps=False,
             hovertemplate="<b>%{y} vs %{x}</b><br>Correlation: %{z:.3f}<extra></extra>",
         )
     )
 
     fig.update_layout(
-        template="plotly_white",
         height=600,
         width=600,
         xaxis_title="Member",
         yaxis_title="Member",
         xaxis={"side": "bottom"},
-        font={"size": 12},
     )
 
     return fig
