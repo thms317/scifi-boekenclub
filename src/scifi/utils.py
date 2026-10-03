@@ -45,10 +45,10 @@ def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
     }
     q = (
         pl.concat(
-            [pl.scan_csv(csv_file, include_file_paths="path") for csv_file in csv_files],
+            [pl.scan_csv(f).with_columns(pl.lit(f.name).alias("file_name")) for f in csv_files],
             how="diagonal_relaxed",
         )
-        .select([*columns.keys(), "path"])
+        .select([*columns.keys(), "file_name"])
         .rename(columns)
         .with_columns(
             pl.col("title").str.strip_chars().str.replace_all(r"\s+", " "),
@@ -113,7 +113,7 @@ def pivot_goodreads_data(
     goodreads_df : pl.DataFrame
         The Goodreads data.
     reviewer_mapping : dict[str, str]
-        Dictionary mapping file paths to reviewer names.
+        Dictionary mapping file names to reviewer names.
 
     Returns
     -------
@@ -131,7 +131,7 @@ def pivot_goodreads_data(
             ],
         )
         .pivot(
-            "path",
+            "file_name",
             index=[
                 *index_cols,
                 "original_publication_year",
@@ -141,7 +141,7 @@ def pivot_goodreads_data(
             values="rating",
             aggregate_function="mean",
         )
-        .rename(reviewer_mapping)
+        .rename(reviewer_mapping, strict=False)
     )
 
 
