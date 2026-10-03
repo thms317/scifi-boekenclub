@@ -234,8 +234,12 @@ def create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[s
     col1, col2, col3, col4, col5 = st.columns(5)
 
     total_books = len(bookclub_processed_df)
-    avg_goodreads = float(bookclub_processed_df["average_goodreads_rating"].mean() or 0.0)
-    avg_bookclub = float(bookclub_processed_df["average_bookclub_rating"].mean() or 0.0)
+    avg_goodreads = float(
+        bookclub_processed_df.select(pl.col("average_goodreads_rating").mean()).item() or 0.0
+    )
+    avg_bookclub = float(
+        bookclub_processed_df.select(pl.col("average_bookclub_rating").mean()).item() or 0.0
+    )
     most_active = max(members, key=lambda m: bookclub_processed_df[m].count())
 
     # Calculate bookclub duration

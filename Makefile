@@ -19,10 +19,6 @@ setup:
 	@echo "Setup completed successfully!"
 
 clean:
-	@echo "Uninstalling local packages..."
-	@rm -rf uv.lock
-	@uv sync
-
 	@echo -e "Cleaning up project artifacts..."
 	@find . \( \
 		-name ".pytest_cache" -o \
@@ -51,12 +47,14 @@ lint:
 	@uv sync
 	@echo "Building the project..."
 	@uv build >/dev/null 2>&1
+	@echo "Running ruff format check..."
+	@uv run ruff format --check .
 	@echo "Running ruff..."
-	-@uv run ruff check --output-format=concise .
+	@uv run ruff check --output-format=concise .
 	@echo "Running ty..."
-	-@uv run ty check .
+	@uv run ty check .
 	@echo "Running pydoclint..."
-	-@uv run pydoclint .
+	@uv run pydoclint .
 	@echo "Linting completed!"
 
 dashboard:
