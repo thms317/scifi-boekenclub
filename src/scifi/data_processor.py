@@ -62,18 +62,85 @@ def process_bookclub_data(
         manual_ratings_df=read_manual_ratings(Path(manual_ratings_path)),
         on="title",
     )
-    # Average over the member ratings, after the manual ratings are merged
-    member_columns = [
-        name for name in BookClubMembers.get_member_names() if name in bookclub_processed_df.columns
+
+    # Get all member names in registry order
+    all_member_names = BookClubMembers.get_member_names()
+
+    # Ensure all members have a Float64 column, even if null
+    member_exprs = [
+        pl.col(member_name).cast(pl.Float64)
+        if member_name in bookclub_processed_df.columns
+        else pl.lit(None, dtype=pl.Float64).alias(member_name)
+        for member_name in all_member_names
     ]
-    bookclub_processed_df = (
-        bookclub_processed_df.with_columns(
-            pl.mean_horizontal(*member_columns).alias("average_bookclub_rating")
-        )
-        .join(pl.read_csv(authors_path), on="author", how="left")
-        .sort("date")
+    bookclub_processed_df = bookclub_processed_df.with_columns(member_exprs)
+
+    # Calculate average over the member ratings
+    bookclub_processed_df = bookclub_processed_df.with_columns(
+        pl.mean_horizontal(*all_member_names).alias("average_bookclub_rating")
     )
+
+    # Join with authors data
+    authors_df = pl.read_csv(authors_path)
+    bookclub_processed_df = bookclub_processed_df.join(authors_df, on="author", how="left")
+
+    # Reorder columns to match the expected schema:
+    # 1. bookclub columns: index, date, title, author, suggested_by, location
+    # 2. Goodreads columns: original_publication_year, average_goodreads_rating, number_of_pages
+    # 3. member columns in registry order (all Float64)
+    # 4. average_bookclub_rating
+    # 5. author columns (from authors.csv)
+
+    bookclub_cols = ["index", "date", "title", "author", "suggested_by", "location"]
+    goodreads_cols = ["original_publication_year", "average_goodreads_rating", "number_of_pages"]
+    author_cols = [col for col in authors_df.columns if col != "author"]
+
+    final_column_order = (
+        bookclub_cols
+        + goodreads_cols
+        + all_member_names
+        + ["average_bookclub_rating"]
+        + author_cols
+    )
+
+    bookclub_processed_df = bookclub_processed_df.select(final_column_order).sort(["date", "index"])
+
     return bookclub_processed_df, unmatched_df, goodreads_df
+
+
+def load_dashboard_data(
+    goodreads_dir: Path | str = GOODREADS_DIR,
+    bookclub_path: Path | str = BOOKCLUB_PATH,
+    manual_ratings_path: Path | str = MANUAL_RATINGS_PATH,
+    authors_path: Path | str = AUTHORS_PATH,
+) -> pl.DataFrame:
+    """Load the processed book club data for dashboard display.
+
+    Runs the pipeline and filters to keep only rows where date is not null.
+
+    Parameters
+    ----------
+    goodreads_dir : Path | str, optional
+        Directory containing Goodreads CSV files, by default GOODREADS_DIR.
+    bookclub_path : Path | str, optional
+        Path to bookclub CSV file, by default BOOKCLUB_PATH.
+    manual_ratings_path : Path | str, optional
+        Path to manual ratings CSV file, by default MANUAL_RATINGS_PATH.
+    authors_path : Path | str, optional
+        Path to authors CSV file (one row per author), by default AUTHORS_PATH.
+
+    Returns
+    -------
+    pl.DataFrame
+        The processed bookclub data with only rows where date is not null.
+    """
+    bookclub_processed_df, _, _ = process_bookclub_data(
+        goodreads_dir=goodreads_dir,
+        bookclub_path=bookclub_path,
+        manual_ratings_path=manual_ratings_path,
+        authors_path=authors_path,
+    )
+    return bookclub_processed_df.filter(pl.col("date").is_not_null())
 
 
 def save_processed_data(
