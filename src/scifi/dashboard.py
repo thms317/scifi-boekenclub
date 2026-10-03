@@ -34,8 +34,8 @@ from scifi.analysis import (
     rating_trend,
     suggester_stats,
 )
-from scifi.data_processor import load_dashboard_data
 from scifi.members import BookClubMembers
+from scifi.ui.data import get_bookclub
 from scifi.visualizer import (
     create_author_bar_chart,
     create_books_per_decade_bar,
@@ -120,39 +120,6 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
-
-
-@st.cache_data
-def load_data() -> tuple[pl.DataFrame, list[str]]:
-    """Load and preprocess the bookclub data using live data processing."""
-    try:
-        with st.spinner("🔄 Processing book club data from sources..."):
-            # Run the data processing pipeline
-            bookclub_processed_df = load_dashboard_data()
-
-    except FileNotFoundError as e:
-        st.error(f"📁 Data files not found: {e}")
-        st.info("💡 Make sure your data files are in the correct directories:")
-        st.code("""
-        data/
-        ├── goodreads/
-        │   └── clean/
-        │       └── [member CSV files]
-        └── bookclub/
-            ├── bookclub.csv
-            ├── manual_ratings.csv (optional)
-            └── authors.csv
-        """)
-        st.stop()
-
-    except (RuntimeError, ValueError, OSError) as e:
-        st.error(f"❌ Error processing data: {e}")
-        st.info("💡 Check the data file formats and try again.")
-        st.stop()
-
-    bookclub_members_list = BookClubMembers.get_member_names()
-
-    return bookclub_processed_df, bookclub_members_list
 
 
 def create_current_book_banner(bookclub_processed_df: pl.DataFrame) -> None:
@@ -539,7 +506,8 @@ def main() -> None:
     )
 
     # Load data
-    bookclub_processed_df, members = load_data()
+    bookclub_processed_df = get_bookclub()
+    members = BookClubMembers.get_member_names()
 
     # Sidebar
     st.sidebar.markdown("## 🎛️ Dashboard Controls")
