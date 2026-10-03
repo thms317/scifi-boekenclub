@@ -1,6 +1,7 @@
 """Overview page of the Sci-Fi Book Club Analytics Dashboard."""
 
 from datetime import date
+from html import escape
 
 import polars as pl
 import streamlit as st
@@ -149,37 +150,25 @@ def _create_current_book_banner(bookclub_processed_df: pl.DataFrame) -> None:
         st.info("No books scheduled yet.")
         return
 
-    # Display each book in the meeting
-    for book in meeting.books:
-        year_display = f"{book.year}" if book.year else "N/A"
-        pages_display = f"{book.pages}" if book.pages else "N/A"
-        countdown_text = countdown_label(meeting.date, today)
-        status = "Next Bookclub Meeting" if meeting.is_upcoming else "Last Bookclub Meeting"
+    # Display meeting info in a container with border
+    with st.container(border=True):
+        col_left, col_right = st.columns([2, 1])
 
-        st.markdown(
-            f"""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    padding: 1rem 2rem;
-                    border-radius: 10px;
-                    color: white;
-                    margin: 1rem 0;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;">
-            <div>
-                <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📖 Book</div>
-                <div style="font-size: 1.3rem;">
-                    <strong>{book.title}</strong> by <em>{book.author}</em> <span style="font-size: 1.0rem;">({year_display} | {pages_display} pages)</span>
-                </div>
-            </div>
-            <div style="font-size: 1.2rem; text-align: right;">
-                {status} 📅<br><span style="font-size: 1.2rem;">{countdown_text}</span>
-            </div>
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
+        # Display each book in the meeting
+        with col_left:
+            for i, book in enumerate(meeting.books):
+                if i > 0:
+                    st.divider()
+                st.markdown(f"**📖 {book.title}** by *{book.author}*")
+                year_display = f"{book.year}" if book.year else "N/A"
+                pages_display = f"{book.pages}" if book.pages else "N/A"
+                st.caption(f"{year_display} | {pages_display} pages")
+
+        with col_right:
+            countdown_text = countdown_label(meeting.date, today)
+            status = "Next Bookclub Meeting" if meeting.is_upcoming else "Last Bookclub Meeting"
+            st.markdown(f"**{status}** 📅")
+            st.markdown(f"**{countdown_text}**")
 
 
 def _create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[str]) -> None:
@@ -207,25 +196,7 @@ def _create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[
 
     for title, value, col in metrics:
         with col:
-            st.markdown(
-                f"""
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    padding: 1rem;
-                    border-radius: 10px;
-                    color: white;
-                    text-align: center;
-                    margin: 0.2rem;
-                    height: 100px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <h3 style="margin: 0; font-size: 0.9rem; opacity: 0.9;">{title}</h3>
-                <h2 style="margin: 0.2rem 0 0 0; font-size: 1.8rem; font-weight: bold;">{value}</h2>
-            </div>
-            """,
-                unsafe_allow_html=True,
-            )
+            st.metric(label=title, value=value, border=True)
 
 
 def _create_selected_book_analysis(
@@ -244,7 +215,16 @@ def _create_selected_book_analysis(
     members : list[str]
         List of member names.
     """
-    # Book header with enhanced styling
+    # Book header with enhanced styling - escape CSV-derived values
+    book_title = escape(str(selected_book["title"]))
+    book_author = escape(str(selected_book["author"]))
+    book_location = escape(str(selected_book.get("location", "N/A")))
+    book_date = selected_book["date"].strftime("%B %d, %Y")
+
+    # Format rating, handling None for unrated books
+    rating_value = selected_book["average_bookclub_rating"]
+    rating_display = f"{rating_value:.2f}" if rating_value is not None else "-"
+
     st.markdown(
         f"""
     <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -255,14 +235,14 @@ def _create_selected_book_analysis(
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div>
-                <h1>📖 {selected_book["title"]}</h1>
-                <h2>✍️ by {selected_book["author"]}</h2>
-                <p><strong>📅 Read on:</strong> {selected_book["date"]}</p>
-                <p><strong>🏠 Location:</strong> {selected_book["location"]}</p>
+                <h1>📖 {book_title}</h1>
+                <h2>✍️ by {book_author}</h2>
+                <p><strong>📅 Read on:</strong> {book_date}</p>
+                <p><strong>🏠 Location:</strong> {book_location}</p>
             </div>
             <div style="text-align: right;">
                 <div style="font-size: 3em;">⭐</div>
-                <div style="font-size: 1.5em;">{selected_book["average_bookclub_rating"]:.2f}</div>
+                <div style="font-size: 1.5em;">{rating_display}</div>
                 <div>Club Rating</div>
             </div>
         </div>

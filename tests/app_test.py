@@ -3,6 +3,7 @@
 from datetime import date
 from unittest.mock import patch
 
+import polars as pl
 import pytest
 import streamlit as st
 from streamlit.testing.v1 import AppTest
@@ -54,6 +55,22 @@ class TestDashboard:
         at.selectbox(key="overview_book_selector").set_value(second_index).run()
         assert titles[1] in book_card_text(at)
         assert titles[0] not in book_card_text(at)
+
+    def test_unrated_books_dont_crash(self) -> None:
+        """Test that selecting unrated past books doesn't crash the overview page."""
+        at = AppTest.from_string(
+            "from scifi.ui import overview\noverview.render()", default_timeout=30
+        )
+        at.run()
+
+        # Find unrated past books
+        df = load_dashboard_data()
+        unrated = past_books(df, date.today()).filter(pl.col("average_bookclub_rating").is_null())
+
+        # Test each unrated book
+        for unrated_index in unrated["index"].to_list():
+            at.selectbox(key="overview_book_selector").set_value(unrated_index).run()
+            assert not at.exception, f"Failed on unrated book with index {unrated_index}"
 
     def test_missing_data_shows_error(self) -> None:
         """Test that a missing data file shows a readable error instead of a traceback."""
