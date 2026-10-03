@@ -1,5 +1,7 @@
 """Visualization functions for the scifi project."""
 
+from collections.abc import Mapping
+
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
@@ -370,7 +372,7 @@ def create_rating_comparison_bar(
 
 
 def create_member_radar(
-    members: list[str], member_ratings: dict[str, float | None], book_title: str
+    members: list[str], member_ratings: Mapping[str, float | None], book_title: str
 ) -> go.Figure:
     """Create a radar chart showing member ratings for a book.
 
@@ -378,7 +380,7 @@ def create_member_radar(
     ----------
     members : list[str]
         List of member names.
-    member_ratings : dict[str, float | None]
+    member_ratings : Mapping[str, float | None]
         Dictionary mapping member names to ratings (or None).
     book_title : str
         The title of the book.
