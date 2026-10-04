@@ -8,6 +8,10 @@ on:
       - src/**
       - tests/**
       - pyproject.toml
+      - app.py
+      - .streamlit/**
+      - uv.lock
+      - data/**
 
 jobs:
   ci:
@@ -26,6 +30,8 @@ jobs:
       - name: Run Formatting Checks
         run: |
           set -e
+          echo "Running ruff format check"
+          uv run ruff format --check .
           echo "Running ruff"
           uv run ruff check --output-format=github .
           echo "Running ty"
