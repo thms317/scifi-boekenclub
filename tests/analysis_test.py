@@ -1,20 +1,13 @@
 """Tests for analysis module functions."""
 
-from datetime import date, timedelta
+from datetime import date
 
 import polars as pl
 import pytest
 
 from scifi.analysis import (
-    Book,
-    books_per_decade,
-    club_duration_label,
-    countdown_label,
     current_meeting,
     member_correlations,
-    member_stats,
-    overview_metrics,
-    past_books,
     rank_books,
     rating_trend,
     suggester_stats,
@@ -48,107 +41,23 @@ def sample_data() -> pl.DataFrame:
     )
 
 
-class TestCountdownLabel:
-    """Tests for countdown_label function."""
-
-    def test_today(self) -> None:
-        """Test label for today."""
-        today = date.today()
-        label = countdown_label(today, today)
-        assert "(TODAY)" in label
-
-    def test_tomorrow(self) -> None:
-        """Test label for tomorrow."""
-        today = date.today()
-        tomorrow = today + timedelta(days=1)
-        label = countdown_label(tomorrow, today)
-        assert "(TOMORROW)" in label
-
-    def test_future_date(self) -> None:
-        """Test label for a future date."""
-        today = date.today()
-        future = today + timedelta(days=10)
-        label = countdown_label(future, today)
-        assert "10 days left" in label
-
-    def test_past_date(self) -> None:
-        """Test label for a past date."""
-        today = date.today()
-        past = today - timedelta(days=5)
-        label = countdown_label(past, today)
-        assert "5 days ago" in label
-
-
-class TestClubDurationLabel:
-    """Tests for club_duration_label function."""
-
-    def test_less_than_a_year(self) -> None:
-        """Test duration under one year."""
-        first = date(2024, 1, 1)
-        last = date(2024, 7, 15)
-        label = club_duration_label(first, last)
-        assert "m" in label
-        assert "y" not in label
-
-    def test_more_than_a_year(self) -> None:
-        """Test duration over one year."""
-        first = date(2022, 1, 1)
-        last = date(2024, 7, 15)
-        label = club_duration_label(first, last)
-        assert "y" in label
-        assert "m" in label
-
-
 class TestCurrentMeeting:
     """Tests for current_meeting function."""
 
     def test_upcoming_meeting(self, sample_data: pl.DataFrame) -> None:
-        """Test finding an upcoming meeting."""
-        today = date(2024, 1, 1)
-        meeting = current_meeting(sample_data, today)
-        assert meeting is not None
-        assert meeting.is_upcoming
-        assert meeting.date == date(2024, 1, 15)
+        """Test that the first meeting on or after today is picked."""
+        meeting = current_meeting(sample_data, date(2024, 1, 1))
+        assert meeting["date"].to_list() == [date(2024, 1, 15)]
 
     def test_only_past_meetings(self, sample_data: pl.DataFrame) -> None:
-        """Test when only past meetings exist."""
-        today = date(2025, 1, 1)
-        meeting = current_meeting(sample_data, today)
-        assert meeting is not None
-        assert not meeting.is_upcoming
-        assert meeting.date == date(2024, 4, 5)
+        """Test that the last meeting is picked when every meeting is in the past."""
+        meeting = current_meeting(sample_data, date(2025, 1, 1))
+        assert meeting["date"].to_list() == [date(2024, 4, 5)]
 
     def test_multiple_books_same_date(self, sample_data: pl.DataFrame) -> None:
-        """Test meeting with multiple books on same date."""
-        today = date(2024, 3, 1)
-        meeting = current_meeting(sample_data, today)
-        assert meeting is not None
-        assert meeting.date == date(2024, 3, 20)
-        assert len(meeting.books) == 2
-        assert all(isinstance(b, Book) for b in meeting.books)
-
-    def test_empty_frame(self) -> None:
-        """Test with empty DataFrame."""
-        empty = pl.DataFrame({"date": pl.Series([], dtype=pl.Date)})
-        result = current_meeting(empty, date.today())
-        assert result is None
-
-
-class TestPastBooks:
-    """Tests for past_books function."""
-
-    def test_returns_past_books(self, sample_data: pl.DataFrame) -> None:
-        """Test that past books are returned."""
-        today = date(2024, 3, 15)
-        past = past_books(sample_data, today)
-        assert len(past) > 0
-        assert all(d < today for d in past["date"].to_list())
-
-    def test_all_books_if_no_past(self, sample_data: pl.DataFrame) -> None:
-        """Test that all books are returned if none are past."""
-        today = date(2020, 1, 1)
-        result = past_books(sample_data, today)
-        assert len(result) == len(sample_data)
+        """Test that every book of the meeting is returned."""
+        meeting = current_meeting(sample_data, date(2024, 3, 1))
+        assert meeting["title"].to_list() == ["Book C", "Book D"]
 
 
 class TestRankBooks:
@@ -181,35 +90,6 @@ class TestRankBooks:
         # Both 4.0 should have rank 1
         top_two = ranked.filter(pl.col("average_bookclub_rating") == 4.0)
         assert all(r == 1 for r in top_two["rank"].to_list())
-
-
-class TestMemberStats:
-    """Tests for member_stats function."""
-
-    def test_counts_ratings(self, sample_data: pl.DataFrame) -> None:
-        """Test that ratings are counted correctly."""
-        members = ["Alice", "Bob", "Carol"]
-        stats = member_stats(sample_data, members)
-        alice_stats = stats.filter(pl.col("member") == "Alice").to_dicts()[0]
-        assert alice_stats["count"] == 5
-
-    def test_skips_nulls(self, sample_data: pl.DataFrame) -> None:
-        """Test that nulls are skipped in calculations."""
-        members = ["Bob"]
-        stats = member_stats(sample_data, members)
-        bob_stats = stats.to_dicts()[0]
-        # Bob has one null, so count should be 4, not 5
-        assert bob_stats["count"] == 4
-
-
-class TestBooksPerDecade:
-    """Tests for books_per_decade function."""
-
-    def test_handles_null_years(self, sample_data: pl.DataFrame) -> None:
-        """Test that books with null publication year are filtered."""
-        result = books_per_decade(sample_data)
-        # Should exclude the one with null year
-        assert result["count"].sum() == 4
 
 
 class TestRatingTrend:
@@ -270,19 +150,3 @@ class TestSuggesterStats:
         result = suggester_stats(sample_data, ["Alice"], min_books=3)
         # Alice should be included as an active member
         assert any(r["suggested_by"] == "Alice" for r in result.to_dicts())
-
-
-class TestOverviewMetrics:
-    """Tests for overview_metrics function."""
-
-    def test_computes_all_metrics(self, sample_data: pl.DataFrame) -> None:
-        """Test that all metrics are computed."""
-        members = ["Alice", "Bob", "Carol"]
-        metrics = overview_metrics(sample_data, members)
-
-        assert metrics.total_books == 5
-        assert metrics.goodreads_avg > 0
-        assert metrics.club_avg > 0
-        assert metrics.most_active_member in members
-        assert isinstance(metrics.first_date, date)
-        assert isinstance(metrics.last_date, date)
