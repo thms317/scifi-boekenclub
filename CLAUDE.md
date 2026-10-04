@@ -34,7 +34,7 @@ The project is a Streamlit web app (`app.py`) backed by a pure Python package (`
 ### Import rules
 1. **Imports point down:** `app.py` → `scifi.ui.*` → `analysis`, `visualizer`, `data_processor` → `utils`, `members`, `paths`. Nothing in `scifi` imports `app.py`.
 2. **Only `scifi.ui` imports streamlit.** Everything else runs and is tested without a Streamlit runtime.
-3. **Use absolute imports only,** for example `from scifi.analysis import member_stats`.
+3. **Use absolute imports only,** for example `from scifi.analysis import rank_books`.
 4. **Only `paths.py` contains `"data/..."` strings.**
 5. **Use Polars everywhere.** No pandas in `src/` or `app.py`.
 
