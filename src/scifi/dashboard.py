@@ -352,7 +352,9 @@ def create_time_analysis(df: pl.DataFrame) -> None:
 
     with col1:
         # Books per year
-        yearly_counts = df.group_by(pl.col("date").dt.year().alias("year")).len("count").sort("year")
+        yearly_counts = (
+            df.group_by(pl.col("date").dt.year().alias("year")).len("count").sort("year")
+        )
         fig_yearly = create_books_per_year_bar(yearly_counts)
         st.plotly_chart(fig_yearly, use_container_width=True)
 
