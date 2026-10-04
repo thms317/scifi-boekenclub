@@ -2,8 +2,7 @@
 
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parents[2]  # src/scifi/paths.py → repo root
-DATA_DIR = ROOT_DIR / "data"
+DATA_DIR = Path("data")
 GOODREADS_DIR = DATA_DIR / "goodreads" / "clean"
 BOOKCLUB_PATH = DATA_DIR / "bookclub" / "bookclub.csv"
 MANUAL_RATINGS_PATH = DATA_DIR / "bookclub" / "manual_ratings.csv"
