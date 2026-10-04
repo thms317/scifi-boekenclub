@@ -1,11 +1,9 @@
 """Tests for data contract and integrity."""
 
-from pathlib import Path
-
 import polars as pl
 
 from scifi.members import BookClubMembers
-from scifi.paths import GOODREADS_DIR
+from scifi.paths import AUTHORS_PATH, BOOKCLUB_PATH, GOODREADS_DIR
 from scifi.utils import read_bookclub
 
 
@@ -17,8 +15,6 @@ class TestAuthors:
 
     """
 
-    data_dir = Path(__file__).parents[1] / "data" / "bookclub"
-
     def test_authors_csv(self) -> None:
         """Test that every book club author has exactly one complete row.
 
@@ -28,11 +24,11 @@ class TestAuthors:
         - All book club authors are covered in the authors file
 
         """
-        authors = pl.read_csv(self.data_dir / "authors.csv")
+        authors = pl.read_csv(AUTHORS_PATH)
         assert authors["author"].is_unique().all()
         assert authors.null_count().sum_horizontal().item() == 0
         # The pipeline joins on the exact author name
-        bookclub_authors = set(read_bookclub(self.data_dir / "bookclub.csv")["author"])
+        bookclub_authors = set(read_bookclub(BOOKCLUB_PATH)["author"])
         assert bookclub_authors <= set(authors["author"])
 
 
@@ -44,8 +40,6 @@ class TestBookclub:
 
     """
 
-    data_dir = Path(__file__).parents[1] / "data" / "bookclub"
-
     def test_bookclub_index_unique(self) -> None:
         """Test that the bookclub index (Nummer) is unique.
 
@@ -53,7 +47,7 @@ class TestBookclub:
         for proper data identification.
 
         """
-        bookclub = read_bookclub(self.data_dir / "bookclub.csv")
+        bookclub = read_bookclub(BOOKCLUB_PATH)
         assert bookclub["index"].n_unique() == len(bookclub)
 
     def test_bookclub_no_null_dates(self) -> None:
@@ -63,7 +57,7 @@ class TestBookclub:
         is used for filtering and time-based analysis.
 
         """
-        bookclub = read_bookclub(self.data_dir / "bookclub.csv")
+        bookclub = read_bookclub(BOOKCLUB_PATH)
         assert bookclub["date"].null_count() == 0
 
     def test_bookclub_unique_titles_lowercase(self) -> None:
@@ -74,7 +68,7 @@ class TestBookclub:
         (after lowercasing) would cause ambiguity in the join.
 
         """
-        bookclub = read_bookclub(self.data_dir / "bookclub.csv")
+        bookclub = read_bookclub(BOOKCLUB_PATH)
         titles_lower = bookclub["title"].str.to_lowercase()
         assert titles_lower.n_unique() == len(titles_lower)
 
