@@ -7,7 +7,6 @@ No Streamlit or Pandas dependencies.
 from dataclasses import dataclass
 from datetime import date
 
-import numpy as np
 import polars as pl
 
 
@@ -399,26 +398,19 @@ def rating_trend(df: pl.DataFrame, window: int = 7) -> pl.DataFrame:
             ]
         )
 
-    # Compute rolling average using polars
-    rated_with_rolling = rated.with_columns(
-        pl.col("average_bookclub_rating")
-        .rolling_mean(window_size=window, min_samples=1)
-        .alias("rolling_avg")
+    rating = pl.col("average_bookclub_rating")
+    days = pl.col("date").dt.epoch("d")
+
+    # Least-squares line through (days, rating): slope = cov / var
+    slope = pl.cov(days, rating) / days.var()
+
+    return rated.select(
+        "date",
+        "title",
+        "average_bookclub_rating",
+        rating.rolling_mean(window_size=window, min_samples=1).alias("rolling_avg"),
+        (rating.mean() + slope * (days - days.mean())).alias("trend"),
     )
-
-    # Compute trend line using numpy polyfit
-    date_numeric = np.array([d.toordinal() for d in rated["date"].to_list()])
-    ratings = np.array(rated["average_bookclub_rating"].to_list())
-
-    if len(date_numeric) >= 2:
-        coeffs = np.polyfit(date_numeric, ratings, 1)  # Linear fit
-        trend_line = np.polyval(coeffs, date_numeric).tolist()
-    else:
-        trend_line = [None] * len(date_numeric)
-
-    return rated_with_rolling.select(
-        "date", "title", "average_bookclub_rating", "rolling_avg"
-    ).with_columns(pl.Series("trend", trend_line, dtype=pl.Float64))
 
 
 def suggester_stats(
@@ -561,16 +553,13 @@ def member_correlations(
             if len(both_rated) < min_shared:
                 continue
 
-            ratings1 = both_rated[m1].to_numpy()
-            ratings2 = both_rated[m2].to_numpy()
-
             # Check variance
-            if len(set(ratings1)) <= 1 or len(set(ratings2)) <= 1:
+            if both_rated[m1].n_unique() <= 1 or both_rated[m2].n_unique() <= 1:
                 # No variance, skip this pair
                 continue
 
             # Compute correlation
-            corr = float(np.corrcoef(ratings1, ratings2)[0, 1])
+            corr = both_rated.select(pl.corr(m1, m2)).item()
 
             correlations.append(
                 {
