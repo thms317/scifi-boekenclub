@@ -362,6 +362,17 @@ class TestMatchDataframes:
         assert matched_df.shape[0] == 1
         assert matched_df["title"][0] == "Non-Matching Book"
 
+    def test_match_dataframes_no_right_columns(
+        self,
+        df_bookclub: pl.DataFrame,
+        df_pivot: pl.DataFrame,
+    ) -> None:
+        """Test that match_dataframes drops right-hand duplicate columns."""
+        matched_df = match_dataframes(df_bookclub, df_pivot, on="title", how="left")
+        # Check that no _right suffix columns exist
+        right_cols = [col for col in matched_df.columns if col.endswith("_right")]
+        assert len(right_cols) == 0, f"Found unwanted right columns: {right_cols}"
+
 
 class TestMergeManualRatings:
     """Test class for the merge_manual_ratings function."""
