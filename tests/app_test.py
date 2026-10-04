@@ -9,7 +9,6 @@ from streamlit.testing.v1 import AppTest
 
 from scifi.analysis import past_books
 from scifi.data_processor import load_dashboard_data
-from scifi.paths import ROOT_DIR
 
 PAGES = ["overview", "member_insights", "time_analysis", "author_insights", "advanced_analytics"]
 
@@ -24,13 +23,12 @@ class TestDashboard:
 
     def test_app_renders(self) -> None:
         """Test that app.py renders the default page without an exception."""
-        at = AppTest.from_file(str(ROOT_DIR / "app.py"), default_timeout=30).run()
+        at = AppTest.from_file("app.py", default_timeout=30).run()
         assert not at.exception
 
     def test_shim_renders(self) -> None:
         """Test that the old src/scifi/dashboard.py entrypoint still renders the app."""
-        shim = ROOT_DIR / "src" / "scifi" / "dashboard.py"
-        at = AppTest.from_file(str(shim), default_timeout=30).run()
+        at = AppTest.from_file("src/scifi/dashboard.py", default_timeout=30).run()
         assert not at.exception
 
     @pytest.mark.parametrize("page", PAGES)
