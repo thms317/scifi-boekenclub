@@ -5,14 +5,7 @@ from datetime import date
 import polars as pl
 import streamlit as st
 
-from scifi.analysis import (
-    club_duration_label,
-    countdown_label,
-    current_meeting,
-    overview_metrics,
-    past_books,
-    rank_books,
-)
+from scifi.analysis import current_meeting, rank_books
 from scifi.members import BookClubMembers
 from scifi.ui.data import get_bookclub
 from scifi.visualizer import (
@@ -34,12 +27,13 @@ def render() -> None:
     st.markdown("---")
     st.subheader("🔍 Select a Book for Detailed Analysis")
 
-    # Get past books sorted by date (newest first)
+    # Past books, newest first, and a title for each index
     today = date.today()
-    past_books_df = past_books(bookclub_processed_df, today)
-
-    # Create list of indices and title mapping
-    book_indices = past_books_df["index"].to_list()
+    book_indices = (
+        bookclub_processed_df.filter(pl.col("date") < today)
+        .sort("date", descending=True)["index"]
+        .to_list()
+    )
     book_index_to_title = dict(
         zip(
             bookclub_processed_df["index"].to_list(),
@@ -144,17 +138,19 @@ def _create_current_book_banner(bookclub_processed_df: pl.DataFrame) -> None:
     """
     today = date.today()
     meeting = current_meeting(bookclub_processed_df, today)
-
-    if not meeting or not meeting.books:
-        st.info("No books scheduled yet.")
-        return
+    meeting_date = meeting["date"][0]
+    days = (meeting_date - today).days
+    when = {0: "TODAY", 1: "TOMORROW"}.get(
+        days, f"{days} days left" if days > 0 else f"{-days} days ago"
+    )
+    countdown_text = f"{meeting_date:%b %d} ({when})"
+    status = "Next Bookclub Meeting" if days >= 0 else "Last Bookclub Meeting"
 
     # Display each book in the meeting
-    for book in meeting.books:
-        year_display = f"{book.year}" if book.year else "N/A"
-        pages_display = f"{book.pages}" if book.pages else "N/A"
-        countdown_text = countdown_label(meeting.date, today)
-        status = "Next Bookclub Meeting" if meeting.is_upcoming else "Last Bookclub Meeting"
+    for book in meeting.iter_rows(named=True):
+        year, pages = book["original_publication_year"], book["number_of_pages"]
+        year_display = f"{int(year)}" if year else "N/A"
+        pages_display = f"{int(pages)}" if pages else "N/A"
 
         st.markdown(
             f"""
@@ -170,7 +166,7 @@ def _create_current_book_banner(bookclub_processed_df: pl.DataFrame) -> None:
             <div>
                 <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📖 Book</div>
                 <div style="font-size: 1.3rem;">
-                    <strong>{book.title}</strong> by <em>{book.author}</em> <span style="font-size: 1.0rem;">({year_display} | {pages_display} pages)</span>
+                    <strong>{book["title"]}</strong> by <em>{book["author"]}</em> <span style="font-size: 1.0rem;">({year_display} | {pages_display} pages)</span>
                 </div>
             </div>
             <div style="font-size: 1.2rem; text-align: right;">
@@ -194,15 +190,20 @@ def _create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[
     """
     col1, col2, col3, col4, col5 = st.columns(5)
 
-    metrics_data = overview_metrics(bookclub_processed_df, members)
-    duration_text = club_duration_label(metrics_data.first_date, metrics_data.last_date)
+    goodreads_avg, club_avg, first, last = bookclub_processed_df.select(
+        pl.col("average_goodreads_rating").mean(),
+        pl.col("average_bookclub_rating").mean(),
+        pl.col("date").min().alias("first"),
+        pl.col("date").max().alias("last"),
+    ).row(0)
+    years, days = divmod((last - first).days, 365)
 
     metrics = [
-        ("📚 Total Books", metrics_data.total_books, col1),
-        ("⭐ Goodreads Avg", f"{metrics_data.goodreads_avg:.2f}", col2),
-        ("🎯 Club Avg", f"{metrics_data.club_avg:.2f}", col3),
-        ("👑 Most Active", str(metrics_data.most_active_member), col4),
-        ("⏰ Duration", str(duration_text), col5),
+        ("📚 Total Books", len(bookclub_processed_df), col1),
+        ("⭐ Goodreads Avg", f"{goodreads_avg:.2f}", col2),
+        ("🎯 Club Avg", f"{club_avg:.2f}", col3),
+        ("👑 Most Active", max(members, key=lambda m: bookclub_processed_df[m].count()), col4),
+        ("⏰ Duration", f"{years}y {days // 30}m" if years else f"{days // 30}m", col5),
     ]
 
     for title, value, col in metrics:

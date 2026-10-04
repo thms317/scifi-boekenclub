@@ -3,7 +3,7 @@
 import polars as pl
 import streamlit as st
 
-from scifi.analysis import books_per_decade, books_per_year, rating_trend
+from scifi.analysis import rating_trend
 from scifi.ui.data import get_bookclub
 from scifi.visualizer import (
     create_books_per_decade_bar,
@@ -52,13 +52,21 @@ def _create_time_analysis(df: pl.DataFrame) -> None:
 
     with col1:
         # Books per year
-        yearly_counts = books_per_year(df)
+        yearly_counts = (
+            df.group_by(pl.col("date").dt.year().alias("year")).len("count").sort("year")
+        )
         fig_yearly = create_books_per_year_bar(yearly_counts)
         st.plotly_chart(fig_yearly, width="stretch")
 
     with col2:
         # Publication decades with outlined bars
-        decade_counts = books_per_decade(df)
+        decade_counts = (
+            df.drop_nulls("original_publication_year")
+            .group_by(decade=(pl.col("original_publication_year") // 10 * 10).cast(pl.UInt32))
+            .len("count")
+            .with_columns(decade_label=pl.col("decade").cast(pl.Utf8) + "s")
+            .sort("decade")
+        )
         fig_decades = create_books_per_decade_bar(decade_counts)
         st.plotly_chart(fig_decades, width="stretch")
 

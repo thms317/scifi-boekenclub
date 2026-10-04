@@ -3,7 +3,7 @@
 import polars as pl
 import streamlit as st
 
-from scifi.analysis import member_stats, suggester_stats
+from scifi.analysis import suggester_stats
 from scifi.members import BookClubMembers
 from scifi.ui.data import get_bookclub
 from scifi.visualizer import (
@@ -43,14 +43,18 @@ def _create_member_comparison(df: pl.DataFrame, members: list[str]) -> None:
     st.subheader("👥 Member Rating Patterns")
 
     # Calculate member statistics
-    stats_df = member_stats(df, members)
-    stats_df = stats_df.select(
-        pl.col("member").alias("Member"),
-        pl.col("count").alias("Count"),
-        pl.col("average").alias("Average"),
-        pl.col("std_dev").alias("Std Dev"),
-        pl.col("min").alias("Min"),
-        pl.col("max").alias("Max"),
+    stats_df = (
+        df.select(members)
+        .unpivot(variable_name="Member", value_name="rating")
+        .drop_nulls("rating")
+        .group_by("Member", maintain_order=True)
+        .agg(
+            pl.len().alias("Count"),
+            pl.col("rating").mean().alias("Average"),
+            pl.col("rating").std().fill_null(0.0).alias("Std Dev"),
+            pl.col("rating").min().alias("Min"),
+            pl.col("rating").max().alias("Max"),
+        )
     )
 
     # Create clean comparison charts

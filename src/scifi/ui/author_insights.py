@@ -3,7 +3,6 @@
 import polars as pl
 import streamlit as st
 
-from scifi.analysis import author_stats
 from scifi.ui.data import get_bookclub
 from scifi.visualizer import create_author_bar_chart
 
@@ -30,9 +29,17 @@ def render() -> None:
     dimension = st.radio("Group authors by:", list(dimensions), horizontal=True)
     group_col = dimensions[dimension]
 
-    stats_result = author_stats(bookclub_processed_df, group_col)
+    stats_result = (
+        bookclub_processed_df.drop_nulls("average_bookclub_rating")
+        .group_by(pl.col(group_col).alias("group"))
+        .agg(
+            pl.len().alias("book_count"),
+            pl.col("average_bookclub_rating").mean().alias("avg_rating"),
+        )
+        .sort("avg_rating", descending=True)
+    )
 
-    if stats_result is None or len(stats_result) == 0:
+    if len(stats_result) == 0:
         st.info(f"No data available for {dimension}.")
         return
 
