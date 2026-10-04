@@ -62,8 +62,9 @@ class TestDashboard:
         at.run()
 
         # Find unrated past books
-        df = load_dashboard_data()
-        unrated = past_books(df, date.today()).filter(pl.col("average_bookclub_rating").is_null())
+        unrated = load_dashboard_data().filter(
+            (pl.col("date") < date.today()) & pl.col("average_bookclub_rating").is_null()
+        )
 
         # Test each unrated book
         for unrated_index in unrated["index"].to_list():
