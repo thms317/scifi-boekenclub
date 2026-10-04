@@ -1,6 +1,5 @@
 """Visualization functions for the scifi project."""
 
-import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import polars as pl
@@ -24,8 +23,7 @@ def rating_to_color(rating: float, alpha: float = 0.3) -> str:
         The RGBA color string.
     """
     # Normalize rating from 1-5 to 0-1
-    normalized = (rating - 1) / 4
-    normalized = np.clip(normalized, 0, 1)
+    normalized = min(max((rating - 1) / 4, 0), 1)
 
     # Interpolate between red and green
     red = int(255 * (1 - normalized))
@@ -87,15 +85,16 @@ def create_member_rating_heatmap(df: pl.DataFrame, member_cols: list[str]) -> go
     # Get book titles for hover text
     book_titles = df_processed.select("title").to_series().to_list()
 
-    rating_values = df_processed.select(reversed_member_cols).to_numpy().T
+    # One row per member, one column per book; None where the member didn't rate the book
+    rating_values = [df_processed[member].to_list() for member in reversed_member_cols]
 
     # Create custom hover text that handles null values
     hover_text = []
     for i, member in enumerate(reversed_member_cols):
         member_row = []
         for j, book_title in enumerate(book_titles):
-            rating = rating_values[i, j]
-            if np.isnan(rating):
+            rating = rating_values[i][j]
+            if rating is None:
                 member_row.append(f"<b>{member}</b><br>Book: {book_title}<br>No rating")
             else:
                 member_row.append(f"<b>{member}</b><br>Book: {book_title}<br>Rating: {rating:.1f}")
@@ -801,7 +800,8 @@ def create_correlation_heatmap(correlations_df: pl.DataFrame) -> go.Figure:
     active_members = sorted(set(member_1_list + member_2_list))
 
     # Create matrix
-    correlation_matrix = np.eye(len(active_members))
+    n = len(active_members)
+    correlation_matrix = [[1.0 if i == j else 0.0 for j in range(n)] for i in range(n)]
     member_to_idx = {m: i for i, m in enumerate(active_members)}
 
     for row in correlations_df.rows(named=True):
@@ -813,7 +813,7 @@ def create_correlation_heatmap(correlations_df: pl.DataFrame) -> go.Figure:
 
     # Create enhanced heatmap with better styling
     # Reverse matrix rows to match reversed y-axis labels (diagonal at top-left)
-    reversed_matrix = np.flipud(correlation_matrix)
+    reversed_matrix = correlation_matrix[::-1]
 
     fig = go.Figure(
         data=go.Heatmap(
@@ -823,7 +823,7 @@ def create_correlation_heatmap(correlations_df: pl.DataFrame) -> go.Figure:
             colorscale="RdYlGn",  # Red-Yellow-Green: Red=0, Yellow=0.5, Green=1
             zmin=-0.25,
             zmax=1,
-            text=np.round(reversed_matrix, 3),
+            text=[[round(value, 3) for value in row] for row in reversed_matrix],
             texttemplate="%{text}",
             textfont={"size": 12, "color": "black"},
             hoverongaps=False,
