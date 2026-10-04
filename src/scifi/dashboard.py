@@ -106,12 +106,7 @@ def load_data() -> tuple[pl.DataFrame, list[str]]:
     try:
         with st.spinner("🔄 Processing book club data from sources..."):
             # Run the data processing pipeline
-            bookclub_processed_df, _unmatched_df, _goodreads_df = process_bookclub_data(
-                goodreads_dir="data/goodreads/clean",
-                bookclub_path="data/bookclub/bookclub.csv",
-                manual_ratings_path="data/bookclub/manual_ratings.csv",
-                authors_path="data/bookclub/authors.csv",
-            )
+            bookclub_processed_df, _unmatched_df, _goodreads_df = process_bookclub_data()
 
     except FileNotFoundError as e:
         st.error(f"📁 Data files not found: {e}")

@@ -10,6 +10,7 @@ from pathlib import Path
 import polars as pl
 
 from scifi.members import BookClubMembers
+from scifi.paths import AUTHORS_PATH, BOOKCLUB_PATH, DATA_DIR, GOODREADS_DIR, MANUAL_RATINGS_PATH
 from scifi.utils import (
     match_dataframes,
     merge_manual_ratings,
@@ -21,10 +22,10 @@ from scifi.utils import (
 
 
 def process_bookclub_data(
-    goodreads_dir: Path | str,
-    bookclub_path: Path | str,
-    manual_ratings_path: Path | str,
-    authors_path: Path | str = "data/bookclub/authors.csv",
+    goodreads_dir: Path | str = GOODREADS_DIR,
+    bookclub_path: Path | str = BOOKCLUB_PATH,
+    manual_ratings_path: Path | str = MANUAL_RATINGS_PATH,
+    authors_path: Path | str = AUTHORS_PATH,
 ) -> tuple[pl.DataFrame, pl.DataFrame, pl.DataFrame]:
     """Process all book club data from raw sources.
 
@@ -33,15 +34,14 @@ def process_bookclub_data(
 
     Parameters
     ----------
-    goodreads_dir : Path | str
-        Directory containing Goodreads CSV files.
-    bookclub_path : Path | str
-        Path to bookclub CSV file.
-    manual_ratings_path : Path | str
-        Path to manual ratings CSV file.
+    goodreads_dir : Path | str, optional
+        Directory containing Goodreads CSV files, by default GOODREADS_DIR.
+    bookclub_path : Path | str, optional
+        Path to bookclub CSV file, by default BOOKCLUB_PATH.
+    manual_ratings_path : Path | str, optional
+        Path to manual ratings CSV file, by default MANUAL_RATINGS_PATH.
     authors_path : Path | str, optional
-        Path to authors CSV file (one row per author), by default
-        "data/bookclub/authors.csv".
+        Path to authors CSV file (one row per author), by default AUTHORS_PATH.
 
     Returns
     -------
@@ -80,7 +80,7 @@ def save_processed_data(
     bookclub_processed_df: pl.DataFrame,
     unmatched_df: pl.DataFrame,
     goodreads_df: pl.DataFrame,
-    output_dir: Path | str = "data",
+    output_dir: Path | str = DATA_DIR,
 ) -> None:
     """Save processed data to CSV files.
 
@@ -93,7 +93,7 @@ def save_processed_data(
     goodreads_df : pl.DataFrame
         The combined Goodreads data.
     output_dir : Path | str, optional
-        Directory to save output files, by default "data".
+        Directory to save output files, by default DATA_DIR.
     """
     output_dir = Path(output_dir)
     output_dir.mkdir(exist_ok=True)
@@ -112,12 +112,7 @@ def save_processed_data(
 
 if __name__ == "__main__":
     # Run the processing pipeline
-    processed_df, unmatched_df, goodreads_df = process_bookclub_data(
-        goodreads_dir=Path("data/goodreads/clean"),
-        bookclub_path=Path("data/bookclub/bookclub.csv"),
-        manual_ratings_path=Path("data/bookclub/manual_ratings.csv"),
-        authors_path=Path("data/bookclub/authors.csv"),
-    )
+    processed_df, unmatched_df, goodreads_df = process_bookclub_data()
     # Save the results
     save_processed_data(processed_df, unmatched_df, goodreads_df)
     print("\nProcessing complete!")
