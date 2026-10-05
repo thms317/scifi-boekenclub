@@ -14,8 +14,9 @@ PROCESSED_PATH = DATA_DIR / "processed_data.csv"
 def input_files(data_dir: Path = DATA_DIR) -> list[Path]:
     """Return the input files for the data pipeline.
 
-    Returns the Goodreads export CSVs and the three bookclub input files,
-    but not the generated outputs like processed_data.csv or goodreads_*.csv.
+    Returns the Goodreads export CSVs and the three bookclub input files that exist,
+    but not the generated outputs: processed_data.csv and the goodreads_*.csv files,
+    which save_processed_data writes to data/goodreads/, outside the clean/ folder.
 
     Parameters
     ----------
@@ -27,27 +28,13 @@ def input_files(data_dir: Path = DATA_DIR) -> list[Path]:
     list[Path]
         A sorted list of input file paths.
     """
-    files: list[Path] = []
-
-    # Add Goodreads CSV exports, excluding generated outputs
-    goodreads_dir = data_dir / "goodreads" / "clean"
-    if goodreads_dir.is_dir():
-        files.extend(
-            [
-                path
-                for path in sorted(goodreads_dir.glob("*.csv"))
-                if not path.name.startswith("goodreads_")
-            ]
-        )
-
-    # Add bookclub input files
-    bookclub_dir = data_dir / "bookclub"
-    for filename in ["bookclub.csv", "manual_ratings.csv", "authors.csv"]:
-        path = bookclub_dir / filename
-        if path.is_file():
-            files.append(path)
-
-    return sorted(files)
+    # Member exports can start with goodreads_ too (e.g. goodreads_library_export-thirsa.csv)
+    goodreads_exports = list((data_dir / "goodreads" / "clean").glob("*.csv"))
+    bookclub_files = [
+        data_dir / "bookclub" / name
+        for name in ("bookclub.csv", "manual_ratings.csv", "authors.csv")
+    ]
+    return sorted(path for path in goodreads_exports + bookclub_files if path.is_file())
 
 
 def source_fingerprint(files: Iterable[Path]) -> tuple[tuple[str, int, int], ...]:
@@ -66,11 +53,5 @@ def source_fingerprint(files: Iterable[Path]) -> tuple[tuple[str, int, int], ...
     tuple[tuple[str, int, int], ...]
         A sorted tuple of (str(path), st_mtime_ns, st_size) for each existing file.
     """
-    fingerprints: list[tuple[str, int, int]] = []
-
-    for file_path in files:
-        if file_path.is_file():
-            stat = file_path.stat()
-            fingerprints.append((str(file_path), stat.st_mtime_ns, stat.st_size))
-
-    return tuple(sorted(fingerprints))
+    stats = [(str(path), path.stat()) for path in files if path.is_file()]
+    return tuple(sorted((name, stat.st_mtime_ns, stat.st_size) for name, stat in stats))
