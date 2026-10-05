@@ -5,8 +5,6 @@ from typing import Literal
 
 import polars as pl
 
-from scifi.members import BookClubMembers
-
 
 def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
     """Read and combine all Goodreads CSVs into a Polars DataFrame.
@@ -278,42 +276,3 @@ def merge_manual_ratings(
         ]
         return joined_df.with_columns(coalesce_exprs).drop(manual_cols_to_drop)
     return joined_df
-
-
-def get_active_book_suggesters(
-    bookclub_df: pl.DataFrame,
-    min_suggestions: int = 2,
-) -> pl.DataFrame:
-    """Get book suggesters who are active in the bookclub.
-
-    Returns suggesters who either:
-    1. Have suggested more than the minimum number of books, OR
-    2. Are in the reviewer mapping (even if they've suggested fewer books)
-
-    Parameters
-    ----------
-    bookclub_df : pl.DataFrame
-        The bookclub DataFrame containing suggestion data.
-    min_suggestions : int, optional
-        Minimum number of suggestions to be considered active, by default 2
-
-    Returns
-    -------
-    pl.DataFrame
-        DataFrame with suggester names and their suggestion counts,
-        sorted by count in descending order.
-    """
-    reviewer_mapping = BookClubMembers.get_reviewer_mapping()
-    mapped_reviewer_names = list(reviewer_mapping.values())
-    return (
-        bookclub_df.group_by("suggested_by")
-        .agg(pl.count("title").alias("count"))
-        .filter(
-            pl.col("suggested_by").is_not_null()
-            & (
-                (pl.col("count") > min_suggestions)
-                | pl.col("suggested_by").is_in(mapped_reviewer_names)
-            )
-        )
-        .sort("count", descending=True)
-    )
