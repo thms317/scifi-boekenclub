@@ -3,13 +3,13 @@
 import polars as pl
 import streamlit as st
 
-from scifi.ui.data import get_bookclub
+from scifi.data_processor import load_dashboard_data
 from scifi.visualizer import create_author_bar_chart
 
 
 def render() -> None:
     """Render the Author Insights page."""
-    bookclub_processed_df = get_bookclub()
+    bookclub_processed_df = load_dashboard_data()
 
     st.subheader("✍️ Who Are We Reading?")
     st.write(
