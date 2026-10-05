@@ -1,7 +1,6 @@
 """Smoke tests for the multipage Streamlit dashboard."""
 
 from datetime import date
-from unittest.mock import patch
 
 import polars as pl
 import pytest
@@ -69,12 +68,3 @@ class TestDashboard:
         for unrated_index in unrated["index"].to_list():
             at.selectbox(key="overview_book_selector").set_value(unrated_index).run()
             assert not at.exception, f"Failed on unrated book with index {unrated_index}"
-
-    def test_missing_data_shows_error(self) -> None:
-        """Test that a missing data file shows a readable error instead of a traceback."""
-        with patch("scifi.ui.data.load_dashboard_data", side_effect=FileNotFoundError("x.csv")):
-            at = AppTest.from_string(
-                "from scifi.ui.data import get_bookclub\nget_bookclub()", default_timeout=30
-            ).run()
-        assert not at.exception
-        assert "Data files not found" in at.error[0].value

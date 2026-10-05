@@ -4,7 +4,7 @@ import polars as pl
 import streamlit as st
 
 from scifi.analysis import rating_trend
-from scifi.ui.data import get_bookclub
+from scifi.data_processor import load_dashboard_data
 from scifi.visualizer import (
     create_books_per_decade_bar,
     create_books_per_year_bar,
@@ -15,7 +15,7 @@ from scifi.visualizer import (
 
 def render() -> None:
     """Render the Time Analysis page."""
-    bookclub_processed_df = get_bookclub()
+    bookclub_processed_df = load_dashboard_data()
 
     # First show the time analysis with bar charts
     _create_time_analysis(bookclub_processed_df)

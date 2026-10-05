@@ -3,8 +3,8 @@
 import streamlit as st
 
 from scifi.analysis import member_correlations
+from scifi.data_processor import load_dashboard_data
 from scifi.members import BookClubMembers
-from scifi.ui.data import get_bookclub
 from scifi.visualizer import (
     create_club_vs_goodreads_discrepancies,
     create_correlation_heatmap,
@@ -14,7 +14,7 @@ from scifi.visualizer import (
 
 def render() -> None:
     """Render the Advanced Analytics page."""
-    bookclub_processed_df = get_bookclub()
+    bookclub_processed_df = load_dashboard_data()
     members = BookClubMembers.get_member_names()
 
     # CORRELATION ANALYSIS SECTION

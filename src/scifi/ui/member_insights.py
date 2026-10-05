@@ -4,8 +4,8 @@ import polars as pl
 import streamlit as st
 
 from scifi.analysis import suggester_stats
+from scifi.data_processor import load_dashboard_data
 from scifi.members import BookClubMembers
-from scifi.ui.data import get_bookclub
 from scifi.visualizer import (
     create_member_average_bar,
     create_member_count_bar,
@@ -16,7 +16,7 @@ from scifi.visualizer import (
 
 def render() -> None:
     """Render the Member Insights page."""
-    bookclub_processed_df = get_bookclub()
+    bookclub_processed_df = load_dashboard_data()
     members = BookClubMembers.get_member_names()
 
     # Add member rating heatmap at the top
