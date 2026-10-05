@@ -1,13 +1,9 @@
 """Data loading for the Sci-Fi Book Club dashboard."""
 
-import logging
-
 import polars as pl
 import streamlit as st
 
 from scifi.data_processor import load_dashboard_data
-
-logger = logging.getLogger(__name__)
 
 
 def get_bookclub() -> pl.DataFrame:
@@ -29,7 +25,6 @@ def get_bookclub() -> pl.DataFrame:
     try:
         return load_dashboard_data()
     except FileNotFoundError as e:
-        logger.exception("Data files not found")
         st.error(f"📁 Data files not found: {e}")
         st.info(
             "💡 Make sure your data files are in the correct directories:\n"
@@ -45,7 +40,6 @@ def get_bookclub() -> pl.DataFrame:
             "```"
         )
     except (pl.exceptions.PolarsError, ValueError, OSError) as e:
-        logger.exception("Error processing data")
         st.error(f"❌ Error processing data: {e}")
     st.stop()
     msg = "st.stop() ends the script run"
