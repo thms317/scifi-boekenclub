@@ -90,7 +90,7 @@ def _create_suggester_analysis(df: pl.DataFrame) -> None:
     # Calculate average ratings per suggester using analysis function
     stats_result = suggester_stats(df, active_member_names)
 
-    if stats_result is None or len(stats_result) == 0:
+    if stats_result.is_empty():
         st.warning("No members meet the criteria (3+ books or active members).")
         return
 

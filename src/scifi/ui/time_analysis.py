@@ -35,7 +35,8 @@ def render() -> None:
     with col2:
         st.subheader("📈 Rating Trends Over Time")
         st.write("The orange line shows a 7-book moving average of club ratings.")
-        _create_rating_trends_chart(bookclub_processed_df)
+        fig_trend = create_rating_trend_chart(rating_trend(bookclub_processed_df))
+        st.plotly_chart(fig_trend, width="stretch")
 
 
 def _create_time_analysis(df: pl.DataFrame) -> None:
@@ -69,17 +70,3 @@ def _create_time_analysis(df: pl.DataFrame) -> None:
         )
         fig_decades = create_books_per_decade_bar(decade_counts)
         st.plotly_chart(fig_decades, width="stretch")
-
-
-def _create_rating_trends_chart(df: pl.DataFrame) -> None:
-    """Create rating trends over time chart.
-
-    Parameters
-    ----------
-    df : pl.DataFrame
-        The processed book club data.
-    """
-    # Get trend data from analysis
-    trend_data = rating_trend(df)
-    fig_trend = create_rating_trend_chart(trend_data)
-    st.plotly_chart(fig_trend, width="stretch")

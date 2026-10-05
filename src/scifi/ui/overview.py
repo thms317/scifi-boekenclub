@@ -34,13 +34,7 @@ def render() -> None:
         .sort("date", descending=True)["index"]
         .to_list()
     )
-    book_index_to_title = dict(
-        zip(
-            bookclub_processed_df["index"].to_list(),
-            bookclub_processed_df["title"].to_list(),
-            strict=False,
-        )
-    )
+    book_index_to_title = dict(bookclub_processed_df.select("index", "title").iter_rows())
 
     selected_book_index = st.selectbox(
         "Choose a book:",
@@ -60,70 +54,38 @@ def render() -> None:
     st.subheader("📋 Overall Book Rankings")
     st.write("**All books ranked by club average rating** (sortable by any column)")
 
-    # Create ranking dataframe using analysis function
-    ranked = rank_books(bookclub_processed_df)
-
-    # Join with original data to get other columns
-    ranking_df = ranked.join(
+    # Ranking with the other book columns; column_config sets the labels and number formats
+    ranking_df = rank_books(bookclub_processed_df).join(
         bookclub_processed_df.select(
-            [
-                "index",
-                "original_publication_year",
-                "number_of_pages",
-                "suggested_by",
-                "date",
-                "average_goodreads_rating",
-            ]
+            "index",
+            "original_publication_year",
+            "number_of_pages",
+            "suggested_by",
+            "date",
+            "average_goodreads_rating",
         ),
         on="index",
     )
 
-    # Rename columns for better display
-    ranking_df_display = ranking_df.rename(
-        {
-            "rank": "Rank",
-            "title": "Title",
-            "author": "Author",
-            "original_publication_year": "Year",
-            "number_of_pages": "Pages",
-            "suggested_by": "Suggested By",
-            "date": "Read on",
-            "average_goodreads_rating": "Goodreads Rating",
-            "average_bookclub_rating": "Club Rating",
-        }
-    )
-
-    # Drop unnecessary columns
-    ranking_df_display = ranking_df_display.drop(["index", "top_percent", "out_of_rated"])
-
-    # Round ratings and pages
-    ranking_df_display = ranking_df_display.with_columns(
-        pl.col("Goodreads Rating").round(2),
-        pl.col("Club Rating").round(2),
-        pl.col("Pages").round(0),
-    )
-
     # Display sortable table
     st.dataframe(
-        ranking_df_display,
+        ranking_df.drop("index", "top_percent", "out_of_rated"),
         width="stretch",
         hide_index=True,
         column_config={
-            "Rank": st.column_config.NumberColumn("Rank", width="small"),
-            "Title": st.column_config.TextColumn("Title", width="large"),
-            "Author": st.column_config.TextColumn("Author", width="medium"),
-            "Year": st.column_config.NumberColumn("Year", width="small"),
-            "Pages": st.column_config.NumberColumn("Pages", format="%.0f", width="small"),
-            "Suggested By": st.column_config.TextColumn("Suggested By", width="small"),
-            "Read on": st.column_config.DateColumn(
-                "Read on", format="MMM DD, YYYY", width="medium"
+            "rank": st.column_config.NumberColumn("Rank", width="small"),
+            "title": st.column_config.TextColumn("Title", width="large"),
+            "author": st.column_config.TextColumn("Author", width="medium"),
+            "original_publication_year": st.column_config.NumberColumn("Year", width="small"),
+            "number_of_pages": st.column_config.NumberColumn("Pages", format="%.0f", width="small"),
+            "suggested_by": st.column_config.TextColumn("Suggested By", width="small"),
+            "date": st.column_config.DateColumn("Read on", format="MMM DD, YYYY", width="medium"),
+            "average_goodreads_rating": st.column_config.NumberColumn(
+                "Goodreads", format="%.2f", width="small"
             ),
-            "Goodreads Rating": st.column_config.NumberColumn(
-                "Goodreads",
-                format="%.2f",
-                width="small",
+            "average_bookclub_rating": st.column_config.NumberColumn(
+                "Club", format="%.2f", width="small"
             ),
-            "Club Rating": st.column_config.NumberColumn("Club", format="%.2f", width="small"),
         },
     )
 
@@ -279,36 +241,24 @@ def _create_selected_book_analysis(
         # Book ranking and statistics
         st.subheader("📈 Book Rankings")
 
-        # Get book ranking using the analysis function
-        ranked = rank_books(df)
-        book_index = int(selected_book["index"])
-        book_rank = ranked.filter(pl.col("index") == book_index)
+        # rank_books keeps every book, so the selected book is always there
+        rank = rank_books(df).filter(pl.col("index") == selected_book["index"]).row(0, named=True)
 
-        if len(book_rank) > 0:
-            rank_row = book_rank.row(0, named=True)
-            if rank_row["rank"] is not None:
-                # Book is rated
-                rank_value = int(rank_row["rank"])
-                top_percent = int(rank_row["top_percent"])
-                out_of_rated = int(rank_row["out_of_rated"])
-
-                # Create informative ranking display
-                st.markdown(
-                    f"""
-                <div style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                            padding: 2rem; border-radius: 15px; color: white; margin: 1rem 0;">
-                    <h1 style="font-size: 4rem; margin: 0; color: white;">#{rank_value}</h1>
-                    <h3 style="margin: 0.5rem 0; color: white;">out of {out_of_rated} rated books</h3>
-                    <h4 style="margin: 0; opacity: 0.9; color: white;">Top {top_percent}% of club ratings</h4>
-                </div>
-                """,
-                    unsafe_allow_html=True,
-                )
-            else:
-                # Book is unrated
-                st.info("This book has not been rated yet.")
-        else:
+        if rank["rank"] is None:
             st.info("This book has not been rated yet.")
+        else:
+            # Create informative ranking display
+            st.markdown(
+                f"""
+            <div style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        padding: 2rem; border-radius: 15px; color: white; margin: 1rem 0;">
+                <h1 style="font-size: 4rem; margin: 0; color: white;">#{rank["rank"]}</h1>
+                <h3 style="margin: 0.5rem 0; color: white;">out of {rank["out_of_rated"]} rated books</h3>
+                <h4 style="margin: 0; opacity: 0.9; color: white;">Top {rank["top_percent"]}% of club ratings</h4>
+            </div>
+            """,
+                unsafe_allow_html=True,
+            )
 
     with col2:
         # Rating comparisons
