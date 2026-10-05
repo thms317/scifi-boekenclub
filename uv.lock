@@ -1529,7 +1529,6 @@ name = "scifi"
 version = "1.6.0"
 source = { editable = "." }
 dependencies = [
-    { name = "numpy" },
     { name = "plotly" },
     { name = "polars" },
     { name = "streamlit" },
@@ -1556,7 +1555,6 @@ notebooks = [
 
 [package.metadata]
 requires-dist = [
-    { name = "numpy", specifier = ">=2.2.6" },
     { name = "plotly", specifier = ">=6.2.0" },
     { name = "polars", specifier = ">=1.32.0" },
     { name = "streamlit", specifier = ">=1.59" },
