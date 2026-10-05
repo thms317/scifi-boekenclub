@@ -30,60 +30,15 @@ class BookClubMembers:
     """Container for all book club member data and query methods."""
 
     _members: ClassVar[list[BookClubMember]] = [
-        BookClubMember(
-            index=0,
-            name="Thirsa",
-            file_name="goodreads_library_export-thirsa.csv",
-            active=True,
-        ),
-        BookClubMember(
-            index=1,
-            name="Koen_v_W",
-            file_name="koen_goodreads_library_export.csv",
-            active=True,
-        ),
-        BookClubMember(
-            index=2,
-            name="Dion",
-            file_name="dion_goodreads_library_export.csv",
-            active=True,
-        ),
-        BookClubMember(
-            index=3,
-            name="Laurynas",
-            file_name="laurynas_goodreads_library_export.csv",
-            active=True,
-        ),
-        BookClubMember(
-            index=4,
-            name="Marloes",
-            file_name=None,
-            active=True,
-        ),
-        BookClubMember(
-            index=5,
-            name="Robert",
-            file_name="Thomas is een worstje_clean.csv",
-            active=True,
-        ),
-        BookClubMember(
-            index=6,
-            name="Peter",
-            file_name="goodreads_library_export-PHT_clean.csv",
-            active=True,
-        ),
-        BookClubMember(
-            index=7,
-            name="Thomas",
-            file_name="thomas_goodreads_library_export.csv",
-            active=True,
-        ),
-        BookClubMember(
-            index=8,
-            name="Koen_M",
-            file_name="koen_m_goodreads_library_export.csv",
-            active=True,
-        ),
+        BookClubMember(0, "Thirsa", "goodreads_library_export-thirsa.csv", active=True),
+        BookClubMember(1, "Koen_v_W", "koen_goodreads_library_export.csv", active=True),
+        BookClubMember(2, "Dion", "dion_goodreads_library_export.csv", active=True),
+        BookClubMember(3, "Laurynas", "laurynas_goodreads_library_export.csv", active=True),
+        BookClubMember(4, "Marloes", None, active=True),
+        BookClubMember(5, "Robert", "Thomas is een worstje_clean.csv", active=True),
+        BookClubMember(6, "Peter", "goodreads_library_export-PHT_clean.csv", active=True),
+        BookClubMember(7, "Thomas", "thomas_goodreads_library_export.csv", active=True),
+        BookClubMember(8, "Koen_M", "koen_m_goodreads_library_export.csv", active=True),
     ]
 
     @classmethod
