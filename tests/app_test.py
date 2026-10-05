@@ -5,7 +5,6 @@ from unittest.mock import patch
 
 import polars as pl
 import pytest
-import streamlit as st
 from streamlit.testing.v1 import AppTest
 
 from scifi.data_processor import load_dashboard_data
@@ -73,7 +72,6 @@ class TestDashboard:
 
     def test_missing_data_shows_error(self) -> None:
         """Test that a missing data file shows a readable error instead of a traceback."""
-        st.cache_data.clear()
         with patch("scifi.ui.data.load_dashboard_data", side_effect=FileNotFoundError("x.csv")):
             at = AppTest.from_string(
                 "from scifi.ui.data import get_bookclub\nget_bookclub()", default_timeout=30

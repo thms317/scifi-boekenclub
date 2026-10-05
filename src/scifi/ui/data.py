@@ -1,4 +1,4 @@
-"""Data loading and caching for the Sci-Fi Book Club dashboard."""
+"""Data loading for the Sci-Fi Book Club dashboard."""
 
 import logging
 
@@ -6,32 +6,15 @@ import polars as pl
 import streamlit as st
 
 from scifi.data_processor import load_dashboard_data
-from scifi.paths import input_files, source_fingerprint
 
 logger = logging.getLogger(__name__)
 
 
-@st.cache_data(show_spinner="🔄 Processing book club data from sources...")
-def load_bookclub(fingerprint: tuple[tuple[str, int, int], ...]) -> pl.DataFrame:
-    """Return the dashboard data; fingerprint only keys the cache.
-
-    Parameters
-    ----------
-    fingerprint : tuple[tuple[str, int, int], ...]
-        A fingerprint of input files used to invalidate the cache when
-        the input data changes. Only used as a cache key; not accessed in the function.
-
-    Returns
-    -------
-    pl.DataFrame
-        The processed book club data.
-    """
-    del fingerprint  # only keys the cache; must not start with _, or Streamlit won't hash it
-    return load_dashboard_data()
-
-
 def get_bookclub() -> pl.DataFrame:
-    """Return the cached data, or stop the page with a readable error.
+    """Return the processed data, or stop the page with a readable error.
+
+    The pipeline runs on every rerun. It takes about 12 ms on the club's data,
+    so there is no cache to keep fresh when a CSV changes.
 
     Returns
     -------
@@ -44,7 +27,7 @@ def get_bookclub() -> pl.DataFrame:
         Never in practice: st.stop() ends the script run before it.
     """
     try:
-        return load_bookclub(source_fingerprint(input_files()))
+        return load_dashboard_data()
     except FileNotFoundError as e:
         logger.exception("Data files not found")
         st.error(f"📁 Data files not found: {e}")
