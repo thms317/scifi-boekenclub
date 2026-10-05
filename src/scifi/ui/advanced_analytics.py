@@ -24,7 +24,7 @@ def render() -> None:
     # Get member correlations using analysis function
     correlations = member_correlations(bookclub_processed_df, members)
 
-    if correlations is None or len(correlations) == 0:
+    if correlations is None:
         st.warning("Not enough members with 5+ ratings to create correlation analysis.")
     else:
         # Create enhanced heatmap
@@ -39,10 +39,7 @@ def render() -> None:
     st.write("Books with the highest rating standard deviation - where members disagreed the most.")
 
     fig_polarizing = create_polarizing_books_analysis(bookclub_processed_df, members)
-    if fig_polarizing is not None:
-        st.plotly_chart(fig_polarizing, width="stretch")
-    else:
-        st.info("No data available for polarizing books analysis.")
+    st.plotly_chart(fig_polarizing, width="stretch")
 
     # Section 2: Club vs Goodreads Discrepancies
     st.markdown("---")
@@ -50,7 +47,4 @@ def render() -> None:
     st.write("Books where our club ratings differ most from the general Goodreads community.")
 
     fig_discrepancies = create_club_vs_goodreads_discrepancies(bookclub_processed_df)
-    if fig_discrepancies is not None:
-        st.plotly_chart(fig_discrepancies, width="stretch")
-    else:
-        st.info("No data available for discrepancies analysis.")
+    st.plotly_chart(fig_discrepancies, width="stretch")
