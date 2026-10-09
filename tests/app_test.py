@@ -47,19 +47,25 @@ class TestDashboard:
         assert titles[0] in book_card_text(at)
         # select_index passes the label to format_func, so set the option value (index) itself
         past = load_dashboard_data().filter(pl.col("date") < date.today())
-        second_index = past.sort("date", descending=True)["index"][1]
+        second_index = past.sort("date", "index", descending=True)["index"][1]
         at.selectbox(key="overview_book_selector").set_value(second_index).run()
         assert titles[1] in book_card_text(at)
         assert titles[0] not in book_card_text(at)
 
-    def test_unrated_book_selection(self) -> None:
-        """Test that choosing a book without club ratings shows the not-rated message."""
+    def test_unrated_books_dont_crash(self) -> None:
+        """Test that selecting unrated past books doesn't crash the overview page."""
         at = AppTest.from_string(
             "from scifi.ui import overview\noverview.render()", default_timeout=30
         )
         at.run()
-        past = load_dashboard_data().filter(pl.col("date") < date.today())
-        unrated_index = past.filter(pl.col("average_bookclub_rating").is_null())["index"][0]
-        at.selectbox(key="overview_book_selector").set_value(unrated_index).run()
-        assert not at.exception
-        assert any("not been rated yet" in info.value for info in at.info)
+
+        # Find unrated past books
+        unrated = load_dashboard_data().filter(
+            (pl.col("date") < date.today()) & pl.col("average_bookclub_rating").is_null()
+        )
+
+        # Test each unrated book
+        for unrated_index in unrated["index"].to_list():
+            at.selectbox(key="overview_book_selector").set_value(unrated_index).run()
+            assert not at.exception, f"Failed on unrated book with index {unrated_index}"
+            assert any("not been rated yet" in info.value for info in at.info)

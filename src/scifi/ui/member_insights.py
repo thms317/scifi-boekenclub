@@ -21,7 +21,7 @@ def render() -> None:
 
     # Add member rating heatmap at the top
     fig_heatmap = create_member_rating_heatmap(bookclub_processed_df, members)
-    st.plotly_chart(fig_heatmap, width="stretch")
+    st.plotly_chart(fig_heatmap)
 
     _create_member_comparison(bookclub_processed_df, members)
 
@@ -63,12 +63,12 @@ def _create_member_comparison(df: pl.DataFrame, members: list[str]) -> None:
     with col1:
         # Rating counts
         fig_counts = create_member_count_bar(stats_df)
-        st.plotly_chart(fig_counts, width="stretch")
+        st.plotly_chart(fig_counts)
 
     with col2:
         # Average ratings
         fig_avg = create_member_average_bar(stats_df)
-        st.plotly_chart(fig_avg, width="stretch")
+        st.plotly_chart(fig_avg)
 
 
 def _create_suggester_analysis(df: pl.DataFrame) -> None:
@@ -101,23 +101,17 @@ def _create_suggester_analysis(df: pl.DataFrame) -> None:
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig)
 
     with col2:
         # Simple stats display
         st.subheader("📈 Suggester Statistics")
-        stats_df = stats_result.select(
-            pl.col("suggested_by"),
-            pl.col("book_count"),
-            pl.col("avg_rating").round(2),
-        )
         st.dataframe(
-            stats_df,
-            width="stretch",
+            stats_result,
             hide_index=True,
             column_config={
                 "suggested_by": "Suggester",
                 "book_count": "Books",
-                "avg_rating": "Avg Rating",
+                "avg_rating": st.column_config.NumberColumn("Avg Rating", format="%.2f"),
             },
         )
