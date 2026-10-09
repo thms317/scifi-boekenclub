@@ -65,7 +65,7 @@ def _create_time_analysis(df: pl.DataFrame) -> None:
             df.drop_nulls("original_publication_year")
             .group_by(decade=(pl.col("original_publication_year") // 10 * 10).cast(pl.UInt32))
             .len("count")
-            .with_columns(decade_label=pl.col("decade").cast(pl.Utf8) + "s")
+            .with_columns(decade_label=pl.col("decade").cast(pl.String) + "s")
             .sort("decade")
         )
         fig_decades = create_books_per_decade_bar(decade_counts)

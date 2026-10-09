@@ -148,7 +148,7 @@ def match_dataframes(
     bookclub_df: pl.DataFrame,
     goodreads_pivot_df: pl.DataFrame,
     on: str,
-    how: Literal["inner", "left", "right", "full", "semi", "anti", "cross", "outer"],
+    how: Literal["inner", "left", "right", "full", "semi", "anti", "cross"],
 ) -> pl.DataFrame:
     """Match the Bookclub and Goodreads DataFrames on a column.
 
@@ -164,8 +164,8 @@ def match_dataframes(
         The Goodreads DataFrame.
     on : str
         The column to match on.
-    how : Literal["inner", "left", "right", "full", "semi", "anti", "cross", "outer"]
-        The type of join to perform.
+    how : Literal["inner", "left", "right", "full", "semi", "anti", "cross"]
+        The type of join to perform. The bookclub order is kept.
 
     Returns
     -------
@@ -180,6 +180,7 @@ def match_dataframes(
             ),
             on="temp_match_column",
             how=how,
+            maintain_order="left",
         )
         .drop("temp_match_column", cs.ends_with("_right"))
     )
