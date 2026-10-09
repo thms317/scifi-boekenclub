@@ -165,9 +165,7 @@ def save_processed_data(
     output_dir = Path(output_dir)
     output_dir.mkdir(exist_ok=True)
     # Save main processed data
-    processed_path = output_dir / "processed_data.csv"
-    processed_path.parent.mkdir(exist_ok=True)
-    bookclub_processed_df.write_csv(processed_path)
+    bookclub_processed_df.write_csv(output_dir / "processed_data.csv")
     # Save unmatched data
     unmatched_path = output_dir / "goodreads" / "goodreads_unmatched.csv"
     unmatched_path.parent.mkdir(exist_ok=True)

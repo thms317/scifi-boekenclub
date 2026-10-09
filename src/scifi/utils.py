@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Literal
 
 import polars as pl
+import polars.selectors as cs
 
 
 def read_combine_goodreads(goodreads_dir: Path) -> pl.DataFrame:
@@ -152,7 +153,7 @@ def match_dataframes(
     """Match the Bookclub and Goodreads DataFrames on a column.
 
     The match column is converted to lowercase before matching.
-    Right-hand columns that also exist on the left are dropped before the join
+    Right-hand columns that also exist on the left are dropped after the join
     to keep the left side's canonical values and avoid duplicate _right columns.
 
     Parameters
@@ -171,12 +172,7 @@ def match_dataframes(
     pl.DataFrame
         The matched DataFrame with no `_right` suffix columns.
     """
-    bookclub_cols = set(bookclub_df.columns)
-    # Drop right-hand columns that also exist on the left to avoid _right duplicates
-    cols_to_drop = [col for col in goodreads_pivot_df.columns if col in bookclub_cols and col != on]
-    goodreads_pivot_df = goodreads_pivot_df.drop(cols_to_drop)
-
-    result = (
+    return (
         bookclub_df.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column"))
         .join(
             goodreads_pivot_df.with_columns(
@@ -185,13 +181,8 @@ def match_dataframes(
             on="temp_match_column",
             how=how,
         )
-        .drop("temp_match_column")
+        .drop("temp_match_column", cs.ends_with("_right"))
     )
-    # Drop any remaining _right columns (should be none if cols_to_drop worked)
-    right_cols = [c for c in result.columns if c.endswith("_right")]
-    if right_cols:
-        result = result.drop(right_cols)
-    return result
 
 
 def read_manual_ratings(manual_ratings_path: Path) -> pl.DataFrame:
@@ -250,29 +241,18 @@ def merge_manual_ratings(
     joined_df = (
         bookclub_processed_df.with_columns(pl.col(on).str.to_lowercase().alias("temp_match_column"))
         .join(
-            manual_ratings_df.with_columns(
-                pl.col(on).str.to_lowercase().alias("temp_match_column")
-            ).select(["temp_match_column", *bookclub_members_list]),
+            manual_ratings_df.select(
+                pl.col(on).str.to_lowercase().alias("temp_match_column"), *bookclub_members_list
+            ),
             on="temp_match_column",
             how="left",
             suffix="_manual",
         )
         .drop("temp_match_column")
     )
-    # Prefer the manual rating; fall back to the existing rating when it is empty
-    coalesce_exprs = []
-    for col in bookclub_members_list:
-        manual_col = f"{col}_manual"
-        if col in bookclub_processed_df.columns and manual_col in joined_df.columns:
-            # Use coalesce to prefer manual ratings over existing ratings when both exist
-            coalesce_exprs.append(pl.coalesce([pl.col(manual_col), pl.col(col)]).alias(col))
-        elif manual_col in joined_df.columns:
-            # If original column doesn't exist, just rename the manual column
-            coalesce_exprs.append(pl.col(manual_col).alias(col))
-    # Apply the coalescing and drop the manual columns
-    if coalesce_exprs:
-        manual_cols_to_drop = [
-            f"{col}_manual" for col in bookclub_members_list if f"{col}_manual" in joined_df.columns
-        ]
-        return joined_df.with_columns(coalesce_exprs).drop(manual_cols_to_drop)
-    return joined_df
+    # Prefer the manual rating; fall back to the existing rating when it is empty.
+    # A member without an existing column keeps the joined manual column as is.
+    existing = [col for col in bookclub_members_list if col in bookclub_processed_df.columns]
+    return joined_df.with_columns(
+        [pl.coalesce(f"{col}_manual", col).alias(col) for col in existing]
+    ).drop([f"{col}_manual" for col in existing])

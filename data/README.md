@@ -3,15 +3,15 @@
 To update the source data, follow these steps:
 
 1. **Update the Goodreads Export**:
-   - Export the latest reading data from Goodreads for one or more club members. This extracts relevant metadata from Goodreads.
-   - Save the export files in the `data/goodreads` directory.
-   - Add the new members to the `BookClubMembers` dataclass in the `src/scifi/members.py` module.
+   - Export the latest reading data from Goodreads for one or more club members.
+   - Place new or unchanged exports in `data/goodreads/clean/`. If the export needs cleaning, place it in `data/goodreads/messy/` and run `notebooks/cleaning.ipynb` to move the cleaned file to `data/goodreads/clean/`.
+   - Register the export file name (without path) in `src/scifi/members.py` by adding it to the member's `file_name` in the registry.
 
 2. **Update the Book Club Source**:
     - Update the `data/bookclub/bookclub.csv` file with the latest book club meeting records.
 
 3. **Update the Manual Ratings**:
-   - A fresh Goodreads is not always necessary, instead update the `data/bookclub/manual_ratings.csv` file accordingly.
+   - Update the `data/bookclub/manual_ratings.csv` file with any manual ratings or corrections.
 
 4. **Update the Authors**:
    - When the club reads a new author, add one row to `data/bookclub/authors.csv`. The `author` must match the `Auteur` in `bookclub.csv` exactly. The tests fail if an author is missing or a cell is empty.
@@ -25,5 +25,5 @@ To update the source data, follow these steps:
      | `lgbtq` | `ja` only if public (out, or a known same-sex marriage); otherwise `onbekend`, never `nee` |
      | `ethnicity` | the club's judgement from public biographies |
 
-5. **Merge the Data (optional)**:
-   - Run the data processing script to merge the Goodreads export data with the book club meeting records. This will create a new dataset that combines both sources of information. This will happen automatically while running the Streamlit app, but can be done manually by running the `notebooks/aggregating.ipynb` notebook.
+5. **Data Processing**:
+   - The app runs the data processing pipeline live when it starts. The `data/processed_data.csv` file is only an export and is not required to run the dashboard.

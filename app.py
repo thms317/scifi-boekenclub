@@ -27,7 +27,7 @@ st.set_page_config(
 
 
 # Setup navigation
-page = st.navigation(
+page = st.navigation(  # ty: ignore[call-non-callable]  # ty mistakes the function for the streamlit.navigation subpackage
     [
         st.Page(overview.render, title="Overview", icon="📊", default=True),
         st.Page(

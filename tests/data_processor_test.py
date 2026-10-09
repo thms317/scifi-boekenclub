@@ -90,15 +90,19 @@ class TestProcessBookclubData:
 
             yield tmpdir_path
 
-    def test_exact_column_list(self, test_data_dir: Path) -> None:
-        """Test that process_bookclub_data returns the exact expected column list."""
+    @pytest.fixture(scope="class")
+    def bookclub_df(self, test_data_dir: Path) -> pl.DataFrame:
+        """Fixture for the processed book club data of the tiny dataset."""
         bookclub_df, _, _ = process_bookclub_data(
             goodreads_dir=test_data_dir / "goodreads",
             bookclub_path=test_data_dir / "bookclub.csv",
             manual_ratings_path=test_data_dir / "manual_ratings.csv",
             authors_path=test_data_dir / "authors.csv",
         )
+        return bookclub_df
 
+    def test_exact_column_list(self, bookclub_df: pl.DataFrame) -> None:
+        """Test that process_bookclub_data returns the exact expected column list."""
         # Expected schema: bookclub cols, goodreads cols, member cols (in registry order),
         # average_bookclub_rating, author cols
         all_member_names = BookClubMembers.get_member_names()
@@ -125,56 +129,28 @@ class TestProcessBookclubData:
             f"Column mismatch. Expected: {expected_columns}\nGot: {list(bookclub_df.columns)}"
         )
 
-    def test_member_without_data_is_float64_null_column(self, test_data_dir: Path) -> None:
+    def test_member_without_data_is_float64_null_column(self, bookclub_df: pl.DataFrame) -> None:
         """Test that a member without data gets an all-null Float64 column."""
-        bookclub_df, _, _ = process_bookclub_data(
-            goodreads_dir=test_data_dir / "goodreads",
-            bookclub_path=test_data_dir / "bookclub.csv",
-            manual_ratings_path=test_data_dir / "manual_ratings.csv",
-            authors_path=test_data_dir / "authors.csv",
-        )
-
         # Marloes is in the registry but has no data
         assert "Marloes" in bookclub_df.columns
         assert bookclub_df["Marloes"].dtype == pl.Float64
         # All values should be null
         assert bookclub_df["Marloes"].is_null().all()
 
-    def test_manual_rating_overrides_goodreads(self, test_data_dir: Path) -> None:
+    def test_manual_rating_overrides_goodreads(self, bookclub_df: pl.DataFrame) -> None:
         """Test that a manual rating overrides the Goodreads rating."""
-        bookclass_df, _, _ = process_bookclub_data(
-            goodreads_dir=test_data_dir / "goodreads",
-            bookclub_path=test_data_dir / "bookclub.csv",
-            manual_ratings_path=test_data_dir / "manual_ratings.csv",
-            authors_path=test_data_dir / "authors.csv",
-        )
-
         # Book A has Thomas rating of 5 in Goodreads but manual rating of 4.5
-        book_a = bookclass_df.filter(pl.col("title") == "Book A")
+        book_a = bookclub_df.filter(pl.col("title") == "Book A")
         assert book_a["Thomas"][0] == 4.5
 
-    def test_average_ignores_nulls(self, test_data_dir: Path) -> None:
+    def test_average_ignores_nulls(self, bookclub_df: pl.DataFrame) -> None:
         """Test that the average_bookclub_rating ignores null ratings."""
-        bookclub_df, _, _ = process_bookclub_data(
-            goodreads_dir=test_data_dir / "goodreads",
-            bookclub_path=test_data_dir / "bookclub.csv",
-            manual_ratings_path=test_data_dir / "manual_ratings.csv",
-            authors_path=test_data_dir / "authors.csv",
-        )
-
         # Book A has Thomas=4.5 and Dion=4.0, so average should be 4.25
         book_a = bookclub_df.filter(pl.col("title") == "Book A")
         # All other members should be null, so average should only use Thomas and Dion
         assert book_a["average_bookclub_rating"][0] == 4.25
 
-    def test_no_right_columns(self, test_data_dir: Path) -> None:
+    def test_no_right_columns(self, bookclub_df: pl.DataFrame) -> None:
         """Test that no _right suffix columns are left."""
-        bookclub_df, _, _ = process_bookclub_data(
-            goodreads_dir=test_data_dir / "goodreads",
-            bookclub_path=test_data_dir / "bookclub.csv",
-            manual_ratings_path=test_data_dir / "manual_ratings.csv",
-            authors_path=test_data_dir / "authors.csv",
-        )
-
         right_cols = [col for col in bookclub_df.columns if col.endswith("_right")]
         assert len(right_cols) == 0, f"Found unwanted right columns: {right_cols}"

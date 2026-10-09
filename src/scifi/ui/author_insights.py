@@ -44,7 +44,7 @@ def render() -> None:
         return
 
     col1, col2 = st.columns(2)
-    book_count_max = float(stats_result["book_count"].max())
+    book_count_max = float(stats_result.select(pl.col("book_count").max()).item())
     with col1:
         st.markdown("**📚 Books read**")
         st.plotly_chart(
