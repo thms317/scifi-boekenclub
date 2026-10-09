@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/thms317/scifi-boekenclub/compare/v1.7.1...v1.7.2) (2026-10-09)
+
+
+### Bug Fixes
+
+* pass the checks of ty 0.0.84 ([be0f8d5](https://github.com/thms317/scifi-boekenclub/commit/be0f8d5c25a8ae5bd77d1eebb5696713449f36b4))
+
 ## [1.7.1](https://github.com/thms317/scifi-boekenclub/compare/v1.7.0...v1.7.1) (2026-10-09)
 
 
