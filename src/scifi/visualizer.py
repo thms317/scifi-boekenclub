@@ -294,19 +294,15 @@ def create_rating_comparison_bar(
     go.Figure
         A Plotly bar figure comparing ratings.
     """
+    ratings = [book_data["average_goodreads_rating"], book_data["average_bookclub_rating"]]
     fig_comp = go.Figure()
     fig_comp.add_trace(
         go.Bar(
             x=["Goodreads", "Our Club"],
-            y=[
-                book_data["average_goodreads_rating"],
-                book_data["average_bookclub_rating"],
-            ],
+            y=ratings,
             marker_color=["#FF6B6B", "#4ECDC4"],
-            text=[
-                f"{book_data['average_goodreads_rating']:.2f}",
-                f"{book_data['average_bookclub_rating']:.2f}",
-            ],
+            # A missing rating (e.g. an unrated book) gets a label instead of a format error
+            text=[f"{value:.2f}" if value is not None else "no ratings" for value in ratings],
             textposition="auto",
         ),
     )
