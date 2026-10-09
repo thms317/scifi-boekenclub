@@ -207,6 +207,9 @@ def _create_selected_book_analysis(
     members : list[str]
         List of member names.
     """
+    club_rating = selected_book["average_bookclub_rating"]
+    club_rating_display = f"{club_rating:.2f}" if club_rating is not None else "N/A"
+
     # Book header with enhanced styling
     st.markdown(
         f"""
@@ -225,7 +228,7 @@ def _create_selected_book_analysis(
             </div>
             <div style="text-align: right;">
                 <div style="font-size: 3em;">⭐</div>
-                <div style="font-size: 1.5em;">{selected_book["average_bookclub_rating"]:.2f}</div>
+                <div style="font-size: 1.5em;">{club_rating_display}</div>
                 <div>Club Rating</div>
             </div>
         </div>
