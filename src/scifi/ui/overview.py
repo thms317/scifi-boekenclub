@@ -32,7 +32,7 @@ def render() -> None:
     today = date.today()
     book_indices = (
         bookclub_processed_df.filter(pl.col("date") < today)
-        .sort("date", descending=True)["index"]
+        .sort("date", "index", descending=True)["index"]
         .to_list()
     )
     book_index_to_title = dict(bookclub_processed_df.select("index", "title").iter_rows())
@@ -44,19 +44,22 @@ def render() -> None:
         key="overview_book_selector",
     )
 
+    ranked = rank_books(bookclub_processed_df)
     if selected_book_index is not None:
         selected_book_row = bookclub_processed_df.filter(
             pl.col("index") == selected_book_index
         ).row(0, named=True)
-        _create_selected_book_analysis(selected_book_row, bookclub_processed_df, members)
+        # rank_books keeps every book, so the selected book is always there
+        rank = ranked.filter(pl.col("index") == selected_book_index).row(0, named=True)
+        _create_selected_book_analysis(selected_book_row, rank, members)
 
     # Overall ranking table
     st.markdown("---")
     st.subheader("📋 Overall Book Rankings")
     st.write("**All books ranked by club average rating** (sortable by any column)")
 
-    # Ranking with the other book columns; column_config sets the labels and number formats
-    ranking_df = rank_books(bookclub_processed_df).join(
+    # Ranking with the other book columns in rank order; column_config sets labels and formats
+    ranking_df = ranked.join(
         bookclub_processed_df.select(
             "index",
             "original_publication_year",
@@ -66,12 +69,12 @@ def render() -> None:
             "average_goodreads_rating",
         ),
         on="index",
+        maintain_order="left",
     )
 
     # Display sortable table
     st.dataframe(
         ranking_df.drop("index", "top_percent", "out_of_rated"),
-        width="stretch",
         hide_index=True,
         column_config={
             "rank": st.column_config.NumberColumn("Rank", width="small"),
@@ -164,7 +167,7 @@ def _create_overview_metrics(bookclub_processed_df: pl.DataFrame, members: list[
 
 def _create_selected_book_analysis(
     selected_book: dict,
-    df: pl.DataFrame,
+    rank: dict,
     members: list[str],
 ) -> None:
     """Create detailed analysis for a selected book.
@@ -173,8 +176,8 @@ def _create_selected_book_analysis(
     ----------
     selected_book : dict
         Dictionary row from the book club data.
-    df : pl.DataFrame
-        The processed book club data.
+    rank : dict
+        Ranking row of the selected book from rank_books.
     members : list[str]
         List of member names.
     """
@@ -221,9 +224,6 @@ def _create_selected_book_analysis(
         # Book ranking and statistics
         st.subheader("📈 Book Rankings")
 
-        # rank_books keeps every book, so the selected book is always there
-        rank = rank_books(df).filter(pl.col("index") == selected_book["index"]).row(0, named=True)
-
         if rank["rank"] is None:
             st.info("This book has not been rated yet.")
         else:
@@ -246,7 +246,7 @@ def _create_selected_book_analysis(
 
         # Club vs Goodreads comparison
         fig_comp = create_rating_comparison_bar(selected_book)
-        st.plotly_chart(fig_comp, width="stretch")
+        st.plotly_chart(fig_comp)
 
     with col3:
         # Member ratings radar chart
@@ -255,6 +255,6 @@ def _create_selected_book_analysis(
 
         fig_radar = create_member_radar(members, member_ratings_dict, selected_book["title"])
         if fig_radar.data:  # Check if figure has data
-            st.plotly_chart(fig_radar, width="stretch")
+            st.plotly_chart(fig_radar)
         else:
             st.info("No member ratings available for this book")

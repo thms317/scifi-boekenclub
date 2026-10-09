@@ -30,13 +30,13 @@ def render() -> None:
             "Points above the diagonal line indicate books we rated higher than Goodreads users."
         )
         fig = create_rating_scatter(bookclub_processed_df)
-        st.plotly_chart(fig, width="stretch", key="overview_scatter")
+        st.plotly_chart(fig, key="overview_scatter")
 
     with col2:
         st.subheader("📈 Rating Trends Over Time")
         st.write("The orange line shows a 7-book moving average of club ratings.")
         fig_trend = create_rating_trend_chart(rating_trend(bookclub_processed_df))
-        st.plotly_chart(fig_trend, width="stretch")
+        st.plotly_chart(fig_trend)
 
 
 def _create_time_analysis(df: pl.DataFrame) -> None:
@@ -57,7 +57,7 @@ def _create_time_analysis(df: pl.DataFrame) -> None:
             df.group_by(pl.col("date").dt.year().alias("year")).len("count").sort("year")
         )
         fig_yearly = create_books_per_year_bar(yearly_counts)
-        st.plotly_chart(fig_yearly, width="stretch")
+        st.plotly_chart(fig_yearly)
 
     with col2:
         # Publication decades with outlined bars
@@ -69,4 +69,4 @@ def _create_time_analysis(df: pl.DataFrame) -> None:
             .sort("decade")
         )
         fig_decades = create_books_per_decade_bar(decade_counts)
-        st.plotly_chart(fig_decades, width="stretch")
+        st.plotly_chart(fig_decades)
