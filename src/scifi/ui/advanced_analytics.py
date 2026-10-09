@@ -31,7 +31,7 @@ def render() -> None:
         fig = create_correlation_heatmap(correlations)
 
         # Display correlation plot
-        st.plotly_chart(fig, width="stretch", key="correlation_heatmap")
+        st.plotly_chart(fig, key="correlation_heatmap")
 
     # Section 1: Most Polarizing Books
     st.markdown("---")
@@ -39,7 +39,7 @@ def render() -> None:
     st.write("Books with the highest rating standard deviation - where members disagreed the most.")
 
     fig_polarizing = create_polarizing_books_analysis(bookclub_processed_df, members)
-    st.plotly_chart(fig_polarizing, width="stretch")
+    st.plotly_chart(fig_polarizing)
 
     # Section 2: Club vs Goodreads Discrepancies
     st.markdown("---")
@@ -47,4 +47,4 @@ def render() -> None:
     st.write("Books where our club ratings differ most from the general Goodreads community.")
 
     fig_discrepancies = create_club_vs_goodreads_discrepancies(bookclub_processed_df)
-    st.plotly_chart(fig_discrepancies, width="stretch")
+    st.plotly_chart(fig_discrepancies)

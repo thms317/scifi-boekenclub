@@ -47,7 +47,7 @@ class TestDashboard:
         assert titles[0] in book_card_text(at)
         # select_index passes the label to format_func, so set the option value (index) itself
         past = load_dashboard_data().filter(pl.col("date") < date.today())
-        second_index = past.sort("date", descending=True)["index"][1]
+        second_index = past.sort("date", "index", descending=True)["index"][1]
         at.selectbox(key="overview_book_selector").set_value(second_index).run()
         assert titles[1] in book_card_text(at)
         assert titles[0] not in book_card_text(at)
@@ -68,3 +68,4 @@ class TestDashboard:
         for unrated_index in unrated["index"].to_list():
             at.selectbox(key="overview_book_selector").set_value(unrated_index).run()
             assert not at.exception, f"Failed on unrated book with index {unrated_index}"
+            assert any("not been rated yet" in info.value for info in at.info)

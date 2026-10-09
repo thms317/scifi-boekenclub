@@ -55,7 +55,6 @@ def render() -> None:
                 x_max=book_count_max * 1.15,
                 decimals=0,
             ),
-            width="stretch",
         )
     with col2:
         st.markdown("**⭐ Average club rating**")
@@ -63,7 +62,6 @@ def render() -> None:
             create_author_bar_chart(
                 stats_result, "avg_rating", "Average club rating (1-5)", x_max=5.6, decimals=2
             ),
-            width="stretch",
         )
     st.caption(
         "Groups with only one or two books say little about taste; hover for counts. "
@@ -77,11 +75,10 @@ def render() -> None:
         "author",
         "date",
         *dimensions.values(),
-        pl.col("average_bookclub_rating").round(2),
+        "average_bookclub_rating",
     )
     st.dataframe(
         author_details,
-        width="stretch",
         hide_index=True,
         column_config={
             "title": st.column_config.TextColumn("Title", width="large"),
