@@ -1,3 +1,20 @@
+# [1.7.0](https://github.com/thms317/scifi-boekenclub/compare/v1.6.0...v1.7.0) (2026-10-09)
+
+
+### Bug Fixes
+
+* exclude generated goodreads files from input_files ([3433de7](https://github.com/thms317/scifi-boekenclub/commit/3433de7f1aac83dd89ce6be883955885a4eb2593))
+* include every member export in the cache fingerprint ([1d489a4](https://github.com/thms317/scifi-boekenclub/commit/1d489a4fe7f0c8a392720fe97317ec91068d3cfb))
+* key the bookclub cache on the input fingerprint ([0f4ff3b](https://github.com/thms317/scifi-boekenclub/commit/0f4ff3be674f77d559812140319cbdf777e860e4))
+* show unrated books on the overview page without crashing ([b92c1e2](https://github.com/thms317/scifi-boekenclub/commit/b92c1e210d4a428b4e4cad61a95b2455df5467f7))
+
+
+### Features
+
+* add input_files and source_fingerprint to paths ([65a6e4f](https://github.com/thms317/scifi-boekenclub/commit/65a6e4f03f96bde15f1ee7ec7dd9644f1d35feed))
+* add ui.data module with cached loading and error handling ([839d9f3](https://github.com/thms317/scifi-boekenclub/commit/839d9f356cf34e8ba5c5da9b0aa710cb77b206fe))
+* create multipage app with st.navigation ([a9cd505](https://github.com/thms317/scifi-boekenclub/commit/a9cd50557dae96f10a3df441a8f53478698076e5))
+
 # [1.6.0](https://github.com/thms317/scifi-boekenclub/compare/v1.5.0...v1.6.0) (2026-10-01)
 
 

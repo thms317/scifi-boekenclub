@@ -68,3 +68,4 @@ class TestDashboard:
         for unrated_index in unrated["index"].to_list():
             at.selectbox(key="overview_book_selector").set_value(unrated_index).run()
             assert not at.exception, f"Failed on unrated book with index {unrated_index}"
+            assert any("not been rated yet" in info.value for info in at.info)
