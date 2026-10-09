@@ -1,3 +1,11 @@
+## [1.7.1](https://github.com/thms317/scifi-boekenclub/compare/v1.7.0...v1.7.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* apply the remaining review findings from PR 70 ([eaeb122](https://github.com/thms317/scifi-boekenclub/commit/eaeb122763774b3f0941f7f90a90f3df54dc8794))
+* render unrated books in the overview deep dive ([5daee4b](https://github.com/thms317/scifi-boekenclub/commit/5daee4b5f52cf36c00dcad7757a639e828b72757))
+
 # [1.7.0](https://github.com/thms317/scifi-boekenclub/compare/v1.6.0...v1.7.0) (2026-10-09)
 
 
