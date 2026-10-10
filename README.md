@@ -4,7 +4,6 @@
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![ty](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ty/main/assets/badge/v0.json)](https://github.com/astral-sh/ty)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 [![CI](https://github.com/thms317/scifi-boekenclub/actions/workflows/ci.yml/badge.svg)](https://github.com/thms317/scifi-boekenclub/actions/workflows/ci.yml)
@@ -14,17 +13,15 @@ This is a Python data analysis project for analyzing the `Sci-Fi Boekenclub` rea
 
 The ratings and trends are visualized in a nice [Streamlit dashboard](https://thms317-scifi-boekenclub-srcscifidashboard-erirdk.streamlit.app/).
 
-The project was generated from [RevoData Asset Bundle Templates](https://github.com/revodatanl/revo-asset-bundle-templates) version `0.15.1`.
-
 ## Getting Started
 
-With [make](https://www.gnu.org/software/make) installed, run the following command to set up a fully configured development environment:
+With [uv](https://docs.astral.sh/uv/) and [make](https://www.gnu.org/software/make) installed, run:
 
 ```bash
 make setup
 ```
 
-This installs [`Homebrew`](https://brew.sh), [`Git`](https://git-scm.com), [`uv`](https://github.com/astral-sh/uv), configures Python, sets up a virtual environment, and installs pre-commit hooks.
+This runs `uv sync` and installs the git hooks with prek.
 
 ## Build the Dashboard
 
@@ -37,3 +34,12 @@ make dashboard
 ```
 
 The hosted dashboard is automatically built and updated on every merge to `main`.
+
+## Development
+
+```bash
+make lint   # ruff format check, ruff, ty and pydoclint; CI runs the same checks, the tests and a package build
+make test   # pytest with coverage
+```
+
+Tool versions live in `uv.lock` (`uv lock --upgrade && uv sync` to upgrade) and, for the git hooks, in `.pre-commit-config.yaml` (`uv run prek autoupdate`).

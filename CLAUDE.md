@@ -40,26 +40,20 @@ The project is a Streamlit web app (`app.py`) backed by a pure Python package (`
 
 ## Development Commands
 
-Use the provided Makefile for common tasks:
+Use the Makefile:
 
-- `make setup`: Complete development environment setup (installs dependencies, pre-commit hooks)
-- `make test`: Run full test suite with coverage reporting
-- `make clean`: Remove caches and build artifacts; keeps `uv.lock` and the virtual environment
-- `make dashboard`: Run the Streamlit app from `app.py`
+- `make setup`: `uv sync` and install the git hooks (prek)
+- `make lint`: ruff format check, ruff, ty and pydoclint
+- `make test`: pytest with coverage
+- `make dashboard`: run the Streamlit app from `app.py`
+- `make clean`: remove caches and build artifacts; keeps `uv.lock` and the virtual environment
 
-Python package management uses `uv`:
-- `uv sync`: Install/update dependencies (includes `dev` and `notebooks` groups)
-- `uv build`: Build the package
-- `uv run pytest`: Run tests directly
+`uv sync` installs the dependencies (groups `dev` and `notebooks`) and the package itself.
 
 ## Testing and Quality
 
-- Tests are in `tests/` directory using pytest
-- Code quality enforced by:
-  - Ruff (linting and formatting)
-  - ty (type checking)
-  - pre-commit hooks
-- Run `make test` to execute full test suite with coverage
+- Tests are in `tests/` and use pytest. `tests/data_test.py` holds the data contracts and runs on the real CSVs.
+- Code quality: ruff (lint and format), ty (types) and pydoclint (numpy docstrings). `make lint` runs them, CI runs the same checks plus the tests with coverage and a package build check, and the git hooks in `.pre-commit-config.yaml` (installed by `make setup` via prek) run them on commit.
 
 ## Data Processing Notes
 

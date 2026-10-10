@@ -234,7 +234,7 @@ class TestPivotGoodreadsData:
         assert df_pivot.shape[0] == 1
         # Assert that the averaged goodreads value is correct (in case of rating drift)
         assert df_pivot["average_goodreads_rating"][0] == 4.6
-        # Assert that the averaged number if  is correct (in case of different editions with different page counts)
+        # Pages are averaged over editions with different page counts
         assert df_pivot["number_of_pages"][0] == 275
 
     def test_pivot_goodreads_data_different_years(

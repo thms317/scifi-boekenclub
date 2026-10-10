@@ -469,7 +469,8 @@ def create_rating_trend_chart(trend_df: pl.DataFrame) -> go.Figure:
     Parameters
     ----------
     trend_df : pl.DataFrame
-        DataFrame with 'date', 'title', 'average_bookclub_rating', 'rolling_avg', and 'trend' columns.
+        DataFrame with 'date', 'title', 'average_bookclub_rating', 'rolling_avg' and
+        'trend' columns.
 
     Returns
     -------

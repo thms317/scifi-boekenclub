@@ -1,17 +1,9 @@
 name: CI
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
-    paths:
-      - .github/workflows/**
-      - src/**
-      - tests/**
-      - pyproject.toml
-      - app.py
-      - .streamlit/**
-      - uv.lock
-      - data/**
+on: [pull_request]
+
+permissions:
+  contents: read
 
 jobs:
   ci:
@@ -25,9 +17,9 @@ jobs:
         uses: astral-sh/setup-uv@v7
 
       - name: Install dependencies
-        run: uv sync --frozen
+        run: uv sync --locked
 
-      - name: Run Formatting Checks
+      - name: Run formatting checks
         run: |
           set -e
           echo "Running ruff format check"

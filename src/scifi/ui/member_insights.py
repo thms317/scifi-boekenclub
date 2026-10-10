@@ -81,7 +81,8 @@ def _create_suggester_analysis(df: pl.DataFrame) -> None:
     """
     st.subheader("🎯 Ratings by Book Suggester")
     st.write(
-        "Distribution of average club ratings for books suggested by members (3+ books or active members)"
+        "Distribution of average club ratings for books suggested by members "
+        "(3+ books or active members)"
     )
 
     # Get active member names from BookClubMembers
