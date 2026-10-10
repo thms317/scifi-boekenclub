@@ -1,7 +1,6 @@
 """Overview page of the Sci-Fi Book Club Analytics Dashboard."""
 
 from datetime import date
-from html import escape
 
 import polars as pl
 import streamlit as st
@@ -40,7 +39,7 @@ def render() -> None:
     selected_book_index = st.selectbox(
         "Choose a book:",
         options=book_indices,
-        format_func=lambda idx: book_index_to_title.get(idx, f"Book {idx}"),
+        format_func=lambda idx: book_index_to_title[idx],
         key="overview_book_selector",
     )
 
@@ -181,41 +180,18 @@ def _create_selected_book_analysis(
     members : list[str]
         List of member names.
     """
-    # Book header with enhanced styling - escape CSV-derived values
-    book_title = escape(str(selected_book["title"]))
-    book_author = escape(str(selected_book["author"]))
-    book_location = escape(str(selected_book.get("location", "N/A")))
-    book_date = selected_book["date"].strftime("%B %d, %Y")
-
-    # Format rating, handling None for unrated books
-    rating_value = selected_book["average_bookclub_rating"]
-    rating_display = f"{rating_value:.2f}" if rating_value is not None else "-"
-
-    st.markdown(
-        f"""
-    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        padding: 2rem;
-        border-radius: 15px;
-        color: white;
-        margin: 1rem 0;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h1>📖 {book_title}</h1>
-                <h2>✍️ by {book_author}</h2>
-                <p><strong>📅 Read on:</strong> {book_date}</p>
-                <p><strong>🏠 Location:</strong> {book_location}</p>
-            </div>
-            <div style="text-align: right;">
-                <div style="font-size: 3em;">⭐</div>
-                <div style="font-size: 1.5em;">{rating_display}</div>
-                <div>Club Rating</div>
-            </div>
-        </div>
-    </div>
-    """,
-        unsafe_allow_html=True,
-    )
+    rating = selected_book["average_bookclub_rating"]
+    with st.container(border=True):
+        col_book, col_rating = st.columns([3, 1])
+        with col_book:
+            st.subheader(f"📖 {selected_book['title']}")
+            st.markdown(f"✍️ by *{selected_book['author']}*")
+            st.caption(
+                f"📅 Read on: {selected_book['date']:%B %d, %Y} · "
+                f"🏠 Location: {selected_book['location'] or 'N/A'}"
+            )
+        with col_rating:
+            st.metric("⭐ Club Rating", "-" if rating is None else f"{rating:.2f}")
 
     # Create three columns for different analyses
     col1, col2, col3 = st.columns(3)
@@ -227,18 +203,10 @@ def _create_selected_book_analysis(
         if rank["rank"] is None:
             st.info("This book has not been rated yet.")
         else:
-            # Create informative ranking display
-            st.markdown(
-                f"""
-            <div style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                        padding: 2rem; border-radius: 15px; color: white; margin: 1rem 0;">
-                <h1 style="font-size: 4rem; margin: 0; color: white;">#{rank["rank"]}</h1>
-                <h3 style="margin: 0.5rem 0; color: white;">out of {rank["out_of_rated"]} rated books</h3>
-                <h4 style="margin: 0; opacity: 0.9; color: white;">Top {rank["top_percent"]}% of club ratings</h4>
-            </div>
-            """,
-                unsafe_allow_html=True,
+            st.metric(
+                f"Rank of {rank['out_of_rated']} rated books", f"#{rank['rank']}", border=True
             )
+            st.caption(f"Top {rank['top_percent']}% of club ratings")
 
     with col2:
         # Rating comparisons
