@@ -30,7 +30,7 @@ def render() -> None:
             "Points above the diagonal line indicate books we rated higher than Goodreads users."
         )
         fig = create_rating_scatter(bookclub_processed_df)
-        st.plotly_chart(fig, key="overview_scatter")
+        st.plotly_chart(fig)
 
     with col2:
         st.subheader("📈 Rating Trends Over Time")

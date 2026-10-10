@@ -117,8 +117,8 @@ class TestRatingTrend:
 class TestMemberCorrelations:
     """Tests for member_correlations function."""
 
-    def test_no_variance_gives_none(self) -> None:
-        """Test that pairs with no variance return None."""
+    def test_no_variance_gives_empty_frame(self) -> None:
+        """Test that pairs with no variance give an empty frame."""
         data = pl.DataFrame(
             {
                 "Alice": [4.0, 4.0, 4.0],  # No variance
@@ -127,7 +127,7 @@ class TestMemberCorrelations:
         )
         result = member_correlations(data, ["Alice", "Bob"], min_ratings=1, min_shared=2)
         # No valid pairs since Alice has no variance
-        assert result is None or len(result) == 0
+        assert result.is_empty()
 
     def test_insufficient_shared_books(self) -> None:
         """Test that pairs with few shared books are excluded."""
@@ -139,7 +139,7 @@ class TestMemberCorrelations:
         )
         result = member_correlations(data, ["Alice", "Bob"], min_ratings=1, min_shared=3)
         # Only 1 shared book, need at least 3
-        assert result is None or len(result) == 0
+        assert result.is_empty()
 
 
 class TestSuggesterStats:
