@@ -50,7 +50,6 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "books/**/*.ipynb" = ["ANN001", "ANN201", "E501", "N803", "N816", "RUF001", "T201"]  # Physics notation (D, log10_M, γ) and prints.
-"src/scifi/data_processor.py" = ["T201"]                              # print is the output of `python -m scifi.data_processor`.
 "tests/*.py" = ["PLR2004", "S101"]                                    # Literal expected values and bare asserts.
 
 [tool.pytest.ini_options]

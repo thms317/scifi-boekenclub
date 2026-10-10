@@ -3,18 +3,18 @@
 import polars as pl
 import streamlit as st
 
-from scifi.data_processor import load_dashboard_data
+from scifi.pipeline import process_bookclub_data
 from scifi.visualizer import create_author_bar_chart
 
 
 def render() -> None:
     """Render the Author Insights page."""
-    bookclub_processed_df = load_dashboard_data()
+    bookclub_processed_df = process_bookclub_data()
 
     st.subheader("✍️ Who Are We Reading?")
     st.write(
-        "Author background for every book we read, one row per author in "
-        "data/bookclub/authors.csv. LGBTQ+ only counts what is public; ethnicity is the "
+        "Author background for every book we read, one row per author in the "
+        "authors file. LGBTQ+ only counts what is public; ethnicity is the "
         "club's judgement from public biographies."
     )
 

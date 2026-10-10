@@ -4,10 +4,9 @@ from datetime import date
 
 import polars as pl
 
-from scifi.data_processor import process_bookclub_data
 from scifi.members import BookClubMembers
 from scifi.paths import AUTHORS_PATH, BOOKCLUB_PATH, GOODREADS_DIR
-from scifi.utils import read_bookclub
+from scifi.pipeline import process_bookclub_data, read_bookclub
 
 
 class TestAuthors:
@@ -91,10 +90,10 @@ class TestMembers:
         CSV file in the Goodreads directory.
 
         """
-        reviewer_mapping = BookClubMembers.get_reviewer_mapping()
-        for file_name, member_name in reviewer_mapping.items():
-            file_path = GOODREADS_DIR / file_name
-            assert file_path.is_file(), f"File for member {member_name} does not exist: {file_path}"
+        for member in BookClubMembers.get_all_members():
+            if member.file_name is not None:
+                file_path = GOODREADS_DIR / member.file_name
+                assert file_path.is_file(), f"File for {member.name} does not exist: {file_path}"
 
     def test_all_goodreads_files_mapped(self) -> None:
         """Test that every CSV in GOODREADS_DIR maps to a member.
@@ -103,8 +102,11 @@ class TestMembers:
         Otherwise an unregistered export would show up as an unnamed rating column.
 
         """
-        reviewer_mapping = BookClubMembers.get_reviewer_mapping()
-        mapped_file_names = set(reviewer_mapping.keys())
+        mapped_file_names = {
+            member.file_name
+            for member in BookClubMembers.get_all_members()
+            if member.file_name is not None
+        }
         goodreads_files = {f.name for f in GOODREADS_DIR.glob("*.csv")}
         assert goodreads_files <= mapped_file_names, (
             f"Unmapped Goodreads files: {goodreads_files - mapped_file_names}"
@@ -122,7 +124,7 @@ class TestProcessedData:
         raw export would silently drop the average of every book only he has.
 
         """
-        bookclub_df, _, _ = process_bookclub_data()
+        bookclub_df = process_bookclub_data()
         missing = bookclub_df.filter(
             (pl.col("date") < date.today()) & pl.col("average_goodreads_rating").is_null()
         )["title"].to_list()

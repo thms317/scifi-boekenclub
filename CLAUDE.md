@@ -13,10 +13,9 @@ The project is a Streamlit web app (`app.py`) backed by a pure Python package (`
 ### Module layout
 - `app.py`: Streamlit entrypoint; calls `scifi.ui` pages
 - `src/scifi/`:
-  - `paths.py`: Paths to data files and utilities to detect data changes
+  - `paths.py`: Paths to the data files
   - `members.py`: Member registry mapping export file names to names
-  - `utils.py`: CSV readers and data joining
-  - `data_processor.py`: The pipeline that combines and cleans data
+  - `pipeline.py`: CSV readers and the pipeline that combines them into the dashboard frame
   - `analysis.py`: Pure computations on Polars DataFrames
   - `visualizer.py`: Plotly figure builders
   - `ui/`: Streamlit pages (one `render()` function per module)
@@ -29,7 +28,7 @@ The project is a Streamlit web app (`app.py`) backed by a pure Python package (`
 - Authors, one row per author (`data/bookclub/authors.csv`)
 
 ### Import rules
-1. **Imports point down:** `app.py` → `scifi.ui.*` → `analysis`, `visualizer`, `data_processor` → `utils`, `members`, `paths`. Nothing in `scifi` imports `app.py`.
+1. **Imports point down:** `app.py` → `scifi.ui.*` → `analysis`, `visualizer`, `pipeline` → `members`, `paths`. Nothing in `scifi` imports `app.py`.
 2. **Only `scifi.ui` imports streamlit.** Everything else runs and is tested without a Streamlit runtime.
 3. **Use absolute imports only,** for example `from scifi.analysis import rank_books`.
 4. **Only `paths.py` contains `"data/..."` strings.**
@@ -54,12 +53,10 @@ Use the Makefile:
 
 ## Data Processing Notes
 
-The core data processing uses Polars for performance. Key functions in `src/scifi/utils.py`:
+`src/scifi/pipeline.py` runs live on every page render (about 0.2 s). There is no cache and no processed-data file. The steps, each a tested function:
 
-- `read_combine_goodreads()`: Loads and standardizes Goodreads CSV exports
-- `read_bookclub()`: Processes book club meeting data
-- `pivot_goodreads_data()`: Transforms individual ratings into club member columns
-- `match_dataframes()`: Joins book club and Goodreads data on the lowercased title
-- `merge_manual_ratings()`: Adds manual ratings; these take precedence over Goodreads ratings
-
-The app runs the pipeline live; `data/processed_data.csv` is only an export.
+- `read_combine_goodreads()`: every shelf of every export, combined by column name (an export without a column gets nulls)
+- `read_bookclub()` and `read_manual_ratings()`: the club's own CSVs
+- `pivot_goodreads_data()`: one row per book, a Float64 column per member in registry order
+- `merge_manual_ratings()`: manual ratings win over Goodreads ratings
+- `process_bookclub_data()`: joins everything on the lowercased title (every book club book is kept), adds the club average and the author columns, and fixes the column order
