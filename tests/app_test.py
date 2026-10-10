@@ -12,8 +12,8 @@ PAGES = ["overview", "member_insights", "time_analysis", "author_insights", "adv
 
 
 def book_card_text(at: AppTest) -> str:
-    """Return the markdown of the selected-book detail card."""
-    return "\n".join(m.value for m in at.markdown if "Read on" in m.value)
+    """Return the title line of the selected-book detail card."""
+    return "\n".join(s.value for s in at.subheader if s.value.startswith("📖 "))
 
 
 class TestDashboard:
