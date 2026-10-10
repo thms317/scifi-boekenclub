@@ -2,13 +2,8 @@
   "recommendations": [
     "astral-sh.ty",
     "charliermarsh.ruff",
-    "davidanson.vscode-markdownlint",
-    "esbenp.prettier-vscode",
     "mechatroner.rainbow-csv",
-    "ms-vscode.makefile-tools",
     "njpwerner.autodocstring",
-    "redhat.vscode-yaml",
-    "tamasfe.even-better-toml",
-    "vscode-icons-team.vscode-icons"
+    "tamasfe.even-better-toml"
   ]
 }

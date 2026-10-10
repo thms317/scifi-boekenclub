@@ -15,14 +15,12 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "pre-commit>=4.2.0",
     "prek>=0.2.27",
     "pydoclint>=0.6.6",
     "pytest-cov>=6.2.1",
-    "pytest-mock>=3.14.1",
     "pytest>=9.0.3",
     "ruff>=0.12.7",
-    "ty>=0.0.1a16",
+    "ty>=0.0.84",
     "watchdog>=6.0.0",
 ]
 notebooks = [
@@ -37,65 +35,26 @@ requires = ["uv_build>=0.12.24,<0.13"]
 build-backend = "uv_build"
 
 [tool.uv]
-package = true
 default-groups = ["dev", "notebooks"]
 
-[tool.ty.environment]
-python-version = "3.12"
-
 [tool.ruff]
-target-version = "py312"
 line-length = 100
-extend-include = ["*.ipynb"]
-extend-exclude = ["scratch"]
 
 [tool.ruff.lint]
-pydocstyle.convention = "numpy"
-external = ["DOC"]
 select = ["ALL"]
+pydocstyle.convention = "numpy"
 ignore = [
-    "ANN401",   # "Dynamically typed expressions (typing.Any) are disallowed in `*args` / `**kwargs`.
-    "C901",     # Function is too complex
-    "COM812",   # "Unnecessary `self` argument in method definition."
-    "D203",     # "One blank line required before class docstring." Should be disabled by default.
-    "D213",     # "Multi-line docstring summary should start at the second line." Should be disabled by default.
-    "D400",     # "First line should end with a period."
-    "E501",     # "Line too long." Sometimes my comments are a bit longer.
-    "E731",     # "Do not assign a lambda expression, use a def." Needed for spark UDFs.
-    "ERA001",   # "Found commented out code."
-    "FBT001",   # "Boolean positional arg in function definition.
-    "FBT002",   # "Boolean default value in function definition."
-    "FBT003",   # "Boolean positional value in function call." This is common in spark.
-    "ISC001",   # "Implicit string concatenation." Ignored since it conflicts with the formatter.
-    "N812",     # "Lowercase `functions` imported as non-lowercase." Pretty standard for spark programming.
-    "PLR0912",  # Too many branches
-    "PLR0915",  # Too many statements
-    "PLR2004",  # Magic value used in comparison"
-    "S608",     # "Possible SQL injection vector through string-based query construction."
-    "T201",     # "`print` found."
-    "TRY300",   # "Consider moving this statement to an `else` block."
-    "DTZ011",   # "datetime.date.today() used"
-]
-unfixable = [
-    "F401",     # "Unused import." Disabled since it makes linting/formatting notebooks messy and impossible.
+    "COM812",   # Trailing commas: the formatter owns this.
+    "ISC001",   # Implicit string concatenation: same.
+    "DTZ011",   # date.today() decides whether a meeting is in the past; no timezone needed.
+    "E501",     # Three inline-HTML lines in ui/overview.py; drop together with the native cards.
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"notebooks/**/*.py" = [
-    "D100",     # "Missing docstring in public module." Not needed for Databricks notebooks.
-    "INP001",   # "Part of an implicit namespace package. Add an `__init__.py`." Not needed for Databricks notebooks.
-]
-"books/**/*.ipynb" = [
-    "ANN001",   # "Missing type annotation for function argument." Not needed for exploratory notebooks.
-    "ANN201",   # "Missing return type annotation for public function." Not needed for exploratory notebooks.
-    "N803",     # "Argument name should be lowercase." Physics notation (e.g. `D` for distance).
-    "N816",     # "Variable in global scope should not be mixedCase." Physics notation (e.g. `log10_M`).
-    "RUF001",   # "String contains ambiguous unicode character." Greek letters (e.g. γ) are intentional.
-]
-"tests/*.py" = [
-    "PLR2004",  # "Magic value used in comparison, consider replacing with a constant variable."
-    "S101",     # "Use of `assert` detected."
-]
+"*.ipynb" = ["E501", "PLR2004", "T201"]                               # Notebooks print and compare literals.
+"books/**/*.ipynb" = ["ANN001", "ANN201", "N803", "N816", "RUF001"]  # Physics notation (D, log10_M, γ).
+"src/scifi/data_processor.py" = ["T201"]                              # print is the output of `python -m scifi.data_processor`.
+"tests/*.py" = ["PLR2004", "S101"]                                    # Literal expected values and bare asserts.
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
