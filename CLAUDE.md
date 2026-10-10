@@ -8,7 +8,7 @@ This is a Python data analysis project for analyzing the "Sci-Fi Boekenclub" (Sc
 
 ## Architecture
 
-The project is a Streamlit web app (`app.py`) backed by a pure Python package (`src/scifi/`) and Jupyter notebooks for one-off analysis.
+The project is a Streamlit web app (`app.py`) backed by a pure Python package (`src/scifi/`).
 
 ### Module layout
 - `app.py`: Streamlit entrypoint; calls `scifi.ui` pages
@@ -20,10 +20,7 @@ The project is a Streamlit web app (`app.py`) backed by a pure Python package (`
   - `analysis.py`: Pure computations on Polars DataFrames
   - `visualizer.py`: Plotly figure builders
   - `ui/`: Streamlit pages (one `render()` function per module)
-- `notebooks/`:
-  - `cleaning.ipynb`: Clean and standardize Goodreads CSV exports
-  - `aggregating.ipynb`: Combine data sources and create aggregated datasets
-  - `eda.ipynb`: Exploratory analysis and visualization
+- `books/sparrow/`: physics side notebooks on The Sparrow; linted, otherwise unrelated to the app
 
 ### Data sources
 - Goodreads CSV exports from individual members (in `data/goodreads/clean/`)
