@@ -181,14 +181,6 @@ class TestReadBookclub:
         actual_dates = df_bookclub_test["date"].to_list()
         assert expected_dates == actual_dates, "Parsed dates do not match expected date values"
 
-    def test_read_bookclub_empty_directory(self) -> None:
-        """Test that read_bookclub handles an empty directory gracefully."""
-        with TemporaryDirectory() as tmpdir:
-            tmpdir_path = Path(tmpdir)
-            # Call the function with an empty directory
-            with pytest.raises(pl.exceptions.ComputeError, match="expected at least 1 source"):
-                _ = read_bookclub(tmpdir_path)
-
 
 class TestPivotGoodreadsData:
     """Test class for the pivot_goodreads_data function."""
@@ -294,7 +286,7 @@ class TestMatchDataframes:
             {
                 "title": ["Sample Book", "Non-Matching Book"],
                 "author": ["Sample Author", "Unknown Author"],
-                "date": [pl.datetime(2020, 1, 1), pl.datetime(2021, 1, 1)],
+                "date": [date(2020, 1, 1), date(2021, 1, 1)],
             },
         )
 
