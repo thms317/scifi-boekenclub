@@ -1,9 +1,4 @@
-"""Data processing pipeline for the sci-fi book club data.
-
-This module consolidates all data processing logic from the aggregating notebook
-into a single, reusable pipeline. It handles reading, cleaning, combining, and
-matching data from multiple sources.
-"""
+"""Data processing pipeline for the sci-fi book club data."""
 
 from pathlib import Path
 

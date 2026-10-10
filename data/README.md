@@ -4,8 +4,9 @@ To update the source data, follow these steps:
 
 1. **Update the Goodreads Export**:
    - Export the latest reading data from Goodreads for one or more club members.
-   - Place new or unchanged exports in `data/goodreads/clean/`. If the export needs cleaning, place it in `data/goodreads/messy/` and run `notebooks/cleaning.ipynb` to move the cleaned file to `data/goodreads/clean/`.
+   - Place the export in `data/goodreads/clean/`. It must be a standard comma-separated Goodreads export.
    - Register the export file name (without path) in `src/scifi/members.py` by adding it to the member's `file_name` in the registry.
+   - Thomas's exports come without the `Average Rating` column (a Goodreads bug since October 2026). Do not replace his committed file with a raw export: add only the new rows, with the average looked up on goodreads.com. The tests fail when a book read so far has no Goodreads average.
 
 2. **Update the Book Club Source**:
     - Update the `data/bookclub/bookclub.csv` file with the latest book club meeting records.
