@@ -20,7 +20,3 @@ scratch/
 
 # Books are copyrighted; never commit them
 *.epub
-
-# Pipeline output, rewritten on every run (data/processed_data.csv stays tracked)
-data/goodreads/goodreads_combined.csv
-data/goodreads/goodreads_unmatched.csv

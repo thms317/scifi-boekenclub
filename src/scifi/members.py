@@ -73,16 +73,3 @@ class BookClubMembers:
             A list of active book club members.
         """
         return [member for member in cls._members if member.active]
-
-    @classmethod
-    def get_reviewer_mapping(cls) -> dict[str, str]:
-        """Return the mapping from file names to reviewer names.
-
-        Returns
-        -------
-        dict[str, str]
-            A dictionary mapping file names to reviewer names.
-        """
-        return {
-            member.file_name: member.name for member in cls._members if member.file_name is not None
-        }

@@ -6,7 +6,7 @@ import polars as pl
 import pytest
 from streamlit.testing.v1 import AppTest
 
-from scifi.data_processor import load_dashboard_data
+from scifi.pipeline import process_bookclub_data
 
 PAGES = ["overview", "member_insights", "time_analysis", "author_insights", "advanced_analytics"]
 
@@ -46,7 +46,7 @@ class TestDashboard:
         titles = at.selectbox(key="overview_book_selector").options
         assert titles[0] in book_card_text(at)
         # select_index passes the label to format_func, so set the option value (index) itself
-        past = load_dashboard_data().filter(pl.col("date") < date.today())
+        past = process_bookclub_data().filter(pl.col("date") < date.today())
         second_index = past.sort("date", "index", descending=True)["index"][1]
         at.selectbox(key="overview_book_selector").set_value(second_index).run()
         assert titles[1] in book_card_text(at)
@@ -60,7 +60,7 @@ class TestDashboard:
         at.run()
 
         # Find unrated past books
-        unrated = load_dashboard_data().filter(
+        unrated = process_bookclub_data().filter(
             (pl.col("date") < date.today()) & pl.col("average_bookclub_rating").is_null()
         )
 
