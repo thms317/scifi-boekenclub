@@ -27,4 +27,4 @@ To update the source data, follow these steps:
      | `ethnicity` | the club's judgement from public biographies |
 
 5. **Data Processing**:
-   - The app runs the data processing pipeline live when it starts. The `data/processed_data.csv` file is only an export and is not required to run the dashboard.
+   - The app runs the pipeline live on every page render; there is no processed-data file to regenerate. Run `make test` to check the data contracts.

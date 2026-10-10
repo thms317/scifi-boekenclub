@@ -1,4 +1,4 @@
-"""Configuration and paths for the scifi project."""
+"""Paths to the data files."""
 
 from pathlib import Path
 
@@ -7,4 +7,3 @@ GOODREADS_DIR = DATA_DIR / "goodreads" / "clean"
 BOOKCLUB_PATH = DATA_DIR / "bookclub" / "bookclub.csv"
 MANUAL_RATINGS_PATH = DATA_DIR / "bookclub" / "manual_ratings.csv"
 AUTHORS_PATH = DATA_DIR / "bookclub" / "authors.csv"
-PROCESSED_PATH = DATA_DIR / "processed_data.csv"
