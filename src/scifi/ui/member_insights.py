@@ -51,9 +51,6 @@ def _create_member_comparison(df: pl.DataFrame, members: list[str]) -> None:
         .agg(
             pl.len().alias("Count"),
             pl.col("rating").mean().alias("Average"),
-            pl.col("rating").std().fill_null(0.0).alias("Std Dev"),
-            pl.col("rating").min().alias("Min"),
-            pl.col("rating").max().alias("Max"),
         )
     )
 
@@ -98,7 +95,7 @@ def _create_suggester_analysis(df: pl.DataFrame) -> None:
     # Create the jitter box plot
     fig = create_suggester_box_plot(df, stats_result)
 
-    # Create layout with violin plot and stats side by side
+    # Box plot and the stats table side by side
     col1, col2 = st.columns([2, 1])
 
     with col1:

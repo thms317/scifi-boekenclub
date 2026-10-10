@@ -47,7 +47,7 @@ def rating_trend(df: pl.DataFrame, window: int = 7) -> pl.DataFrame:
 
 def member_correlations(
     df: pl.DataFrame, members: list[str], min_ratings: int = 5, min_shared: int = 3
-) -> pl.DataFrame | None:
+) -> pl.DataFrame:
     """Correlate each pair of active members over the books both rated."""
     active = [m for m in members if df[m].count() >= min_ratings]
     rows = []
@@ -58,7 +58,13 @@ def member_correlations(
             rows.append(
                 {"member_1": m1, "member_2": m2, "correlation": corr, "shared_books": len(both)}
             )
-    return pl.DataFrame(rows) if rows else None
+    schema = {
+        "member_1": pl.String,
+        "member_2": pl.String,
+        "correlation": pl.Float64,
+        "shared_books": pl.Int64,
+    }
+    return pl.DataFrame(rows, schema=schema)
 
 
 def suggester_stats(
