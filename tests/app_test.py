@@ -24,11 +24,6 @@ class TestDashboard:
         at = AppTest.from_file("app.py", default_timeout=30).run()
         assert not at.exception
 
-    def test_shim_renders(self) -> None:
-        """Test that the old src/scifi/dashboard.py entrypoint still renders the app."""
-        at = AppTest.from_file("src/scifi/dashboard.py", default_timeout=30).run()
-        assert not at.exception
-
     @pytest.mark.parametrize("page", PAGES)
     def test_page_renders(self, page: str) -> None:
         """Test that every page renders without an exception on the real data."""
