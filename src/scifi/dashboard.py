@@ -1,11 +1,4 @@
-"""
-🚀 Sci-Fi Book Club Analytics Dashboard
-
-This module is kept for backwards compatibility with Community Cloud.
-The actual app is now in app.py at the repository root.
-
-To run: streamlit run app.py
-"""
+"""Entrypoint kept for Streamlit Community Cloud; the app lives in app.py at the repository root."""
 
 import runpy
 

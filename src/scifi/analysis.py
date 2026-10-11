@@ -64,7 +64,7 @@ def member_correlations(
 def suggester_stats(
     df: pl.DataFrame, active_members: list[str], min_books: int = 3
 ) -> pl.DataFrame:
-    """Count and average the rated books per suggester, for active members and frequent suggesters."""
+    """Count and average the rated books per active member or frequent suggester."""
     return (
         df.filter(pl.col("average_bookclub_rating").is_not_null())
         .group_by("suggested_by")

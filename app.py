@@ -1,17 +1,4 @@
-"""
-🚀 Sci-Fi Book Club Analytics Dashboard
-
-This dashboard provides deep insights into your book club's reading patterns and preferences.
-Key features:
-- Overview scatter plot with trendline and 1-5 axes range
-- Member correlation analysis with clickable shared book exploration
-- Time-series analysis with decade publication views
-- Book deep dive with ranking explanations
-
-To run: streamlit run app.py
-
-Built with ❤️ using Streamlit, Plotly, and Polars
-"""
+"""Sci-Fi Book Club dashboard: page configuration and navigation."""
 
 import streamlit as st
 
