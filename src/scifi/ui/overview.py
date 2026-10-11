@@ -7,8 +7,8 @@ import polars as pl
 import streamlit as st
 
 from scifi.analysis import current_meeting, rank_books
-from scifi.data_processor import load_dashboard_data
 from scifi.members import BookClubMembers
+from scifi.pipeline import process_bookclub_data
 from scifi.visualizer import (
     create_member_radar,
     create_rating_comparison_bar,
@@ -17,7 +17,7 @@ from scifi.visualizer import (
 
 def render() -> None:
     """Render the Overview page."""
-    bookclub_processed_df = load_dashboard_data()
+    bookclub_processed_df = process_bookclub_data()
     members = BookClubMembers.get_member_names()
 
     # Add header
