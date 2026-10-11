@@ -1,3 +1,10 @@
+## [1.7.4](https://github.com/thms317/scifi-boekenclub/compare/v1.7.3...v1.7.4) (2026-10-11)
+
+
+### Bug Fixes
+
+* **pipeline:** one Goodreads row per title ([a0a49e7](https://github.com/thms317/scifi-boekenclub/commit/a0a49e7e0f4da8a470cd109c6f7f51af492497d9))
+
 ## [1.7.3](https://github.com/thms317/scifi-boekenclub/compare/v1.7.2...v1.7.3) (2026-10-11)
 
 
