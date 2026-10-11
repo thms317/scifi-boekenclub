@@ -43,3 +43,5 @@ make test   # pytest with coverage
 ```
 
 Tool versions live in `uv.lock` (`uv lock --upgrade && uv sync` to upgrade) and, for the git hooks, in `.pre-commit-config.yaml` (`uv run prek autoupdate`).
+
+`.agents/skills/` holds the Streamlit skill for coding assistants, as a symlink into `.venv` that `make setup` makes valid; it is the only skills folder.

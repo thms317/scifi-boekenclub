@@ -46,6 +46,8 @@ Use the Makefile:
 
 `uv sync` installs the dependencies (groups `dev` and `notebooks`) and the package itself.
 
+Streamlit guidance for assistants lives in `.agents/skills/developing-with-streamlit/SKILL.md`; read it before UI work.
+
 ## Testing and Quality
 
 - Tests are in `tests/` and use pytest. `tests/data_test.py` holds the data contracts and runs on the real CSVs.
