@@ -1,6 +1,9 @@
 """Tests for data contract and integrity."""
 
+from pathlib import Path
+
 import polars as pl
+import pytest
 
 from scifi.members import BookClubMembers
 from scifi.paths import AUTHORS_PATH, BOOKCLUB_PATH, GOODREADS_DIR, MANUAL_RATINGS_PATH
@@ -71,6 +74,26 @@ class TestBookclub:
         bookclub = read_bookclub(BOOKCLUB_PATH)
         titles_lower = bookclub["title"].str.to_lowercase()
         assert titles_lower.n_unique() == len(titles_lower)
+
+
+class TestGoodreadsExports:
+    """Test class for the Goodreads export files.
+
+    Verifies that every file in GOODREADS_DIR is a standard Goodreads export.
+    The pipeline combines the exports by column name and reads a malformed
+    file or row as nulls or garbage instead of failing.
+
+    """
+
+    @pytest.mark.parametrize("csv_file", sorted(GOODREADS_DIR.glob("*.csv")), ids=lambda f: f.name)
+    def test_export_is_a_standard_goodreads_csv(self, csv_file: Path) -> None:
+        """Test that an export parses and has the pipeline's columns and a title on every row."""
+        export = pl.read_csv(csv_file)
+        assert export["Book Id"].dtype == pl.Int64, "A row is mangled: its Book Id is not a number"
+        # "Average Rating" is not required: Thomas's exports lack it (see data/README.md)
+        required = {"Title", "Author", "My Rating", "Original Publication Year", "Number of Pages"}
+        assert required <= set(export.columns), f"Missing columns: {required - set(export.columns)}"
+        assert export["Title"].null_count() == 0
 
 
 class TestMembers:
