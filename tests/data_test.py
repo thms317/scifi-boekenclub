@@ -2,6 +2,7 @@
 
 import polars as pl
 
+from scifi.data_processor import process_bookclub_data
 from scifi.members import BookClubMembers
 from scifi.paths import AUTHORS_PATH, BOOKCLUB_PATH, GOODREADS_DIR
 from scifi.utils import read_bookclub
@@ -106,3 +107,20 @@ class TestMembers:
         assert goodreads_files <= mapped_file_names, (
             f"Unmapped Goodreads files: {goodreads_files - mapped_file_names}"
         )
+
+
+class TestProcessedData:
+    """Test class for the contract of the processed data on the real files."""
+
+    def test_every_book_has_goodreads_average(self) -> None:
+        """Test that every book club book, the next one included, has a Goodreads average.
+
+        The average comes from the Goodreads exports, so add a book to an export
+        when its meeting is planned. Thomas's exports lack the "Average Rating"
+        column, so his file is maintained by hand; committing a raw export would
+        silently drop the average of every book only he has.
+
+        """
+        bookclub_df, _, _ = process_bookclub_data()
+        missing = bookclub_df.filter(pl.col("average_goodreads_rating").is_null())["title"]
+        assert missing.is_empty(), f"Books without a Goodreads average: {missing.to_list()}"
