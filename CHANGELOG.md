@@ -1,3 +1,10 @@
+## [1.7.5](https://github.com/thms317/scifi-boekenclub/compare/v1.7.4...v1.7.5) (2026-10-11)
+
+
+### Bug Fixes
+
+* **data:** repair two mangled Discworld rows in Robert's export ([1ba17df](https://github.com/thms317/scifi-boekenclub/commit/1ba17dfd5179f8cfc2940b1eca1d5f4adb57a644)), closes [#1](https://github.com/thms317/scifi-boekenclub/issues/1) [#1](https://github.com/thms317/scifi-boekenclub/issues/1) [#4](https://github.com/thms317/scifi-boekenclub/issues/4) [#1](https://github.com/thms317/scifi-boekenclub/issues/1) [#1](https://github.com/thms317/scifi-boekenclub/issues/1) [#1](https://github.com/thms317/scifi-boekenclub/issues/1)
+
 ## [1.7.4](https://github.com/thms317/scifi-boekenclub/compare/v1.7.3...v1.7.4) (2026-10-11)
 
 
