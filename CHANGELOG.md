@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/thms317/scifi-boekenclub/compare/v1.7.2...v1.7.3) (2026-10-11)
+
+
+### Bug Fixes
+
+* **data:** add Wild Seed for the 17 November meeting ([da0fbcc](https://github.com/thms317/scifi-boekenclub/commit/da0fbcc8ca5352c5888ebb1f359c89f4ce294fdc))
+
 ## [1.7.2](https://github.com/thms317/scifi-boekenclub/compare/v1.7.1...v1.7.2) (2026-10-09)
 
 
