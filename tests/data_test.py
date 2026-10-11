@@ -141,3 +141,13 @@ class TestProcessedData:
         bookclub_df = process_bookclub_data()
         missing = bookclub_df.filter(pl.col("average_goodreads_rating").is_null())["title"]
         assert missing.is_empty(), f"Books without a Goodreads average: {missing.to_list()}"
+
+    def test_one_row_per_book(self) -> None:
+        """Test that the join with the Goodreads data duplicates no book club book.
+
+        Exports that spell a title or author differently must still be one
+        Goodreads book, or the club book is ranked twice.
+
+        """
+        bookclub_df = process_bookclub_data()
+        assert bookclub_df["index"].n_unique() == len(bookclub_df)

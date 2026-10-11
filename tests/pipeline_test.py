@@ -239,6 +239,21 @@ class TestPivotGoodreadsData:
         assert df_pivot.shape[0] == 1
         assert df_pivot["original_publication_year"][0] == 1953
 
+    def test_pivot_goodreads_data_spelling_variants(
+        self,
+        df_goodreads: pl.DataFrame,
+        members: list[BookClubMember],
+    ) -> None:
+        """Test that exports spelling the title or author differently are still one book."""
+        df_goodreads = df_goodreads.with_columns(
+            pl.Series("title", ["Sample Book", "SAMPLE BOOK"]),
+            pl.Series("author", ["Sample Author", "S. Author"]),
+        )
+        df_pivot = pivot_goodreads_data(df_goodreads, members)
+        assert df_pivot.shape[0] == 1
+        assert df_pivot["Koen"][0] == 5
+        assert df_pivot["Thomas"][0] == 4
+
     def test_pivot_goodreads_data_member_without_export(
         self,
         df_goodreads: pl.DataFrame,

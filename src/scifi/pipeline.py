@@ -132,8 +132,10 @@ def read_manual_ratings(manual_ratings_path: Path) -> pl.DataFrame:
 def pivot_goodreads_data(goodreads_df: pl.DataFrame, members: list[BookClubMember]) -> pl.DataFrame:
     """Pivot the Goodreads data to one row per book with a rating column per member.
 
-    Every member gets a Float64 column: all null for a member without an
-    export, or whose export has no rows.
+    A book is a lowercased title, as the book club matches it, so exports that
+    spell the title or author differently still form one row. Every member gets
+    a Float64 column: all null for a member without an export, or whose export
+    has no rows.
 
     Parameters
     ----------
@@ -147,18 +149,21 @@ def pivot_goodreads_data(goodreads_df: pl.DataFrame, members: list[BookClubMembe
     pl.DataFrame
         The pivoted Goodreads data.
     """
-    index_cols = ["title", "author"]
     pivot_df = (
         goodreads_df.with_columns(
-            pl.mean("average_goodreads_rating").over(index_cols),
-            pl.mean("number_of_pages").over(index_cols),
+            # Exports differ in title case and author spelling; the lowercased title is the book
+            pl.first("title").over(TITLE_KEY),
+            pl.first("author").over(TITLE_KEY),
+            pl.mean("average_goodreads_rating").over(TITLE_KEY),
+            pl.mean("number_of_pages").over(TITLE_KEY),
             # Editions can list a different original year; the earliest is the original
-            pl.min("original_publication_year").over(index_cols),
+            pl.min("original_publication_year").over(TITLE_KEY),
         )
         .pivot(
             "file_name",
             index=[
-                *index_cols,
+                "title",
+                "author",
                 "original_publication_year",
                 "average_goodreads_rating",
                 "number_of_pages",
