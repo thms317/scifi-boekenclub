@@ -7,55 +7,6 @@ import plotly.graph_objects as go
 import polars as pl
 
 
-def rating_to_color(rating: float, alpha: float = 0.3) -> str:
-    """Convert a rating to an RGBA color string.
-
-    Parameters
-    ----------
-    rating : float
-        The rating to convert, expected to be in the range 1-5.
-    alpha : float, optional
-        The alpha value for the color, by default 0.3
-
-    Returns
-    -------
-    str
-        The RGBA color string.
-    """
-    # Normalize rating from 1-5 to 0-1
-    normalized = min(max((rating - 1) / 4, 0), 1)
-
-    # Interpolate between red and green
-    red = int(255 * (1 - normalized))
-    green = int(255 * normalized)
-    blue = 0
-
-    return f"rgba({red}, {green}, {blue}, {alpha})"
-
-
-def create_voting_text(bookclub_members_list: list[str], row: dict[str, float]) -> str:
-    """Create a summary of voting members and their ratings.
-
-    Parameters
-    ----------
-    bookclub_members_list : list[str]
-        List of member names who voted.
-    row : dict[str, float]
-        A dictionary containing member ratings.
-
-    Returns
-    -------
-    str
-        A formatted string listing the voting members and their ratings.
-    """
-    voters = []
-    for member in bookclub_members_list:
-        value = row.get(member)
-        if value is not None and value != 0:
-            voters.append(f"{member}: {value:.1f}")
-    return "<br>".join(voters)
-
-
 def create_member_rating_heatmap(df: pl.DataFrame, member_cols: list[str]) -> go.Figure:
     """Create a heatmap showing member ratings across all books.
 
@@ -206,7 +157,7 @@ def create_polarizing_books_analysis(df: pl.DataFrame, member_cols: list[str]) -
 
 
 def create_rating_scatter(df: pl.DataFrame) -> go.Figure:
-    """Create scatter plot with trendline comparing Goodreads vs club ratings.
+    """Create a scatter plot comparing Goodreads vs club ratings.
 
     Parameters
     ----------
@@ -218,11 +169,8 @@ def create_rating_scatter(df: pl.DataFrame) -> go.Figure:
     go.Figure
         A Plotly scatter figure with perfect agreement line.
     """
-    # Prepare data for plotting - handle null values and filter out unrated books
-    df_processed = df.with_columns(
-        pl.col("original_publication_year").fill_null(0),
-        pl.col("suggested_by").fill_null("Unknown"),
-    ).filter(
+    # Unrated books are left out; a book without a publication year is drawn grey
+    df_processed = df.with_columns(pl.col("suggested_by").fill_null("Unknown")).filter(
         pl.col("average_bookclub_rating").is_not_null()
         & pl.col("average_goodreads_rating").is_not_null()
     )
@@ -534,61 +482,46 @@ def create_suggester_box_plot(df: pl.DataFrame, suggester_stats_df: pl.DataFrame
     df : pl.DataFrame
         The processed book club data.
     suggester_stats_df : pl.DataFrame
-        DataFrame with suggester statistics.
+        DataFrame with suggester statistics; one box per suggester, in its order.
 
     Returns
     -------
     go.Figure
-        A Plotly box plot figure.
+        A Plotly box plot figure with every book as a jittered point.
     """
-    # Create the jitter box plot, one box per suggester (meeting criteria)
-    fig = go.Figure()
-
-    for suggester in suggester_stats_df["suggested_by"].to_list():
-        suggester_books = df.filter(pl.col("suggested_by") == suggester)
-
-        # Add stylized box plot with subtle design
-        fig.add_trace(
-            go.Box(
-                x=[suggester] * len(suggester_books),
-                y=suggester_books["average_bookclub_rating"].to_list(),
-                name=suggester,
-                boxpoints="all",  # Show all points with jitter
-                jitter=0.4,  # Slightly more jitter for better spread
-                pointpos=0,  # Center the points
-                marker={
-                    "size": 5,
-                    "opacity": 0.6,
-                },
-                fillcolor="rgba(240, 240, 240, 0.3)",  # Very light gray fill
-                boxmean=True,  # Show mean as well as median
-                customdata=suggester_books.select("title", "author").rows(),
-                hovertemplate=(
-                    "<b>%{customdata[0]}</b><br>"
-                    "Author: %{customdata[1]}<br>"
-                    "Rating: %{y:.2f}<br>"
-                    f"Suggested by: {suggester}<br>"
-                    "<extra></extra>"
-                ),
-                showlegend=False,
-            )
-        )
-
+    suggesters = suggester_stats_df["suggested_by"].to_list()
+    fig = px.box(
+        df.filter(pl.col("suggested_by").is_in(suggesters)),
+        x="suggested_by",
+        y="average_bookclub_rating",
+        color="suggested_by",
+        points="all",
+        hover_data=["title", "author"],
+        category_orders={"suggested_by": suggesters},
+        height=600,
+    )
+    fig.update_traces(
+        boxmean=True,
+        jitter=0.4,
+        pointpos=0,
+        marker={"size": 5, "opacity": 0.6},
+        fillcolor="rgba(240, 240, 240, 0.3)",
+        hovertemplate=(
+            "<b>%{customdata[0]}</b><br>"
+            "Author: %{customdata[1]}<br>"
+            "Rating: %{y:.2f}<br>"
+            "Suggested by: %{x}<br>"
+            "<extra></extra>"
+        ),
+    )
     fig.update_layout(
         xaxis_title="Book Suggester",
         yaxis_title="Average Club Rating",
-        yaxis={
-            "range": [1, 5],
-            "gridwidth": 1,
-        },
-        xaxis={
-            "tickangle": -45,
-            "tickfont": {"size": 11},
-        },
-        height=600,
-        margin={"l": 60, "r": 20, "t": 20, "b": 80},  # Better spacing
+        yaxis={"range": [1, 5], "gridwidth": 1},
+        xaxis={"tickangle": -45, "tickfont": {"size": 11}},
+        margin={"l": 60, "r": 20, "t": 20, "b": 80},
+        showlegend=False,
     )
-
     return fig
 
 
@@ -668,18 +601,18 @@ def create_correlation_heatmap(correlations_df: pl.DataFrame) -> go.Figure:
     go.Figure
         A Plotly heatmap figure.
     """
-    # Look up each pair both ways; pairs without a correlation count as 0
-    pair_corr: dict[tuple[str, str], float] = {}
+    # Look up each pair both ways; a pair without a correlation stays a gap
+    pair_corr: dict[tuple[str, str], float | None] = {}
     for member_1, member_2, corr in correlations_df.select(
         "member_1", "member_2", "correlation"
     ).iter_rows():
-        pair_corr[member_1, member_2] = pair_corr[member_2, member_1] = corr or 0.0
+        pair_corr[member_1, member_2] = pair_corr[member_2, member_1] = corr
     active_members = sorted({member for pair in pair_corr for member in pair})
 
     # Reverse the rows so the diagonal starts top-left
     reversed_members = active_members[::-1]
     reversed_matrix = [
-        [1.0 if row == col else pair_corr.get((row, col), 0.0) for col in active_members]
+        [1.0 if row == col else pair_corr.get((row, col)) for col in active_members]
         for row in reversed_members
     ]
 
@@ -691,7 +624,10 @@ def create_correlation_heatmap(correlations_df: pl.DataFrame) -> go.Figure:
             colorscale="RdYlGn",  # Red-Yellow-Green: Red=0, Yellow=0.5, Green=1
             zmin=-0.25,
             zmax=1,
-            text=[[round(value, 3) for value in row] for row in reversed_matrix],
+            text=[
+                ["" if value is None else round(value, 3) for value in row]
+                for row in reversed_matrix
+            ],
             texttemplate="%{text}",
             hoverongaps=False,
             hovertemplate="<b>%{y} vs %{x}</b><br>Correlation: %{z:.3f}<extra></extra>",
