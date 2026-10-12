@@ -12,13 +12,13 @@ export default {
     [
       "@semantic-release/exec",
       {
-        prepareCmd: "sed -i 's/^version = \".*\"/version = \"${nextRelease.version}\"/' pyproject.toml"
+        prepareCmd: "uv version ${nextRelease.version} --no-sync"
       }
     ],
     [
       "@semantic-release/git",
       {
-        assets: ["CHANGELOG.md", "pyproject.toml"],
+        assets: ["CHANGELOG.md", "pyproject.toml", "uv.lock"],
         message: "chore(release): ${nextRelease.version} [skip ci]"
       }
     ],

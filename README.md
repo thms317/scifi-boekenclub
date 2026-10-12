@@ -11,7 +11,7 @@
 
 This is a Python data analysis project for analyzing the `Sci-Fi Boekenclub` reading data. The project combines Goodreads export data from multiple club members with book club meeting records to analyze reading preferences and ratings over time.
 
-The ratings and trends are visualized in a nice [Streamlit dashboard](https://thms317-scifi-boekenclub-srcscifidashboard-erirdk.streamlit.app/).
+The ratings and trends are visualized in a nice [Streamlit dashboard](https://scifi-boekenclub.streamlit.app/).
 
 ## Getting Started
 
