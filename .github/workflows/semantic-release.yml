@@ -1,7 +1,7 @@
 # This workflow does the following things:
 # 1. Analyze commit messages and determine the next version number based on conventional commits
 # 2. Generate a CHANGELOG.md file with all changes since the last release
-# 3. Update the version in pyproject.toml
+# 3. Update the version in pyproject.toml and uv.lock
 # 4. Create a new git tag with the version
 # 5. Create a GitHub release with the changelog
 # 6. Push all changes back to the repository
@@ -33,6 +33,9 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 20
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
 
       - name: Install Semantic Release
         run: |
