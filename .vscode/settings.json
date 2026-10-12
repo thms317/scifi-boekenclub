@@ -1,5 +1,10 @@
 {
   "autoDocstring.docstringFormat": "numpy",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.ruff_cache": true
+  },
   "jupyter.notebookFileRoot": "${workspaceFolder}",
   "notebook.formatOnSave.enabled": true,
   "notebook.codeActionsOnSave": {
