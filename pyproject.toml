@@ -8,6 +8,7 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "certifi>=2026.10.19",  # emSign CA compromise, Oct 2026
     "plotly>=6.2.0",
     "polars>=2.0",
     "streamlit>=1.59",
@@ -15,7 +16,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "prek>=0.2.27",
+    "prek>=0.5.7",  # emSign CA compromise, Oct 2026
     "pydoclint>=0.6.6",
     "pytest-cov>=6.2.1",
     "pytest>=9.0.3",
@@ -33,6 +34,7 @@ requires = ["uv_build>=0.12.24,<0.13"]
 build-backend = "uv_build"
 
 [tool.uv]
+required-version = ">=0.13.4"  # emSign CA compromise, Oct 2026
 default-groups = ["dev", "notebooks"]
 
 [tool.ruff]
