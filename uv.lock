@@ -1382,7 +1382,7 @@ wheels = [
 
 [[package]]
 name = "scifi"
-version = "1.7.5"
+version = "1.7.6"
 source = { editable = "." }
 default-groups = ["dev", "notebooks"]
 dependencies = [

@@ -1,3 +1,11 @@
+## [1.7.6](https://github.com/thms317/scifi-boekenclub/compare/v1.7.5...v1.7.6) (2026-11-18)
+
+
+### Bug Fixes
+
+* **data:** add the location of the Wild Seed meeting ([cb1a23d](https://github.com/thms317/scifi-boekenclub/commit/cb1a23db01091310de574fb9896afbd0958a01cc))
+* **data:** add Wild Seed ratings ([36d189c](https://github.com/thms317/scifi-boekenclub/commit/36d189c0cbef840e14be3f89d37aa0fec64225b7))
+
 ## [1.7.5](https://github.com/thms317/scifi-boekenclub/compare/v1.7.4...v1.7.5) (2026-10-11)
 
 
