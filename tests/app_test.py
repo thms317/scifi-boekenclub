@@ -21,7 +21,7 @@ class TestDashboard:
 
     def test_app_renders(self) -> None:
         """Test that app.py renders the default page without an exception."""
-        at = AppTest.from_file("app.py", default_timeout=30).run()
+        at = AppTest.from_file("../app.py", default_timeout=30).run()
         assert not at.exception
 
     @pytest.mark.parametrize("page", PAGES)
